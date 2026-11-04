@@ -1,1 +1,319 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Pieces of My World ♡</title>
 
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        .memory-page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 55px 25px 80px;
+        }
+
+        .memory-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .memory-heading .tiny-label {
+            color: #b98791;
+            letter-spacing: 3px;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .memory-heading h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(35px, 6vw, 55px);
+            color: #9d7079;
+            margin: 15px 0;
+        }
+
+        .memory-heading p {
+            color: #8f7b78;
+            line-height: 1.8;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .memory-card {
+            background: #fffdf9;
+            padding: 13px 13px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 18px rgba(120, 80, 80, 0.10);
+            transition: 0.3s ease;
+            cursor: pointer;
+            transform: rotate(var(--tilt));
+        }
+
+        .memory-card:hover {
+            transform: translateY(-8px) rotate(0deg);
+            box-shadow: 0 12px 25px rgba(120, 80, 80, 0.16);
+        }
+
+        .memory-card img {
+            width: 100%;
+            aspect-ratio: 4 / 4.5;
+            object-fit: cover;
+            display: block;
+            border-radius: 3px;
+        }
+
+        .memory-caption {
+            text-align: center;
+            padding-top: 17px;
+        }
+
+        .memory-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #9d7079;
+            margin: 0 0 7px;
+        }
+
+        .memory-caption p {
+            font-size: 12px;
+            color: #a9958d;
+            margin: 0;
+        }
+
+        .memory-footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #ad8990;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(39, 29, 34, 0.88);
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border: 10px solid #fffdf9;
+            border-bottom-width: 35px;
+            border-radius: 3px;
+        }
+
+        .lightbox p {
+            color: white;
+            margin-top: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            color: white;
+            font-size: 35px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .memory-back {
+            display: block;
+            text-align: center;
+            margin-top: 35px;
+            color: #a77983;
+            text-decoration: none;
+        }
+
+        body.dark-mode .memory-card {
+            background: #30272e;
+        }
+
+        body.dark-mode .memory-caption h3 {
+            color: #edb9c7;
+        }
+
+        body.dark-mode .memory-caption p,
+        body.dark-mode .memory-heading p {
+            color: #d0b9c0;
+        }
+
+        @media (max-width: 750px) {
+            .memory-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .memory-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="memory-page">
+
+        <header class="memory-heading">
+            <span class="tiny-label">♡ a collection of little things ♡</span>
+            <h1>Little Pieces of My World</h1>
+            <p>
+                A tiny collection of beautiful things,<br>
+                dreamy places, and little moments.
+            </p>
+        </header>
+
+        <section class="memory-grid">
+
+            <article class="memory-card" style="--tilt: -2deg"
+                data-caption="Paper Memories">
+                <img src="assets/images/paperm.jpg" alt="Paper Memories">
+                <div class="memory-caption">
+                    <h3>Paper Memories</h3>
+                    <p>Little notes, little stories ♡</p>
+                </div>
+            </article>
+
+            <article class="memory-card" style="--tilt: 2deg"
+                data-caption="Little Blooms">
+                <img src="assets/images/bloom.jpg" alt="Little Blooms">
+                <div class="memory-caption">
+                    <h3>Little Blooms</h3>
+                    <p>Flowers make everything lovely.</p>
+                </div>
+            </article>
+
+            <article class="memory-card" style="--tilt: -1deg"
+                data-caption="Places to Dream">
+                <img src="assets/images/dreampl.jpg" alt="Places to Dream">
+                <div class="memory-caption">
+                    <h3>Places to Dream</h3>
+                    <p>Somewhere I wish to be.</p>
+                </div>
+            </article>
+
+            <article class="memory-card" style="--tilt: 2deg"
+                data-caption="Golden Moments">
+                <img src="assets/images/gh.jpg" alt="Golden Moments">
+                <div class="memory-caption">
+                    <h3>Golden Moments</h3>
+                    <p>Chasing little rays of sunshine.</p>
+                </div>
+            </article>
+
+            <article class="memory-card" style="--tilt: -2deg"
+                data-caption="My Little Things">
+                <img src="assets/images/lilthings.jpg" alt="My Little Things">
+                <div class="memory-caption">
+                    <h3>My Little Things</h3>
+                    <p>Things that make me happy.</p>
+                </div>
+            </article>
+
+            <article class="memory-card" style="--tilt: 1deg"
+                data-caption="Slow Days">
+                <img src="assets/images/slowday.jpg" alt="Slow Days">
+                <div class="memory-caption">
+                    <h3>Slow Days</h3>
+                    <p>Taking life one day at a time.</p>
+                </div>
+            </article>
+
+        </section>
+
+        <p class="memory-footer">
+            "Collect moments, not things." ♡
+        </p>
+
+        <a href="index.html" class="memory-back">
+            ← Back to my little universe
+        </a>
+
+    </main>
+
+    <div class="lightbox" id="memoryLightbox">
+        <button class="lightbox-close" id="closeLightbox" aria-label="Close">&times;</button>
+
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <p id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <script>
+        const memoryCards = document.querySelectorAll('.memory-card');
+        const lightbox = document.getElementById('memoryLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        memoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const image = card.querySelector('img');
+
+                lightboxImage.src = image.src;
+                lightboxImage.alt = image.alt;
+                lightboxCaption.textContent = card.dataset.caption;
+
+                lightbox.classList.add('active');
+            });
+        });
+
+        function closeMemory() {
+            lightbox.classList.remove('active');
+        }
+
+        closeLightbox.addEventListener('click', closeMemory);
+
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                closeMemory();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMemory();
+            }
+        });
+
+        // Follow the website's existing dark mode preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+
+</body>
+</html>
+```
