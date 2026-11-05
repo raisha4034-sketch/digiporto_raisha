@@ -974,3 +974,205 @@ a:focus-visible {
     background: var(--blush);
     color: var(--text);
 }
+
+/* =========================================
+   LITTLE UNIVERSE 2.0
+   HOMEPAGE ENHANCEMENT
+   ========================================= */
+
+/* HERO BACKGROUND */
+.home-page .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 85% 20%, #f8e5e5 0%, transparent 35%),
+        radial-gradient(ellipse at 10% 85%, #f8edca 0%, transparent 30%),
+        var(--cream);
+}
+
+.home-page .hero::before,
+.home-page .hero::after {
+    content: "✿";
+    position: absolute;
+    z-index: -1;
+    color: #d99a9e;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.home-page .hero::before {
+    font-size: 150px;
+    top: 5%;
+    right: 4%;
+    transform: rotate(20deg);
+}
+
+.home-page .hero::after {
+    content: "✧";
+    font-size: 110px;
+    bottom: 5%;
+    left: 3%;
+}
+
+/* HERO CONTENT */
+.home-page .hero-content,
+.home-page .hero-visual {
+    position: relative;
+    z-index: 1;
+    animation: homeFadeUp 0.9s ease both;
+}
+
+.home-page .hero-visual {
+    animation-delay: 0.2s;
+}
+
+.home-page .hero-label {
+    box-shadow: 0 5px 18px rgba(169, 104, 112, 0.08);
+}
+
+.home-page .hero h1 {
+    letter-spacing: -1.5px;
+}
+
+.home-page .hero h1 span {
+    text-shadow: 2px 3px 15px rgba(217, 154, 158, 0.15);
+}
+
+/* POLAROID UPGRADE */
+.home-page .polaroid-card {
+    position: relative;
+    border-radius: 5px;
+    box-shadow:
+        0 25px 55px rgba(120, 83, 79, 0.13),
+        0 5px 12px rgba(120, 83, 79, 0.06);
+}
+
+.home-page .polaroid-card::before {
+    content: "";
+    position: absolute;
+    width: 85px;
+    height: 25px;
+    background: rgba(248, 237, 202, 0.8);
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    z-index: 2;
+}
+
+.home-page .polaroid-image img {
+    transition: transform 0.6s ease;
+}
+
+.home-page .polaroid-card:hover .polaroid-image img {
+    transform: scale(1.05);
+}
+
+/* FLOATING STICKERS */
+.home-page .floating-sticker {
+    filter: drop-shadow(0 5px 8px rgba(169, 104, 112, 0.12));
+}
+
+/* BUTTON UPGRADE */
+.home-page .btn-primary,
+.home-page .btn-secondary {
+    box-shadow: 0 8px 20px rgba(169, 104, 112, 0.08);
+}
+
+.home-page .btn-primary:hover,
+.home-page .btn-secondary:hover {
+    box-shadow: 0 12px 25px rgba(169, 104, 112, 0.16);
+}
+
+/* WELCOME SECTION */
+.home-page .welcome-section {
+    position: relative;
+    background:
+        linear-gradient(135deg, #f9ece8, #fff5ee);
+}
+
+.home-page .welcome-signature {
+    letter-spacing: 0.5px;
+}
+
+/* MEMORY CARD UPGRADE */
+.home-page .memory-card {
+    border-radius: 20px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.home-page .memory-card:hover {
+    transform: translateY(-10px) rotate(-1deg);
+}
+
+.home-page .memory-placeholder {
+    position: relative;
+    overflow: hidden;
+}
+
+.home-page .memory-placeholder i {
+    transition: transform 0.4s ease;
+}
+
+.home-page .memory-card:hover .memory-placeholder i {
+    transform: scale(1.2) rotate(-8deg);
+}
+
+/* FAVORITES UPGRADE */
+.home-page .favorite-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-page .favorite-item:hover {
+    box-shadow: 0 15px 30px rgba(157, 111, 105, 0.12);
+}
+
+/* QUOTE SECTION */
+.home-page .quote-section {
+    position: relative;
+    background:
+        radial-gradient(circle at 15% 20%, #f8e5e5 0%, transparent 30%),
+        #fff7ed;
+}
+
+/* ANIMATION */
+@keyframes homeFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* DARK MODE */
+body.home-page.dark-mode .hero {
+    background:
+        radial-gradient(ellipse at 85% 20%, #49343d 0%, transparent 35%),
+        radial-gradient(ellipse at 10% 85%, #514533 0%, transparent 30%),
+        var(--cream);
+}
+
+body.home-page.dark-mode .welcome-section {
+    background: #2b2429;
+}
+
+body.home-page.dark-mode .quote-section {
+    background: #2b2429;
+}
+
+/* REDUCE MOTION */
+@media (prefers-reduced-motion: reduce) {
+    .home-page .hero-content,
+    .home-page .hero-visual {
+        animation: none;
+    }
+
+    .home-page .floating-sticker {
+        animation: none;
+    }
+}
+
