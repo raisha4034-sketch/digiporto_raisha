@@ -1,6 +1,6 @@
-```javascript
+
 // ===================================
-// LITTLE UNIVERSE
+// LITTLE UNIVERSE ✿
 // GLOBAL INTERACTIVE JAVASCRIPT
 // ===================================
 
@@ -9,9 +9,11 @@
 // ===================================
 
 const themeToggle = document.getElementById("themeToggle");
+
+// Gunakan satu penyimpanan tema untuk seluruh halaman
 const savedTheme = localStorage.getItem("theme");
 
-// Apply saved theme immediately
+// Terapkan tema saat halaman dibuka
 if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
 } else {
@@ -19,8 +21,9 @@ if (savedTheme === "dark") {
 }
 
 
-// Update theme icon
+// Update moon and sun icon
 function updateThemeIcon() {
+
     if (!themeToggle) return;
 
     const icon = themeToggle.querySelector("i");
@@ -28,19 +31,25 @@ function updateThemeIcon() {
     if (!icon) return;
 
     if (document.body.classList.contains("dark-mode")) {
-        icon.classList.remove("fa-moon");
-        icon.classList.add("fa-sun");
+
+        icon.className = "fa-solid fa-sun";
+
     } else {
-        icon.classList.remove("fa-sun");
-        icon.classList.add("fa-moon");
+
+        icon.className = "fa-regular fa-moon";
+
     }
+
 }
 
+
+// Set icon when page loads
 updateThemeIcon();
 
 
-// Toggle theme
+// Toggle dark mode
 if (themeToggle) {
+
     themeToggle.addEventListener("click", function () {
 
         document.body.classList.toggle("dark-mode");
@@ -48,6 +57,7 @@ if (themeToggle) {
         const isDarkMode =
             document.body.classList.contains("dark-mode");
 
+        // Save theme for all pages
         localStorage.setItem(
             "theme",
             isDarkMode ? "dark" : "light"
@@ -56,7 +66,9 @@ if (themeToggle) {
         updateThemeIcon();
 
     });
+
 }
+
 
 
 // 2. GLOBAL MOBILE NAVIGATION
@@ -68,6 +80,7 @@ const navLinks = document.getElementById("navLinks");
 
 // Update menu icon
 function updateMenuIcon() {
+
     if (!menuToggle) return;
 
     const icon = menuToggle.querySelector("i");
@@ -75,12 +88,15 @@ function updateMenuIcon() {
     if (!icon) return;
 
     if (navLinks && navLinks.classList.contains("show")) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
+
+        icon.className = "fa-solid fa-xmark";
+
     } else {
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+
+        icon.className = "fa-solid fa-bars";
+
     }
+
 }
 
 
@@ -130,13 +146,17 @@ if (menuToggle && navLinks) {
 }
 
 
+
 // 3. RANDOM DAILY QUOTES
 // ===================================
 
 const quoteElement = document.getElementById("dailyQuote");
+
 const newQuoteButton = document.getElementById("newQuote");
 
+
 const quotes = [
+
     "Bloom at your own pace.",
     "Little things make life beautiful.",
     "You are allowed to grow slowly.",
@@ -147,9 +167,11 @@ const quotes = [
     "There is magic in ordinary days.",
     "Dream big, start small.",
     "Be proud of how far you've come."
+
 ];
 
 
+// Activate only on pages with quote elements
 if (quoteElement && newQuoteButton) {
 
     newQuoteButton.addEventListener("click", function () {
@@ -173,7 +195,7 @@ if (quoteElement && newQuoteButton) {
 }
 
 
+
 // ===================================
-// END OF LITTLE UNIVERSE JS
+// END OF LITTLE UNIVERSE ✿
 // ===================================
-```
