@@ -1,67 +1,138 @@
-
+```javascript
 // ===================================
-// LITTLE UNIVERSE - INTERACTIVE JS
+// LITTLE UNIVERSE
+// GLOBAL INTERACTIVE JAVASCRIPT
 // ===================================
 
 
-// 1. DARK MODE
+// 1. GLOBAL DARK MODE
+// ===================================
+
 const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("theme");
 
+// Apply saved theme immediately
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+} else {
+    document.body.classList.remove("dark-mode");
+}
+
+
+// Update theme icon
+function updateThemeIcon() {
+    if (!themeToggle) return;
+
+    const icon = themeToggle.querySelector("i");
+
+    if (!icon) return;
+
+    if (document.body.classList.contains("dark-mode")) {
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
+    } else {
+        icon.classList.remove("fa-sun");
+        icon.classList.add("fa-moon");
+    }
+}
+
+updateThemeIcon();
+
+
+// Toggle theme
 if (themeToggle) {
     themeToggle.addEventListener("click", function () {
+
         document.body.classList.toggle("dark-mode");
 
-        const icon = themeToggle.querySelector("i");
+        const isDarkMode =
+            document.body.classList.contains("dark-mode");
 
-        if (document.body.classList.contains("dark-mode")) {
-            icon.classList.replace("fa-moon", "fa-sun");
-            localStorage.setItem("theme", "dark");
-        } else {
-            icon.classList.replace("fa-sun", "fa-moon");
-            localStorage.setItem("theme", "light");
-        }
+        localStorage.setItem(
+            "theme",
+            isDarkMode ? "dark" : "light"
+        );
+
+        updateThemeIcon();
+
     });
+}
 
-    // Remember theme preference
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
 
-        const icon = themeToggle.querySelector("i");
-        icon.classList.replace("fa-moon", "fa-sun");
+// 2. GLOBAL MOBILE NAVIGATION
+// ===================================
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+
+// Update menu icon
+function updateMenuIcon() {
+    if (!menuToggle) return;
+
+    const icon = menuToggle.querySelector("i");
+
+    if (!icon) return;
+
+    if (navLinks && navLinks.classList.contains("show")) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-xmark");
+    } else {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
     }
 }
 
 
-// 2. MOBILE NAVIGATION
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
-
+// Toggle mobile menu
 if (menuToggle && navLinks) {
+
     menuToggle.addEventListener("click", function () {
+
         navLinks.classList.toggle("show");
 
-        const icon = menuToggle.querySelector("i");
+        updateMenuIcon();
 
-        if (navLinks.classList.contains("show")) {
-            icon.classList.replace("fa-bars", "fa-xmark");
-        } else {
-            icon.classList.replace("fa-xmark", "fa-bars");
-        }
     });
 
-    // Close menu after clicking a link
+
+    // Close menu after selecting a page
     navLinks.querySelectorAll("a").forEach(function (link) {
+
         link.addEventListener("click", function () {
+
             navLinks.classList.remove("show");
 
-            const icon = menuToggle.querySelector("i");
-            icon.classList.replace("fa-xmark", "fa-bars");
+            updateMenuIcon();
+
         });
+
     });
+
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+
+        const clickedInsideNavbar =
+            navLinks.contains(event.target) ||
+            menuToggle.contains(event.target);
+
+        if (!clickedInsideNavbar) {
+
+            navLinks.classList.remove("show");
+
+            updateMenuIcon();
+
+        }
+
+    });
+
 }
 
 
 // 3. RANDOM DAILY QUOTES
+// ===================================
+
 const quoteElement = document.getElementById("dailyQuote");
 const newQuoteButton = document.getElementById("newQuote");
 
@@ -78,24 +149,31 @@ const quotes = [
     "Be proud of how far you've come."
 ];
 
+
 if (quoteElement && newQuoteButton) {
+
     newQuoteButton.addEventListener("click", function () {
-        const currentQuote = quoteElement.textContent;
+
+        const currentQuote =
+            quoteElement.textContent.trim();
 
         let randomQuote;
 
         do {
-            randomQuote = quotes[
-                Math.floor(Math.random() * quotes.length)
-            ];
+
+            randomQuote =
+                quotes[Math.floor(Math.random() * quotes.length)];
+
         } while (randomQuote === currentQuote);
 
         quoteElement.textContent = randomQuote;
+
     });
+
 }
 
 
 // ===================================
 // END OF LITTLE UNIVERSE JS
 // ===================================
-
+```
