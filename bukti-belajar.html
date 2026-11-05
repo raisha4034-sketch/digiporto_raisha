@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bukti Belajar | Little Universe ✿</title>
-
     <meta name="description" content="My little academic archive and learning journey.">
 
     <!-- MAIN CSS -->
@@ -15,18 +14,17 @@
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
-    <!-- PAGE SPECIFIC CSS -->
+    <!-- PAGE CSS -->
     <style>
 
         /* ==================================
-           LEARNING PAGE
+           GENERAL LEARNING PAGE
         ================================== */
 
         .learning-container {
@@ -34,8 +32,6 @@
             width: 90%;
             margin: auto;
         }
-
-        /* HERO */
 
         .learning-hero {
             position: relative;
@@ -100,8 +96,6 @@
             font-size: 15px;
         }
 
-        /* SECTION HEADING */
-
         .learning-heading {
             margin-bottom: 28px;
         }
@@ -127,8 +121,6 @@
             margin-top: 5px;
         }
 
-        /* CALCULATOR GRID */
-
         .calculator-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -142,10 +134,11 @@
             padding: 25px;
             box-shadow: var(--shadow);
             transition: .3s ease;
+            min-width: 0;
         }
 
         .calculator-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: 0 12px 28px rgba(116, 73, 83, .12);
         }
 
@@ -190,9 +183,8 @@
             color: var(--muted);
             font-size: 13px;
             min-height: 45px;
+            line-height: 1.7;
         }
-
-        /* WORKSPACE */
 
         .workspace {
             background: #fff8f5;
@@ -213,47 +205,29 @@
             margin-top: 12px;
             color: var(--muted);
             font-size: 12px;
-        }
-
-        .result-box {
-            margin-top: 14px;
-            padding: 13px;
-            background: var(--pink);
-            border-radius: 10px;
-        }
-
-        .result-box span {
-            display: block;
-            color: var(--dark-rose);
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .result-box p {
-            color: var(--text);
-            font-size: 12px;
+            line-height: 1.7;
         }
 
 
         /* ==================================
-           LEVEL 1 - MODULO CALCULATOR
+           SHARED FORM ELEMENTS
         ================================== */
 
-        .modulo-input-group {
+        .calc-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-top: 18px;
+            margin-top: 17px;
         }
 
-        .modulo-input-group label {
+        .calc-group label {
             color: var(--text);
             font-size: 13px;
             font-weight: 600;
         }
 
-        .modulo-input-group input {
+        .calc-group input,
+        .calc-group select {
             width: 100%;
             padding: 12px 14px;
             border: 1px solid var(--border);
@@ -266,17 +240,19 @@
             box-sizing: border-box;
         }
 
-        .modulo-input-group input:focus {
+        .calc-group input:focus,
+        .calc-group select:focus {
             border-color: var(--rose);
             box-shadow: 0 0 0 3px rgba(217, 154, 158, .12);
         }
 
-        .modulo-input-group small {
+        .calc-group small {
             color: var(--muted);
             font-size: 11px;
+            line-height: 1.6;
         }
 
-        .modulo-button {
+        .calc-button {
             width: 100%;
             margin-top: 20px;
             padding: 13px;
@@ -291,22 +267,26 @@
             transition: .3s ease;
         }
 
-        .modulo-button:hover {
+        .calc-button:hover {
             opacity: .88;
             transform: translateY(-2px);
         }
 
-        .modulo-error {
+        .calc-button i {
+            margin-right: 6px;
+        }
+
+        .calc-error {
             margin-top: 14px;
             padding: 12px;
             border-radius: 9px;
             background: #fce5e5;
             color: #a94442;
             font-size: 12px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        .modulo-result {
+        .calc-result {
             margin-top: 18px;
             padding: 16px;
             border-radius: 11px;
@@ -314,8 +294,8 @@
             border: 1px solid var(--border);
         }
 
-        .modulo-result[hidden],
-        .modulo-error[hidden] {
+        .calc-result[hidden],
+        .calc-error[hidden] {
             display: none;
         }
 
@@ -330,7 +310,7 @@
             margin: 12px 0;
             color: var(--dark-rose);
             font-family: var(--heading);
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             overflow-wrap: anywhere;
         }
@@ -364,52 +344,114 @@
             margin-bottom: 5px;
         }
 
-        /* DARK MODE - MODULO */
 
-        body.dark-mode .modulo-input-group input {
-            background: #292329;
-            color: var(--text);
-            border-color: var(--border);
+        /* ==================================
+           LEVEL 2 - CONGRUENCE CHECKER
+        ================================== */
+
+        .congruence-status {
+            text-align: center;
+            padding: 14px;
+            border-radius: 9px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 12px;
         }
 
-        body.dark-mode .modulo-result {
-            background: #49343d;
-            border-color: var(--border);
+        .congruence-status.yes {
+            background: #e3f0df;
+            color: #426b45;
         }
 
-        body.dark-mode .result-detail,
-        body.dark-mode .result-explanation {
-            background: #30282d;
-        }
-
-        body.dark-mode .modulo-error {
-            background: #503237;
-            color: #ffd1d1;
+        .congruence-status.no {
+            background: #fce5e5;
+            color: #a94442;
         }
 
 
         /* ==================================
-           FOOTER
+           LEVEL 5 - NUMBER SYSTEM
         ================================== */
 
-        .learning-footer {
-            text-align: center;
-            padding: 55px 15px 35px;
-            margin-top: 45px;
-            border-top: 1px solid var(--border);
+        .base-result-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
         }
 
-        .learning-footer p {
+        .base-result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 9px;
+            background: var(--white);
+        }
+
+        .base-result-item span {
             color: var(--muted);
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
-        .learning-footer .footer-love {
+        .base-result-item strong {
             color: var(--dark-rose);
-            font-family: var(--heading);
-            font-style: italic;
             font-size: 15px;
+            overflow-wrap: anywhere;
+            text-align: right;
+        }
+
+        .base-result-item.original {
+            border: 1px solid var(--rose);
+        }
+
+
+        /* ==================================
+           LEVEL 6 - COMBINATORICS
+        ================================== */
+
+        .combinatorics-result {
+            margin-top: 15px;
+        }
+
+        .combinatorics-item {
+            padding: 14px;
+            margin-top: 12px;
+            background: var(--white);
+            border-radius: 9px;
+        }
+
+        .combinatorics-item h4 {
+            color: var(--dark-rose);
+            font-size: 13px;
             margin-bottom: 8px;
+        }
+
+        .combinatorics-item .big-number {
+            color: var(--text);
+            font-family: var(--heading);
+            font-size: 23px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .combinatorics-item p {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.8;
+            margin-top: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .concept-note {
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 9px;
+            background: var(--white);
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.8;
         }
 
 
@@ -448,16 +490,64 @@
             color: #f0e2df;
         }
 
-        body.dark-mode .result-box {
-            background: #49343d;
+        body.dark-mode .calc-group input,
+        body.dark-mode .calc-group select {
+            background: #292329;
+            color: var(--text);
+            border-color: var(--border);
         }
 
-        body.dark-mode .result-box p {
-            color: #f0e2df;
+        body.dark-mode .calc-result {
+            background: #49343d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .result-detail,
+        body.dark-mode .result-explanation,
+        body.dark-mode .base-result-item,
+        body.dark-mode .combinatorics-item,
+        body.dark-mode .concept-note {
+            background: #30282d;
+        }
+
+        body.dark-mode .congruence-status.yes {
+            background: #304333;
+            color: #c7e6c8;
+        }
+
+        body.dark-mode .congruence-status.no,
+        body.dark-mode .calc-error {
+            background: #503237;
+            color: #ffd1d1;
         }
 
         body.dark-mode .learning-footer {
             border-color: var(--border);
+        }
+
+
+        /* ==================================
+           FOOTER
+        ================================== */
+
+        .learning-footer {
+            text-align: center;
+            padding: 55px 15px 35px;
+            margin-top: 45px;
+            border-top: 1px solid var(--border);
+        }
+
+        .learning-footer p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .learning-footer .footer-love {
+            color: var(--dark-rose);
+            font-family: var(--heading);
+            font-style: italic;
+            font-size: 15px;
+            margin-bottom: 8px;
         }
 
 
@@ -507,6 +597,10 @@
                 padding: 20px;
             }
 
+            .result-equation {
+                font-size: 22px;
+            }
+
         }
 
     </style>
@@ -534,7 +628,6 @@
         </a>
 
         <nav class="nav-links" id="navLinks">
-
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="memories.html">Memories</a>
@@ -546,7 +639,6 @@
             <a href="planner.html">Planner</a>
             <a href="guestbook.html">Guestbook</a>
             <a href="surprises.html">Surprises</a>
-
         </nav>
 
         <div class="nav-actions">
@@ -562,6 +654,7 @@
         </div>
 
     </header>
+
 
 
     <!-- MAIN CONTENT -->
@@ -591,6 +684,7 @@
         </header>
 
 
+
         <!-- LEARNING LABORATORY -->
 
         <section class="learning-section">
@@ -609,6 +703,7 @@
             </div>
 
 
+
             <div class="calculator-grid">
 
 
@@ -619,11 +714,8 @@
                 <article class="calculator-card">
 
                     <div class="card-top">
-
                         <div class="card-icon">%</div>
-
                         <span class="level">LEVEL 1</span>
-
                     </div>
 
                     <h3>Modulo Calculator</h3>
@@ -632,7 +724,6 @@
                         Explore modulo operations and discover
                         the remainder of a division.
                     </p>
-
 
                     <div class="workspace">
 
@@ -644,113 +735,38 @@
                             Enter your numbers and calculate the remainder.
                         </p>
 
-
-                        <!-- INPUT A -->
-
-                        <div class="modulo-input-group">
-
-                            <label for="moduloA">
-                                Bilangan a
-                            </label>
-
-                            <input
-                                type="number"
-                                id="moduloA"
-                                step="1"
-                                placeholder="Contoh: 17"
-                            >
-
+                        <div class="calc-group">
+                            <label for="moduloA">Bilangan a</label>
+                            <input type="number" id="moduloA" step="1" placeholder="Contoh: 17">
                         </div>
 
-
-                        <!-- INPUT M -->
-
-                        <div class="modulo-input-group">
-
-                            <label for="moduloM">
-                                Modulus m
-                            </label>
-
-                            <input
-                                type="number"
-                                id="moduloM"
-                                step="1"
-                                min="1"
-                                placeholder="Contoh: 5"
-                            >
-
-                            <small>
-                                Modulus harus berupa bilangan bulat positif.
-                            </small>
-
+                        <div class="calc-group">
+                            <label for="moduloM">Modulus m</label>
+                            <input type="number" id="moduloM" step="1" min="1" placeholder="Contoh: 5">
+                            <small>Modulus harus berupa bilangan bulat positif.</small>
                         </div>
 
-
-                        <!-- CALCULATE BUTTON -->
-
-                        <button
-                            type="button"
-                            id="calculateModulo"
-                            class="modulo-button"
-                        >
-
+                        <button type="button" id="calculateModulo" class="calc-button">
                             <i class="fa-solid fa-calculator"></i>
                             Hitung Modulo
-
                         </button>
 
+                        <div id="moduloError" class="calc-error" role="alert" hidden></div>
 
-                        <!-- ERROR MESSAGE -->
+                        <div id="moduloResult" class="calc-result" aria-live="polite" hidden>
 
-                        <div
-                            id="moduloError"
-                            class="modulo-error"
-                            role="alert"
-                            hidden
-                        ></div>
+                            <span class="result-label">HASIL PERHITUNGAN</span>
 
-
-                        <!-- RESULT -->
-
-                        <div
-                            id="moduloResult"
-                            class="modulo-result"
-                            aria-live="polite"
-                            hidden
-                        >
-
-                            <span class="result-label">
-                                HASIL PERHITUNGAN
-                            </span>
-
-                            <div
-                                class="result-equation"
-                                id="moduloEquation"
-                            ></div>
-
-
-                            <!-- CALCULATION PROCESS -->
+                            <div id="moduloEquation" class="result-equation"></div>
 
                             <div class="result-detail">
-
-                                <h4>
-                                    <i class="fa-regular fa-lightbulb"></i>
-                                    Proses Perhitungan
-                                </h4>
-
+                                <h4><i class="fa-regular fa-lightbulb"></i> Proses Perhitungan</h4>
                                 <p id="moduloProcess"></p>
-
                             </div>
 
-
-                            <!-- EXPLANATION -->
-
                             <div class="result-explanation">
-
                                 <strong>Kesimpulan:</strong>
-
                                 <p id="moduloExplanation"></p>
-
                             </div>
 
                         </div>
@@ -762,24 +778,21 @@
 
 
                 <!-- ==================================
-                     LEVEL 2
+                     LEVEL 2 - CONGRUENCE CHECKER
                 ================================== -->
 
                 <article class="calculator-card">
 
                     <div class="card-top">
-
                         <div class="card-icon">≡</div>
-
                         <span class="level">LEVEL 2</span>
-
                     </div>
 
                     <h3>Congruence Checker</h3>
 
                     <p class="card-description">
-                        Explore congruence relationships
-                        between numbers in modular arithmetic.
+                        Check whether two numbers are congruent
+                        under a given modulus.
                     </p>
 
                     <div class="workspace">
@@ -789,14 +802,49 @@
                         </span>
 
                         <p class="workspace-message">
-                            Your congruence checker will appear here.
+                            Check the congruence relationship between a and b.
                         </p>
 
-                        <div class="result-box">
+                        <div class="calc-group">
+                            <label for="congruenceA">Bilangan a</label>
+                            <input type="number" id="congruenceA" step="1" placeholder="Contoh: 17">
+                        </div>
 
-                            <span>Checking Result</span>
+                        <div class="calc-group">
+                            <label for="congruenceB">Bilangan b</label>
+                            <input type="number" id="congruenceB" step="1" placeholder="Contoh: 2">
+                        </div>
 
-                            <p>Waiting for your calculation...</p>
+                        <div class="calc-group">
+                            <label for="congruenceM">Modulus m</label>
+                            <input type="number" id="congruenceM" step="1" min="1" placeholder="Contoh: 5">
+                            <small>Modulus harus bilangan bulat positif.</small>
+                        </div>
+
+                        <button type="button" id="checkCongruence" class="calc-button">
+                            <i class="fa-solid fa-check-double"></i>
+                            Periksa Kongruensi
+                        </button>
+
+                        <div id="congruenceError" class="calc-error" role="alert" hidden></div>
+
+                        <div id="congruenceResult" class="calc-result" aria-live="polite" hidden>
+
+                            <span class="result-label">HASIL PENGECEKAN</span>
+
+                            <div id="congruenceEquation" class="result-equation"></div>
+
+                            <div id="congruenceStatus" class="congruence-status"></div>
+
+                            <div class="result-detail">
+                                <h4><i class="fa-regular fa-lightbulb"></i> Proses Pengecekan</h4>
+                                <p id="congruenceProcess"></p>
+                            </div>
+
+                            <div class="result-explanation">
+                                <strong>Kesimpulan:</strong>
+                                <p id="congruenceExplanation"></p>
+                            </div>
 
                         </div>
 
@@ -807,24 +855,21 @@
 
 
                 <!-- ==================================
-                     LEVEL 5
+                     LEVEL 5 - NUMBER SYSTEM
                 ================================== -->
 
                 <article class="calculator-card">
 
                     <div class="card-top">
-
                         <div class="card-icon">01</div>
-
                         <span class="level">LEVEL 5</span>
-
                     </div>
 
                     <h3>Number System Calculator</h3>
 
                     <p class="card-description">
-                        Discover number systems and explore
-                        different numerical representations.
+                        Convert numbers between binary, decimal,
+                        octal, and hexadecimal systems.
                     </p>
 
                     <div class="workspace">
@@ -834,14 +879,64 @@
                         </span>
 
                         <p class="workspace-message">
-                            Your number system calculator will appear here.
+                            Choose your number system and convert it into other bases.
                         </p>
 
-                        <div class="result-box">
+                        <div class="calc-group">
+                            <label for="numberInput">Input Bilangan</label>
+                            <input type="text" id="numberInput" placeholder="Contoh: 1010">
+                        </div>
 
-                            <span>Conversion Result</span>
+                        <div class="calc-group">
+                            <label for="numberBase">Basis Bilangan Asal</label>
+                            <select id="numberBase">
+                                <option value="2">Biner (Basis 2)</option>
+                                <option value="10">Desimal (Basis 10)</option>
+                                <option value="8">Oktal (Basis 8)</option>
+                                <option value="16">Heksadesimal (Basis 16)</option>
+                            </select>
+                            <small>Bilangan negatif juga didukung.</small>
+                        </div>
 
-                            <p>Waiting for your calculation...</p>
+                        <button type="button" id="convertNumber" class="calc-button">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            Konversi Bilangan
+                        </button>
+
+                        <div id="numberError" class="calc-error" role="alert" hidden></div>
+
+                        <div id="numberResult" class="calc-result" aria-live="polite" hidden>
+
+                            <span class="result-label">HASIL KONVERSI</span>
+
+                            <div class="base-result-list">
+
+                                <div class="base-result-item" id="binaryResult">
+                                    <span>Biner (Basis 2)</span>
+                                    <strong></strong>
+                                </div>
+
+                                <div class="base-result-item" id="decimalResult">
+                                    <span>Desimal (Basis 10)</span>
+                                    <strong></strong>
+                                </div>
+
+                                <div class="base-result-item" id="octalResult">
+                                    <span>Oktal (Basis 8)</span>
+                                    <strong></strong>
+                                </div>
+
+                                <div class="base-result-item" id="hexResult">
+                                    <span>Heksadesimal (Basis 16)</span>
+                                    <strong></strong>
+                                </div>
+
+                            </div>
+
+                            <div class="result-detail">
+                                <h4><i class="fa-regular fa-lightbulb"></i> Informasi Konversi</h4>
+                                <p id="numberExplanation"></p>
+                            </div>
 
                         </div>
 
@@ -852,24 +947,21 @@
 
 
                 <!-- ==================================
-                     LEVEL 6
+                     LEVEL 6 - COMBINATORICS
                 ================================== -->
 
                 <article class="calculator-card">
 
                     <div class="card-top">
-
                         <div class="card-icon">n!</div>
-
                         <span class="level">LEVEL 6</span>
-
                     </div>
 
                     <h3>Combinatorics Calculator</h3>
 
                     <p class="card-description">
-                        Explore counting principles,
-                        permutations, and combinations.
+                        Calculate permutations and combinations
+                        with their formulas and calculation steps.
                     </p>
 
                     <div class="workspace">
@@ -879,14 +971,66 @@
                         </span>
 
                         <p class="workspace-message">
-                            Your combinatorics calculator will appear here.
+                            Enter n and r to explore permutations and combinations.
                         </p>
 
-                        <div class="result-box">
+                        <div class="calc-group">
+                            <label for="combinatoricsN">Nilai n</label>
+                            <input type="number" id="combinatoricsN" min="0" step="1" placeholder="Contoh: 5">
+                        </div>
 
-                            <span>Calculation Result</span>
+                        <div class="calc-group">
+                            <label for="combinatoricsR">Nilai r</label>
+                            <input type="number" id="combinatoricsR" min="0" step="1" placeholder="Contoh: 2">
+                            <small>Ketentuan: 0 ≤ r ≤ n. Untuk menjaga performa, n dibatasi maksimal 500.</small>
+                        </div>
 
-                            <p>Waiting for your calculation...</p>
+                        <button type="button" id="calculateCombinatorics" class="calc-button">
+                            <i class="fa-solid fa-calculator"></i>
+                            Hitung Permutasi & Kombinasi
+                        </button>
+
+                        <div id="combinatoricsError" class="calc-error" role="alert" hidden></div>
+
+                        <div id="combinatoricsResult" class="calc-result" aria-live="polite" hidden>
+
+                            <span class="result-label">HASIL PERHITUNGAN</span>
+
+                            <div class="combinatorics-result">
+
+                                <div class="combinatorics-item">
+
+                                    <h4><i class="fa-solid fa-arrow-right-arrow-left"></i> Permutasi P(n,r)</h4>
+
+                                    <div class="big-number" id="permutationValue"></div>
+
+                                    <p id="permutationFormula"></p>
+
+                                    <p id="permutationProcess"></p>
+
+                                </div>
+
+
+                                <div class="combinatorics-item">
+
+                                    <h4><i class="fa-solid fa-layer-group"></i> Kombinasi C(n,r)</h4>
+
+                                    <div class="big-number" id="combinationValue"></div>
+
+                                    <p id="combinationFormula"></p>
+
+                                    <p id="combinationProcess"></p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="concept-note">
+                                <strong>Perbedaan konsep:</strong><br>
+                                Permutasi memperhatikan urutan pemilihan objek,
+                                sedangkan kombinasi tidak memperhatikan urutan.
+                            </div>
 
                         </div>
 
@@ -924,173 +1068,396 @@
     <script src="js/script.js"></script>
 
 
+
     <!-- ==================================
-         LEVEL 1 - MODULO JAVASCRIPT
+         CALCULATOR JAVASCRIPT
     ================================== -->
 
     <script>
 
-        (function () {
+    // ===================================
+    // HELPER FUNCTIONS
+    // ===================================
 
-            const calculateButton =
-                document.getElementById("calculateModulo");
+    function getIntegerValue(id) {
 
-            if (!calculateButton) return;
+        const input = document.getElementById(id);
+        const value = input.value.trim();
 
+        if (value === "") {
+            return { valid: false, message: "Silakan isi semua input terlebih dahulu." };
+        }
 
-            const inputA =
-                document.getElementById("moduloA");
+        const number = Number(value);
 
-            const inputM =
-                document.getElementById("moduloM");
+        if (!Number.isSafeInteger(number)) {
+            return { valid: false, message: "Masukkan bilangan bulat yang valid." };
+        }
 
-            const resultBox =
-                document.getElementById("moduloResult");
+        return { valid: true, value: number };
 
-            const errorBox =
-                document.getElementById("moduloError");
-
-            const equation =
-                document.getElementById("moduloEquation");
-
-            const process =
-                document.getElementById("moduloProcess");
-
-            const explanation =
-                document.getElementById("moduloExplanation");
+    }
 
 
-            // CALCULATE MODULO
+    function showError(id, message) {
 
-            calculateButton.addEventListener("click", function () {
+        const element = document.getElementById(id);
 
-                const valueA = inputA.value.trim();
-                const valueM = inputM.value.trim();
+        element.textContent = message;
+        element.hidden = false;
 
-                const a = Number(valueA);
-                const m = Number(valueM);
-
-
-                // RESET PREVIOUS RESULT
-
-                errorBox.hidden = true;
-                resultBox.hidden = true;
+    }
 
 
-                // CHECK EMPTY INPUT
+    function hideResult(errorId, resultId) {
 
-                if (valueA === "" || valueM === "") {
+        document.getElementById(errorId).hidden = true;
+        document.getElementById(resultId).hidden = true;
+
+    }
+
+
+    // ===================================
+    // LEVEL 1 - MODULO CALCULATOR
+    // ===================================
+
+    (function () {
+
+        const button = document.getElementById("calculateModulo");
+
+        button.addEventListener("click", function () {
+
+            hideResult("moduloError", "moduloResult");
+
+            const a = getIntegerValue("moduloA");
+            const m = getIntegerValue("moduloM");
+
+            if (!a.valid || !m.valid) {
+                showError("moduloError", !a.valid ? a.message : m.message);
+                return;
+            }
+
+            if (m.value <= 0) {
+                showError("moduloError", "Modulus harus merupakan bilangan bulat positif.");
+                return;
+            }
+
+            const remainder = ((a.value % m.value) + m.value) % m.value;
+            const quotient = (a.value - remainder) / m.value;
+
+            document.getElementById("moduloEquation").textContent =
+                `${a.value} mod ${m.value} = ${remainder}`;
+
+            document.getElementById("moduloProcess").textContent =
+                `${a.value} = (${quotient} × ${m.value}) + ${remainder}`;
+
+            document.getElementById("moduloExplanation").textContent =
+                `Sisa pembagian ${a.value} dengan ${m.value} adalah ${remainder}. Jadi, ${a.value} mod ${m.value} = ${remainder}.`;
+
+            document.getElementById("moduloResult").hidden = false;
+
+        });
+
+    })();
+
+
+
+    // ===================================
+    // LEVEL 2 - CONGRUENCE CHECKER
+    // ===================================
+
+    (function () {
+
+        const button = document.getElementById("checkCongruence");
+
+        button.addEventListener("click", function () {
+
+            hideResult("congruenceError", "congruenceResult");
+
+            const a = getIntegerValue("congruenceA");
+            const b = getIntegerValue("congruenceB");
+            const m = getIntegerValue("congruenceM");
+
+            if (!a.valid || !b.valid || !m.valid) {
+
+                const message =
+                    !a.valid ? a.message :
+                    !b.valid ? b.message :
+                    m.message;
+
+                showError("congruenceError", message);
+                return;
+
+            }
+
+            if (m.value <= 0) {
+                showError("congruenceError", "Modulus harus merupakan bilangan bulat positif.");
+                return;
+            }
+
+            const difference = a.value - b.value;
+
+            const isCongruent = difference % m.value === 0;
+
+            const remainder = difference % m.value;
+
+            document.getElementById("congruenceEquation").textContent =
+                `${a.value} ≡ ${b.value} (mod ${m.value})`;
+
+            const status = document.getElementById("congruenceStatus");
+
+            if (isCongruent) {
+
+                status.textContent = "✓ KONGRUEN";
+                status.className = "congruence-status yes";
+
+            } else {
+
+                status.textContent = "✕ TIDAK KONGRUEN";
+                status.className = "congruence-status no";
+
+            }
+
+            document.getElementById("congruenceProcess").textContent =
+                `Hitung selisih a - b = ${a.value} - (${b.value}) = ${difference}. Kemudian periksa apakah ${m.value} membagi ${difference}. Sisa pembagian ${difference} dengan ${m.value} adalah ${remainder}.`;
+
+            document.getElementById("congruenceExplanation").textContent =
+                isCongruent
+                ? `${m.value} membagi ${difference} tanpa sisa. Oleh karena itu, ${a.value} kongruen dengan ${b.value} modulo ${m.value}.`
+                : `${m.value} tidak membagi ${difference} secara habis. Oleh karena itu, kedua bilangan tidak kongruen modulo ${m.value}.`;
+
+            document.getElementById("congruenceResult").hidden = false;
+
+        });
+
+    })();
+
+
+
+    // ===================================
+    // LEVEL 5 - NUMBER SYSTEM CALCULATOR
+    // ===================================
+
+    (function () {
+
+        const button = document.getElementById("convertNumber");
+
+        const input = document.getElementById("numberInput");
+        const baseSelect = document.getElementById("numberBase");
+
+        const digitValues = "0123456789ABCDEF";
+
+        button.addEventListener("click", function () {
+
+            hideResult("numberError", "numberResult");
+
+            const rawValue = input.value.trim().toUpperCase();
+            const base = Number(baseSelect.value);
+
+            if (rawValue === "") {
+                showError("numberError", "Silakan masukkan bilangan terlebih dahulu.");
+                return;
+            }
+
+            // Allow optional negative sign
+            const isNegative = rawValue.startsWith("-");
+            const digits = isNegative ? rawValue.slice(1) : rawValue;
+
+            if (digits === "") {
+                showError("numberError", "Masukkan angka yang valid.");
+                return;
+            }
+
+            let decimalValue = 0n;
+
+            // Validate and convert each digit
+            for (const character of digits) {
+
+                const digit = digitValues.indexOf(character);
+
+                if (digit < 0 || digit >= base) {
 
                     showError(
-                        "Silakan isi kedua bilangan terlebih dahulu."
+                        "numberError",
+                        `Input tidak valid untuk basis ${base}. Periksa kembali angka yang dimasukkan.`
                     );
 
                     return;
 
                 }
 
+                decimalValue =
+                    decimalValue * BigInt(base) + BigInt(digit);
 
-                // CHECK INTEGER INPUT
+            }
 
-                if (
-                    !Number.isSafeInteger(a) ||
-                    !Number.isSafeInteger(m)
-                ) {
+            if (isNegative) {
+                decimalValue = -decimalValue;
+            }
 
-                    showError(
-                        "Input harus berupa bilangan bulat yang valid."
-                    );
+            // Convert decimal BigInt into each base
+            const binary = decimalValue.toString(2).toUpperCase();
+            const decimal = decimalValue.toString(10);
+            const octal = decimalValue.toString(8).toUpperCase();
+            const hexadecimal = decimalValue.toString(16).toUpperCase();
 
-                    return;
+            const results = [
+                ["binaryResult", binary],
+                ["decimalResult", decimal],
+                ["octalResult", octal],
+                ["hexResult", hexadecimal]
+            ];
 
-                }
+            results.forEach(function (item) {
 
+                const element = document.getElementById(item[0]);
 
-                // CHECK POSITIVE MODULUS
+                element.querySelector("strong").textContent = item[1];
 
-                if (m <= 0) {
-
-                    showError(
-                        "Modulus harus merupakan bilangan bulat positif."
-                    );
-
-                    return;
-
-                }
-
-
-                // MODULO CALCULATION
-                // Handles negative numbers correctly.
-
-                const remainder = a % m;
-
-                const moduloResult =
-                    remainder < 0
-                    ? remainder + m
-                    : remainder;
-
-
-                // EUCLIDEAN QUOTIENT
-
-                const quotient =
-                    (a - moduloResult) / m;
-
-
-                // DISPLAY RESULT
-
-                equation.textContent =
-                    `${a} mod ${m} = ${moduloResult}`;
-
-
-                // DISPLAY CALCULATION PROCESS
-
-                process.textContent =
-                    `${a} = (${quotient} × ${m}) + ${moduloResult}`;
-
-
-                // DISPLAY EXPLANATION
-
-                explanation.textContent =
-                    `Sisa pembagian ${a} dengan ${m} adalah ${moduloResult}. ` +
-                    `Karena itu, ${a} mod ${m} = ${moduloResult}.`;
-
-
-                // SHOW RESULT BOX
-
-                resultBox.hidden = false;
+                element.classList.remove("original");
 
             });
 
+            // Highlight original base
+            const originalId = {
+                2: "binaryResult",
+                10: "decimalResult",
+                8: "octalResult",
+                16: "hexResult"
+            };
 
-            // ERROR HANDLER
+            document.getElementById(originalId[base]).classList.add("original");
 
-            function showError(message) {
+            document.getElementById("numberExplanation").textContent =
+                `Bilangan ${rawValue} dari basis ${base} dikonversi ke nilai desimal ${decimalValue.toString()}. Nilai yang sama kemudian direpresentasikan dalam empat sistem bilangan.`;
 
-                errorBox.textContent = message;
+            document.getElementById("numberResult").hidden = false;
 
-                errorBox.hidden = false;
+        });
+
+        input.addEventListener("keydown", function (event) {
+
+            if (event.key === "Enter") {
+                button.click();
+            }
+
+        });
+
+    })();
+
+
+
+    // ===================================
+    // LEVEL 6 - COMBINATORICS CALCULATOR
+    // ===================================
+
+    (function () {
+
+        const button = document.getElementById("calculateCombinatorics");
+
+        // BigInt factorial calculation
+        function factorial(number) {
+
+            let result = 1n;
+
+            for (let i = 2; i <= number; i++) {
+                result *= BigInt(i);
+            }
+
+            return result;
+
+        }
+
+
+        button.addEventListener("click", function () {
+
+            hideResult("combinatoricsError", "combinatoricsResult");
+
+            const nInput = getIntegerValue("combinatoricsN");
+            const rInput = getIntegerValue("combinatoricsR");
+
+            if (!nInput.valid || !rInput.valid) {
+
+                showError(
+                    "combinatoricsError",
+                    !nInput.valid ? nInput.message : rInput.message
+                );
+
+                return;
+
+            }
+
+            const n = nInput.value;
+            const r = rInput.value;
+
+            // Validate range
+            if (n < 0 || r < 0 || r > n) {
+
+                showError(
+                    "combinatoricsError",
+                    "Input harus memenuhi ketentuan 0 ≤ r ≤ n."
+                );
+
+                return;
+
+            }
+
+            // Limit maximum n for performance
+            if (n > 500) {
+
+                showError(
+                    "combinatoricsError",
+                    "Nilai n maksimal adalah 500 untuk menjaga performa kalkulator."
+                );
+
+                return;
 
             }
 
 
-            // ENTER KEY SUPPORT
-
-            [inputA, inputM].forEach(function (input) {
-
-                input.addEventListener("keydown", function (event) {
-
-                    if (event.key === "Enter") {
-
-                        calculateButton.click();
-
-                    }
-
-                });
-
-            });
+            // Calculate factorials
+            const nFactorial = factorial(n);
+            const rFactorial = factorial(r);
+            const differenceFactorial = factorial(n - r);
 
 
-        })();
+            // Permutation: n! / (n-r)!
+            const permutation =
+                nFactorial / differenceFactorial;
+
+
+            // Combination: n! / (r!(n-r)!)
+            const combination =
+                nFactorial / (rFactorial * differenceFactorial);
+
+
+            // Display permutation
+            document.getElementById("permutationValue").textContent =
+                permutation.toString();
+
+            document.getElementById("permutationFormula").textContent =
+                `Rumus: P(${n},${r}) = ${n}! / (${n}-${r})!`;
+
+            document.getElementById("permutationProcess").textContent =
+                `Proses: ${nFactorial} / ${differenceFactorial} = ${permutation}`;
+
+
+            // Display combination
+            document.getElementById("combinationValue").textContent =
+                combination.toString();
+
+            document.getElementById("combinationFormula").textContent =
+                `Rumus: C(${n},${r}) = ${n}! / (${r}! × (${n}-${r})!)`;
+
+            document.getElementById("combinationProcess").textContent =
+                `Proses: ${nFactorial} / (${rFactorial} × ${differenceFactorial}) = ${combination}`;
+
+
+            document.getElementById("combinatoricsResult").hidden = false;
+
+        });
+
+    })();
 
     </script>
 
