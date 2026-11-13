@@ -1,0 +1,381 @@
+/* =========================================
+   LITTLE UNIVERSE ✿
+   Diary Page Styles (diary.css)
+   ========================================= */
+
+.diary-container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 60px 25px 90px;
+}
+
+/* 1. HEADER JURNAL */
+.diary-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.diary-header h1 {
+    font-family: var(--heading);
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 500;
+    color: var(--text);
+    margin: 12px 0 14px;
+}
+
+.diary-header h1 span {
+    font-style: italic;
+    color: var(--dark-rose);
+}
+
+.diary-header p {
+    max-width: 520px;
+    margin: auto;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+/* 2. KOTAK TULIS CATATAN BARU (QUICK NOTE) */
+.write-box {
+    max-width: 720px;
+    margin: 0 auto 45px;
+    background: var(--white);
+    border: 1.5px dashed var(--rose);
+    border-radius: 22px;
+    padding: 26px 28px;
+    box-shadow: var(--shadow);
+}
+
+.write-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.write-box-header h2 {
+    font-family: var(--heading);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--dark-rose);
+}
+
+.write-box-header span {
+    font-size: 11px;
+    background: var(--yellow);
+    color: var(--text);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.write-row {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.write-box input,
+.write-box select,
+.write-box textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 13px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.write-box input:focus,
+.write-box select:focus,
+.write-box textarea:focus {
+    border-color: var(--rose);
+    background: var(--white);
+}
+
+.write-box textarea {
+    min-height: 95px;
+    resize: vertical;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.write-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 3. FILTER KATEGORI / MOOD */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 9px 18px;
+    border-radius: 30px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--pink);
+    color: var(--dark-rose);
+    border-color: var(--blush);
+    transform: translateY(-2px);
+}
+
+/* 4. GRID KARTU DIARY */
+.diary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.diary-card {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.diary-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 40px rgba(157, 111, 105, 0.14);
+}
+
+/* Stiker sudut atas kartu */
+.diary-mood-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--pink);
+    color: var(--dark-rose);
+    margin-bottom: 14px;
+    width: fit-content;
+}
+
+.diary-card:nth-child(even) .diary-mood-tag {
+    background: var(--yellow);
+    color: var(--text);
+}
+
+.diary-card:nth-child(3n) .diary-mood-tag {
+    background: var(--sage);
+    color: #54664e;
+}
+
+.diary-date {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.diary-card h3 {
+    font-family: var(--heading);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 12px;
+}
+
+.diary-excerpt {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 22px;
+}
+
+.diary-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border);
+}
+
+.read-entry-btn {
+    background: none;
+    color: var(--dark-rose);
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s;
+}
+
+.read-entry-btn:hover {
+    gap: 10px;
+    color: var(--rose);
+}
+
+.delete-entry-btn {
+    background: none;
+    color: var(--muted);
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+.delete-entry-btn:hover {
+    color: #c95c68;
+}
+
+/* 5. MODAL BACA CERITA LENGKAP */
+.diary-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(39, 29, 34, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.diary-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.diary-modal-paper {
+    position: relative;
+    background: var(--cream);
+    max-width: 640px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    transform: translateY(15px);
+    transition: transform 0.3s ease;
+}
+
+.diary-modal.open .diary-modal-paper {
+    transform: translateY(0);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--dark-rose);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.modal-close-btn:hover {
+    background: var(--blush);
+    transform: rotate(90deg);
+}
+
+.diary-modal-paper h2 {
+    font-family: var(--heading);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--dark-rose);
+    margin: 10px 0 18px;
+}
+
+.diary-modal-body {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 2;
+    white-space: pre-line;
+}
+
+.diary-modal-sign {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    font-family: var(--heading);
+    font-style: italic;
+    color: var(--dark-rose);
+    font-size: 15px;
+}
+
+/* 6. DARK MODE KHUSUS DIARY */
+body.dark-mode .write-box,
+body.dark-mode .diary-card,
+body.dark-mode .filter-btn {
+    background: #30282d;
+    border-color: var(--border);
+}
+
+body.dark-mode .write-box input,
+body.dark-mode .write-box select,
+body.dark-mode .write-box textarea {
+    background: #241e22;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+body.dark-mode .filter-btn.active,
+body.dark-mode .filter-btn:hover {
+    background: var(--pink);
+    color: var(--dark-rose);
+}
+
+body.dark-mode .diary-card:nth-child(3n) .diary-mood-tag {
+    color: #d5e6cf;
+}
+
+body.dark-mode .diary-modal-paper {
+    background: #2b2429;
+    border: 1px solid var(--border);
+}
+
+/* 7. RESPONSIVE */
+@media (max-width: 768px) {
+    .diary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .write-row {
+        grid-template-columns: 1fr;
+    }
+
+    .diary-modal-paper {
+        padding: 30px 22px;
+    }
+}
