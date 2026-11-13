@@ -1,1 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Creative Corner ✿ | Little Universe</title>
+    <meta name="description" content="Raisha's creative corner filled with web designs, digital art, visual storyboards, and little experiments.">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS KHUSUS CREATIVE CORNER -->
+    <style>
+        .creative-container {
+            max-width: 1080px;
+            margin: auto;
+            padding: 60px 25px 95px;
+        }
+
+        /* 1. HEADER */
+        .creative-header {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto 45px;
+        }
+
+        .creative-header .eyebrow {
+            background: var(--yellow);
+            color: var(--text);
+            padding: 7px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        .creative-header h1 {
+            font-family: var(--heading);
+            font-size: clamp(35px, 5vw, 52px);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .creative-header h1 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .creative-header p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        /* 2. FILTER KARYA */
+        .creative-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .c-filter-btn {
+            padding: 9px 18px;
+            border-radius: 30px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .c-filter-btn:hover,
+        .c-filter-btn.active {
+            background: var(--pink);
+            color: var(--dark-rose);
+            border-color: var(--blush);
+            transform: translateY(-2px);
+        }
+
+        /* 3. GRID KARTU KREATIF */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+            margin-bottom: 65px;
+        }
+
+        .project-card {
+            position: relative;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 38px rgba(157, 111, 105, 0.16);
+        }
+
+        /* Banner Ilustrasi Atas Kartu */
+        .project-banner {
+            height: 165px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .banner-pink { background: linear-gradient(135deg, #fcecf1, #f3d1d2); color: var(--dark-rose); }
+        .banner-yellow { background: linear-gradient(135deg, #fff7dd, #f8e8b0); color: #9a7b3e; }
+        .banner-sage { background: linear-gradient(135deg, #eef4eb, #dce5d5); color: #5c7056; }
+
+        .project-banner i {
+            font-size: 38px;
+            transition: transform 0.35s ease;
+        }
+
+        .project-card:hover .project-banner i {
+            transform: scale(1.15) rotate(-6deg);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.88);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .project-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-body h3 {
+            font-family: var(--heading);
+            font-size: 21px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .project-body p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .project-tags span {
+            font-size: 10.5px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .project-detail-btn {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .project-detail-btn:hover {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        /* 4. INTERACTIVE COLOR PALETTE SWATCHES */
+        .palette-box {
+            background: var(--white);
+            border: 1.5px dashed var(--rose);
+            border-radius: 26px;
+            padding: 36px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .palette-box h2 {
+            font-family: var(--heading);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .palette-box p {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 26px;
+        }
+
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .swatch-card {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .swatch-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .swatch-color {
+            height: 75px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .swatch-card h4 {
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .swatch-card span {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-rose);
+        }
+
+        /* 5. POPUP DETAIL PROYEK */
+        .project-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(39, 29, 34, 0.75);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .project-modal-card {
+            position: relative;
+            background: var(--cream);
+            max-width: 560px;
+            width: 100%;
+            border-radius: 24px;
+            padding: 36px 32px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .close-p-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: var(--dark-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-modal-card h2 {
+            font-family: var(--heading);
+            font-size: 28px;
+            color: var(--dark-rose);
+            margin: 10px 0 14px;
+        }
+
+        .project-modal-card p {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.9;
+        }
+
+        /* 6. DARK MODE */
+        body.dark-mode .project-card,
+        body.dark-mode .palette-box,
+        body.dark-mode .c-filter-btn {
+            background: #30282d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .swatch-card,
+        body.dark-mode .project-tags span {
+            background: #241e22;
+        }
+
+        body.dark-mode .project-badge {
+            background: rgba(33, 29, 32, 0.85);
+            color: var(--text);
+        }
+
+        body.dark-mode .project-modal-card {
+            background: #2b2429;
+            border: 1px solid var(--border);
+        }
+
+        /* 7. RESPONSIVE */
+        @media (max-width: 850px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .swatch-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .swatch-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html" class="active">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="creative-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="creative-header">
+            <span class="eyebrow">IMAGINATION & MAKING</span>
+            <h1>My Creative <span>Playground.</span></h1>
+            <p>
+                A little gallery where my Information Systems side meets my love 
+                for soft aesthetics, storytelling, and cute digital creations ✧
+            </p>
+        </header>
+
+        <!-- FILTER KARYA -->
+        <div class="creative-filters">
+            <button type="button" class="c-filter-btn active" data-filter="all">All Creations ✿</button>
+            <button type="button" class="c-filter-btn" data-filter="web">💻 Web & UI Design</button>
+            <button type="button" class="c-filter-btn" data-filter="art">🎨 Visual & Digital Art</button>
+            <button type="button" class="c-filter-btn" data-filter="ideas">📝 Storyboard & Concepts</button>
+        </div>
+
+        <!-- GRID PROYEK & KARYA -->
+        <section class="projects-grid" id="projectsGrid">
+
+            <!-- Karya 1 -->
+            <article class="project-card" data-category="web">
+                <div class="project-banner banner-pink">
+                    <span class="project-badge">WEB DESIGN</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Little Universe Personal Web</h3>
+                        <p>My own digital scrapbook built from scratch with pastel colors, dark mode, and interactive pages.</p>
+                        <div class="project-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Little Universe Personal Web"
+                        data-cat="Web & UI Design"
+                        data-desc="Designed with the 'Blush Memories × A Little Mix' concept, this multi-page website blends warm personal storytelling with responsive front-end coding.">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karya 2 -->
+            <article class="project-card" data-category="web">
+                <div class="project-banner banner-sage">
+                    <span class="project-badge">WEB APP</span>
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Interactive Multi-Calculator</h3>
+                        <p>A clean web tool featuring Modulo, Congruence Checker, Number System, and Combinatorics calculators.</p>
+                        <div class="project-tags">
+                            <span>Bootstrap 5</span>
+                            <span>JavaScript</span>
+                            <span>Discrete Math</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Interactive Multi-Calculator"
+                        data-cat="Web & UI Design"
+                        data-desc="Created as a university web development challenge to make discrete mathematics calculations faster, clearer, and visually friendly.">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karya 3 -->
+            <article class="project-card" data-category="art">
+                <div class="project-banner banner-yellow">
+                    <span class="project-badge">VISUAL DESIGN</span>
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Orientation Group Branding</h3>
+                        <p>Custom aesthetic name tags, visual identity, and a digital appreciation memory site for campus mentors.</p>
+                        <div class="project-tags">
+                            <span>Layouting</span>
+                            <span>Google Sites</span>
+                            <span>Scrapbook UI</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Orientation Group Branding & Memory Site"
+                        data-cat="Visual & Digital Art"
+                        data-desc="Designed printable A4 landscape name tags and built a dedicated digital memory corner to thank our orientation mentors.">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karya 4 -->
+            <article class="project-card" data-category="ideas">
+                <div class="project-banner banner-pink">
+                    <span class="project-badge">STORYBOARD</span>
+                    <i class="fa-solid fa-film"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Educational Animation Storyboard</h3>
+                        <p>Mixed-media visual storytelling concepts inspired by classic childhood storybook animations.</p>
+                        <div class="project-tags">
+                            <span>Storyboarding</span>
+                            <span>Visual Prompts</span>
+                            <span>Civic Edu</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Educational Animation Storyboard"
+                        data-cat="Storyboard & Concepts"
+                        data-desc="Crafted frame-by-frame visual scenes combining soft illustrated backgrounds with educational storytelling about environmental care.">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karya 5 -->
+            <article class="project-card" data-category="web">
+                <div class="project-banner banner-sage">
+                    <span class="project-badge">IT PROJECT</span>
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Helpdesk IT Support Portal</h3>
+                        <p>My vocational school internship project built to organize IT support requests neatly and efficiently.</p>
+                        <div class="project-tags">
+                            <span>Web Dev</span>
+                            <span>IT Support</span>
+                            <span>UI Structure</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Helpdesk IT Support Portal"
+                        data-cat="Web & UI Design"
+                        data-desc="Developed independently during my SMK internship, teaching me how to turn real workplace needs into a working web interface.">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+            <!-- Karya 6 -->
+            <article class="project-card" data-category="art">
+                <div class="project-banner banner-yellow">
+                    <span class="project-badge">DIGITAL STYLING</span>
+                    <i class="fa-solid fa-sparkles"></i>
+                </div>
+                <div class="project-body">
+                    <div>
+                        <h3>Character & Lifestyle Styling</h3>
+                        <p>Curating outfits, pastel moodboards, and cozy lifestyle scenes for digital avatars.</p>
+                        <div class="project-tags">
+                            <span>Aesthetics</span>
+                            <span>Moodboard</span>
+                            <span>Color Styling</span>
+                        </div>
+                    </div>
+                    <button type="button" class="project-detail-btn"
+                        data-title="Character & Lifestyle Styling"
+                        data-cat="Visual & Digital Art"
+                        data-desc="Experimenting with soft color combinations, cozy outfits, and playful visual compositions just for fun and relaxation ♡">
+                        View Behind The Scenes ✿
+                    </button>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- MINI INTERACTIVE COLOR PALETTE -->
+        <section class="palette-box">
+            <h2>My Signature Color Palette 🎨</h2>
+            <p>Click any color card below to copy its hex code for your own cute designs!</p>
+
+            <div class="swatch-grid">
+                <div class="swatch-card" data-hex="#e9b7c7">
+                    <div class="swatch-color" style="background: #e9b7c7;"></div>
+                    <h4>Blush Pink</h4>
+                    <span>#e9b7c7</span>
+                </div>
+
+                <div class="swatch-card" data-hex="#fcecf1">
+                    <div class="swatch-color" style="background: #fcecf1;"></div>
+                    <h4>Soft Petal</h4>
+                    <span>#fcecf1</span>
+                </div>
+
+                <div class="swatch-card" data-hex="#fffaf3">
+                    <div class="swatch-color" style="background: #fffaf3;"></div>
+                    <h4>Warm Cream</h4>
+                    <span>#fffaf3</span>
+                </div>
+
+                <div class="swatch-card" data-hex="#f8e8b0">
+                    <div class="swatch-color" style="background: #f8e8b0;"></div>
+                    <h4>Butter Yellow</h4>
+                    <span>#f8e8b0</span>
+                </div>
+
+                <div class="swatch-card" data-hex="#dce5d5">
+                    <div class="swatch-color" style="background: #dce5d5;"></div>
+                    <h4>Matcha Sage</h4>
+                    <span>#dce5d5</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- POPUP DETAIL KARYA -->
+    <div class="project-modal" id="projectModal">
+        <div class="project-modal-card">
+            <button type="button" class="close-p-modal" id="closeProjectModal" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="eyebrow" id="pModalCat">CATEGORY</span>
+            <h2 id="pModalTitle">Project Title</h2>
+            <p id="pModalDesc">Project description...</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT CREATIVE CORNER -->
+    <script>
+        // 1. Filter Kategori Karya
+        const cFilterBtns = document.querySelectorAll('.c-filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        cFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                cFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 2. Popup Detail Proyek
+        const projectModal = document.getElementById('projectModal');
+        const closeProjectModal = document.getElementById('closeProjectModal');
+        const pModalCat = document.getElementById('pModalCat');
+        const pModalTitle = document.getElementById('pModalTitle');
+        const pModalDesc = document.getElementById('pModalDesc');
+
+        document.querySelectorAll('.project-detail-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                pModalCat.textContent = btn.dataset.cat;
+                pModalTitle.textContent = btn.dataset.title;
+                pModalDesc.textContent = btn.dataset.desc;
+                projectModal.classList.add('open');
+            });
+        });
+
+        closeProjectModal.addEventListener('click', () => {
+            projectModal.classList.remove('open');
+        });
+
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                projectModal.classList.remove('open');
+            }
+        });
+
+        // 3. Klik Kartu Warna untuk Copy Hex Code
+        document.querySelectorAll('.swatch-card').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                const hex = swatch.dataset.hex;
+                const label = swatch.querySelector('span');
+                navigator.clipboard.writeText(hex);
+                label.textContent = 'Copied! ♡';
+                setTimeout(() => {
+                    label.textContent = hex;
+                }, 1300);
+            });
+        });
+    </script>
+
+</body>
+</html>
