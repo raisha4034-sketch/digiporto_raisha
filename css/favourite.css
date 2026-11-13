@@ -1,0 +1,313 @@
+/* =========================================
+   LITTLE UNIVERSE ✿
+   Favorites Page Styles (favorites.css)
+   Nuansa: Cozy Sage & Warm Cream (Adem di mata)
+   ========================================= */
+
+body.favorites-page {
+    background: linear-gradient(180deg, #f3f7f0 0%, #fffaf5 45%, #f6efe9 100%);
+}
+
+.fav-container {
+    max-width: 1080px;
+    margin: auto;
+    padding: 60px 25px 95px;
+}
+
+/* 1. HEADER ADEM */
+.fav-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 45px;
+}
+
+.fav-header .eyebrow {
+    background: #e3ece0;
+    color: #5c7056;
+    padding: 7px 16px;
+    border-radius: 30px;
+    margin-bottom: 14px;
+}
+
+.fav-header h1 {
+    font-family: var(--heading);
+    font-size: clamp(35px, 5vw, 52px);
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+.fav-header h1 span {
+    font-style: italic;
+    color: #7d9476;
+}
+
+.fav-header p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+/* 2. CURRENT OBSESSION BANNER */
+.obsession-card {
+    background: #fffdf9;
+    border: 1px solid #e4ebe0;
+    border-radius: 24px;
+    padding: 28px 32px;
+    margin-bottom: 45px;
+    box-shadow: 0 10px 30px rgba(110, 128, 104, 0.07);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+    align-items: center;
+}
+
+.obsession-badge {
+    background: #e8efe4;
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+}
+
+.obsession-badge span {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.obsession-badge h3 {
+    font-family: var(--heading);
+    font-size: 20px;
+    color: #55684f;
+    font-weight: 500;
+}
+
+.obsession-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.obsession-item {
+    background: #f9fbf7;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px dashed #d3dfd0;
+}
+
+.obsession-item small {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #7d9476;
+    margin-bottom: 4px;
+}
+
+.obsession-item p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* 3. SPOTIFY MUSIC CORNER */
+.spotify-corner {
+    background: #fffdf9;
+    border: 1px solid #e4ebe0;
+    border-radius: 26px;
+    padding: 32px;
+    margin-bottom: 55px;
+    box-shadow: 0 12px 32px rgba(110, 128, 104, 0.08);
+}
+
+.spotify-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.spotify-header h2 {
+    font-family: var(--heading);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.spotify-header span {
+    font-size: 12px;
+    color: #5c7056;
+    background: #e8efe4;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.spotify-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.spotify-frame {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(110, 128, 104, 0.08);
+}
+
+.spotify-songs-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* 4. FILTER & RAK FAVORIT LAINNYA */
+.fav-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 35px;
+}
+
+.fav-filter-btn {
+    padding: 9px 18px;
+    border-radius: 30px;
+    background: #fffdf9;
+    border: 1px solid #e1e8dd;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.fav-filter-btn:hover,
+.fav-filter-btn.active {
+    background: #e3ece0;
+    color: #4f6349;
+    border-color: #c5d4bf;
+}
+
+.fav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.fav-card {
+    background: #fffdf9;
+    border: 1px solid #e7ece4;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(110, 128, 104, 0.06);
+    transition: 0.3s ease;
+}
+
+.fav-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(110, 128, 104, 0.11);
+}
+
+.fav-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.fav-emoji {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #eef4eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.fav-card:nth-child(even) .fav-emoji {
+    background: var(--pink);
+}
+
+.fav-card:nth-child(3n) .fav-emoji {
+    background: var(--yellow);
+}
+
+.fav-cat-pill {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #7d9476;
+    text-transform: uppercase;
+}
+
+.fav-card h3 {
+    font-family: var(--heading);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.fav-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* 5. DARK MODE ADEM */
+body.favorites-page.dark-mode {
+    background: linear-gradient(180deg, #1f2421 0%, #211d20 50%, #242022 100%);
+}
+
+body.dark-mode .obsession-card,
+body.dark-mode .spotify-corner,
+body.dark-mode .fav-card,
+body.dark-mode .fav-filter-btn {
+    background: #2b272a;
+    border-color: #3d363b;
+}
+
+body.dark-mode .obsession-badge,
+body.dark-mode .obsession-item {
+    background: #232824;
+    border-color: #364038;
+}
+
+body.dark-mode .obsession-badge h3,
+body.dark-mode .fav-header h1 span {
+    color: #b7d1af;
+}
+
+body.dark-mode .fav-filter-btn.active,
+body.dark-mode .fav-filter-btn:hover {
+    background: #354137;
+    color: #d5e6cf;
+}
+
+/* 6. RESPONSIVE */
+@media (max-width: 850px) {
+    .obsession-card,
+    .obsession-list,
+    .spotify-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .fav-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spotify-corner {
+        padding: 22px 18px;
+    }
+}
