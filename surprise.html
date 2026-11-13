@@ -1,1 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Little Surprises ✿ | Little Universe</title>
+    <meta name="description" content="Tap the mystery gift boxes to unlock sweet surprises, sound chimes, and little magic!">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS KHUSUS SURPRISES -->
+    <style>
+        .surprise-container {
+            max-width: 1080px;
+            margin: auto;
+            padding: 60px 25px 95px;
+            text-align: center;
+        }
+
+        /* 1. HEADER */
+        .surprise-header {
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .surprise-header .eyebrow {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 7px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        .surprise-header h1 {
+            font-family: var(--heading);
+            font-size: clamp(35px, 5vw, 52px);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .surprise-header h1 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .surprise-header p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .sound-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            background: var(--yellow);
+            color: var(--text);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 2. GRID 3 KOTAK KADO */
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 65px;
+        }
+
+        .gift-stage {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 36px 24px 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 340px;
+            transition: transform 0.35s ease;
+        }
+
+        .gift-stage:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Bentuk Kotak Kado CSS */
+        .gift-box-wrap {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 25px auto 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box-wrap:hover {
+            animation: giftWiggle 0.6s ease infinite;
+        }
+
+        @keyframes giftWiggle {
+            0%, 100% { transform: rotate(0deg) scale(1.04); }
+            25% { transform: rotate(-4deg) scale(1.04); }
+            75% { transform: rotate(4deg) scale(1.04); }
+        }
+
+        /* Tutup Kado */
+        .gift-lid {
+            position: absolute;
+            top: 0;
+            left: -6px;
+            width: 142px;
+            height: 32px;
+            border-radius: 10px;
+            z-index: 2;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+        }
+
+        /* Pita di atas tutup */
+        .gift-lid::before {
+            content: "୨୧";
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: var(--dark-rose);
+        }
+
+        /* Badan Kado */
+        .gift-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 130px;
+            height: 100px;
+            border-radius: 0 0 16px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Pita Vertikal Tengah */
+        .gift-body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Warna 3 Kado */
+        .gift-pink .gift-lid { background: #e9b7c7; }
+        .gift-pink .gift-body { background: #f5d3dd; }
+
+        .gift-yellow .gift-lid { background: #eed584; }
+        .gift-yellow .gift-body { background: #f8e8b0; }
+
+        .gift-sage .gift-lid { background: #b8ccb0; }
+        .gift-sage .gift-body { background: #dce5d5; }
+
+        /* Animasi Saat Kado Dibuka */
+        .gift-stage.opened .gift-box-wrap {
+            animation: none;
+            cursor: default;
+        }
+
+        .gift-stage.opened .gift-lid {
+            transform: translateY(-42px) rotate(-14deg);
+            opacity: 0.25;
+        }
+
+        .gift-label {
+            font-family: var(--heading);
+            font-size: 20px;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .gift-hint {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Isi Kejutan Setelah Dibuka */
+        .gift-reveal {
+            display: none;
+            animation: popReveal 0.45s ease;
+        }
+
+        .gift-stage.opened .gift-reveal {
+            display: block;
+        }
+
+        .gift-stage.opened .gift-hint {
+            display: none;
+        }
+
+        @keyframes popReveal {
+            from { opacity: 0; transform: scale(0.88) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .reveal-card {
+            background: var(--cream);
+            border: 1.5px dashed var(--rose);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 10px;
+        }
+
+        .reveal-card h4 {
+            font-family: var(--heading);
+            font-size: 18px;
+            color: var(--dark-rose);
+            margin-bottom: 6px;
+        }
+
+        .reveal-card p {
+            font-size: 12.5px;
+            color: var(--text);
+            line-height: 1.75;
+        }
+
+        /* 3. LUCKY FORTUNE JAR */
+        .fortune-box {
+            max-width: 680px;
+            margin: auto;
+            background: linear-gradient(135deg, #fffdf9 0%, #fcecf1 100%);
+            border: 1.5px dashed var(--rose);
+            border-radius: 26px;
+            padding: 36px 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .fortune-box h2 {
+            font-family: var(--heading);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .fortune-box p {
+            font-size: 13.5px;
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+
+        .fortune-result {
+            min-height: 74px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--heading);
+            font-style: italic;
+            font-size: 18px;
+            color: var(--dark-rose);
+        }
+
+        /* 4. CONFETTI PARTICLE */
+        .confetti-piece {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            z-index: 9999;
+            animation: confettiFall 1.6s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.7) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(360deg);
+            }
+        }
+
+        /* 5. DARK MODE */
+        body.dark-mode .gift-stage,
+        body.dark-mode .fortune-result {
+            background: #30282d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .reveal-card {
+            background: #241e22;
+        }
+
+        body.dark-mode .fortune-box {
+            background: linear-gradient(135deg, #30282d 0%, #3d2a32 100%);
+        }
+
+        /* 6. RESPONSIVE */
+        @media (max-width: 850px) {
+            .gifts-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html" class="active">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="surprise-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="surprise-header">
+            <span class="eyebrow">A LITTLE BIT OF MAGIC</span>
+            <h1>Open Your <span>Surprises.</span></h1>
+            <p>
+                Tap each pastel gift box below to unwrap a secret message, 
+                a cute voucher, and a little musical chime!
+            </p>
+            <div class="sound-hint">
+                <i class="fa-solid fa-volume-high"></i> Turn on your sound for magic chimes ♪
+            </div>
+        </header>
+
+        <!-- 3 KOTAK KADO INTERAKTIF -->
+        <section class="gifts-grid">
+
+            <!-- Kado 1 -->
+            <div class="gift-stage" id="gift1">
+                <div>
+                    <h3 class="gift-label">Mystery Box #1</h3>
+                    <p class="gift-hint">Tap the pink ribbon box to unwrap 🎀</p>
+                </div>
+
+                <div class="gift-box-wrap gift-pink" onclick="openGift('gift1', event)">
+                    <div class="gift-lid"></div>
+                    <div class="gift-body">💌</div>
+                </div>
+
+                <div class="gift-reveal">
+                    <div class="reveal-card">
+                        <h4>A Little Love Note ♡</h4>
+                        <p>
+                            You are doing so amazing, Raisha! Every line of code you write 
+                            and every step you take in university is something to be proud of ✿
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kado 2 -->
+            <div class="gift-stage" id="gift2">
+                <div>
+                    <h3 class="gift-label">Mystery Box #2</h3>
+                    <p class="gift-hint">Tap the butter yellow box to unwrap ✨</p>
+                </div>
+
+                <div class="gift-box-wrap gift-yellow" onclick="openGift('gift2', event)">
+                    <div class="gift-lid"></div>
+                    <div class="gift-body">🎟️</div>
+                </div>
+
+                <div class="gift-reveal">
+                    <div class="reveal-card">
+                        <h4>Cozy Treat Voucher 🍵</h4>
+                        <p>
+                            <strong>1x Golden Hour Drive & Sweet Treat Pass!</strong><br>
+                            Redeemable anytime you finish a tough assignment or exam ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kado 3 -->
+            <div class="gift-stage" id="gift3">
+                <div>
+                    <h3 class="gift-label">Mystery Box #3</h3>
+                    <p class="gift-hint">Tap the matcha sage box to unwrap 🌿</p>
+                </div>
+
+                <div class="gift-box-wrap gift-sage" onclick="openGift('gift3', event)">
+                    <div class="gift-lid"></div>
+                    <div class="gift-body">🌟</div>
+                </div>
+
+                <div class="gift-reveal">
+                    <div class="reveal-card">
+                        <h4>2026 Wish & Blessing ✧</h4>
+                        <p>
+                            May your days always be filled with warm sunshine, good music, 
+                            kind friendships, and big dreams coming true ♡
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FORTUNE COOKIE / LUCKY NOTE JAR -->
+        <section class="fortune-box">
+            <h2>Little Magic Fortune Jar 🏺✿</h2>
+            <p>Need a tiny boost of happiness today? Tap the button to pick a lucky note!</p>
+
+            <div class="fortune-result" id="fortuneResult">
+                "Tap the button below to reveal today's little fortune ✧"
+            </div>
+
+            <button type="button" class="btn-primary" id="pickFortuneBtn">
+                Pick a Lucky Note ♪
+            </button>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT EFEK SUARA KADO & CONFETTI -->
+    <script>
+        // 1. Generator Efek Suara Lonceng Ajaib (Web Audio API - Anti Error Tanpa File MP3!)
+        function playMagicChime(type = 'gift') {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+
+            const ctx = new AudioCtx();
+            // Nada melodi ceria (C5 - E5 - G5 - B5 - C6)
+            const notes = type === 'gift'
+                ? [523.25, 659.25, 783.99, 987.77, 1046.50]
+                : [659.25, 783.99, 1046.50];
+
+            notes.forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.11);
+
+                gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.11);
+                gain.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + i * 0.11 + 0.03);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.11 + 0.45);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + i * 0.11);
+                osc.stop(ctx.currentTime + i * 0.11 + 0.5);
+            });
+        }
+
+        // 2. Efek Confetti Pastel Terbang
+        function spawnConfetti(x, y) {
+            const icons = ['✿', '♡', '✧', '୨୧', '✨', '🌸'];
+            for (let i = 0; i < 16; i++) {
+                const el = document.createElement('span');
+                el.className = 'confetti-piece';
+                el.textContent = icons[Math.floor(Math.random() * icons.length)];
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 70 + Math.random() * 110;
+                el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                el.style.setProperty('--ty', (Math.sin(angle) * dist - 40) + 'px');
+
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 1600);
+            }
+        }
+
+        // 3. Fungsi Buka Kotak Kado
+        function openGift(giftId, event) {
+            const box = document.getElementById(giftId);
+            if (box.classList.contains('opened')) return;
+
+            box.classList.add('opened');
+            playMagicChime('gift');
+            spawnConfetti(event.clientX, event.clientY);
+        }
+
+        // 4. Lucky Fortune Jar
+        const fortunes = [
+            '"Good things are quietly making their way to you today ✿"',
+            '"Your creativity and kindness make this world a brighter place ♡"',
+            '"A cozy afternoon drive and your favorite song will fix everything ✨"',
+            '"Trust your pace—you are growing stronger and smarter every semester 💻"',
+            '"Today is a wonderful day to smile and treat yourself to something sweet 🍵"'
+        ];
+
+        const fortuneResult = document.getElementById('fortuneResult');
+        const pickFortuneBtn = document.getElementById('pickFortuneBtn');
+
+        pickFortuneBtn.addEventListener('click', (e) => {
+            playMagicChime('fortune');
+            spawnConfetti(e.clientX, e.clientY);
+            const randomQuote = fortunes[Math.floor(Math.random() * fortunes.length)];
+            fortuneResult.textContent = randomQuote;
+        });
+    </script>
+
+</body>
+</html>
