@@ -18,7 +18,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS KHUSUS SURPRISES -->
+    <!-- CSS KHUSUS SURPRISE -->
     <style>
         .surprise-container {
             max-width: 1080px;
@@ -356,7 +356,7 @@
             <a href="bukti-belajar.html">Bukti Belajar</a>
             <a href="planner.html">Planner</a>
             <a href="guestbook.html">Guestbook</a>
-            <a href="surprises.html" class="active">Surprises</a>
+            <a href="surprise.html" class="active">Surprises</a>
         </nav>
 
         <div class="nav-actions">
@@ -505,13 +505,11 @@
 
     <!-- JAVASCRIPT EFEK SUARA KADO & CONFETTI -->
     <script>
-        // 1. Generator Efek Suara Lonceng Ajaib (Web Audio API - Anti Error Tanpa File MP3!)
         function playMagicChime(type = 'gift') {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             if (!AudioCtx) return;
 
             const ctx = new AudioCtx();
-            // Nada melodi ceria (C5 - E5 - G5 - B5 - C6)
             const notes = type === 'gift'
                 ? [523.25, 659.25, 783.99, 987.77, 1046.50]
                 : [659.25, 783.99, 1046.50];
@@ -535,7 +533,6 @@
             });
         }
 
-        // 2. Efek Confetti Pastel Terbang
         function spawnConfetti(x, y) {
             const icons = ['✿', '♡', '✧', '୨୧', '✨', '🌸'];
             for (let i = 0; i < 16; i++) {
@@ -555,7 +552,6 @@
             }
         }
 
-        // 3. Fungsi Buka Kotak Kado
         function openGift(giftId, event) {
             const box = document.getElementById(giftId);
             if (box.classList.contains('opened')) return;
@@ -565,7 +561,6 @@
             spawnConfetti(event.clientX, event.clientY);
         }
 
-        // 4. Lucky Fortune Jar
         const fortunes = [
             '"Good things are quietly making their way to you today ✿"',
             '"Your creativity and kindness make this world a brighter place ♡"',
