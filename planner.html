@@ -1,1 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Cozy Planner ✿ | Little Universe</title>
+    <meta name="description" content="Raisha's cute daily to-do list, weekly study schedule, and monthly little goals.">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS KHUSUS PLANNER -->
+    <style>
+        .planner-container {
+            max-width: 1080px;
+            margin: auto;
+            padding: 60px 25px 95px;
+        }
+
+        /* 1. HEADER */
+        .planner-header {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto 45px;
+        }
+
+        .planner-header .eyebrow {
+            background: var(--yellow);
+            color: var(--text);
+            padding: 7px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        .planner-header h1 {
+            font-family: var(--heading);
+            font-size: clamp(35px, 5vw, 52px);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .planner-header h1 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .planner-header p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        /* 2. LAYOUT UTAMA: TO-DO LIST & STICKY GOALS */
+        .planner-top-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 28px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        /* Kartu Interactive To-Do List */
+        .todo-board {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .todo-board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .todo-board-header h2 {
+            font-family: var(--heading);
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .today-pill {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* Progress Bar Lucu */
+        .progress-wrap {
+            margin-bottom: 22px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: var(--cream);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--blush), var(--dark-rose));
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+
+        /* Form Tambah Tugas */
+        .todo-form {
+            display: grid;
+            grid-template-columns: 1.4fr 0.7fr auto;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .todo-form input,
+        .todo-form select {
+            padding: 11px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .todo-form input:focus,
+        .todo-form select:focus {
+            border-color: var(--rose);
+            background: var(--white);
+        }
+
+        .add-task-btn {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 11px 18px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .add-task-btn:hover {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        /* Daftar Item Tugas */
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 16px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: 0.25s;
+        }
+
+        .todo-item:hover {
+            transform: translateX(4px);
+        }
+
+        .todo-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .todo-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: transparent;
+            background: var(--white);
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        .todo-item.done .todo-check {
+            background: var(--dark-rose);
+            border-color: var(--dark-rose);
+            color: white;
+        }
+
+        .todo-text {
+            font-size: 13.5px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .todo-item.done .todo-text {
+            text-decoration: line-through;
+            color: var(--muted);
+        }
+
+        .todo-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .todo-tag {
+            font-size: 10.5px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--dark-rose);
+            font-weight: 600;
+        }
+
+        .todo-del {
+            background: none;
+            color: var(--muted);
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .todo-del:hover {
+            color: #c95c68;
+        }
+
+        /* Kolom Kanan: Sticky Goals */
+        .sticky-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sticky-note {
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .note-yellow { background: #fff9e3; }
+        .note-pink { background: #fcecf1; }
+        .note-sage { background: #eef4eb; }
+
+        .sticky-note span {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--dark-rose);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .sticky-note h3 {
+            font-family: var(--heading);
+            font-size: 20px;
+            font-weight: 500;
+            color: #4f4341;
+            margin-bottom: 8px;
+        }
+
+        .sticky-note p {
+            font-size: 13px;
+            color: #6e5f5d;
+            line-height: 1.75;
+        }
+
+        /* 3. WEEKLY RHYTHM SCHEDULE */
+        .weekly-section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 34px 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .weekly-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .weekly-header h2 {
+            font-family: var(--heading);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text);
+            margin-top: 6px;
+        }
+
+        .weekly-header h2 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .day-card {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            transition: 0.3s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--blush);
+        }
+
+        .day-name {
+            display: inline-block;
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 4px 12px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .day-card:nth-child(even) .day-name {
+            background: var(--sage);
+            color: #4f6349;
+        }
+
+        .day-card h4 {
+            font-family: var(--heading);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .day-card p {
+            font-size: 12.5px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* 4. DARK MODE */
+        body.dark-mode .todo-board,
+        body.dark-mode .weekly-section {
+            background: #30282d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .todo-item,
+        body.dark-mode .day-card,
+        body.dark-mode .todo-form input,
+        body.dark-mode .todo-form select {
+            background: #241e22;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .note-yellow { background: #3d3726; }
+        body.dark-mode .note-pink { background: #3d2a31; }
+        body.dark-mode .note-sage { background: #29332b; }
+
+        body.dark-mode .sticky-note h3 { color: #f6ecef; }
+        body.dark-mode .sticky-note p { color: #c9b8bd; }
+
+        /* 5. RESPONSIVE */
+        @media (max-width: 850px) {
+            .planner-top-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .week-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .todo-form {
+                grid-template-columns: 1fr;
+            }
+
+            .week-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html" class="active">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="planner-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="planner-header">
+            <span class="eyebrow">STAYING ORGANIZED & COZY</span>
+            <h1>My Little <span>Life Planner.</span></h1>
+            <p>
+                Keeping track of campus tasks, coding goals, and gentle reminders 
+                to take things one step at a time ✿
+            </p>
+        </header>
+
+        <!-- BAGIAN ATAS: INTERACTIVE TO-DO LIST & STICKY NOTES -->
+        <section class="planner-top-grid">
+
+            <!-- To-Do List Interaktif -->
+            <div class="todo-board">
+                <div class="todo-board-header">
+                    <h2>Today's Checklist ✎</h2>
+                    <span class="today-pill" id="plannerDateBadge">TODAY ✿</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-wrap">
+                    <div class="progress-label">
+                        <span>Daily Progress</span>
+                        <span id="progressText">0% Done ♡</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Form Tambah Tugas -->
+                <form class="todo-form" id="todoForm">
+                    <input type="text" id="taskInput" placeholder="Add a little task for today..." required>
+                    <select id="taskCategory">
+                        <option value="🎓 Campus">🎓 Campus</option>
+                        <option value="💻 Coding">💻 Coding</option>
+                        <option value="🌷 Self-Care">🌷 Self-Care</option>
+                    </select>
+                    <button type="submit" class="add-task-btn">Add +</button>
+                </form>
+
+                <!-- Daftar Tugas -->
+                <div class="todo-list" id="todoList"></div>
+            </div>
+
+            <!-- Sticky Notes Kanan -->
+            <div class="sticky-stack">
+                <div class="sticky-note note-yellow">
+                    <span>MONTHLY FOCUS ✧</span>
+                    <h3>Semester 1 Strong Finish</h3>
+                    <p>Review Java & Discrete Math notes every week and keep coding projects clean and well-documented.</p>
+                </div>
+
+                <div class="sticky-note note-pink">
+                    <span>CREATIVE GOAL ♡</span>
+                    <h3>Complete Little Universe</h3>
+                    <p>Polish every single page of my personal website and add a custom Admin Edit Mode!</p>
+                </div>
+
+                <div class="sticky-note note-sage">
+                    <span>GENTLE REMINDER 🌿</span>
+                    <h3>Rest Is Productive Too</h3>
+                    <p>Drink plenty of water, take afternoon breaks, and celebrate small progress every single day.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- BAGIAN BAWAH: WEEKLY RHYTHM -->
+        <section class="weekly-section">
+            <div class="weekly-header">
+                <span class="eyebrow">WEEKLY ROUTINE</span>
+                <h2>My Cozy <span>Weekly Rhythm.</span></h2>
+            </div>
+
+            <div class="week-grid">
+                <div class="day-card">
+                    <span class="day-name">MON – TUE</span>
+                    <h4>Campus & Lectures</h4>
+                    <p>Attending Information Systems classes, taking neat notes, and organizing weekly assignments.</p>
+                </div>
+
+                <div class="day-card">
+                    <span class="day-name">WED – THU</span>
+                    <h4>Coding & Practice</h4>
+                    <p>Practicing Java in NetBeans, Excel data formulas, and solving discrete math exercises.</p>
+                </div>
+
+                <div class="day-card">
+                    <span class="day-name">FRIDAY</span>
+                    <h4>Creative & Web Dev</h4>
+                    <p>Designing pastel interfaces, updating Little Universe pages, and experimenting with visual ideas.</p>
+                </div>
+
+                <div class="day-card">
+                    <span class="day-name">WEEKEND</span>
+                    <h4>Slow & Recharge</h4>
+                    <p>Afternoon drives around Bandung with favorite songs, good snacks, and journaling time ♡</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT INTERACTIVE PLANNER -->
+    <script>
+        // Tampilkan tanggal hari ini di badge
+        const todayBadge = document.getElementById('plannerDateBadge');
+        todayBadge.textContent = new Date().toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric'
+        }).toUpperCase() + ' ✿';
+
+        // Daftar tugas bawaan
+        const defaultTasks = [
+            { id: 't1', text: 'Finish designing Little Universe pages', category: '💻 Coding', done: true },
+            { id: 't2', text: 'Review Information Systems lecture notes', category: '🎓 Campus', done: false },
+            { id: 't3', text: 'Enjoy a relaxing evening drive & playlist', category: '🌷 Self-Care', done: false }
+        ];
+
+        const todoForm = document.getElementById('todoForm');
+        const taskInput = document.getElementById('taskInput');
+        const taskCategory = document.getElementById('taskCategory');
+        const todoList = document.getElementById('todoList');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        function getTasks() {
+            const saved = localStorage.getItem('raishaPlannerTasks');
+            return saved ? JSON.parse(saved) : defaultTasks;
+        }
+
+        function saveTasks(tasks) {
+            localStorage.setItem('raishaPlannerTasks', JSON.stringify(tasks));
+        }
+
+        function renderTasks() {
+            const tasks = getTasks();
+            todoList.innerHTML = '';
+
+            let doneCount = 0;
+
+            tasks.forEach(task => {
+                if (task.done) doneCount++;
+
+                const item = document.createElement('div');
+                item.className = `todo-item ${task.done ? 'done' : ''}`;
+                item.innerHTML = `
+                    <div class="todo-left" data-toggle="${task.id}">
+                        <div class="todo-check"><i class="fa-solid fa-check"></i></div>
+                        <span class="todo-text">${task.text}</span>
+                    </div>
+                    <div class="todo-right">
+                        <span class="todo-tag">${task.category}</span>
+                        <button type="button" class="todo-del" data-del="${task.id}" title="Delete task">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                `;
+                todoList.appendChild(item);
+            });
+
+            // Update Progress Bar
+            const percent = tasks.length === 0 ? 0 : Math.round((doneCount / tasks.length) * 100);
+            progressFill.style.width = percent + '%';
+            progressText.textContent = `${percent}% Done ♡`;
+
+            // Event Centang Selesai
+            document.querySelectorAll('[data-toggle]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const updated = getTasks().map(t =>
+                        t.id === el.dataset.toggle ? { ...t, done: !t.done } : t
+                    );
+                    saveTasks(updated);
+                    renderTasks();
+                });
+            });
+
+            // Event Hapus Tugas
+            document.querySelectorAll('[data-del]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const updated = getTasks().filter(t => t.id !== btn.dataset.del);
+                    saveTasks(updated);
+                    renderTasks();
+                });
+            });
+        }
+
+        todoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const textVal = taskInput.value.trim();
+            if (!textVal) return;
+
+            const tasks = getTasks();
+            tasks.unshift({
+                id: 'task-' + Date.now(),
+                text: textVal,
+                category: taskCategory.value,
+                done: false
+            });
+
+            saveTasks(tasks);
+            todoForm.reset();
+            renderTasks();
+        });
+
+        renderTasks();
+    </script>
+
+</body>
+</html>
