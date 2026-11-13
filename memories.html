@@ -3,184 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Pieces of My World ♡</title>
+    <title>Little Pieces of My World ♡ | Little Universe</title>
 
+    <!-- CSS Global & Khusus Memories -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/memories.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
-    <style>
-        .memory-page {
-            max-width: 1100px;
-            margin: auto;
-            padding: 55px 25px 80px;
-        }
-
-        .memory-heading {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .memory-heading .tiny-label {
-            color: #b98791;
-            letter-spacing: 3px;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        .memory-heading h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(35px, 6vw, 55px);
-            color: #9d7079;
-            margin: 15px 0;
-        }
-
-        .memory-heading p {
-            color: #8f7b78;
-            line-height: 1.8;
-        }
-
-        .memory-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .memory-card {
-            background: #fffdf9;
-            padding: 13px 13px 20px;
-            border-radius: 5px;
-            box-shadow: 0 5px 18px rgba(120, 80, 80, 0.10);
-            transition: 0.3s ease;
-            cursor: pointer;
-            transform: rotate(var(--tilt));
-        }
-
-        .memory-card:hover {
-            transform: translateY(-8px) rotate(0deg);
-            box-shadow: 0 12px 25px rgba(120, 80, 80, 0.16);
-        }
-
-        .memory-card img {
-            width: 100%;
-            aspect-ratio: 4 / 4.5;
-            object-fit: cover;
-            display: block;
-            border-radius: 3px;
-        }
-
-        .memory-caption {
-            text-align: center;
-            padding-top: 17px;
-        }
-
-        .memory-caption h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: #9d7079;
-            margin: 0 0 7px;
-        }
-
-        .memory-caption p {
-            font-size: 12px;
-            color: #a9958d;
-            margin: 0;
-        }
-
-        .memory-footer {
-            text-align: center;
-            margin-top: 60px;
-            color: #ad8990;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(39, 29, 34, 0.88);
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            max-width: 650px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .lightbox img {
-            max-width: 100%;
-            max-height: 75vh;
-            object-fit: contain;
-            border: 10px solid #fffdf9;
-            border-bottom-width: 35px;
-            border-radius: 3px;
-        }
-
-        .lightbox p {
-            color: white;
-            margin-top: 15px;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 28px;
-            color: white;
-            font-size: 35px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .memory-back {
-            display: block;
-            text-align: center;
-            margin-top: 35px;
-            color: #a77983;
-            text-decoration: none;
-        }
-
-        body.dark-mode .memory-card {
-            background: #30272e;
-        }
-
-        body.dark-mode .memory-caption h3 {
-            color: #edb9c7;
-        }
-
-        body.dark-mode .memory-caption p,
-        body.dark-mode .memory-heading p {
-            color: #d0b9c0;
-        }
-
-        @media (max-width: 750px) {
-            .memory-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 18px;
-            }
-        }
-
-        @media (max-width: 450px) {
-            .memory-grid {
-                grid-template-columns: 1fr;
-                max-width: 320px;
-                margin: auto;
-            }
-        }
-    </style>
+    <!-- Font Awesome (untuk ikon navbar & dark mode) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION (Sama persis dengan Homepage) -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html" class="active">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
     <main class="memory-page">
 
@@ -255,12 +132,15 @@
             "Collect moments, not things." ♡
         </p>
 
-        <a href="index.html" class="memory-back">
-            ← Back to my little universe
-        </a>
+        <div class="back-wrapper">
+            <a href="index.html" class="memory-back">
+                ← Back to my little universe
+            </a>
+        </div>
 
     </main>
 
+    <!-- LIGHTBOX -->
     <div class="lightbox" id="memoryLightbox">
         <button class="lightbox-close" id="closeLightbox" aria-label="Close">&times;</button>
 
@@ -270,49 +150,34 @@
         </div>
     </div>
 
-    <script>
-        const memoryCards = document.querySelectorAll('.memory-card');
-        const lightbox = document.getElementById('memoryLightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxCaption = document.getElementById('lightboxCaption');
-        const closeLightbox = document.getElementById('closeLightbox');
+    <!-- FOOTER (Sama persis dengan Homepage) -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
 
-        memoryCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const image = card.querySelector('img');
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
 
-                lightboxImage.src = image.src;
-                lightboxImage.alt = image.alt;
-                lightboxCaption.textContent = card.dataset.caption;
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
 
-                lightbox.classList.add('active');
-            });
-        });
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
 
-        function closeMemory() {
-            lightbox.classList.remove('active');
-        }
-
-        closeLightbox.addEventListener('click', closeMemory);
-
-        lightbox.addEventListener('click', (event) => {
-            if (event.target === lightbox) {
-                closeMemory();
-            }
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                closeMemory();
-            }
-        });
-
-        // Follow the website's existing dark mode preference
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
-    </script>
+    <!-- JAVASCRIPT GLOBAL & KHUSUS MEMORIES -->
+    <script src="js/script.js"></script>
+    <script src="js/memories.js"></script>
 
 </body>
 </html>
-```
