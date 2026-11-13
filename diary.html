@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Digital Diary ✿ | Little Universe</title>
-    <meta name="description" content="Little pages of thoughts, campus stories, and everyday moments from Raisha's diary.">
+    <meta name="description" content="Raisha's personal handwritten-style flipbook diary and mood tracker.">
 
     <!-- CSS Global & Khusus Diary -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/diary.css">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Termasuk Font Tulisan Tangan: Caveat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -61,76 +61,111 @@
         </div>
     </header>
 
-    <main class="diary-container">
+    <main class="diary-stage">
 
-        <!-- HEADER HALAMAN -->
-        <header class="diary-header">
-            <span class="eyebrow">DEAR LITTLE DIARY</span>
-            <h1>Pages of My <span>Thoughts.</span></h1>
-            <p>
-                A cozy corner where I write down little stories, 
-                random late-night thoughts, and moments worth remembering ♡
-            </p>
+        <header class="diary-intro">
+            <span class="eyebrow">SECRET LITTLE JOURNAL</span>
+            <h1>My Handwritten <span>Diary.</span></h1>
+            <p>Tap the book cover to open, flip through the pages, or write today's notes & mood ♡</p>
         </header>
 
-        <!-- KOTAK TULIS CATATAN CEPAT -->
-        <section class="write-box">
-            <div class="write-box-header">
-                <h2>Write a Little Note ✎</h2>
-                <span>saved in your browser ♡</span>
-            </div>
+        <div class="book-wrapper">
 
-            <form id="diaryForm">
-                <div class="write-row">
-                    <input type="text" id="entryTitle" placeholder="Give your story a cute title..." required>
-                    <select id="entryCategory">
-                        <option value="everyday">✿ Everyday</option>
-                        <option value="campus">🎓 Campus Life</option>
-                        <option value="thoughts">☁ Late Night Thoughts</option>
-                    </select>
+            <!-- 1. TAMPILAN BUKU TERTUTUP (COVER) -->
+            <div class="diary-cover" id="diaryCover">
+                <span class="cover-badge">PRIVATE NOTES ✿</span>
+
+                <div class="cover-label-box">
+                    <h2>Raisha's Diary</h2>
+                    <p>"little stories, moods & dreams"</p>
                 </div>
 
-                <textarea id="entryStory" placeholder="What's on your mind today, Raisha?" required></textarea>
+                <button type="button" class="open-book-btn">
+                    Open Diary ✿
+                </button>
+            </div>
 
-                <div class="write-actions">
-                    <button type="submit" class="btn-primary">
-                        Save to Diary ✿
+            <!-- 2. TAMPILAN BUKU TERBUKA (ISI LEMBARAN) -->
+            <div class="open-diary" id="openDiary">
+
+                <!-- Toolbar Atas Buku -->
+                <div class="diary-toolbar">
+                    <button type="button" class="tool-btn" id="closeBookBtn">
+                        <i class="fa-solid fa-book"></i> Close Cover
+                    </button>
+
+                    <button type="button" class="tool-btn highlight" id="toggleWriteBtn">
+                        <i class="fa-solid fa-pen-nib"></i> Write Today's Page
                     </button>
                 </div>
-            </form>
-        </section>
 
-        <!-- TOMBOL FILTER MOOD -->
-        <div class="filter-bar">
-            <button type="button" class="filter-btn active" data-filter="all">All Pages ✧</button>
-            <button type="button" class="filter-btn" data-filter="everyday">✿ Everyday</button>
-            <button type="button" class="filter-btn" data-filter="campus">🎓 Campus Life</button>
-            <button type="button" class="filter-btn" data-filter="thoughts">☁ Late Night Thoughts</button>
+                <!-- MODE BACA: LEMBAR KERTAS JURNAL -->
+                <div class="paper-sheet" id="readingSheet">
+                    <div class="paper-header">
+                        <span class="handwriting-date" id="pageDate">Date</span>
+                        <span class="mood-sticker" id="pageMood">Mood</span>
+                    </div>
+
+                    <h2 class="handwriting-title" id="pageTitle">Title</h2>
+
+                    <div class="handwriting-body" id="pageBody"></div>
+
+                    <div class="paper-footer">
+                        <span>~ written by Raisha ♡</span>
+                        <button type="button" class="delete-page-btn" id="deletePageBtn" style="display: none;">
+                            <i class="fa-regular fa-trash-can"></i> Tear out this page
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MODE TULIS: FORMULIR JURNAL & MOOD TRACKER -->
+                <div class="paper-sheet journal-form-sheet" id="writingSheet">
+                    <div class="paper-header">
+                        <span class="handwriting-date" id="todayDateLabel">Today's Note</span>
+                        <span class="mood-sticker">New Entry ✎</span>
+                    </div>
+
+                    <form id="journalForm">
+                        <label style="font-size: 12px; font-weight: 700; color: var(--dark-rose);">
+                            1. HOW ARE YOU FEELING TODAY? (MOOD TRACKER)
+                        </label>
+                        <div class="mood-picker" id="moodPicker">
+                            <button type="button" class="mood-option selected" data-mood="✿ Happy & Bloom">✿ Happy & Bloom</button>
+                            <button type="button" class="mood-option" data-mood="☁ Cozy & Calm">☁ Cozy & Calm</button>
+                            <button type="button" class="mood-option" data-mood="💻 Productive">💻 Productive</button>
+                            <button type="button" class="mood-option" data-mood="♡ Grateful">♡ Grateful</button>
+                            <button type="button" class="mood-option" data-mood="🌙 Sleepy / Tired">🌙 Sleepy / Tired</button>
+                        </div>
+
+                        <input type="text" id="noteTitle" class="paper-input" placeholder="Write a title for today's page..." required>
+
+                        <textarea id="noteContent" class="paper-textarea" placeholder="Dear diary, today..." required></textarea>
+
+                        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px;">
+                            <button type="button" class="tool-btn" id="cancelWriteBtn">Cancel</button>
+                            <button type="submit" class="btn-primary">Stick into Diary ✿</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Navigasi Bolak-Balik Halaman -->
+                <div class="page-controls" id="pageControls">
+                    <button type="button" class="nav-page-btn" id="prevPageBtn">
+                        ← Prev Page
+                    </button>
+
+                    <span class="page-indicator" id="pageIndicator">Page 1 of 4</span>
+
+                    <button type="button" class="nav-page-btn" id="nextPageBtn">
+                        Next Page →
+                    </button>
+                </div>
+
+            </div>
+
         </div>
-
-        <!-- DAFTAR KARTU DIARY -->
-        <section class="diary-grid" id="diaryGrid"></section>
 
     </main>
-
-    <!-- POPUP BACA CERITA LENGKAP -->
-    <div class="diary-modal" id="diaryModal">
-        <div class="diary-modal-paper">
-            <button type="button" class="modal-close-btn" id="closeDiaryModal" aria-label="Close diary">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <span class="diary-mood-tag" id="modalMood">✿ Mood</span>
-            <span class="diary-date" id="modalDate">DATE</span>
-            <h2 id="modalTitle">Diary Title</h2>
-
-            <div class="diary-modal-body" id="modalStory"></div>
-
-            <div class="diary-modal-sign">
-                written with love, Raisha ♡
-            </div>
-        </div>
-    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -160,190 +195,206 @@
     <!-- JAVASCRIPT GLOBAL -->
     <script src="js/script.js"></script>
 
-    <!-- JAVASCRIPT KHUSUS DIARY -->
+    <!-- JAVASCRIPT BUKU DIARY -->
     <script>
-        const defaultEntries = [
+        // Halaman bawaan di dalam buku
+        const initialPages = [
             {
-                id: 'entry-1',
-                date: 'NOVEMBER 10, 2026',
-                category: 'campus',
-                mood: '🎓 Campus Life',
+                id: 'page-1',
+                date: 'Monday, Nov 10, 2026',
+                mood: '💻 Productive',
                 title: 'First Semester Adventures in Information Systems',
-                story: `Stepping into university life felt a little overwhelming at first—new faces, new schedules, and learning things like algorithms, matrices, and programming.\n\nYet somewhere between coding assignments and campus walks, I realized I am genuinely enjoying the process. Every small error I fix feels like a tiny victory. Here is to growing step by step! ✿`,
+                body: `Dear Diary,\nStepping into university life felt a little overwhelming at first—new friends, algorithms, matrices, and Java code.\nYet somewhere between coding tasks and campus walks, I realized I am genuinely enjoying the process. Every small bug I fix feels like a tiny victory! ✿`,
                 isCustom: false
             },
             {
-                id: 'entry-2',
-                date: 'NOVEMBER 04, 2026',
-                category: 'everyday',
-                mood: '✿ Everyday',
-                title: 'Building My Own Little Corner on the Internet',
-                story: `Today I spent hours choosing pastel colors and fonts for Little Universe. I wanted this website to feel like opening a warm, cozy scrapbook rather than a rigid tech page.\n\nHaving a space that reflects both my IT journey and my soft, creative side makes me so happy ♡`,
+                id: 'page-2',
+                date: 'Wednesday, Nov 04, 2026',
+                mood: '✿ Happy & Bloom',
+                title: 'Creating My Little Universe',
+                body: `Dear Diary,\nToday I worked on designing my personal website. I wanted it to feel warm, soft, and personal—just like opening a real scrapbook rather than a rigid tech page.\nSeeing all the pastel colors come together makes my heart so happy ♡`,
                 isCustom: false
             },
             {
-                id: 'entry-3',
-                date: 'OCTOBER 27, 2026',
-                category: 'thoughts',
-                mood: '☁ Late Night Thoughts',
-                title: 'A Gentle Reminder to Slow Down',
-                story: `Sometimes it feels like everyone is running so fast toward their goals. Tonight, listening to soft music, I reminded myself that flowers do not bloom all at once.\n\nTaking a deep breath, enjoying quiet moments, and appreciating how far I have come is more than enough.`,
+                id: 'page-3',
+                date: 'Tuesday, Oct 27, 2026',
+                mood: '☁ Cozy & Calm',
+                title: 'Bloom at Your Own Pace',
+                body: `Dear Diary,\nA gentle reminder to myself tonight: there is no rush in becoming who I want to be. Flowers do not bloom all at once.\nTaking a deep breath, enjoying quiet music, and appreciating small steps is more than enough.`,
                 isCustom: false
             },
             {
-                id: 'entry-4',
-                date: 'OCTOBER 18, 2026',
-                category: 'everyday',
-                mood: '✿ Everyday',
-                title: 'Afternoon Drives & Favorite Playlists',
-                story: `There is something magical about driving around Bandung in the late afternoon while playing my favorite songs.\n\nGolden sunlight filtering through the trees, cool breeze, and zero rush—definitely one of my favorite simple joys.`,
+                id: 'page-4',
+                date: 'Sunday, Oct 18, 2026',
+                mood: '♡ Grateful',
+                title: 'Golden Hour Drive & Favorite Songs',
+                body: `Dear Diary,\nNothing beats a slow afternoon drive around Bandung while playing my favorite playlist.\nWarm sunlight, cool breeze, and peaceful thoughts—definitely one of my favorite simple joys.`,
                 isCustom: false
             }
         ];
 
-        const diaryGrid = document.getElementById('diaryGrid');
-        const diaryForm = document.getElementById('diaryForm');
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        // Ambil elemen DOM
+        const diaryCover = document.getElementById('diaryCover');
+        const openDiary = document.getElementById('openDiary');
+        const closeBookBtn = document.getElementById('closeBookBtn');
 
-        const diaryModal = document.getElementById('diaryModal');
-        const closeDiaryModal = document.getElementById('closeDiaryModal');
-        const modalMood = document.getElementById('modalMood');
-        const modalDate = document.getElementById('modalDate');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalStory = document.getElementById('modalStory');
+        const readingSheet = document.getElementById('readingSheet');
+        const writingSheet = document.getElementById('writingSheet');
+        const pageControls = document.getElementById('pageControls');
 
-        let currentFilter = 'all';
+        const toggleWriteBtn = document.getElementById('toggleWriteBtn');
+        const cancelWriteBtn = document.getElementById('cancelWriteBtn');
+        const journalForm = document.getElementById('journalForm');
 
-        function getCustomEntries() {
-            const saved = localStorage.getItem('littleUniverseDiary');
+        const pageDate = document.getElementById('pageDate');
+        const pageMood = document.getElementById('pageMood');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageBody = document.getElementById('pageBody');
+        const deletePageBtn = document.getElementById('deletePageBtn');
+
+        const prevPageBtn = document.getElementById('prevPageBtn');
+        const nextPageBtn = document.getElementById('nextPageBtn');
+        const pageIndicator = document.getElementById('pageIndicator');
+
+        let currentPageIndex = 0;
+        let selectedMood = '✿ Happy & Bloom';
+
+        // Ambil catatan tambahan dari localStorage
+        function getSavedPages() {
+            const saved = localStorage.getItem('raishaFlipDiary');
             return saved ? JSON.parse(saved) : [];
         }
 
-        function saveCustomEntries(entries) {
-            localStorage.setItem('littleUniverseDiary', JSON.stringify(entries));
+        function getAllPages() {
+            return [...getSavedPages(), ...initialPages];
         }
 
-        function renderDiary() {
-            const allEntries = [...getCustomEntries(), ...defaultEntries];
+        // Buka & Tutup Sampul Buku
+        diaryCover.addEventListener('click', () => {
+            diaryCover.style.display = 'none';
+            openDiary.classList.add('active');
+            renderCurrentPage();
+        });
 
-            const filteredEntries = currentFilter === 'all'
-                ? allEntries
-                : allEntries.filter(item => item.category === currentFilter);
+        closeBookBtn.addEventListener('click', () => {
+            openDiary.classList.remove('active');
+            diaryCover.style.display = 'flex';
+            showReadingMode();
+        });
 
-            diaryGrid.innerHTML = '';
+        // Tampilkan isi halaman aktif
+        function renderCurrentPage() {
+            const pages = getAllPages();
+            if (currentPageIndex >= pages.length) currentPageIndex = pages.length - 1;
+            if (currentPageIndex < 0) currentPageIndex = 0;
 
-            filteredEntries.forEach(entry => {
-                const shortText = entry.story.length > 135
-                    ? entry.story.substring(0, 135) + '...'
-                    : entry.story;
+            const current = pages[currentPageIndex];
+            pageDate.textContent = current.date;
+            pageMood.textContent = current.mood;
+            pageTitle.textContent = current.title;
+            pageBody.textContent = current.body;
 
-                const card = document.createElement('article');
-                card.className = 'diary-card';
-                card.innerHTML = `
-                    <div>
-                        <span class="diary-mood-tag">${entry.mood}</span>
-                        <span class="diary-date">${entry.date}</span>
-                        <h3>${entry.title}</h3>
-                        <p class="diary-excerpt">${shortText}</p>
-                    </div>
-                    <div class="diary-card-footer">
-                        <button type="button" class="read-entry-btn" data-id="${entry.id}">
-                            Read full entry <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                        ${entry.isCustom ? `<button type="button" class="delete-entry-btn" data-delete="${entry.id}" title="Delete note"><i class="fa-regular fa-trash-can"></i></button>` : ''}
-                    </div>
-                `;
+            pageIndicator.textContent = `Page ${currentPageIndex + 1} of ${pages.length}`;
+            prevPageBtn.disabled = currentPageIndex === 0;
+            nextPageBtn.disabled = currentPageIndex === pages.length - 1;
 
-                diaryGrid.appendChild(card);
-            });
-
-            document.querySelectorAll('.read-entry-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const target = allEntries.find(item => item.id === btn.dataset.id);
-                    if (target) {
-                        modalMood.textContent = target.mood;
-                        modalDate.textContent = target.date;
-                        modalTitle.textContent = target.title;
-                        modalStory.textContent = target.story;
-                        diaryModal.classList.add('open');
-                    }
-                });
-            });
-
-            document.querySelectorAll('.delete-entry-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const updated = getCustomEntries().filter(item => item.id !== btn.dataset.delete);
-                    saveCustomEntries(updated);
-                    renderDiary();
-                });
-            });
+            deletePageBtn.style.display = current.isCustom ? 'inline-block' : 'none';
         }
 
-        diaryForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // Animasi & tombol pindah halaman
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPageIndex > 0) {
+                readingSheet.classList.add('flipping-prev');
+                setTimeout(() => {
+                    currentPageIndex--;
+                    renderCurrentPage();
+                    readingSheet.classList.remove('flipping-prev');
+                }, 220);
+            }
+        });
 
-            const titleInput = document.getElementById('entryTitle').value.trim();
-            const categoryInput = document.getElementById('entryCategory').value;
-            const storyInput = document.getElementById('entryStory').value.trim();
+        nextPageBtn.addEventListener('click', () => {
+            const pages = getAllPages();
+            if (currentPageIndex < pages.length - 1) {
+                readingSheet.classList.add('flipping-next');
+                setTimeout(() => {
+                    currentPageIndex++;
+                    renderCurrentPage();
+                    readingSheet.classList.remove('flipping-next');
+                }, 220);
+            }
+        });
 
-            if (!titleInput || !storyInput) return;
+        // Beralih antara Mode Baca dan Mode Tulis Jurnal
+        function showWritingMode() {
+            readingSheet.style.display = 'none';
+            pageControls.style.display = 'none';
+            writingSheet.classList.add('active');
 
-            const moodLabels = {
-                everyday: '✿ Everyday',
-                campus: '🎓 Campus Life',
-                thoughts: '☁ Late Night Thoughts'
-            };
-
-            const today = new Date().toLocaleDateString('en-US', {
-                month: 'long',
+            const todayStr = new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
                 day: '2-digit',
                 year: 'numeric'
-            }).toUpperCase();
+            });
+            document.getElementById('todayDateLabel').textContent = todayStr;
+        }
 
-            const newEntry = {
+        function showReadingMode() {
+            writingSheet.classList.remove('active');
+            readingSheet.style.display = 'block';
+            pageControls.style.display = 'flex';
+        }
+
+        toggleWriteBtn.addEventListener('click', showWritingMode);
+        cancelWriteBtn.addEventListener('click', showReadingMode);
+
+        // Pilih Mood di Mood Tracker
+        document.querySelectorAll('.mood-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mood-option').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedMood = btn.dataset.mood;
+            });
+        });
+
+        // Simpan catatan baru ke dalam buku
+        journalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const titleVal = document.getElementById('noteTitle').value.trim();
+            const contentVal = document.getElementById('noteContent').value.trim();
+            if (!titleVal || !contentVal) return;
+
+            const newPage = {
                 id: 'custom-' + Date.now(),
-                date: today,
-                category: categoryInput,
-                mood: moodLabels[categoryInput],
-                title: titleInput,
-                story: storyInput,
+                date: document.getElementById('todayDateLabel').textContent,
+                mood: selectedMood,
+                title: titleVal,
+                body: contentVal,
                 isCustom: true
             };
 
-            const customEntries = getCustomEntries();
-            customEntries.unshift(newEntry);
-            saveCustomEntries(customEntries);
+            const saved = getSavedPages();
+            saved.unshift(newPage);
+            localStorage.setItem('raishaFlipDiary', JSON.stringify(saved));
 
-            diaryForm.reset();
-            renderDiary();
+            journalForm.reset();
+            currentPageIndex = 0;
+            showReadingMode();
+            renderCurrentPage();
         });
 
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                renderDiary();
-            });
-        });
-
-        closeDiaryModal.addEventListener('click', () => {
-            diaryModal.classList.remove('open');
-        });
-
-        diaryModal.addEventListener('click', (e) => {
-            if (e.target === diaryModal) {
-                diaryModal.classList.remove('open');
+        // Hapus halaman yang ditulis sendiri
+        deletePageBtn.addEventListener('click', () => {
+            const pages = getAllPages();
+            const target = pages[currentPageIndex];
+            if (target && target.isCustom) {
+                const updated = getSavedPages().filter(p => p.id !== target.id);
+                localStorage.setItem('raishaFlipDiary', JSON.stringify(updated));
+                renderCurrentPage();
             }
         });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                diaryModal.classList.remove('open');
-            }
-        });
-
-        renderDiary();
     </script>
 
 </body>
