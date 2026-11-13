@@ -1,1 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Guestbook ✿ | Little Universe</title>
+    <meta name="description" content="Leave a sweet note, doodle sticker, or little message in Raisha's digital guestbook.">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS KHUSUS GUESTBOOK -->
+    <style>
+        .guest-container {
+            max-width: 1080px;
+            margin: auto;
+            padding: 60px 25px 95px;
+        }
+
+        /* 1. HEADER */
+        .guest-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 45px;
+        }
+
+        .guest-header .eyebrow {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 7px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        .guest-header h1 {
+            font-family: var(--heading);
+            font-size: clamp(35px, 5vw, 52px);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .guest-header h1 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .guest-header p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        /* 2. KOTAK TULIS PESAN (SIGN THE GUESTBOOK) */
+        .sign-box {
+            max-width: 720px;
+            margin: 0 auto 55px;
+            background: var(--white);
+            border: 1.5px dashed var(--rose);
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .sign-box h2 {
+            font-family: var(--heading);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--dark-rose);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .sign-box p {
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .sign-row {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .sign-box input,
+        .sign-box select,
+        .sign-box textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .sign-box input:focus,
+        .sign-box select:focus,
+        .sign-box textarea:focus {
+            border-color: var(--rose);
+            background: var(--white);
+        }
+
+        .sign-box textarea {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        .sign-submit-wrap {
+            text-align: center;
+        }
+
+        /* 3. DINDING PESAN PENGUNJUNG (MESSAGE WALL) */
+        .wall-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .wall-header h3 {
+            font-family: var(--heading);
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .wall-header h3 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .guest-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.35s ease;
+        }
+
+        .guest-card:hover {
+            transform: translateY(-6px) rotate(-1deg);
+        }
+
+        .guest-card:nth-child(even):hover {
+            transform: translateY(-6px) rotate(1deg);
+        }
+
+        .guest-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .guest-sticker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .guest-card:nth-child(even) .guest-sticker {
+            background: var(--yellow);
+        }
+
+        .guest-card:nth-child(3n) .guest-sticker {
+            background: var(--sage);
+        }
+
+        .guest-date {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        .guest-message {
+            font-size: 13.5px;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        .guest-author {
+            padding-top: 12px;
+            border-top: 1px dashed var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guest-author strong {
+            font-family: var(--heading);
+            font-size: 16px;
+            color: var(--dark-rose);
+        }
+
+        .guest-author span {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* 4. DARK MODE */
+        body.dark-mode .sign-box,
+        body.dark-mode .guest-card {
+            background: #30282d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .sign-box input,
+        body.dark-mode .sign-box select,
+        body.dark-mode .sign-box textarea {
+            background: #241e22;
+            border-color: var(--border);
+        }
+
+        /* 5. RESPONSIVE */
+        @media (max-width: 850px) {
+            .notes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .sign-row {
+                grid-template-columns: 1fr;
+            }
+
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html" class="active">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="guest-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="guest-header">
+            <span class="eyebrow">LITTLE NOTES FROM FRIENDS</span>
+            <h1>Sign My <span>Guestbook.</span></h1>
+            <p>
+                Thank you for visiting my little universe! Leave a kind note, 
+                a song recommendation, or a cute sticker before you go ♡
+            </p>
+        </header>
+
+        <!-- FORMULIR BUKU TAMU -->
+        <section class="sign-box">
+            <h2>Leave a Little Note ✎</h2>
+            <p>Your message will be pinned onto my scrapbook wall ✿</p>
+
+            <form id="guestForm">
+                <div class="sign-row">
+                    <input type="text" id="guestName" placeholder="Your name or nickname..." required>
+                    <select id="guestSticker">
+                        <option value="✿">✿ Pastel Flower</option>
+                        <option value="♡">♡ Sweet Heart</option>
+                        <option value="☁">☁ Cozy Cloud</option>
+                        <option value="🍵">🍵 Iced Matcha</option>
+                        <option value="✨">✨ Magic Sparkle</option>
+                    </select>
+                </div>
+
+                <textarea id="guestMessage" placeholder="Write something sweet, encouraging, or random..." required></textarea>
+
+                <div class="sign-submit-wrap">
+                    <button type="submit" class="btn-primary">
+                        Pin Note to Wall ✿
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- DINDING CATATAN -->
+        <section>
+            <div class="wall-header">
+                <h3>Scrapbook <span>Message Wall.</span></h3>
+            </div>
+
+            <div class="notes-grid" id="notesGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT GUESTBOOK -->
+    <script>
+        const defaultNotes = [
+            {
+                name: 'Campus Bestie',
+                sticker: '✿',
+                date: 'NOV 2026',
+                message: '"Your website is literally the cutest thing ever Caca!! Good luck with our Semester 1 coding tasks, semangat terus!"'
+            },
+            {
+                name: 'ORACLE Squad',
+                sticker: '✨',
+                date: 'OCT 2026',
+                message: '"So proud of everything you are building in Information Systems. Keep shining and stay sweet!"'
+            },
+            {
+                name: 'Secret Visitor',
+                sticker: '🍵',
+                date: 'NOV 2026',
+                message: '"The pastel colors and flipbook diary feel so warm and cozy. Wishing you lots of happy days and smooth afternoon drives ♡"'
+            }
+        ];
+
+        const guestForm = document.getElementById('guestForm');
+        const notesGrid = document.getElementById('notesGrid');
+
+        function getSavedNotes() {
+            const saved = localStorage.getItem('raishaGuestbookNotes');
+            return saved ? JSON.parse(saved) : [];
+        }
+
+        function renderNotes() {
+            const allNotes = [...getSavedNotes(), ...defaultNotes];
+            notesGrid.innerHTML = '';
+
+            allNotes.forEach(note => {
+                const card = document.createElement('article');
+                card.className = 'guest-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="guest-card-top">
+                            <div class="guest-sticker">${note.sticker}</div>
+                            <span class="guest-date">${note.date}</span>
+                        </div>
+                        <p class="guest-message">${note.message}</p>
+                    </div>
+                    <div class="guest-author">
+                        <strong>~ ${note.name}</strong>
+                        <span>visitor ♡</span>
+                    </div>
+                `;
+                notesGrid.appendChild(card);
+            });
+        }
+
+        guestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nameVal = document.getElementById('guestName').value.trim();
+            const stickerVal = document.getElementById('guestSticker').value;
+            const msgVal = document.getElementById('guestMessage').value.trim();
+
+            if (!nameVal || !msgVal) return;
+
+            const today = new Date().toLocaleDateString('en-US', {
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
+            }).toUpperCase();
+
+            const newNote = {
+                name: nameVal,
+                sticker: stickerVal,
+                date: today,
+                message: `"${msgVal}"`
+            };
+
+            const saved = getSavedNotes();
+            saved.unshift(newNote);
+            localStorage.setItem('raishaGuestbookNotes', JSON.stringify(saved));
+
+            guestForm.reset();
+            renderNotes();
+        });
+
+        renderNotes();
+    </script>
+
+</body>
+</html>
