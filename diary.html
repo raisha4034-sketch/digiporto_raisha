@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Digital Diary ✿ | Little Universe</title>
+    <meta name="description" content="Little pages of thoughts, campus stories, and everyday moments from Raisha's diary.">
+
+    <!-- CSS Global & Khusus Diary -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/diary.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION (Sama persis dengan Homepage, About, & Memories) -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html" class="active">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="diary-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="diary-header">
+            <span class="eyebrow">DEAR LITTLE DIARY</span>
+            <h1>Pages of My <span>Thoughts.</span></h1>
+            <p>
+                A cozy corner where I write down little stories, 
+                random late-night thoughts, and moments worth remembering ♡
+            </p>
+        </header>
+
+        <!-- KOTAK TULIS CATATAN CEPAT -->
+        <section class="write-box">
+            <div class="write-box-header">
+                <h2>Write a Little Note ✎</h2>
+                <span>saved in your browser ♡</span>
+            </div>
+
+            <form id="diaryForm">
+                <div class="write-row">
+                    <input type="text" id="entryTitle" placeholder="Give your story a cute title..." required>
+                    <select id="entryCategory">
+                        <option value="everyday">✿ Everyday</option>
+                        <option value="campus">🎓 Campus Life</option>
+                        <option value="thoughts">☁ Late Night Thoughts</option>
+                    </select>
+                </div>
+
+                <textarea id="entryStory" placeholder="What's on your mind today, Raisha?" required></textarea>
+
+                <div class="write-actions">
+                    <button type="submit" class="btn-primary">
+                        Save to Diary ✿
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- TOMBOL FILTER MOOD -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All Pages ✧</button>
+            <button class="filter-btn" data-filter="everyday">✿ Everyday</button>
+            <button class="filter-btn" data-filter="campus">🎓 Campus Life</button>
+            <button class="filter-btn" data-filter="thoughts">☁ Late Night Thoughts</button>
+        </div>
+
+        <!-- DAFTAR KARTU DIARY (Diisi otomatis oleh diary.js) -->
+        <section class="diary-grid" id="diaryGrid"></section>
+
+    </main>
+
+    <!-- POPUP BACA CERITA LENGKAP -->
+    <div class="diary-modal" id="diaryModal">
+        <div class="diary-modal-paper">
+            <button class="modal-close-btn" id="closeDiaryModal" aria-label="Close diary">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <span class="diary-mood-tag" id="modalMood">✿ Mood</span>
+            <span class="diary-date" id="modalDate">DATE</span>
+            <h2 id="modalTitle">Diary Title</h2>
+
+            <div class="diary-modal-body" id="modalStory"></div>
+
+            <div class="diary-modal-sign">
+                written with love, Raisha ♡
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER (Konsisten di semua halaman) -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL & KHUSUS DIARY -->
+    <script src="js/script.js"></script>
+    <script src="js/diary.js"></script>
+
+</body>
+</html>
