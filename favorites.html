@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>My Favorites ✿ | Little Universe</title>
+    <meta name="description" content="A cozy corner of Raisha's favorite Spotify playlists, comfort movies, snacks, and little joys.">
+
+    <!-- CSS Global & Khusus Favorites -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/favorites.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="favorites-page">
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html" class="active">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprises.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="fav-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="fav-header">
+            <span class="eyebrow">COZY LITTLE THINGS</span>
+            <h1>Things That Make My <span>Heart Happy.</span></h1>
+            <p>
+                A soft, peaceful corner filled with my favorite driving playlists, 
+                comfort movies, sweet treats, and everyday little joys ✿
+            </p>
+        </header>
+
+        <!-- CURRENTLY OBSESSED WITH -->
+        <section class="obsession-card">
+            <div class="obsession-badge">
+                <span>🌿</span>
+                <h3>Currently Obsessed With</h3>
+            </div>
+
+            <div class="obsession-list">
+                <div class="obsession-item">
+                    <small>🎧 ON REPEAT</small>
+                    <p>Late Afternoon Drive Playlist</p>
+                </div>
+
+                <div class="obsession-item">
+                    <small>🍵 COMFORT SIP</small>
+                    <p>Iced Matcha & Warm Tea</p>
+                </div>
+
+                <div class="obsession-item">
+                    <small>✨ LITTLE HABIT</small>
+                    <p>Designing Cute Web Pages</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPOTIFY MUSIC CORNER -->
+        <section class="spotify-corner">
+            <div class="spotify-header">
+                <h2>Soundtrack of My Days 🎧</h2>
+                <span>press play on spotify ♡</span>
+            </div>
+
+            <div class="spotify-grid">
+                <!-- Kiri: Playlist Spotify (Ganti link src dengan playlist Spotify Caca!) -->
+                <div class="spotify-frame">
+                    <iframe 
+                        style="border-radius:16px" 
+                        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator&theme=0" 
+                        width="100%" 
+                        height="352" 
+                        frameBorder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Kanan: 2 Lagu Favorit Pilihan (Ganti link src dengan lagu favorit Caca!) -->
+                <div class="spotify-songs-stack">
+                    <div class="spotify-frame">
+                        <iframe 
+                            style="border-radius:16px" 
+                            src="https://open.spotify.com/embed/track/4uUG5RXrOk84mYEfFvj3cK?utm_source=generator" 
+                            width="100%" 
+                            height="168" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="spotify-frame">
+                        <iframe 
+                            style="border-radius:16px" 
+                            src="https://open.spotify.com/embed/track/1BxfuPKGuaTgP7aM0Bbdwr?utm_source=generator" 
+                            width="100%" 
+                            height="168" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTER KATEGORI FAVORIT -->
+        <div class="fav-filters">
+            <button type="button" class="fav-filter-btn active" data-cat="all">All Favorites ✿</button>
+            <button type="button" class="fav-filter-btn" data-cat="movies">🎬 Movies & Shows</button>
+            <button type="button" class="fav-filter-btn" data-cat="food">🍵 Food & Treats</button>
+            <button type="button" class="fav-filter-btn" data-cat="little">🌷 Little Joys</button>
+            <button type="button" class="fav-filter-btn" data-cat="books">📚 Cozy Reads</button>
+        </div>
+
+        <!-- GRID KARTU FAVORIT -->
+        <section class="fav-grid" id="favGrid">
+
+            <article class="fav-card" data-category="movies">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">🎬</div>
+                    <span class="fav-cat-pill">Movies & Shows</span>
+                </div>
+                <h3>Feel-Good & Comfort Films</h3>
+                <p>Warm, aesthetic stories with gentle soundtracks that always make a rainy weekend feel cozy.</p>
+            </article>
+
+            <article class="fav-card" data-category="food">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">🍘</div>
+                    <span class="fav-cat-pill">Food & Treats</span>
+                </div>
+                <h3>Crunchy Traditional Snacks</h3>
+                <p>Crispy homemade snacks and warm comfort food that remind me of home and family afternoons.</p>
+            </article>
+
+            <article class="fav-card" data-category="little">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">🚗</div>
+                    <span class="fav-cat-pill">Little Joys</span>
+                </div>
+                <h3>Golden Hour Drives</h3>
+                <p>Cruising around the city right before sunset with cool breeze and favorite Western tracks playing.</p>
+            </article>
+
+            <article class="fav-card" data-category="books">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">📖</div>
+                    <span class="fav-cat-pill">Cozy Reads</span>
+                </div>
+                <h3>Soft Poetry & Short Stories</h3>
+                <p>Pages filled with gentle reminders about growing, dreaming, and appreciating small moments.</p>
+            </article>
+
+            <article class="fav-card" data-category="little">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">⌚</div>
+                    <span class="fav-cat-pill">Little Joys</span>
+                </div>
+                <h3>Dainty Accessories & Pastels</h3>
+                <p>Mini chain watches, soft blush tones, cute stickers, and neat aesthetic stationery.</p>
+            </article>
+
+            <article class="fav-card" data-category="food">
+                <div class="fav-card-top">
+                    <div class="fav-emoji">🍰</div>
+                    <span class="fav-cat-pill">Food & Treats</span>
+                </div>
+                <h3>Sweet Pastries & Iced Drinks</h3>
+                <p>A little sweet treat after finishing campus assignments is always the best reward ♡</p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT FILTER FAVORITES -->
+    <script>
+        const favFilterBtns = document.querySelectorAll('.fav-filter-btn');
+        const favCards = document.querySelectorAll('.fav-card');
+
+        favFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                favFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const selectedCat = btn.dataset.cat;
+                favCards.forEach(card => {
+                    if (selectedCat === 'all' || card.dataset.category === selectedCat) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
