@@ -1,0 +1,226 @@
+/* =========================================
+   LITTLE UNIVERSE ✿
+   Memories Page Styles (memories.css)
+   ========================================= */
+
+.memory-page {
+    max-width: 1100px;
+    margin: auto;
+    padding: 65px 25px 80px;
+}
+
+.memory-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.memory-heading .tiny-label {
+    color: var(--dark-rose);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.memory-heading h1 {
+    font-family: var(--heading);
+    font-size: clamp(35px, 6vw, 55px);
+    font-weight: 500;
+    color: #9d7079;
+    margin: 15px 0;
+}
+
+.memory-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Grid Kartu Foto */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 30px;
+}
+
+.memory-card {
+    position: relative;
+    background: #fffdf9;
+    padding: 13px 13px 20px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    box-shadow: 0 5px 18px rgba(120, 80, 80, 0.10);
+    transition: 0.35s ease;
+    cursor: pointer;
+    transform: rotate(var(--tilt));
+}
+
+.memory-card:hover {
+    transform: translateY(-8px) rotate(0deg) scale(1.02);
+    box-shadow: 0 15px 30px rgba(120, 80, 80, 0.16);
+    z-index: 5;
+}
+
+/* Efek Washi Tape di atas foto */
+.memory-card::before {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 80px;
+    height: 22px;
+    background: rgba(243, 209, 210, 0.85);
+    z-index: 2;
+}
+
+.memory-card:nth-child(even)::before {
+    background: rgba(248, 237, 202, 0.85);
+    transform: translateX(-50%) rotate(3deg);
+}
+
+.memory-card:nth-child(3n)::before {
+    background: rgba(220, 229, 213, 0.85);
+}
+
+.memory-card img {
+    width: 100%;
+    aspect-ratio: 4 / 4.5;
+    object-fit: cover;
+    display: block;
+    border-radius: 3px;
+}
+
+.memory-caption {
+    text-align: center;
+    padding-top: 17px;
+}
+
+.memory-caption h3 {
+    font-family: var(--heading);
+    font-size: 20px;
+    font-weight: 500;
+    color: #9d7079;
+    margin: 0 0 7px;
+}
+
+.memory-caption p {
+    font-size: 12px;
+    color: #a9958d;
+    margin: 0;
+}
+
+.memory-footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #ad8990;
+    font-family: var(--heading);
+    font-style: italic;
+}
+
+.memory-back {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-rose);
+    transition: 0.3s;
+}
+
+.memory-back:hover {
+    transform: translateX(-4px);
+}
+
+.back-wrapper {
+    text-align: center;
+}
+
+/* Lightbox (Popup Perbesar Foto) */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(39, 29, 34, 0.88);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 10px solid #fffdf9;
+    border-bottom-width: 35px;
+    border-radius: 3px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.lightbox p {
+    color: white;
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: var(--heading);
+    font-style: italic;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    color: white;
+    font-size: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--blush);
+    transform: rotate(90deg);
+}
+
+/* Dark Mode Khusus Memories */
+body.dark-mode .memory-card {
+    background: #30272e;
+    border-color: var(--border);
+}
+
+body.dark-mode .memory-heading h1,
+body.dark-mode .memory-caption h3 {
+    color: #edb9c7;
+}
+
+body.dark-mode .memory-caption p,
+body.dark-mode .memory-heading p {
+    color: #d0b9c0;
+}
+
+/* Responsive Tablet & Mobile */
+@media (max-width: 750px) {
+    .memory-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 18px;
+    }
+}
+
+@media (max-width: 450px) {
+    .memory-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: auto;
+    }
+}
