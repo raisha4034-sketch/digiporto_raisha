@@ -1,381 +1,451 @@
 /* =========================================
    LITTLE UNIVERSE ✿
-   Diary Page Styles (diary.css)
+   Handwritten Flipbook Diary (diary.css)
    ========================================= */
 
-.diary-container {
-    max-width: 1050px;
+.diary-stage {
+    max-width: 900px;
     margin: auto;
-    padding: 60px 25px 90px;
-}
-
-/* 1. HEADER JURNAL */
-.diary-header {
+    padding: 55px 20px 90px;
     text-align: center;
-    margin-bottom: 40px;
 }
 
-.diary-header h1 {
+.diary-intro {
+    margin-bottom: 35px;
+}
+
+.diary-intro h1 {
     font-family: var(--heading);
-    font-size: clamp(36px, 5vw, 54px);
+    font-size: clamp(34px, 5vw, 50px);
     font-weight: 500;
     color: var(--text);
-    margin: 12px 0 14px;
+    margin: 10px 0;
 }
 
-.diary-header h1 span {
+.diary-intro h1 span {
     font-style: italic;
     color: var(--dark-rose);
 }
 
-.diary-header p {
-    max-width: 520px;
-    margin: auto;
+.diary-intro p {
     font-size: 14px;
     color: var(--muted);
-    line-height: 1.9;
 }
 
-/* 2. KOTAK TULIS CATATAN BARU (QUICK NOTE) */
-.write-box {
-    max-width: 720px;
-    margin: 0 auto 45px;
-    background: var(--white);
-    border: 1.5px dashed var(--rose);
-    border-radius: 22px;
-    padding: 26px 28px;
-    box-shadow: var(--shadow);
-}
-
-.write-box-header {
+/* 1. BUKU TERTUTUP (BOOK COVER) */
+.book-wrapper {
+    perspective: 1600px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.write-box-header h2 {
-    font-family: var(--heading);
-    font-size: 21px;
-    font-weight: 500;
-    color: var(--dark-rose);
-}
-
-.write-box-header span {
-    font-size: 11px;
-    background: var(--yellow);
-    color: var(--text);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-.write-row {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.write-box input,
-.write-box select,
-.write-box textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    background: var(--cream);
-    color: var(--text);
-    font-family: var(--body);
-    font-size: 13px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.write-box input:focus,
-.write-box select:focus,
-.write-box textarea:focus {
-    border-color: var(--rose);
-    background: var(--white);
-}
-
-.write-box textarea {
-    min-height: 95px;
-    resize: vertical;
-    line-height: 1.7;
-    margin-bottom: 14px;
-}
-
-.write-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-
-/* 3. FILTER KATEGORI / MOOD */
-.filter-bar {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
+    align-items: center;
+    min-height: 480px;
 }
 
-.filter-btn {
-    padding: 9px 18px;
-    border-radius: 30px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--pink);
-    color: var(--dark-rose);
-    border-color: var(--blush);
-    transform: translateY(-2px);
-}
-
-/* 4. GRID KARTU DIARY */
-.diary-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-}
-
-.diary-card {
+.diary-cover {
     position: relative;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 30px;
-    box-shadow: var(--shadow);
+    width: 360px;
+    min-height: 470px;
+    background: linear-gradient(145deg, #f3d1d2, #e9b7c7);
+    border-radius: 10px 24px 24px 10px;
+    padding: 40px 30px;
+    box-shadow:
+        -12px 15px 35px rgba(120, 83, 79, 0.2),
+        inset 14px 0 20px rgba(169, 104, 112, 0.18);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.diary-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 18px 40px rgba(157, 111, 105, 0.14);
-}
-
-/* Stiker sudut atas kartu */
-.diary-mood-tag {
-    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 13px;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    border: 2px solid #e4a9bc;
+}
+
+/* Punggung buku di sisi kiri */
+.diary-cover::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(169, 104, 112, 0.28);
+}
+
+/* Pita pembatas buku di bawah */
+.diary-cover::after {
+    content: "";
+    position: absolute;
+    bottom: -18px;
+    right: 45px;
+    width: 24px;
+    height: 35px;
+    background: var(--yellow);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.diary-cover:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow: -16px 22px 45px rgba(120, 83, 79, 0.25);
+}
+
+.cover-badge {
+    background: var(--cream);
+    color: var(--dark-rose);
+    padding: 6px 16px;
     border-radius: 20px;
     font-size: 11px;
-    font-weight: 600;
-    background: var(--pink);
-    color: var(--dark-rose);
-    margin-bottom: 14px;
-    width: fit-content;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 
-.diary-card:nth-child(even) .diary-mood-tag {
+.cover-label-box {
+    background: var(--cream);
+    padding: 28px 22px;
+    border-radius: 16px;
+    border: 1.5px dashed var(--dark-rose);
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(169, 104, 112, 0.12);
+}
+
+.cover-label-box h2 {
+    font-family: var(--heading);
+    font-size: 28px;
+    color: var(--dark-rose);
+    margin-bottom: 8px;
+}
+
+.cover-label-box p {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--text);
+}
+
+.open-book-btn {
+    background: var(--cream);
+    color: var(--dark-rose);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 6px 15px rgba(169, 104, 112, 0.15);
+    transition: 0.3s;
+}
+
+.diary-cover:hover .open-book-btn {
+    background: var(--dark-rose);
+    color: white;
+}
+
+/* 2. BUKU TERBUKA (OPEN JOURNAL) */
+.open-diary {
+    display: none;
+    width: 100%;
+    max-width: 780px;
+    background: #f5dfd9;
+    padding: 16px;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(120, 83, 79, 0.18);
+    border: 2px solid #e8c5c4;
+    animation: bookAppear 0.5s ease;
+}
+
+.open-diary.active {
+    display: block;
+}
+
+@keyframes bookAppear {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Topbar di dalam buku */
+.diary-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding: 0 6px;
+}
+
+.tool-btn {
+    background: var(--cream);
+    color: var(--dark-rose);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tool-btn:hover {
+    background: var(--dark-rose);
+    color: white;
+}
+
+.tool-btn.highlight {
     background: var(--yellow);
     color: var(--text);
 }
 
-.diary-card:nth-child(3n) .diary-mood-tag {
-    background: var(--sage);
-    color: #54664e;
+.tool-btn.highlight:hover {
+    background: var(--dark-rose);
+    color: white;
 }
 
-.diary-date {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: block;
+/* LEMBAR KERTAS BERGARIS */
+.paper-sheet {
+    position: relative;
+    background-color: #fffdf9;
+    background-image: linear-gradient(to bottom, transparent 31px, #f0e3dc 32px);
+    background-size: 100% 32px;
+    border-radius: 14px;
+    padding: 36px 42px 32px 58px;
+    min-height: 440px;
+    text-align: left;
+    box-shadow: inset 12px 0 22px rgba(157, 111, 105, 0.08);
+    transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.diary-card h3 {
-    font-family: var(--heading);
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.35;
-    margin-bottom: 12px;
+/* Garis margin merah muda vertikal di kiri kertas */
+.paper-sheet::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 42px;
+    width: 1.5px;
+    background: rgba(217, 154, 158, 0.45);
 }
 
-.diary-excerpt {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.85;
-    margin-bottom: 22px;
+/* Efek animasi saat membalik halaman */
+.paper-sheet.flipping-next {
+    opacity: 0;
+    transform: translateX(-25px) rotateY(-8deg);
 }
 
-.diary-card-footer {
+.paper-sheet.flipping-prev {
+    opacity: 0;
+    transform: translateX(25px) rotateY(8deg);
+}
+
+/* Header di dalam kertas */
+.paper-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 15px;
-    border-top: 1px dashed var(--border);
-}
-
-.read-entry-btn {
-    background: none;
-    color: var(--dark-rose);
-    font-size: 12px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: 0.3s;
-}
-
-.read-entry-btn:hover {
+    flex-wrap: wrap;
     gap: 10px;
-    color: var(--rose);
+    margin-bottom: 18px;
+    line-height: 32px;
 }
 
-.delete-entry-btn {
-    background: none;
-    color: var(--muted);
-    font-size: 12px;
-    transition: 0.3s;
+.handwriting-date {
+    font-family: 'Caveat', cursive;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--dark-rose);
 }
 
-.delete-entry-btn:hover {
-    color: #c95c68;
-}
-
-/* 5. MODAL BACA CERITA LENGKAP */
-.diary-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(39, 29, 34, 0.75);
-    backdrop-filter: blur(6px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 9999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.diary-modal.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.diary-modal-paper {
-    position: relative;
-    background: var(--cream);
-    max-width: 640px;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    border-radius: 24px;
-    padding: 40px 36px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-    transform: translateY(15px);
-    transition: transform 0.3s ease;
-}
-
-.diary-modal.open .diary-modal-paper {
-    transform: translateY(0);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+.mood-sticker {
     background: var(--pink);
     color: var(--dark-rose);
-    font-size: 16px;
+    padding: 2px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 24px;
+    transform: rotate(2deg);
+}
+
+.handwriting-title {
+    font-family: 'Caveat', cursive;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 32px;
+    margin-bottom: 16px;
+}
+
+.handwriting-body {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    color: #5c4d4a;
+    line-height: 32px;
+    white-space: pre-line;
+    min-height: 224px;
+}
+
+.paper-footer {
+    margin-top: 24px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    color: var(--muted);
+}
+
+.delete-page-btn {
+    background: none;
+    color: #c97a84;
+    font-size: 13px;
+    font-family: var(--body);
+    font-weight: 600;
+}
+
+.delete-page-btn:hover {
+    text-decoration: underline;
+}
+
+/* 3. FORMULIR JURNAL & MOOD TRACKER DI DALAM KERTAS */
+.journal-form-sheet {
+    display: none;
+}
+
+.journal-form-sheet.active {
+    display: block;
+}
+
+.mood-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 18px;
+}
+
+.mood-option {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text);
+    transition: 0.25s;
+}
+
+.mood-option:hover,
+.mood-option.selected {
+    background: var(--pink);
+    border-color: var(--dark-rose);
+    color: var(--dark-rose);
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.paper-input,
+.paper-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px dashed var(--rose);
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
+    color: var(--text);
+    padding: 4px 0;
+    margin-bottom: 16px;
+    outline: none;
+}
+
+.paper-textarea {
+    border: 1.5px dashed var(--rose);
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-height: 150px;
+    line-height: 30px;
+    background: rgba(255, 250, 245, 0.6);
+    resize: vertical;
+}
+
+/* 4. NAVIGASI HALAMAN BAWAH BUKU */
+.page-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 0 8px;
+}
+
+.nav-page-btn {
+    background: var(--cream);
+    color: var(--dark-rose);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 700;
     transition: 0.3s;
 }
 
-.modal-close-btn:hover {
-    background: var(--blush);
-    transform: rotate(90deg);
+.nav-page-btn:hover:not(:disabled) {
+    background: var(--dark-rose);
+    color: white;
 }
 
-.diary-modal-paper h2 {
-    font-family: var(--heading);
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--dark-rose);
-    margin: 10px 0 18px;
+.nav-page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
-.diary-modal-body {
-    font-size: 14.5px;
-    color: var(--text);
-    line-height: 2;
-    white-space: pre-line;
-}
-
-.diary-modal-sign {
-    margin-top: 28px;
-    padding-top: 16px;
-    border-top: 1px dashed var(--border);
+.page-indicator {
     font-family: var(--heading);
     font-style: italic;
-    color: var(--dark-rose);
     font-size: 15px;
-}
-
-/* 6. DARK MODE KHUSUS DIARY */
-body.dark-mode .write-box,
-body.dark-mode .diary-card,
-body.dark-mode .filter-btn {
-    background: #30282d;
-    border-color: var(--border);
-}
-
-body.dark-mode .write-box input,
-body.dark-mode .write-box select,
-body.dark-mode .write-box textarea {
-    background: #241e22;
-    color: var(--text);
-    border-color: var(--border);
-}
-
-body.dark-mode .filter-btn.active,
-body.dark-mode .filter-btn:hover {
-    background: var(--pink);
     color: var(--dark-rose);
+    font-weight: 600;
 }
 
-body.dark-mode .diary-card:nth-child(3n) .diary-mood-tag {
-    color: #d5e6cf;
+/* 5. DARK MODE UNTUK BUKU JURNAL */
+body.dark-mode .diary-cover {
+    background: linear-gradient(145deg, #49343d, #3a2830);
+    border-color: #68454e;
 }
 
-body.dark-mode .diary-modal-paper {
+body.dark-mode .cover-label-box {
     background: #2b2429;
-    border: 1px solid var(--border);
 }
 
-/* 7. RESPONSIVE */
-@media (max-width: 768px) {
-    .diary-grid {
-        grid-template-columns: 1fr;
+body.dark-mode .open-diary {
+    background: #3a2d33;
+    border-color: #543e47;
+}
+
+body.dark-mode .paper-sheet {
+    background-color: #2b2429;
+    background-image: linear-gradient(to bottom, transparent 31px, #3f333a 32px);
+}
+
+body.dark-mode .handwriting-body {
+    color: #e8dad7;
+}
+
+body.dark-mode .paper-textarea {
+    background: rgba(33, 29, 32, 0.5);
+}
+
+/* 6. RESPONSIVE HP */
+@media (max-width: 600px) {
+    .diary-cover {
+        width: 100%;
+        max-width: 330px;
+        min-height: 430px;
     }
 
-    .write-row {
-        grid-template-columns: 1fr;
+    .paper-sheet {
+        padding: 28px 20px 26px 36px;
     }
 
-    .diary-modal-paper {
-        padding: 30px 22px;
+    .paper-sheet::before {
+        left: 24px;
+    }
+
+    .handwriting-title {
+        font-size: 28px;
+    }
+
+    .handwriting-body {
+        font-size: 21px;
     }
 }
