@@ -125,7 +125,7 @@ if (quoteElement && newQuoteButton) {
     const SECRET_PIN = "220408";
 
     // Daftar halaman pribadi yang otomatis terkunci gembok
-    const PRIVATE_PAGES = ["diary.html", "planner.html", "campus.html"];
+    const PRIVATE_PAGES = ["diary.html", "planner.html", "campus.html", "study-hub.html"];
 
     let isVisualEditActive = false;
 
@@ -133,6 +133,19 @@ if (quoteElement && newQuoteButton) {
     document.querySelectorAll('a[href="surprises.html"]').forEach(link => {
         link.setAttribute("href", "surprise.html");
     });
+
+    // Otomatis sisipkan menu "Study Hub" di navbar halaman lama jika belum ada
+    if (navLinks && !navLinks.querySelector('a[href="study-hub.html"]')) {
+        const plannerLink = navLinks.querySelector('a[href="planner.html"]');
+        const studyLink = document.createElement("a");
+        studyLink.href = "study-hub.html";
+        studyLink.textContent = "Study Hub";
+        if (plannerLink) {
+            plannerLink.insertAdjacentElement("afterend", studyLink);
+        } else {
+            navLinks.appendChild(studyLink);
+        }
+    }
 
     const currentPath = window.location.pathname.split("/").pop() || "index.html";
     const isPrivatePage = PRIVATE_PAGES.includes(currentPath);
@@ -296,7 +309,7 @@ if (quoteElement && newQuoteButton) {
         reader.readAsDataURL(file);
     }
 
-    // B. LAYAR GEMBOK PIN (Diary, Planner, & Campus Life)
+    // B. LAYAR GEMBOK PIN (Diary, Planner, Campus Life, & Study Hub)
     function renderLockScreen() {
         if (!isPrivatePage || isUnlocked()) return;
 
@@ -364,7 +377,7 @@ if (quoteElement && newQuoteButton) {
             <div class="lock-card">
                 <div class="lock-icon">🔒</div>
                 <h2>Private Little Space</h2>
-                <p>This page holds Raisha's personal diary, campus journey & plans. Enter the secret PIN to unlock ✿</p>
+                <p>This page holds Raisha's personal diary, campus journey, study hub & plans. Enter the secret PIN to unlock ✿</p>
                 <form id="pinUnlockForm">
                     <input type="password" id="pinInputField" class="lock-input" maxlength="8" placeholder="••••••" required autofocus>
                     <div class="lock-error" id="pinErrorText"></div>
