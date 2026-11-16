@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study & Task Hub ✿ | Little Universe</title>
+    <meta name="description" content="Private task deadline tracker with notifications, Pomodoro study timer, Semester 1 notes, and NotebookLM links.">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS KHUSUS STUDY & TASK HUB -->
+    <style>
+        .hub-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 55px 22px 95px;
+        }
+
+        /* 1. HEADER */
+        .hub-header {
+            text-align: center;
+            max-width: 660px;
+            margin: 0 auto 40px;
+        }
+
+        .hub-header .eyebrow {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 7px 16px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        .hub-header h1 {
+            font-family: var(--heading);
+            font-size: clamp(32px, 5vw, 50px);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .hub-header h1 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .hub-header p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.85;
+            margin-bottom: 18px;
+        }
+
+        .notif-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: var(--white);
+            border: 1px dashed var(--rose);
+            padding: 10px 18px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .notif-btn {
+            background: var(--yellow);
+            color: var(--text);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .notif-btn:hover {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        .notif-status {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* 2. TOP GRID: DEADLINE CHECKLIST & POMODORO */
+        .hub-top-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 0.65fr;
+            gap: 26px;
+            margin-bottom: 55px;
+            align-items: start;
+        }
+
+        .hub-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 30px 26px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title-row h2 {
+            font-family: var(--heading);
+            font-size: 25px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .count-pill {
+            background: var(--pink);
+            color: var(--dark-rose);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        /* Form Tambah Deadline */
+        .deadline-form {
+            display: grid;
+            grid-template-columns: 1.2fr 0.9fr;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .deadline-form input,
+        .deadline-form select {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .deadline-form input:focus,
+        .deadline-form select:focus {
+            border-color: var(--rose);
+            background: var(--white);
+        }
+
+        .deadline-submit {
+            grid-column: 1 / -1;
+            background: var(--pink);
+            color: var(--dark-rose);
+            border: none;
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .deadline-submit:hover {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        /* List Tugas & Deadline */
+        .task-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dl-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            transition: 0.25s;
+        }
+
+        .dl-item.urgent {
+            border: 1.5px solid #e58e98;
+            background: #fff4f6;
+        }
+
+        .dl-item.done {
+            opacity: 0.65;
+        }
+
+        .dl-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .dl-check {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            border-radius: 50%;
+            border: 2px solid var(--rose);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: transparent;
+            flex-shrink: 0;
+        }
+
+        .dl-item.done .dl-check {
+            background: var(--dark-rose);
+            border-color: var(--dark-rose);
+            color: white;
+        }
+
+        .dl-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .dl-item.done .dl-info h4 {
+            text-decoration: line-through;
+        }
+
+        .dl-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            font-size: 11.5px;
+            color: var(--muted);
+        }
+
+        .dl-badge {
+            padding: 3px 9px;
+            border-radius: 12px;
+            font-size: 10.5px;
+            font-weight: 700;
+            background: var(--white);
+            border: 1px solid var(--border);
+            color: var(--dark-rose);
+        }
+
+        .dl-badge.soon {
+            background: #ffe1e6;
+            color: #b54554;
+            border-color: #f3b5be;
+        }
+
+        .dl-del {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 4px;
+        }
+
+        .dl-del:hover {
+            color: #c95c68;
+        }
+
+        /* 3. POMODORO STUDY TIMER */
+        .pomo-card {
+            text-align: center;
+            background: linear-gradient(145deg, #fffdf9 0%, #fcecf1 100%);
+            border: 1.5px solid var(--blush);
+        }
+
+        .pomo-modes {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .pomo-mode-btn {
+            padding: 6px 12px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            background: var(--white);
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .pomo-mode-btn.active {
+            background: var(--dark-rose);
+            color: white;
+            border-color: var(--dark-rose);
+        }
+
+        .pomo-circle {
+            width: 185px;
+            height: 185px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 4px dashed var(--rose);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 30px rgba(157, 111, 105, 0.14);
+        }
+
+        .pomo-time {
+            font-family: var(--heading);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--dark-rose);
+            line-height: 1.1;
+        }
+
+        .pomo-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .pomo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .pomo-btn {
+            padding: 10px 20px;
+            border-radius: 22px;
+            border: none;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .pomo-start {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        .pomo-reset {
+            background: var(--white);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .pomo-sessions {
+            font-size: 12px;
+            color: var(--dark-rose);
+            font-weight: 600;
+            background: var(--white);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        /* 4. SEMESTER 1 COURSES + NOTEBOOKLM LINKS + DAILY NOTES */
+        .courses-section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .courses-section-header h2 {
+            font-family: var(--heading);
+            font-size: 30px;
+            font-weight: 500;
+            color: var(--text);
+            margin-top: 8px;
+        }
+
+        .courses-section-header h2 span {
+            font-style: italic;
+            color: var(--dark-rose);
+        }
+
+        .sem1-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .matkul-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .matkul-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .matkul-tag {
+            background: var(--sage);
+            color: #4f6349;
+            padding: 4px 12px;
+            border-radius: 14px;
+            font-size: 10.5px;
+            font-weight: 700;
+        }
+
+        .matkul-card:nth-child(even) .matkul-tag {
+            background: var(--yellow);
+            color: #7d632c;
+        }
+
+        .edit-nlm-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 10.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .edit-nlm-btn:hover {
+            border-color: var(--dark-rose);
+            color: var(--dark-rose);
+        }
+
+        .matkul-card h3 {
+            font-family: var(--heading);
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        /* Tombol Link NotebookLM (Daily & UTS/UAS) */
+        .nlm-links-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .nlm-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 10px;
+            border-radius: 13px;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.25s;
+            text-align: center;
+        }
+
+        .nlm-daily {
+            background: #eef4eb;
+            color: #465e40;
+            border: 1px solid #d1e0ca;
+        }
+
+        .nlm-daily:hover {
+            background: #465e40;
+            color: white;
+        }
+
+        .nlm-exam {
+            background: #fff8e2;
+            color: #826629;
+            border: 1px solid #eddca6;
+        }
+
+        .nlm-exam:hover {
+            background: #826629;
+            color: white;
+        }
+
+        .nlm-pill.unset {
+            opacity: 0.65;
+            border-style: dashed;
+        }
+
+        /* Form Input Link NotebookLM (Muncul saat diklik Set Links) */
+        .nlm-editor-box {
+            display: none;
+            background: var(--cream);
+            border: 1px dashed var(--rose);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .nlm-editor-box.show {
+            display: block;
+        }
+
+        .nlm-editor-box input {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--white);
+            color: var(--text);
+            font-size: 11.5px;
+            margin-bottom: 8px;
+            outline: none;
+        }
+
+        .nlm-save-links {
+            background: var(--dark-rose);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .matkul-note-area {
+            width: 100%;
+            min-height: 78px;
+            padding: 11px 13px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-family: var(--body);
+            font-size: 12.5px;
+            line-height: 1.7;
+            resize: vertical;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .matkul-note-area:focus {
+            border-color: var(--rose);
+            background: var(--white);
+        }
+
+        .matkul-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .matkul-saved-info {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .save-note-btn {
+            background: var(--pink);
+            color: var(--dark-rose);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .save-note-btn:hover {
+            background: var(--dark-rose);
+            color: white;
+        }
+
+        /* 5. DARK MODE */
+        body.dark-mode .hub-card,
+        body.dark-mode .matkul-card,
+        body.dark-mode .notif-bar {
+            background: #30282d;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .pomo-card {
+            background: linear-gradient(145deg, #30282d 0%, #3d2a32 100%);
+        }
+
+        body.dark-mode .dl-item,
+        body.dark-mode .deadline-form input,
+        body.dark-mode .deadline-form select,
+        body.dark-mode .matkul-note-area,
+        body.dark-mode .nlm-editor-box,
+        body.dark-mode .nlm-editor-box input,
+        body.dark-mode .pomo-circle,
+        body.dark-mode .pomo-mode-btn,
+        body.dark-mode .pomo-sessions {
+            background: #241e22;
+            border-color: var(--border);
+        }
+
+        body.dark-mode .nlm-daily {
+            background: #263327;
+            color: #b7d6b3;
+            border-color: #3a4f3b;
+        }
+
+        body.dark-mode .nlm-exam {
+            background: #383121;
+            color: #e8d297;
+            border-color: #544930;
+        }
+
+        body.dark-mode .dl-item.urgent {
+            background: #3d2429;
+        }
+
+        /* 6. RESPONSIVE MOBILE */
+        @media (max-width: 860px) {
+            .hub-top-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sem1-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .deadline-form,
+            .nlm-links-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration">
+        <span>✿</span>
+        <span>♡</span>
+        <span>✧</span>
+        <span>୨୧</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            little universe <span>✿</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="creative.html">Creative</a>
+            <a href="campus.html">Campus Life</a>
+            <a href="bukti-belajar.html">Bukti Belajar</a>
+            <a href="planner.html">Planner</a>
+            <a href="study-hub.html" class="active">Study Hub</a>
+            <a href="guestbook.html">Guestbook</a>
+            <a href="surprise.html">Surprises</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="hub-container">
+
+        <!-- HEADER HALAMAN -->
+        <header class="hub-header">
+            <span class="eyebrow">PRIVATE STUDY & DEADLINE SPACE 🔒</span>
+            <h1>My Little <span>Study Hub.</span></h1>
+            <p>
+                Track assignment deadlines with reminders, focus with Pomodoro sessions, 
+                jump straight to your Daily & UTS/UAS NotebookLM, and save today's lecture notes 🎓✿
+            </p>
+
+            <div class="notif-bar">
+                <button type="button" class="notif-btn" id="enableNotifBtn">
+                    🔔 Enable Deadline Reminders
+                </button>
+                <span class="notif-status" id="notifStatusText">Tap to allow mobile/desktop alerts</span>
+            </div>
+        </header>
+
+        <!-- BAGIAN ATAS: DEADLINE CHECKLIST & POMODORO -->
+        <section class="hub-top-grid">
+
+            <!-- 1. TASK & DEADLINE CHECKLIST -->
+            <div class="hub-card">
+                <div class="card-title-row">
+                    <h2>Task & Deadline Checklist ✎</h2>
+                    <span class="count-pill" id="activeTaskCount">0 Pending</span>
+                </div>
+
+                <form class="deadline-form" id="deadlineForm">
+                    <input type="text" id="dlTitle" placeholder="Task or assignment title..." required>
+                    <select id="dlCourse">
+                        <option value="💻 Algoritma & Java">💻 Algoritma & Java</option>
+                        <option value="🌐 Web Development">🌐 Web Development</option>
+                        <option value="📐 Matematika Diskrit">📐 Matematika Diskrit</option>
+                        <option value="🔢 Aljabar Linear">🔢 Aljabar Linear</option>
+                        <option value="📊 Praktikum Niaga & Akuntansi">📊 Praktikum Niaga & Akuntansi</option>
+                        <option value="🇮🇩 Kewarganegaraan">🇮🇩 Kewarganegaraan</option>
+                    </select>
+                    <input type="datetime-local" id="dlDateTime" required>
+                    <button type="submit" class="deadline-submit">+ Add Task & Set Reminder 🔔</button>
+                </form>
+
+                <div class="task-items" id="deadlineList"></div>
+            </div>
+
+            <!-- 2. POMODORO FOCUS TIMER -->
+            <div class="hub-card pomo-card">
+                <div class="card-title-row" style="justify-content: center;">
+                    <h2>Pomodoro Study 🍅</h2>
+                </div>
+
+                <div class="pomo-modes">
+                    <button type="button" class="pomo-mode-btn active" data-mins="25" data-label="FOCUS TIME">Focus 25m</button>
+                    <button type="button" class="pomo-mode-btn" data-mins="5" data-label="SHORT BREAK">Break 5m</button>
+                    <button type="button" class="pomo-mode-btn" data-mins="15" data-label="LONG REST">Rest 15m</button>
+                </div>
+
+                <div class="pomo-circle">
+                    <div class="pomo-time" id="pomoDisplay">25:00</div>
+                    <div class="pomo-label" id="pomoModeLabel">FOCUS TIME</div>
+                </div>
+
+                <div class="pomo-controls">
+                    <button type="button" class="pomo-btn pomo-start" id="pomoStartBtn">Start ▶</button>
+                    <button type="button" class="pomo-btn pomo-reset" id="pomoResetBtn">Reset ↺</button>
+                </div>
+
+                <div class="pomo-sessions" id="pomoSessionCount">
+                    Today's Focus Sessions: 0 ✿
+                </div>
+            </div>
+
+        </section>
+
+        <!-- BAGIAN BAWAH: SEMESTER 1 MATA KULIAH + NOTEBOOKLM LINKS + CATATAN HARIAN -->
+        <section>
+            <div class="courses-section-header">
+                <span class="eyebrow">INFORMATION SYSTEMS • SEMESTER 1</span>
+                <h2>NotebookLM & <span>Today's Materials.</span></h2>
+            </div>
+
+            <div class="sem1-grid" id="sem1CoursesGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            little universe <span>✿</span>
+        </div>
+
+        <p>
+            A little space on the internet,
+            made with love and a thousand little dreams.
+        </p>
+
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="memories.html">Memories</a>
+            <a href="diary.html">Diary</a>
+            <a href="study-hub.html">Study Hub</a>
+            <a href="guestbook.html">Guestbook</a>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Little Universe</span>
+            <span>made with ♡ and a little sunshine</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT STUDY HUB -->
+    <script>
+        // ==========================================
+        // 1. ALARM SOUND & BROWSER NOTIFICATION
+        // ==========================================
+        function playReminderBell() {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            const freqs = [587.33, 783.99, 987.77, 1174.66];
+            freqs.forEach((f, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(f, ctx.currentTime + idx * 0.14);
+                gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.14);
+                gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + idx * 0.14 + 0.03);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.14 + 0.5);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + idx * 0.14);
+                osc.stop(ctx.currentTime + idx * 0.14 + 0.55);
+            });
+        }
+
+        const enableNotifBtn = document.getElementById("enableNotifBtn");
+        const notifStatusText = document.getElementById("notifStatusText");
+
+        function updateNotifStatus() {
+            if (!("Notification" in window)) {
+                notifStatusText.textContent = "In-app chime reminders active ♪";
+                return;
+            }
+            if (Notification.permission === "granted") {
+                notifStatusText.textContent = "Notifications Active ✓";
+                enableNotifBtn.textContent = "🔔 Test Reminder";
+            } else if (Notification.permission === "denied") {
+                notifStatusText.textContent = "Browser blocked popup (in-app alert active)";
+            }
+        }
+
+        enableNotifBtn.addEventListener("click", () => {
+            playReminderBell();
+            if ("Notification" in window) {
+                Notification.requestPermission().then(perm => {
+                    updateNotifStatus();
+                    if (perm === "granted") {
+                        new Notification("Little Universe Study Hub ✿", {
+                            body: "Yay! Deadline & Pomodoro reminders are ready for Caca ♡"
+                        });
+                    }
+                });
+            }
+        });
+
+        updateNotifStatus();
+
+        function sendSmartAlert(title, bodyText) {
+            playReminderBell();
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(title, { body: bodyText });
+            }
+        }
+
+        // ==========================================
+        // 2. TASK & DEADLINE CHECKLIST
+        // ==========================================
+        const deadlineForm = document.getElementById("deadlineForm");
+        const deadlineList = document.getElementById("deadlineList");
+        const activeTaskCount = document.getElementById("activeTaskCount");
+
+        function getDeadlineTasks() {
+            const saved = localStorage.getItem("raishaDeadlineTasks");
+            if (saved) return JSON.parse(saved);
+
+            const tomorrow = new Date(Date.now() + 18 * 3600 * 1000).toISOString().slice(0, 16);
+            return [
+                {
+                    id: "dl-1",
+                    title: "Latihan Logika & Program Java NetBeans",
+                    course: "💻 Algoritma & Java",
+                    deadline: tomorrow,
+                    done: false,
+                    reminded: false
+                }
+            ];
+        }
+
+        function saveDeadlineTasks(list) {
+            localStorage.setItem("raishaDeadlineTasks", JSON.stringify(list));
+        }
+
+        function formatDeadlineInfo(isoStr, isDone) {
+            const target = new Date(isoStr);
+            const now = new Date();
+            const diffHours = (target - now) / (1000 * 60 * 60);
+
+            const formattedDate = target.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            if (isDone) return { text: formattedDate, urgent: false, badge: "Completed ♡" };
+            if (diffHours < 0) return { text: formattedDate, urgent: true, badge: "⚠️ Overdue!" };
+            if (diffHours <= 24) return { text: formattedDate, urgent: true, badge: `🔥 Due in ${Math.max(1, Math.ceil(diffHours))}h!` };
+            const days = Math.ceil(diffHours / 24);
+            return { text: formattedDate, urgent: false, badge: `${days} days left` };
+        }
+
+        function renderDeadlineTasks() {
+            const tasks = getDeadlineTasks();
+            deadlineList.innerHTML = "";
+            let pending = 0;
+
+            tasks.forEach(task => {
+                if (!task.done) pending++;
+                const info = formatDeadlineInfo(task.deadline, task.done);
+
+                const item = document.createElement("div");
+                item.className = `dl-item ${info.urgent ? "urgent" : ""} ${task.done ? "done" : ""}`;
+                item.innerHTML = `
+                    <div class="dl-left" data-toggle-dl="${task.id}">
+                        <div class="dl-check"><i class="fa-solid fa-check"></i></div>
+                        <div class="dl-info">
+                            <h4>${task.title}</h4>
+                            <div class="dl-meta">
+                                <span class="dl-badge">${task.course}</span>
+                                <span class="dl-badge ${info.urgent ? "soon" : ""}">${info.badge}</span>
+                                <span>⏰ ${info.text}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="dl-del" data-del-dl="${task.id}" title="Delete">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+                deadlineList.appendChild(item);
+            });
+
+            activeTaskCount.textContent = `${pending} Pending`;
+
+            document.querySelectorAll("[data-toggle-dl]").forEach(el => {
+                el.addEventListener("click", () => {
+                    const updated = getDeadlineTasks().map(t =>
+                        t.id === el.dataset.toggleDl ? { ...t, done: !t.done } : t
+                    );
+                    saveDeadlineTasks(updated);
+                    renderDeadlineTasks();
+                });
+            });
+
+            document.querySelectorAll("[data-del-dl]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const updated = getDeadlineTasks().filter(t => t.id !== btn.dataset.delDl);
+                    saveDeadlineTasks(updated);
+                    renderDeadlineTasks();
+                });
+            });
+        }
+
+        deadlineForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const title = document.getElementById("dlTitle").value.trim();
+            const course = document.getElementById("dlCourse").value;
+            const deadline = document.getElementById("dlDateTime").value;
+
+            if (!title || !deadline) return;
+
+            const list = getDeadlineTasks();
+            list.unshift({
+                id: "dl-" + Date.now(),
+                title,
+                course,
+                deadline,
+                done: false,
+                reminded: false
+            });
+            saveDeadlineTasks(list);
+            deadlineForm.reset();
+            renderDeadlineTasks();
+        });
+
+        function checkDueReminders() {
+            const list = getDeadlineTasks();
+            let changed = false;
+            const now = new Date();
+
+            list.forEach(task => {
+                if (!task.done && !task.reminded) {
+                    const diffHours = (new Date(task.deadline) - now) / (1000 * 60 * 60);
+                    if (diffHours <= 24) {
+                        sendSmartAlert(
+                            "Deadline Reminder ✿",
+                            `${task.title} (${task.course}) sudah dekat waktunya!`
+                        );
+                        task.reminded = true;
+                        changed = true;
+                    }
+                }
+            });
+
+            if (changed) saveDeadlineTasks(list);
+        }
+
+        renderDeadlineTasks();
+        setTimeout(checkDueReminders, 2500);
+        setInterval(checkDueReminders, 30000);
+
+        // ==========================================
+        // 3. POMODORO TIMER
+        // ==========================================
+        let pomoSeconds = 25 * 60;
+        let pomoInterval = null;
+        let isRunning = false;
+        let currentModeLabel = "FOCUS TIME";
+
+        const pomoDisplay = document.getElementById("pomoDisplay");
+        const pomoModeLabel = document.getElementById("pomoModeLabel");
+        const pomoStartBtn = document.getElementById("pomoStartBtn");
+        const pomoResetBtn = document.getElementById("pomoResetBtn");
+        const pomoSessionCount = document.getElementById("pomoSessionCount");
+        const modeBtns = document.querySelectorAll(".pomo-mode-btn");
+
+        function updatePomoUI() {
+            const mins = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
+            const secs = String(pomoSeconds % 60).padStart(2, "0");
+            pomoDisplay.textContent = `${mins}:${secs}`;
+        }
+
+        function loadSessionCounter() {
+            const todayKey = "pomoSessions_" + new Date().toDateString();
+            const count = parseInt(localStorage.getItem(todayKey) || "0", 10);
+            pomoSessionCount.textContent = `Today's Focus Sessions: ${count} ✿`;
+            return count;
+        }
+
+        function incrementSessionCounter() {
+            const todayKey = "pomoSessions_" + new Date().toDateString();
+            const next = loadSessionCounter() + 1;
+            localStorage.setItem(todayKey, String(next));
+            loadSessionCounter();
+        }
+
+        modeBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                clearInterval(pomoInterval);
+                isRunning = false;
+                pomoStartBtn.textContent = "Start ▶";
+
+                modeBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                pomoSeconds = parseInt(btn.dataset.mins, 10) * 60;
+                currentModeLabel = btn.dataset.label;
+                pomoModeLabel.textContent = currentModeLabel;
+                updatePomoUI();
+            });
+        });
+
+        pomoStartBtn.addEventListener("click", () => {
+            if (isRunning) {
+                clearInterval(pomoInterval);
+                isRunning = false;
+                pomoStartBtn.textContent = "Resume ▶";
+            } else {
+                isRunning = true;
+                pomoStartBtn.textContent = "Pause ❚❚";
+                pomoInterval = setInterval(() => {
+                    if (pomoSeconds > 0) {
+                        pomoSeconds--;
+                        updatePomoUI();
+                    } else {
+                        clearInterval(pomoInterval);
+                        isRunning = false;
+                        pomoStartBtn.textContent = "Start ▶";
+                        if (currentModeLabel === "FOCUS TIME") incrementSessionCounter();
+                        sendSmartAlert(
+                            "Pomodoro Finished! 🍅✿",
+                            `${currentModeLabel} selesai! Good job Caca, waktunya istirahat sejenak ♡`
+                        );
+                    }
+                }, 1000);
+            }
+        });
+
+        pomoResetBtn.addEventListener("click", () => {
+            clearInterval(pomoInterval);
+            isRunning = false;
+            pomoStartBtn.textContent = "Start ▶";
+            const activeBtn = document.querySelector(".pomo-mode-btn.active");
+            pomoSeconds = parseInt(activeBtn.dataset.mins, 10) * 60;
+            updatePomoUI();
+        });
+
+        loadSessionCounter();
+
+        // ==========================================
+        // 4. SEMESTER 1 MATA KULIAH + NOTEBOOKLM LINKS + CATATAN HARIAN
+        // ==========================================
+        const sem1Courses = [
+            {
+                id: "mk-algo",
+                code: "SEM 1 • CORE",
+                name: "Algoritma & Pemrograman (Java)",
+                placeholder: "Catat materi hari ini (misal: percabangan if-else, perulangan for/while, array di NetBeans)..."
+            },
+            {
+                id: "mk-web",
+                code: "SEM 1 • PRACTICAL",
+                name: "Pengembangan Web",
+                placeholder: "Catat materi hari ini (misal: struktur HTML5, Flexbox/Grid CSS, JavaScript DOM)..."
+            },
+            {
+                id: "mk-matdis",
+                code: "SEM 1 • LOGIC",
+                name: "Matematika Diskrit",
+                placeholder: "Catat materi hari ini (misal: logika proposisi, himpunan, relasi, aritmetika modulo)..."
+            },
+            {
+                id: "mk-aljabar",
+                code: "SEM 1 • MATH",
+                name: "Aljabar Linear",
+                placeholder: "Catat materi hari ini (misal: operasi matriks, determinan, sistem persamaan linear)..."
+            },
+            {
+                id: "mk-niaga",
+                code: "SEM 1 • DATA",
+                name: "Pengantar Praktikum Niaga & Akuntansi",
+                placeholder: "Catat materi hari ini (misal: rumus VLOOKUP/HLOOKUP Excel, jurnal umum, laporan keuangan)..."
+            },
+            {
+                id: "mk-pkn",
+                code: "SEM 1 • GENERAL",
+                name: "Pendidikan Kewarganegaraan",
+                placeholder: "Catat materi hari ini (misal: nilai Pancasila, identitas nasional, studi kasus masyarakat)..."
+            }
+        ];
+
+        const sem1Grid = document.getElementById("sem1CoursesGrid");
+
+        function renderSem1Courses() {
+            const savedNotes = JSON.parse(localStorage.getItem("raishaSem1CourseNotes") || "{}");
+            const savedLinks = JSON.parse(localStorage.getItem("raishaNotebookLMLinks") || "{}");
+            sem1Grid.innerHTML = "";
+
+            sem1Courses.forEach(mk => {
+                const links = savedLinks[mk.id] || { daily: "", exam: "" };
+                const dailyUrl = links.daily || "https://notebooklm.google.com/";
+                const examUrl = links.exam || "https://notebooklm.google.com/";
+
+                const card = document.createElement("article");
+                card.className = "matkul-card";
+                card.innerHTML = `
+                    <div>
+                        <div class="matkul-top">
+                            <span class="matkul-tag">${mk.code}</span>
+                            <button type="button" class="edit-nlm-btn" data-toggle-nlm="${mk.id}">
+                                🔗 Set NotebookLM Links
+                            </button>
+                        </div>
+
+                        <h3>${mk.name}</h3>
+
+                        <!-- Tombol Langsung ke NotebookLM Harian & UTS/UAS -->
+                        <div class="nlm-links-row">
+                            <a href="${dailyUrl}" target="_blank" rel="noopener" class="nlm-pill nlm-daily ${links.daily ? "" : "unset"}">
+                                📓 Belajar Harian ↗
+                            </a>
+                            <a href="${examUrl}" target="_blank" rel="noopener" class="nlm-pill nlm-exam ${links.exam ? "" : "unset"}">
+                                🎯 Persiapan UTS / UAS ↗
+                            </a>
+                        </div>
+
+                        <!-- Kotak Pengaturan Link NotebookLM (Tersembunyi sampai tombol Set Links diklik) -->
+                        <div class="nlm-editor-box" id="nlm-box-${mk.id}">
+                            <input type="url" id="daily-input-${mk.id}" value="${links.daily}" placeholder="Paste link NotebookLM Belajar Harian (https://notebooklm.google.com/notebook/...)">
+                            <input type="url" id="exam-input-${mk.id}" value="${links.exam}" placeholder="Paste link NotebookLM Belajar UTS/UAS (https://notebooklm.google.com/notebook/...)">
+                            <button type="button" class="nlm-save-links" data-save-nlm="${mk.id}">Save Links ✿</button>
+                        </div>
+
+                        <!-- Catatan Materi Hari Ini -->
+                        <textarea class="matkul-note-area" id="note-${mk.id}" placeholder="${mk.placeholder}">${savedNotes[mk.id] || ""}</textarea>
+                    </div>
+
+                    <div class="matkul-footer">
+                        <span class="matkul-saved-info" id="status-${mk.id}">
+                            ${savedNotes[mk.id] ? "Saved in study log ♡" : "No notes yet"}
+                        </span>
+                        <button type="button" class="save-note-btn" data-save-mk="${mk.id}">Save Note ✿</button>
+                    </div>
+                `;
+                sem1Grid.appendChild(card);
+            });
+
+            // Buka/tutup form tempel link NotebookLM
+            document.querySelectorAll("[data-toggle-nlm]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const box = document.getElementById(`nlm-box-${btn.dataset.toggleNlm}`);
+                    box.classList.toggle("show");
+                });
+            });
+
+            // Simpan link NotebookLM Harian & UTS/UAS
+            document.querySelectorAll("[data-save-nlm]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = btn.dataset.saveNlm;
+                    const dailyVal = document.getElementById(`daily-input-${id}`).value.trim();
+                    const examVal = document.getElementById(`exam-input-${id}`).value.trim();
+
+                    const allLinks = JSON.parse(localStorage.getItem("raishaNotebookLMLinks") || "{}");
+                    allLinks[id] = { daily: dailyVal, exam: examVal };
+                    localStorage.setItem("raishaNotebookLMLinks", JSON.stringify(allLinks));
+
+                    renderSem1Courses();
+                });
+            });
+
+            // Simpan catatan materi hari ini
+            document.querySelectorAll("[data-save-mk]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = btn.dataset.saveMk;
+                    const textVal = document.getElementById(`note-${id}`).value;
+                    const allNotes = JSON.parse(localStorage.getItem("raishaSem1CourseNotes") || "{}");
+                    allNotes[id] = textVal;
+                    localStorage.setItem("raishaSem1CourseNotes", JSON.stringify(allNotes));
+
+                    const statusEl = document.getElementById(`status-${id}`);
+                    statusEl.textContent = "Saved just now! ✓";
+                    btn.textContent = "Saved ♡";
+                    setTimeout(() => {
+                        btn.textContent = "Save Note ✿";
+                    }, 1300);
+                });
+            });
+        }
+
+        renderSem1Courses();
+    </script>
+
+</body>
+</html>
