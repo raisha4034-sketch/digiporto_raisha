@@ -49,18 +49,25 @@
             z-index: 5;
         }
 
-        /* Tanpa backdrop-filter agar GPU tidak berat saat animasi berjalan */
+        /* Latar belakang kotak dihapus agar teks menyatu langsung dengan background musim */
         .hero-content {
-            background: rgba(255, 250, 243, 0.88);
-            padding: 28px 30px;
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 14px 35px rgba(157, 111, 105, 0.1);
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 10px 0;
         }
 
-        body.dark-mode .hero-content {
-            background: rgba(36, 30, 34, 0.9);
-            border-color: rgba(255, 255, 255, 0.08);
+        /* Glow halus di pinggiran huruf agar teks tetap terbaca jelas di semua musim */
+        .hero-content h1,
+        .hero-content .hero-description,
+        .hero-content .hero-note {
+            text-shadow: 0 2px 14px rgba(255, 250, 243, 0.96), 0 0 4px rgba(255, 250, 243, 0.88);
+        }
+
+        body.dark-mode .hero-content h1,
+        body.dark-mode .hero-content .hero-description,
+        body.dark-mode .hero-content .hero-note {
+            text-shadow: 0 2px 14px rgba(33, 29, 32, 0.96), 0 0 5px rgba(33, 29, 32, 0.92);
         }
 
         /* Pemilih Musim di Pojok Kiri Bawah */
@@ -96,9 +103,6 @@
         }
 
         @media (max-width: 600px) {
-            .hero-content {
-                padding: 22px 20px;
-            }
             #seasonSwitcherDock {
                 bottom: 66px;
                 left: 14px;
@@ -509,16 +513,13 @@
 
         resizeCanvas();
 
-        // Pause otomatis jika Hero tidak terlihat di layar (hemat baterai & anti lag)
         if ("IntersectionObserver" in window) {
             new IntersectionObserver((entries) => {
                 isHeroVisible = entries[0].isIntersecting;
             }, { threshold: 0.05 }).observe(heroSection);
         }
 
-        // ======================================================
         // PRE-RENDERED SPRITES (Digambar 1x di memori -> Super Cepat!)
-        // ======================================================
         const MAPLE_PALETTE = [
             { main: "#e86f2c", vein: "#b84a14" },
             { main: "#f29d38", vein: "#c77416" },
@@ -601,9 +602,7 @@
             return fCanvas;
         });
 
-        // ======================================================
         // POINTER TRACKING
-        // ======================================================
         const pointer = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, vx: 0, vy: 0, active: false };
         let lastRippleTime = 0;
 
@@ -725,7 +724,7 @@
                 size: 5 + Math.random() * 3
             }));
 
-            // 3. AUTUMN (Menggunakan Pre-Rendered Sprite -> 240 daun penuh tapi 60 FPS mulus!)
+            // 3. AUTUMN
             const leafCount = width < 600 ? 140 : 250;
             mapleLeaves = Array.from({ length: leafCount }, () => {
                 const bx = Math.random() * width;
@@ -955,7 +954,7 @@
                 }
             }
 
-            // 3. AUTUMN (Super Ringan dengan Sprite Caching!)
+            // 3. AUTUMN
             else if (currentSeason === "autumn") {
                 ctx.fillStyle = isDark ? "rgba(58, 38, 28, 0.72)" : "rgba(247, 220, 192, 0.65)";
                 ctx.fillRect(0, 0, width, height);
