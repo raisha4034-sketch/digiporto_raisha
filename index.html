@@ -38,34 +38,9 @@
             display: block;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.72;
             will-change: transform;
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
-        }
-
-        /* Kabut cahaya lembut tanpa garis kotak agar teks menyatu & terbaca tajam */
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 2;
-            background: radial-gradient(
-                ellipse 54% 72% at 28% 50%,
-                rgba(255, 250, 243, 0.86) 0%,
-                rgba(255, 250, 243, 0.55) 55%,
-                rgba(255, 250, 243, 0) 100%
-            );
-        }
-
-        body.dark-mode .hero::after {
-            background: radial-gradient(
-                ellipse 54% 72% at 28% 50%,
-                rgba(33, 29, 32, 0.88) 0%,
-                rgba(33, 29, 32, 0.55) 55%,
-                rgba(33, 29, 32, 0) 100%
-            );
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 84%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 84%, rgba(0,0,0,0) 100%);
         }
 
         .hero-content,
@@ -74,7 +49,7 @@
             z-index: 5;
         }
 
-        /* Tanpa kotak pembungkus */
+        /* Latar belakang kotak dihapus agar teks menyatu langsung dengan background musim */
         .hero-content {
             background: transparent !important;
             border: none !important;
@@ -82,16 +57,17 @@
             padding: 10px 0;
         }
 
+        /* Glow halus di pinggiran huruf agar teks tetap terbaca jelas di semua musim */
         .hero-content h1,
         .hero-content .hero-description,
         .hero-content .hero-note {
-            text-shadow: 0 1px 12px rgba(255, 250, 243, 0.9);
+            text-shadow: 0 2px 14px rgba(255, 250, 243, 0.96), 0 0 4px rgba(255, 250, 243, 0.88);
         }
 
         body.dark-mode .hero-content h1,
         body.dark-mode .hero-content .hero-description,
         body.dark-mode .hero-content .hero-note {
-            text-shadow: 0 1px 12px rgba(28, 24, 27, 0.9);
+            text-shadow: 0 2px 14px rgba(33, 29, 32, 0.96), 0 0 5px rgba(33, 29, 32, 0.92);
         }
 
         /* Pemilih Musim di Pojok Kiri Bawah */
@@ -126,15 +102,7 @@
             cursor: pointer;
         }
 
-        @media (max-width: 768px) {
-            .hero::after {
-                background: radial-gradient(
-                    ellipse 85% 60% at 50% 32%,
-                    rgba(255, 250, 243, 0.88) 0%,
-                    rgba(255, 250, 243, 0.5) 60%,
-                    rgba(255, 250, 243, 0) 100%
-                );
-            }
+        @media (max-width: 600px) {
             #seasonSwitcherDock {
                 bottom: 66px;
                 left: 14px;
@@ -190,7 +158,7 @@
 
     <main>
 
-        <!-- HERO SECTION DENGAN FULL SOFT SEASONAL BACKGROUND -->
+        <!-- HERO SECTION DENGAN FULL INTERACTIVE BACKGROUND -->
         <section class="hero" id="heroSection">
 
             <canvas id="heroSeasonalCanvas"></canvas>
@@ -508,18 +476,18 @@
         <span id="seasonEmoji">🍂</span>
         <select id="seasonSelect" aria-label="Select Season">
             <option value="auto">Auto (Calendar)</option>
-            <option value="spring">🌸 Spring (Soft Meadow)</option>
-            <option value="summer">☀️ Summer (Pastel Shore)</option>
-            <option value="autumn">🍂 Autumn (Soft Maple)</option>
-            <option value="rainy">🌧️ Rainy (Misty Koi Pond)</option>
-            <option value="winter">❄️ Winter (Soft Snow)</option>
+            <option value="spring">🌸 Spring (Flower Field)</option>
+            <option value="summer">☀️ Summer (Pastel Beach)</option>
+            <option value="autumn">🍂 Autumn (Maple Leaves)</option>
+            <option value="rainy">🌧️ Rainy (Koi Pond)</option>
+            <option value="winter">❄️ Winter (Snow Field)</option>
         </select>
     </div>
 
     <!-- JAVASCRIPT GLOBAL -->
     <script src="js/script.js"></script>
 
-    <!-- JAVASCRIPT SOFT PASTEL REALISTIC 5-SEASONAL WORLD (60FPS) -->
+    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD (OPTIMIZED 60FPS SPRITES) -->
     <script>
     window.addEventListener("load", function () {
         const heroSection = document.getElementById("heroSection");
@@ -551,177 +519,90 @@
             }, { threshold: 0.05 }).observe(heroSection);
         }
 
-        // ============================================================
-        // 1. PRE-RENDERED SOFT PASTEL SPRITES (Lembut & Estetik)
-        // ============================================================
-
-        // Palet daun maple soft pastel-earthy (tidak mencolok)
-        const MAPLE_THEMES = [
-            { inner: "#f5cfa0", mid: "#e39b6d", outer: "#c97a57", vein: "rgba(138, 76, 48, 0.45)" }, // Soft Apricot
-            { inner: "#ebb09b", mid: "#d47d6a", outer: "#b55d52", vein: "rgba(122, 52, 45, 0.45)" }, // Dusty Terracotta
-            { inner: "#f7e1a6", mid: "#e8c279", outer: "#cfa255", vein: "rgba(145, 106, 42, 0.45)" }, // Soft Honey Gold
-            { inner: "#e6c3a5", mid: "#c79875", outer: "#a67656", vein: "rgba(110, 72, 48, 0.45)" }, // Warm Latte Leaf
-            { inner: "#f2bfa0", mid: "#de8f68", outer: "#bf6d4b", vein: "rgba(128, 66, 42, 0.45)" }, // Soft Peach Maple
-            { inner: "#d9b9a3", mid: "#b89079", outer: "#966e59", vein: "rgba(99, 68, 52, 0.45)" }  // Muted Cinnamon
+        // PRE-RENDERED SPRITES (Digambar 1x di memori -> Super Cepat!)
+        const MAPLE_PALETTE = [
+            { main: "#e86f2c", vein: "#b84a14" },
+            { main: "#f29d38", vein: "#c77416" },
+            { main: "#c94328", vein: "#8f2511" },
+            { main: "#f7c252", vein: "#cf9725" },
+            { main: "#d96b38", vein: "#9e4219" },
+            { main: "#9e3623", vein: "#6b1d0f" },
+            { main: "#e6a76c", vein: "#b57840" }
         ];
 
-        const mapleSprites = MAPLE_THEMES.map((pal) => {
+        const mapleSprites = MAPLE_PALETTE.map((pal) => {
             const sCanvas = document.createElement("canvas");
-            const sz = 31;
-            sCanvas.width = 84;
-            sCanvas.height = 84;
-            const c = sCanvas.getContext("2d");
+            const size = 28;
+            sCanvas.width = 76;
+            sCanvas.height = 76;
+            const sCtx = sCanvas.getContext("2d");
 
-            c.translate(42, 42);
-            c.shadowColor = "rgba(110, 72, 55, 0.14)";
-            c.shadowBlur = 5;
-            c.shadowOffsetX = 1.5;
-            c.shadowOffsetY = 2.5;
+            sCtx.translate(38, 38);
+            sCtx.shadowColor = "rgba(74, 32, 12, 0.25)";
+            sCtx.shadowBlur = 4;
+            sCtx.shadowOffsetX = 1.5;
+            sCtx.shadowOffsetY = 2.5;
 
-            const grad = c.createRadialGradient(0, -4, 3, 0, 0, sz);
-            grad.addColorStop(0, pal.inner);
-            grad.addColorStop(0.6, pal.mid);
-            grad.addColorStop(1, pal.outer);
-            c.fillStyle = grad;
+            sCtx.fillStyle = pal.main;
+            sCtx.beginPath();
+            sCtx.moveTo(0, size * 0.95);
+            sCtx.lineTo(0, size * 0.45);
+            sCtx.lineTo(-size * 0.65, size * 0.55);
+            sCtx.lineTo(-size * 0.45, size * 0.2);
+            sCtx.lineTo(-size * 0.95, 0);
+            sCtx.lineTo(-size * 0.45, -size * 0.18);
+            sCtx.lineTo(-size * 0.35, -size * 0.55);
+            sCtx.lineTo(0, -size * 0.95);
+            sCtx.lineTo(size * 0.35, -size * 0.55);
+            sCtx.lineTo(size * 0.45, -size * 0.18);
+            sCtx.lineTo(size * 0.95, 0);
+            sCtx.lineTo(size * 0.45, size * 0.2);
+            sCtx.lineTo(size * 0.65, size * 0.55);
+            sCtx.lineTo(0, size * 0.45);
+            sCtx.closePath();
+            sCtx.fill();
 
-            c.beginPath();
-            c.moveTo(-1, sz * 1.02);
-            c.lineTo(-1, sz * 0.42);
-            c.lineTo(-sz * 0.48, sz * 0.56);
-            c.lineTo(-sz * 0.42, sz * 0.36);
-            c.lineTo(-sz * 0.72, sz * 0.32);
-            c.lineTo(-sz * 0.52, sz * 0.14);
-            c.lineTo(-sz * 0.98, -sz * 0.04);
-            c.lineTo(-sz * 0.68, -sz * 0.14);
-            c.lineTo(-sz * 0.78, -sz * 0.32);
-            c.lineTo(-sz * 0.42, -sz * 0.24);
-            c.lineTo(-sz * 0.46, -sz * 0.54);
-            c.lineTo(-sz * 0.24, -sz * 0.5);
-            c.lineTo(0, -sz * 0.98);
-            c.lineTo(sz * 0.24, -sz * 0.5);
-            c.lineTo(sz * 0.46, -sz * 0.54);
-            c.lineTo(sz * 0.42, -sz * 0.24);
-            c.lineTo(sz * 0.78, -sz * 0.32);
-            c.lineTo(sz * 0.68, -sz * 0.14);
-            c.lineTo(sz * 0.98, -sz * 0.04);
-            c.lineTo(sz * 0.52, sz * 0.14);
-            c.lineTo(sz * 0.72, sz * 0.32);
-            c.lineTo(sz * 0.42, sz * 0.36);
-            c.lineTo(sz * 0.48, sz * 0.56);
-            c.lineTo(1, sz * 0.42);
-            c.lineTo(1, sz * 1.02);
-            c.closePath();
-            c.fill();
-
-            c.shadowColor = "transparent";
-            c.strokeStyle = pal.vein;
-            c.lineWidth = 0.9;
-            c.beginPath();
-            c.moveTo(0, sz * 1.0);
-            c.lineTo(0, -sz * 0.82);
-            c.moveTo(0, -sz * 0.25); c.lineTo(-sz * 0.22, -sz * 0.42);
-            c.moveTo(0, -sz * 0.25); c.lineTo(sz * 0.22, -sz * 0.42);
-            c.moveTo(0, sz * 0.22); c.lineTo(-sz * 0.8, -sz * 0.04);
-            c.moveTo(0, sz * 0.22); c.lineTo(sz * 0.8, -sz * 0.04);
-            c.moveTo(0, sz * 0.36); c.lineTo(-sz * 0.52, sz * 0.32);
-            c.moveTo(0, sz * 0.36); c.lineTo(sz * 0.52, sz * 0.32);
-            c.stroke();
+            sCtx.shadowColor = "transparent";
+            sCtx.strokeStyle = pal.vein;
+            sCtx.lineWidth = 1.1;
+            sCtx.beginPath();
+            sCtx.moveTo(0, size * 0.95);
+            sCtx.lineTo(0, -size * 0.8);
+            sCtx.moveTo(0, size * 0.25);
+            sCtx.lineTo(-size * 0.75, 0);
+            sCtx.moveTo(0, size * 0.25);
+            sCtx.lineTo(size * 0.75, 0);
+            sCtx.moveTo(0, size * 0.38);
+            sCtx.lineTo(-size * 0.5, size * 0.45);
+            sCtx.moveTo(0, size * 0.38);
+            sCtx.lineTo(size * 0.5, size * 0.45);
+            sCtx.stroke();
 
             return sCanvas;
         });
 
-        // Bunga Liar Soft Pastel
-        const FLOWER_THEMES = [
-            { petalOuter: "#fffdf9", petalInner: "#f7e8ec", core: "#f2cc6b" },
-            { petalOuter: "#ffd6e0", petalInner: "#f5adc0", core: "#fae08c" },
-            { petalOuter: "#fff0b8", petalInner: "#f2d279", core: "#c98e49" },
-            { petalOuter: "#e8d5f7", petalInner: "#ccaee6", core: "#fff7cc" },
-            { petalOuter: "#ffe0e9", petalInner: "#f5bfd0", core: "#ffffff" }
-        ];
-
-        const flowerSprites = FLOWER_THEMES.map((fl) => {
+        const FLOWER_COLORS = ["#ff9ebb", "#ffd166", "#ffffff", "#d8b4f8", "#ffcad4", "#ffb5a7"];
+        const flowerSprites = FLOWER_COLORS.map((col) => {
             const fCanvas = document.createElement("canvas");
-            fCanvas.width = 30;
-            fCanvas.height = 30;
-            const c = fCanvas.getContext("2d");
-            c.translate(15, 15);
-
-            const petals = 6;
-            for (let k = 0; k < petals; k++) {
-                c.save();
-                c.rotate((k * Math.PI * 2) / petals);
-                const pGrad = c.createRadialGradient(0, -5, 1, 0, -6, 6);
-                pGrad.addColorStop(0, fl.petalInner);
-                pGrad.addColorStop(1, fl.petalOuter);
-                c.fillStyle = pGrad;
-                c.beginPath();
-                c.ellipse(0, -5.5, 3, 5, 0, 0, Math.PI * 2);
-                c.fill();
-                c.restore();
+            fCanvas.width = 24;
+            fCanvas.height = 24;
+            const fCtx = fCanvas.getContext("2d");
+            fCtx.translate(12, 12);
+            fCtx.fillStyle = col;
+            for (let k = 0; k < 5; k++) {
+                const a = (k * Math.PI * 2) / 5;
+                fCtx.beginPath();
+                fCtx.arc(Math.cos(a) * 4, Math.sin(a) * 4, 3.2, 0, Math.PI * 2);
+                fCtx.fill();
             }
-
-            c.fillStyle = fl.core;
-            c.beginPath();
-            c.arc(0, 0, 2.8, 0, Math.PI * 2);
-            c.fill();
-
+            fCtx.fillStyle = "#ffe066";
+            fCtx.beginPath();
+            fCtx.arc(0, 0, 2.3, 0, Math.PI * 2);
+            fCtx.fill();
             return fCanvas;
         });
 
-        // Daun Teratai Soft Sage untuk Kolam Hujan
-        const lilyPadSprite = (function () {
-            const lCanvas = document.createElement("canvas");
-            lCanvas.width = 86;
-            lCanvas.height = 86;
-            const c = lCanvas.getContext("2d");
-            c.translate(43, 43);
-
-            c.shadowColor = "rgba(45, 78, 84, 0.18)";
-            c.shadowBlur = 6;
-            c.shadowOffsetY = 3;
-
-            const grad = c.createRadialGradient(-5, -5, 4, 0, 0, 31);
-            grad.addColorStop(0, "#a8cfa3");
-            grad.addColorStop(0.7, "#84b082");
-            grad.addColorStop(1, "#6a966b");
-            c.fillStyle = grad;
-
-            c.beginPath();
-            c.moveTo(0, 0);
-            c.arc(0, 0, 30, 0.25, Math.PI * 2 - 0.25);
-            c.closePath();
-            c.fill();
-
-            c.shadowColor = "transparent";
-            c.strokeStyle = "rgba(220, 240, 215, 0.5)";
-            c.lineWidth = 0.9;
-            for (let a = 0.6; a < Math.PI * 2 - 0.5; a += 0.65) {
-                c.beginPath();
-                c.moveTo(0, 0);
-                c.lineTo(Math.cos(a) * 26, Math.sin(a) * 26);
-                c.stroke();
-            }
-
-            c.fillStyle = "#ffe3eb";
-            for (let p = 0; p < 6; p++) {
-                c.save();
-                c.rotate((p * Math.PI * 2) / 6);
-                c.beginPath();
-                c.ellipse(0, -5.5, 2.8, 5.5, 0, 0, Math.PI * 2);
-                c.fill();
-                c.restore();
-            }
-            c.fillStyle = "#fae08c";
-            c.beginPath();
-            c.arc(0, 0, 2.3, 0, Math.PI * 2);
-            c.fill();
-
-            return lCanvas;
-        })();
-
-        // ============================================================
-        // 2. POINTER & TOUCH INTERACTION
-        // ============================================================
+        // POINTER TRACKING
         const pointer = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, vx: 0, vy: 0, active: false };
         let lastRippleTime = 0;
 
@@ -745,14 +626,12 @@
             pointer.active = true;
 
             const now = Date.now();
-            if (now - lastRippleTime > 75) {
+            if (now - lastRippleTime > 85) {
                 if (currentSeason === "rainy" || currentSeason === "summer") {
-                    if (ripples.length < 30) {
-                        ripples.push({ x, y, r: 4, alpha: 0.65, double: true });
-                    }
+                    if (ripples.length < 30) ripples.push({ x, y, r: 5, alpha: 0.65 });
                 } else if (currentSeason === "winter") {
-                    snowTracks.push({ x, y, r: 25 + Math.random() * 9, alpha: 0.8 });
-                    if (snowTracks.length > 70) snowTracks.shift();
+                    snowTracks.push({ x, y, r: 24 + Math.random() * 8, alpha: 0.8 });
+                    if (snowTracks.length > 60) snowTracks.shift();
                     for (let i = 0; i < 2; i++) {
                         sparkles.push({
                             x, y,
@@ -795,14 +674,11 @@
 
         let springTufts = [];
         let floatingPetals = [];
-        let sandGrains = [];
         let seaShells = [];
-        let baseMapleCarpet = [];
-        let interactiveMapleLeaves = [];
+        let mapleLeaves = [];
         let fallingMapleLeaves = [];
         let raindrops = [];
         let ripples = [];
-        let lilyPads = [];
         let koiFishes = [];
         let snowflakes = [];
         let snowTracks = [];
@@ -811,63 +687,46 @@
         function initWorldEntities() {
             // 1. SPRING
             springTufts = [];
-            const cols = width < 600 ? 16 : 28;
-            const rows = width < 600 ? 9 : 14;
+            const cols = width < 600 ? 15 : 26;
+            const rows = width < 600 ? 8 : 13;
             const cellW = width / cols;
             const cellH = height / rows;
 
             for (let r = 0; r <= rows; r++) {
                 for (let c = 0; c <= cols; c++) {
                     springTufts.push({
-                        x: c * cellW + (Math.random() - 0.5) * cellW * 0.75,
-                        y: r * cellH + (Math.random() - 0.5) * cellH * 0.75,
-                        h: 24 + Math.random() * 20,
+                        x: c * cellW + (Math.random() - 0.5) * cellW * 0.7,
+                        y: r * cellH + (Math.random() - 0.5) * cellH * 0.7,
+                        h: 24 + Math.random() * 18,
                         angle: 0,
                         vel: 0,
                         phase: Math.random() * Math.PI * 2,
-                        hasFlower: Math.random() < 0.48,
-                        spriteIdx: Math.floor(Math.random() * flowerSprites.length),
-                        grassShade: Math.random() > 0.5 ? "#8ec28b" : "#a3d19f"
+                        hasFlower: Math.random() < 0.45,
+                        spriteIdx: Math.floor(Math.random() * flowerSprites.length)
                     });
                 }
             }
 
-            floatingPetals = Array.from({ length: width < 600 ? 18 : 28 }, () => ({
+            floatingPetals = Array.from({ length: width < 600 ? 16 : 26 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 r: 3.5 + Math.random() * 2.5,
-                vy: 0.5 + Math.random() * 0.85,
+                vy: 0.6 + Math.random() * 0.9,
                 wobble: Math.random() * Math.PI * 2
             }));
 
             // 2. SUMMER
-            sandGrains = Array.from({ length: width < 600 ? 75 : 140 }, () => ({
-                x: Math.random() * width,
-                y: height * 0.48 + Math.random() * (height * 0.52),
-                r: 1 + Math.random() * 1.4,
-                shade: Math.random() > 0.5 ? "rgba(214, 186, 146, 0.35)" : "rgba(255, 252, 242, 0.55)"
-            }));
-
-            seaShells = Array.from({ length: width < 600 ? 12 : 20 }, () => ({
-                x: 25 + Math.random() * (width - 50),
-                y: height * 0.62 + Math.random() * (height * 0.34),
-                color: Math.random() > 0.5 ? "#fad4dc" : "#fce7c5",
+            seaShells = Array.from({ length: width < 600 ? 14 : 22 }, () => ({
+                x: 20 + Math.random() * (width - 40),
+                y: height * 0.56 + Math.random() * (height * 0.4),
+                color: Math.random() > 0.5 ? "#f7c5cc" : "#ffe5b4",
                 rot: Math.random() * Math.PI * 2,
-                size: 5.5 + Math.random() * 3
+                size: 5 + Math.random() * 3
             }));
 
-            // 3. AUTUMN: 2 Lapis Daun Maple Soft Pastel-Earthy
-            const baseCount = width < 600 ? 110 : 200;
-            baseMapleCarpet = Array.from({ length: baseCount }, () => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                rot: Math.random() * Math.PI * 2,
-                scale: 0.72 + Math.random() * 0.45,
-                spriteIdx: Math.floor(Math.random() * mapleSprites.length)
-            }));
-
-            const topCount = width < 600 ? 95 : 170;
-            interactiveMapleLeaves = Array.from({ length: topCount }, () => {
+            // 3. AUTUMN
+            const leafCount = width < 600 ? 140 : 250;
+            mapleLeaves = Array.from({ length: leafCount }, () => {
                 const bx = Math.random() * width;
                 const by = Math.random() * height;
                 return {
@@ -879,16 +738,16 @@
                     vy: 0,
                     rot: Math.random() * Math.PI * 2,
                     vrot: 0,
-                    scale: 0.76 + Math.random() * 0.5,
+                    scale: 0.75 + Math.random() * 0.55,
                     spriteIdx: Math.floor(Math.random() * mapleSprites.length)
                 };
             });
 
-            fallingMapleLeaves = Array.from({ length: width < 600 ? 10 : 16 }, () => ({
+            fallingMapleLeaves = Array.from({ length: width < 600 ? 12 : 18 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                scale: 0.52 + Math.random() * 0.25,
-                vy: 0.65 + Math.random() * 0.9,
+                scale: 0.55 + Math.random() * 0.3,
+                vy: 0.7 + Math.random() * 1.0,
                 wobble: Math.random() * Math.PI * 2,
                 spriteIdx: Math.floor(Math.random() * mapleSprites.length)
             }));
@@ -897,35 +756,28 @@
             raindrops = Array.from({ length: width < 600 ? 35 : 65 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                len: 11 + Math.random() * 9,
-                vy: 6.5 + Math.random() * 3.5
+                len: 10 + Math.random() * 9,
+                vy: 6 + Math.random() * 3.5
             }));
             ripples = [];
-
-            lilyPads = [
-                { x: width * 0.14, y: height * 0.22, rot: 0.4, scale: 0.88 },
-                { x: width * 0.86, y: height * 0.74, rot: 2.1, scale: 1.0 },
-                { x: width * 0.48, y: height * 0.84, rot: 1.2, scale: 0.78 }
-            ];
-
             const koiStyles = [
-                { body: "#f7a583", spot: "#ffffff" },
-                { body: "#ffffff", spot: "#f28c82" },
-                { body: "#fad586", spot: "#fff6d6" },
-                { body: "#ffb8a8", spot: "#fff5f0" }
+                { body: "#ff9e7d", spot: "#ffffff" },
+                { body: "#ffffff", spot: "#ff7575" },
+                { body: "#ffd180", spot: "#ff8a65" },
+                { body: "#ffb5a7", spot: "#fff1e6" }
             ];
-            koiFishes = Array.from({ length: width < 600 ? 5 : 8 }, (_, i) => ({
+            koiFishes = Array.from({ length: width < 600 ? 5 : 9 }, (_, i) => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                vx: (Math.random() > 0.5 ? 1 : -1) * (0.75 + Math.random() * 0.75),
-                vy: (Math.random() - 0.5) * 0.65,
-                size: 16 + Math.random() * 5,
+                vx: (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.8),
+                vy: (Math.random() - 0.5) * 0.7,
+                size: 15 + Math.random() * 5,
                 tailPhase: Math.random() * Math.PI * 2,
                 style: koiStyles[i % koiStyles.length]
             }));
 
             // 5. WINTER
-            snowflakes = Array.from({ length: width < 600 ? 40 : 75 }, () => ({
+            snowflakes = Array.from({ length: width < 600 ? 35 : 65 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 r: 2 + Math.random() * 3.5,
@@ -959,7 +811,7 @@
             }, 150);
         });
 
-        function drawRealisticKoi(fish, time) {
+        function drawKoiFish(fish, time) {
             const angle = Math.atan2(fish.vy, fish.vx);
             const wag = Math.sin(time * 6 + fish.tailPhase) * 0.35;
 
@@ -967,34 +819,21 @@
             ctx.translate(fish.x, fish.y);
             ctx.rotate(angle);
 
-            ctx.fillStyle = "rgba(42, 74, 82, 0.14)";
-            ctx.beginPath();
-            ctx.ellipse(-4, 11, fish.size * 0.9, fish.size * 0.35, 0, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
-            ctx.beginPath();
-            ctx.ellipse(fish.size * 0.15, -fish.size * 0.5, fish.size * 0.3, fish.size * 0.16, -0.5, 0, Math.PI * 2);
-            ctx.ellipse(fish.size * 0.15, fish.size * 0.5, fish.size * 0.3, fish.size * 0.16, 0.5, 0, Math.PI * 2);
-            ctx.fill();
-
             ctx.fillStyle = fish.style.body;
             ctx.beginPath();
-            ctx.moveTo(-fish.size * 0.72, 0);
-            ctx.quadraticCurveTo(-fish.size * 1.15, Math.sin(wag) * 6, -fish.size * 1.5, Math.sin(wag) * 8 - 5.5);
-            ctx.lineTo(-fish.size * 1.32, Math.sin(wag) * 6.5);
-            ctx.lineTo(-fish.size * 1.5, Math.sin(wag) * 8 + 5.5);
+            ctx.moveTo(-fish.size * 0.7, 0);
+            ctx.lineTo(-fish.size * 1.45, Math.sin(wag) * 7 - 5);
+            ctx.lineTo(-fish.size * 1.45, Math.sin(wag) * 7 + 5);
             ctx.closePath();
             ctx.fill();
 
             ctx.beginPath();
-            ctx.ellipse(0, 0, fish.size, fish.size * 0.4, 0, 0, Math.PI * 2);
+            ctx.ellipse(0, 0, fish.size, fish.size * 0.42, 0, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.fillStyle = fish.style.spot;
             ctx.beginPath();
-            ctx.ellipse(fish.size * 0.2, -1, fish.size * 0.42, fish.size * 0.2, 0.15, 0, Math.PI * 2);
-            ctx.ellipse(-fish.size * 0.3, 1.5, fish.size * 0.26, fish.size * 0.15, -0.2, 0, Math.PI * 2);
+            ctx.ellipse(fish.size * 0.15, -1, fish.size * 0.42, fish.size * 0.22, 0.2, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.restore();
@@ -1010,30 +849,26 @@
             time += 0.025;
             const isDark = document.body.classList.contains("dark-mode");
 
-            // ==========================================================
-            // 1. SPRING: SOFT PASTEL MEADOW 🌸
-            // ==========================================================
+            // 1. SPRING
             if (currentSeason === "spring") {
-                const bgGrad = ctx.createLinearGradient(0, 0, 0, height);
-                bgGrad.addColorStop(0, isDark ? "#28362a" : "#ebf7e8");
-                bgGrad.addColorStop(1, isDark ? "#334736" : "#d5edd1");
-                ctx.fillStyle = bgGrad;
+                ctx.fillStyle = isDark ? "rgba(42, 58, 45, 0.58)" : "rgba(214, 240, 210, 0.78)";
                 ctx.fillRect(0, 0, width, height);
 
-                ctx.lineWidth = 2.2;
+                ctx.strokeStyle = isDark ? "#67946c" : "#73b370";
+                ctx.lineWidth = 2.3;
                 ctx.lineCap = "round";
 
                 for (let i = 0; i < springTufts.length; i++) {
                     const s = springTufts[i];
-                    const wind = Math.sin(time + s.phase + s.x * 0.01) * 0.15;
+                    const wind = Math.sin(time + s.phase + s.x * 0.01) * 0.16;
                     let push = 0;
                     if (pointer.active) {
                         const dx = s.x - pointer.x;
                         const dy = s.y - pointer.y;
                         const distSq = dx * dx + dy * dy;
-                        if (distSq < 15625) {
+                        if (distSq < 14400) {
                             const dist = Math.sqrt(distSq);
-                            push = (dx >= 0 ? 1 : -1) * (1 - dist / 125) * 0.95;
+                            push = (dx >= 0 ? 1 : -1) * (1 - dist / 120) * 0.95;
                         }
                     }
                     s.vel = (s.vel + (wind + push - s.angle) * 0.05) * 0.86;
@@ -1042,18 +877,17 @@
                     const tipX = s.x + Math.sin(s.angle) * s.h;
                     const tipY = s.y - Math.cos(s.angle) * s.h;
 
-                    ctx.strokeStyle = isDark ? "#5d8761" : s.grassShade;
                     ctx.beginPath();
                     ctx.moveTo(s.x, s.y);
                     ctx.quadraticCurveTo(s.x + Math.sin(s.angle * 0.5) * s.h * 0.5, s.y - s.h * 0.5, tipX, tipY);
                     ctx.stroke();
 
                     if (s.hasFlower) {
-                        ctx.drawImage(flowerSprites[s.spriteIdx], tipX - 15, tipY - 15);
+                        ctx.drawImage(flowerSprites[s.spriteIdx], tipX - 12, tipY - 12);
                     }
                 }
 
-                ctx.fillStyle = "rgba(255, 204, 220, 0.85)";
+                ctx.fillStyle = "rgba(255, 183, 206, 0.88)";
                 for (let i = 0; i < floatingPetals.length; i++) {
                     const p = floatingPetals[i];
                     p.wobble += 0.03;
@@ -1066,21 +900,10 @@
                 }
             }
 
-            // ==========================================================
-            // 2. SUMMER: SOFT PASTEL SHORE ☀️
-            // ==========================================================
+            // 2. SUMMER
             else if (currentSeason === "summer") {
-                const sandGrad = ctx.createLinearGradient(0, height * 0.45, 0, height);
-                sandGrad.addColorStop(0, isDark ? "#5e4e3e" : "#f5e4c8");
-                sandGrad.addColorStop(1, isDark ? "#73604d" : "#fbf0dc");
-                ctx.fillStyle = sandGrad;
+                ctx.fillStyle = isDark ? "rgba(115, 94, 71, 0.72)" : "rgba(247, 229, 193, 0.88)";
                 ctx.fillRect(0, 0, width, height);
-
-                for (let i = 0; i < sandGrains.length; i++) {
-                    const sg = sandGrains[i];
-                    ctx.fillStyle = sg.shade;
-                    ctx.fillRect(sg.x, sg.y, sg.r, sg.r);
-                }
 
                 for (let i = 0; i < seaShells.length; i++) {
                     const sh = seaShells[i];
@@ -1094,35 +917,21 @@
                     ctx.restore();
                 }
 
-                const tideY = height * 0.55 + Math.sin(time * 1.15) * 26;
-                ctx.fillStyle = isDark ? "rgba(42, 34, 26, 0.35)" : "rgba(219, 193, 154, 0.38)";
+                const tideY = height * 0.56 + Math.sin(time * 1.2) * 26;
+                ctx.fillStyle = isDark ? "rgba(48, 104, 134, 0.75)" : "rgba(148, 214, 236, 0.78)";
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.lineTo(width, 0);
                 for (let x = width; x >= 0; x -= 40) {
-                    ctx.lineTo(x, tideY + 16 + Math.sin(x * 0.012 + time * 1.5) * 8);
-                }
-                ctx.closePath();
-                ctx.fill();
-
-                const seaGrad = ctx.createLinearGradient(0, 0, 0, tideY);
-                seaGrad.addColorStop(0, isDark ? "#2d607a" : "#9bd7e8");
-                seaGrad.addColorStop(0.65, isDark ? "#3f7d99" : "#bce6f2");
-                seaGrad.addColorStop(1, isDark ? "#5696b3" : "#daf3fa");
-                ctx.fillStyle = seaGrad;
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo(width, 0);
-                for (let x = width; x >= 0; x -= 35) {
                     ctx.lineTo(x, tideY + Math.sin(x * 0.012 + time * 1.8) * 9);
                 }
                 ctx.closePath();
                 ctx.fill();
 
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.92)";
                 ctx.lineWidth = 4;
                 ctx.beginPath();
-                for (let x = 0; x <= width; x += 25) {
+                for (let x = 0; x <= width; x += 30) {
                     const wave = Math.sin(x * 0.012 + time * 1.8) * 9;
                     if (x === 0) ctx.moveTo(x, tideY + wave);
                     else ctx.lineTo(x, tideY + wave);
@@ -1145,32 +954,15 @@
                 }
             }
 
-            // ==========================================================
-            // 3. AUTUMN: SOFT PASTEL MAPLE CARPET 🍂
-            // ==========================================================
+            // 3. AUTUMN
             else if (currentSeason === "autumn") {
-                // Dasar krem-peach lembut yang menyatu dengan warna website
-                ctx.fillStyle = isDark ? "#382820" : "#faebd9";
+                ctx.fillStyle = isDark ? "rgba(58, 38, 28, 0.72)" : "rgba(247, 220, 192, 0.65)";
                 ctx.fillRect(0, 0, width, height);
 
-                // Lapisan 1: Karpet daun dasar soft
-                ctx.globalAlpha = 0.65;
-                for (let i = 0; i < baseMapleCarpet.length; i++) {
-                    const bl = baseMapleCarpet[i];
-                    const sprite = mapleSprites[bl.spriteIdx];
-                    const drawSize = 84 * bl.scale;
-                    ctx.save();
-                    ctx.translate(bl.x, bl.y);
-                    ctx.rotate(bl.rot);
-                    ctx.drawImage(sprite, -drawSize * 0.5, -drawSize * 0.5, drawSize, drawSize);
-                    ctx.restore();
-                }
+                const radiusSq = 130 * 130;
 
-                // Lapisan 2: Daun maple atas yang tersibak realistis saat kursor lewat
-                ctx.globalAlpha = 0.92;
-                const radiusSq = 135 * 135;
-                for (let i = 0; i < interactiveMapleLeaves.length; i++) {
-                    const lf = interactiveMapleLeaves[i];
+                for (let i = 0; i < mapleLeaves.length; i++) {
+                    const lf = mapleLeaves[i];
                     if (pointer.active) {
                         const dx = lf.x - pointer.x;
                         const dy = lf.y - pointer.y;
@@ -1178,15 +970,15 @@
 
                         if (distSq < radiusSq && distSq > 1) {
                             const dist = Math.sqrt(distSq);
-                            const force = (1 - dist / 135) * 5.6;
-                            lf.vx += (dx / dist) * force + pointer.vx * 0.22;
-                            lf.vy += (dy / dist) * force + pointer.vy * 0.22;
-                            lf.vrot += ((dx * pointer.vy - dy * pointer.vx) * 0.00045) + (Math.random() - 0.5) * 0.07;
+                            const force = (1 - dist / 130) * 5.2;
+                            lf.vx += (dx / dist) * force + pointer.vx * 0.2;
+                            lf.vy += (dy / dist) * force + pointer.vy * 0.2;
+                            lf.vrot += ((dx * pointer.vy - dy * pointer.vx) * 0.0004) + (Math.random() - 0.5) * 0.06;
                         }
                     }
 
-                    lf.vx = (lf.vx + (lf.baseX - lf.x) * 0.011) * 0.88;
-                    lf.vy = (lf.vy + (lf.baseY - lf.y) * 0.011) * 0.88;
+                    lf.vx = (lf.vx + (lf.baseX - lf.x) * 0.012) * 0.88;
+                    lf.vy = (lf.vy + (lf.baseY - lf.y) * 0.012) * 0.88;
                     lf.vrot *= 0.91;
 
                     lf.x += lf.vx;
@@ -1194,7 +986,7 @@
                     lf.rot += lf.vrot;
 
                     const sprite = mapleSprites[lf.spriteIdx];
-                    const drawSize = 84 * lf.scale;
+                    const drawSize = 76 * lf.scale;
                     ctx.save();
                     ctx.translate(lf.x, lf.y);
                     ctx.rotate(lf.rot);
@@ -1202,33 +994,26 @@
                     ctx.restore();
                 }
 
-                // Daun gugur melayang pelan
                 for (let i = 0; i < fallingMapleLeaves.length; i++) {
                     const fl = fallingMapleLeaves[i];
                     fl.wobble += 0.025;
                     fl.y += fl.vy;
                     fl.x += Math.sin(fl.wobble) * 1.1;
-                    if (fl.y > height + 30) { fl.y = -30; fl.x = Math.random() * width; }
+                    if (fl.y > height + 25) { fl.y = -25; fl.x = Math.random() * width; }
 
                     const sprite = mapleSprites[fl.spriteIdx];
-                    const drawSize = 84 * fl.scale;
+                    const drawSize = 76 * fl.scale;
                     ctx.save();
                     ctx.translate(fl.x, fl.y);
                     ctx.rotate(fl.wobble);
                     ctx.drawImage(sprite, -drawSize * 0.5, -drawSize * 0.5, drawSize, drawSize);
                     ctx.restore();
                 }
-                ctx.globalAlpha = 1;
             }
 
-            // ==========================================================
-            // 4. RAINY: MISTY KOI & LILY POND 🌧️
-            // ==========================================================
+            // 4. RAINY
             else if (currentSeason === "rainy") {
-                const pondGrad = ctx.createRadialGradient(width * 0.5, height * 0.5, 40, width * 0.5, height * 0.5, width * 0.7);
-                pondGrad.addColorStop(0, isDark ? "#2d4e59" : "#d4edf2");
-                pondGrad.addColorStop(1, isDark ? "#1e3a45" : "#b3dce3");
-                ctx.fillStyle = pondGrad;
+                ctx.fillStyle = isDark ? "rgba(30, 56, 66, 0.82)" : "rgba(144, 200, 212, 0.78)";
                 ctx.fillRect(0, 0, width, height);
 
                 for (let i = 0; i < koiFishes.length; i++) {
@@ -1237,10 +1022,10 @@
                         const dx = fish.x - pointer.x;
                         const dy = fish.y - pointer.y;
                         const distSq = dx * dx + dy * dy;
-                        if (distSq < 150 * 150 && distSq > 1) {
+                        if (distSq < 145 * 145 && distSq > 1) {
                             const dist = Math.sqrt(distSq);
-                            fish.vx += (dx / dist) * 0.36;
-                            fish.vy += (dy / dist) * 0.36;
+                            fish.vx += (dx / dist) * 0.34;
+                            fish.vy += (dy / dist) * 0.34;
                         }
                     }
 
@@ -1248,7 +1033,7 @@
                     if (speed > 3.2) {
                         fish.vx = (fish.vx / speed) * 3.2;
                         fish.vy = (fish.vy / speed) * 3.2;
-                    } else if (speed < 0.85) {
+                    } else if (speed < 0.8) {
                         fish.vx *= 1.03;
                         fish.vy *= 1.03;
                     }
@@ -1256,36 +1041,24 @@
                     fish.x += fish.vx;
                     fish.y += fish.vy;
 
-                    if (fish.x < 35 || fish.x > width - 35) fish.vx *= -1;
-                    if (fish.y < 35 || fish.y > height - 35) fish.vy *= -1;
+                    if (fish.x < 30 || fish.x > width - 30) fish.vx *= -1;
+                    if (fish.y < 30 || fish.y > height - 30) fish.vy *= -1;
 
-                    drawRealisticKoi(fish, time);
+                    drawKoiFish(fish, time);
                 }
 
-                for (let i = 0; i < lilyPads.length; i++) {
-                    const lp = lilyPads[i];
-                    const bobX = Math.sin(time + i) * 3;
-                    const bobY = Math.cos(time * 0.8 + i) * 2.5;
-                    ctx.save();
-                    ctx.translate(lp.x + bobX, lp.y + bobY);
-                    ctx.rotate(lp.rot + Math.sin(time * 0.5 + i) * 0.05);
-                    const s = 86 * lp.scale;
-                    ctx.drawImage(lilyPadSprite, -s * 0.5, -s * 0.5, s, s);
-                    ctx.restore();
-                }
-
-                ctx.strokeStyle = isDark ? "rgba(196, 232, 247, 0.45)" : "rgba(255, 255, 255, 0.7)";
+                ctx.strokeStyle = isDark ? "rgba(186, 224, 240, 0.5)" : "rgba(95, 155, 186, 0.58)";
                 ctx.lineWidth = 1.4;
                 ctx.beginPath();
                 for (let i = 0; i < raindrops.length; i++) {
                     const rd = raindrops[i];
                     rd.y += rd.vy;
-                    rd.x -= 0.9;
+                    rd.x -= 0.8;
                     ctx.moveTo(rd.x, rd.y);
-                    ctx.lineTo(rd.x - 2.2, rd.y + rd.len);
+                    ctx.lineTo(rd.x - 2, rd.y + rd.len);
 
-                    if (Math.random() < 0.028 && ripples.length < 30) {
-                        ripples.push({ x: rd.x, y: rd.y, r: 2, alpha: 0.6, double: false });
+                    if (Math.random() < 0.025 && ripples.length < 30) {
+                        ripples.push({ x: rd.x, y: rd.y, r: 2, alpha: 0.55 });
                         rd.y = -15;
                         rd.x = Math.random() * width;
                     } else if (rd.y > height) {
@@ -1297,7 +1070,7 @@
 
                 for (let i = ripples.length - 1; i >= 0; i--) {
                     const rp = ripples[i];
-                    rp.r += 1.15;
+                    rp.r += 1.1;
                     rp.alpha -= 0.013;
                     if (rp.alpha <= 0) {
                         ripples.splice(i, 1);
@@ -1306,47 +1079,32 @@
                         ctx.lineWidth = 1.5;
                         ctx.beginPath();
                         ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.42, 0, 0, Math.PI * 2);
-                        if (rp.double && rp.r > 12) {
-                            ctx.moveTo(rp.x + rp.r * 0.6, rp.y);
-                            ctx.ellipse(rp.x, rp.y, rp.r * 0.6, rp.r * 0.25, 0, 0, Math.PI * 2);
-                        }
                         ctx.stroke();
                     }
                 }
             }
 
-            // ==========================================================
-            // 5. WINTER: SOFT SNOW FIELD ❄️
-            // ==========================================================
+            // 5. WINTER
             else if (currentSeason === "winter") {
-                const snowBg = ctx.createLinearGradient(0, 0, 0, height);
-                snowBg.addColorStop(0, isDark ? "#3c485c" : "#e8f0fa");
-                snowBg.addColorStop(1, isDark ? "#52627a" : "#f7faff");
-                ctx.fillStyle = snowBg;
+                ctx.fillStyle = isDark ? "rgba(64, 76, 96, 0.82)" : "rgba(224, 236, 250, 0.88)";
                 ctx.fillRect(0, 0, width, height);
 
                 for (let i = snowTracks.length - 1; i >= 0; i--) {
                     const tr = snowTracks[i];
-                    tr.alpha -= 0.0035;
+                    tr.alpha -= 0.004;
                     if (tr.alpha <= 0) {
                         snowTracks.splice(i, 1);
                     } else {
                         ctx.fillStyle = isDark
-                            ? `rgba(34, 42, 56, ${tr.alpha * 0.55})`
-                            : `rgba(196, 216, 240, ${tr.alpha * 0.65})`;
+                            ? `rgba(38, 46, 61, ${tr.alpha * 0.55})`
+                            : `rgba(176, 200, 228, ${tr.alpha * 0.7})`;
                         ctx.beginPath();
                         ctx.arc(tr.x, tr.y, tr.r, 0, Math.PI * 2);
                         ctx.fill();
-
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${tr.alpha * 0.85})`;
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.arc(tr.x, tr.y, tr.r, 0.2, Math.PI - 0.2);
-                        ctx.stroke();
                     }
                 }
 
-                ctx.fillStyle = "rgba(255, 255, 255, 0.96)";
+                ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
                 ctx.beginPath();
                 for (let i = 0; i < snowflakes.length; i++) {
                     const sf = snowflakes[i];
