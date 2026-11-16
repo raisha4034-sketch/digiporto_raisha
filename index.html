@@ -544,11 +544,11 @@
 
     <!-- PEMILIH MUSIM DI POJOK KIRI BAWAH -->
     <div id="seasonSwitcherDock" title="Change seasonal world">
-        <span id="seasonEmoji">🌷</span>
+        <span id="seasonEmoji">☀️</span>
         <select id="seasonSelect" aria-label="Select Season">
             <option value="auto">Auto (Calendar)</option>
             <option value="spring">🌷 Spring (Tulip Garden)</option>
-            <option value="summer">☀️ Summer (Pastel Beach)</option>
+            <option value="summer">☀️ Summer (Pearl &amp; Seashell Shore)</option>
             <option value="autumn">🍂 Autumn (Maple Leaves)</option>
             <option value="rainy">🌧️ Rainy (Koi Pond)</option>
             <option value="winter">❄️ Winter (Snow Field)</option>
@@ -558,7 +558,7 @@
     <!-- JAVASCRIPT GLOBAL -->
     <script src="js/script.js"></script>
 
-    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD (REALISTIC TULIP GARDEN + 60FPS SPRITES) -->
+    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD (REALISTIC SPRITES + 60FPS) -->
     <script>
     window.addEventListener("load", function () {
         const heroSection = document.getElementById("heroSection");
@@ -591,52 +591,28 @@
         }
 
         // ============================================================
-        // 1. PRE-RENDERED REALISTIC TULIP HEAD SPRITES (Pink & White)
+        // 1. PRE-RENDERED REALISTIC TULIP HEAD SPRITES (SPRING)
         // ============================================================
         const TULIP_PALETTES = [
-            // 0: Soft Pastel Pink Tulip
             {
-                back: "#d48ca3",
-                sideTop: "#f5c2d1",
-                sideBottom: "#d991a7",
-                frontTop: "#fae0e8",
-                frontMid: "#eba8bd",
-                frontBase: "#cfe0b4",
-                vein: "rgba(186, 104, 130, 0.26)",
-                edge: "rgba(255, 245, 248, 0.7)"
+                back: "#d48ca3", sideTop: "#f5c2d1", sideBottom: "#d991a7",
+                frontTop: "#fae0e8", frontMid: "#eba8bd", frontBase: "#cfe0b4",
+                vein: "rgba(186, 104, 130, 0.26)", edge: "rgba(255, 245, 248, 0.7)"
             },
-            // 1: Dusty Blush Rose Tulip
             {
-                back: "#c47890",
-                sideTop: "#ebb0c2",
-                sideBottom: "#c97d95",
-                frontTop: "#f7d4df",
-                frontMid: "#de95ac",
-                frontBase: "#c5d9a9",
-                vein: "rgba(168, 86, 112, 0.28)",
-                edge: "rgba(255, 240, 245, 0.65)"
+                back: "#c47890", sideTop: "#ebb0c2", sideBottom: "#c97d95",
+                frontTop: "#f7d4df", frontMid: "#de95ac", frontBase: "#c5d9a9",
+                vein: "rgba(168, 86, 112, 0.28)", edge: "rgba(255, 240, 245, 0.65)"
             },
-            // 2: Creamy White Tulip dengan pangkal hijau lembut
             {
-                back: "#dfe3da",
-                sideTop: "#ffffff",
-                sideBottom: "#e6ebe1",
-                frontTop: "#ffffff",
-                frontMid: "#f5f7f2",
-                frontBase: "#d6e6bd",
-                vein: "rgba(175, 186, 168, 0.25)",
-                edge: "rgba(255, 255, 255, 0.9)"
+                back: "#dfe3da", sideTop: "#ffffff", sideBottom: "#e6ebe1",
+                frontTop: "#ffffff", frontMid: "#f5f7f2", frontBase: "#d6e6bd",
+                vein: "rgba(175, 186, 168, 0.25)", edge: "rgba(255, 255, 255, 0.9)"
             },
-            // 3: Ivory Pearl Tulip
             {
-                back: "#e6e2d8",
-                sideTop: "#fffdf9",
-                sideBottom: "#ebe8df",
-                frontTop: "#ffffff",
-                frontMid: "#faf7f0",
-                frontBase: "#dde6c5",
-                vein: "rgba(186, 179, 162, 0.24)",
-                edge: "rgba(255, 255, 255, 0.85)"
+                back: "#e6e2d8", sideTop: "#fffdf9", sideBottom: "#ebe8df",
+                frontTop: "#ffffff", frontMid: "#faf7f0", frontBase: "#dde6c5",
+                vein: "rgba(186, 179, 162, 0.24)", edge: "rgba(255, 255, 255, 0.85)"
             }
         ];
 
@@ -646,15 +622,12 @@
             tCanvas.height = 76;
             const c = tCanvas.getContext("2d");
 
-            // Titik pangkal bunga berada di (34, 62) agar mudah diputar menempel di ujung tangkai
             c.translate(34, 62);
-
             c.shadowColor = "rgba(35, 58, 38, 0.24)";
             c.shadowBlur = 5;
             c.shadowOffsetX = 1.5;
             c.shadowOffsetY = 2.5;
 
-            // 1. Kelopak Dalam Belakang (Puncak tengah)
             c.fillStyle = pal.back;
             c.beginPath();
             c.moveTo(-10, -16);
@@ -663,7 +636,6 @@
             c.closePath();
             c.fill();
 
-            // 2. Kelopak Kiri Melengkung
             const leftGrad = c.createLinearGradient(-18, -46, -2, 0);
             leftGrad.addColorStop(0, pal.sideTop);
             leftGrad.addColorStop(0.85, pal.sideBottom);
@@ -676,7 +648,6 @@
             c.closePath();
             c.fill();
 
-            // 3. Kelopak Kanan Melengkung
             const rightGrad = c.createLinearGradient(18, -46, 2, 0);
             rightGrad.addColorStop(0, pal.sideTop);
             rightGrad.addColorStop(0.85, pal.sideBottom);
@@ -689,7 +660,6 @@
             c.closePath();
             c.fill();
 
-            // 4. Kelopak Depan Tengah (Cup utama tulip)
             const frontGrad = c.createLinearGradient(0, -48, 0, 2);
             frontGrad.addColorStop(0, pal.frontTop);
             frontGrad.addColorStop(0.65, pal.frontMid);
@@ -703,7 +673,6 @@
             c.closePath();
             c.fill();
 
-            // Highlight tepi kelopak & urat vertikal halus khas tulip
             c.shadowColor = "transparent";
             c.strokeStyle = pal.edge;
             c.lineWidth = 1.1;
@@ -724,7 +693,300 @@
         });
 
         // ============================================================
-        // 2. PRE-RENDERED MAPLE SPRITES (AUTUMN)
+        // 2. PRE-RENDERED SUMMER BEACH SPRITES (Sand Tile, Starfish, Shells, Pearls)
+        // ============================================================
+        // A. Tile Tekstur Pasir Pantai Realistis (60 FPS super ringan)
+        function createSandPattern(dark) {
+            const pCanvas = document.createElement("canvas");
+            pCanvas.width = 160;
+            pCanvas.height = 160;
+            const pCtx = pCanvas.getContext("2d");
+
+            pCtx.fillStyle = dark ? "#5c4d40" : "#dccab7";
+            pCtx.fillRect(0, 0, 160, 160);
+
+            // Riak pasir lembut
+            pCtx.strokeStyle = dark ? "rgba(74, 60, 49, 0.38)" : "rgba(198, 178, 158, 0.42)";
+            pCtx.lineWidth = 2.5;
+            for (let y = 12; y < 160; y += 26) {
+                pCtx.beginPath();
+                pCtx.moveTo(0, y);
+                pCtx.bezierCurveTo(50, y - 5, 110, y + 5, 160, y);
+                pCtx.stroke();
+            }
+
+            // Butiran mineral pasir halus
+            for (let i = 0; i < 650; i++) {
+                const gx = Math.random() * 160;
+                const gy = Math.random() * 160;
+                const r = Math.random() * 1.3;
+                pCtx.fillStyle = i % 3 === 0
+                    ? (dark ? "rgba(255,245,235,0.12)" : "rgba(255,253,249,0.5)")
+                    : (dark ? "rgba(40,30,22,0.28)" : "rgba(155,134,114,0.28)");
+                pCtx.fillRect(gx, gy, r, r);
+            }
+            return ctx.createPattern(pCanvas, "repeat");
+        }
+        const lightSandPattern = createSandPattern(false);
+        const darkSandPattern = createSandPattern(true);
+
+        // B. Sprite Bintang Laut Krem Berbintik (Knobby Starfish seperti foto)
+        const starfishSprite = (function () {
+            const sCanvas = document.createElement("canvas");
+            sCanvas.width = 120;
+            sCanvas.height = 120;
+            const c = sCanvas.getContext("2d");
+            c.translate(60, 60);
+
+            c.shadowColor = "rgba(84, 67, 52, 0.36)";
+            c.shadowBlur = 8;
+            c.shadowOffsetX = 3;
+            c.shadowOffsetY = 4;
+
+            const grad = c.createRadialGradient(0, 0, 4, 0, 0, 48);
+            grad.addColorStop(0, "#f5efe0");
+            grad.addColorStop(0.6, "#e6dcc3");
+            grad.addColorStop(1, "#cfc2a3");
+            c.fillStyle = grad;
+
+            // 5 lengan bintang laut dengan lekuk lembut alami
+            c.beginPath();
+            const arms = 5;
+            for (let i = 0; i < arms; i++) {
+                const aMid = (i * Math.PI * 2) / arms - Math.PI / 2;
+                const aLeft = aMid - 0.34;
+                const aRight = aMid + 0.34;
+                const innerR = 14;
+                const outerR = 48;
+
+                if (i === 0) {
+                    c.moveTo(Math.cos(aLeft) * innerR, Math.sin(aLeft) * innerR);
+                } else {
+                    c.lineTo(Math.cos(aLeft) * innerR, Math.sin(aLeft) * innerR);
+                }
+                c.quadraticCurveTo(
+                    Math.cos(aMid - 0.12) * (outerR * 0.65),
+                    Math.sin(aMid - 0.12) * (outerR * 0.65),
+                    Math.cos(aMid) * outerR,
+                    Math.sin(aMid) * outerR
+                );
+                c.quadraticCurveTo(
+                    Math.cos(aMid + 0.12) * (outerR * 0.65),
+                    Math.sin(aMid + 0.12) * (outerR * 0.65),
+                    Math.cos(aRight) * innerR,
+                    Math.sin(aRight) * innerR
+                );
+            }
+            c.closePath();
+            c.fill();
+
+            // Bintik-bintik menonjol khas knobby starfish
+            c.shadowColor = "rgba(95, 80, 60, 0.25)";
+            c.shadowBlur = 2;
+            c.shadowOffsetX = 1;
+            c.shadowOffsetY = 1;
+            c.fillStyle = "#fffdf7";
+
+            // Bintik pusat
+            c.beginPath();
+            c.arc(0, 0, 3.2, 0, Math.PI * 2);
+            c.fill();
+
+            for (let i = 0; i < arms; i++) {
+                const a = (i * Math.PI * 2) / arms - Math.PI / 2;
+                for (let d = 11; d <= 38; d += 8.5) {
+                    const rDot = Math.max(1.4, 3.2 - d * 0.045);
+                    c.beginPath();
+                    c.arc(Math.cos(a) * d, Math.sin(a) * d, rDot, 0, Math.PI * 2);
+                    c.fill();
+                }
+            }
+            return sCanvas;
+        })();
+
+        // C. 4 Variasi Sprite Kerang Realistis (Scallop Putih, Spiral Conch, Spiky Murex, Spotted Clam)
+        const shellSprites = [
+            // 0: White Ribbed Scallop Shell (Kerang Kipas Putih seperti di tengah kanan foto)
+            (function () {
+                const sc = document.createElement("canvas");
+                sc.width = 64; sc.height = 64;
+                const c = sc.getContext("2d");
+                c.translate(32, 34);
+                c.shadowColor = "rgba(75, 60, 48, 0.34)";
+                c.shadowBlur = 6; c.shadowOffsetX = 2; c.shadowOffsetY = 3;
+
+                const grad = c.createRadialGradient(0, 12, 2, 0, -4, 26);
+                grad.addColorStop(0, "#e3dfd7");
+                grad.addColorStop(0.5, "#f7f5f0");
+                grad.addColorStop(1, "#ffffff");
+                c.fillStyle = grad;
+
+                c.beginPath();
+                c.moveTo(-6, 14);
+                c.lineTo(-20, 2);
+                c.bezierCurveTo(-24, -14, -10, -24, 0, -24);
+                c.bezierCurveTo(10, -24, 24, -14, 20, 2);
+                c.lineTo(6, 14);
+                c.closePath();
+                c.fill();
+
+                c.shadowColor = "transparent";
+                c.strokeStyle = "rgba(175, 168, 158, 0.42)";
+                c.lineWidth = 1.1;
+                for (let a = -0.85; a <= 0.85; a += 0.24) {
+                    c.beginPath();
+                    c.moveTo(0, 12);
+                    c.lineTo(Math.sin(a) * 19, -Math.cos(a) * 21);
+                    c.stroke();
+                }
+                return sc;
+            })(),
+
+            // 1: Striped Spiral Conch (Kerang Ulir Runcing)
+            (function () {
+                const sc = document.createElement("canvas");
+                sc.width = 68; sc.height = 68;
+                const c = sc.getContext("2d");
+                c.translate(34, 34);
+                c.shadowColor = "rgba(75, 60, 48, 0.34)";
+                c.shadowBlur = 6; c.shadowOffsetX = 2; c.shadowOffsetY = 3;
+
+                const grad = c.createLinearGradient(-22, 0, 22, 0);
+                grad.addColorStop(0, "#d9cfc3");
+                grad.addColorStop(0.45, "#f5efe6");
+                grad.addColorStop(1, "#9c8d7e");
+                c.fillStyle = grad;
+
+                c.beginPath();
+                c.moveTo(-24, 0);
+                c.quadraticCurveTo(-8, -14, 10, -11);
+                c.quadraticCurveTo(22, -6, 22, 0);
+                c.quadraticCurveTo(22, 6, 10, 11);
+                c.quadraticCurveTo(-8, 14, -24, 0);
+                c.closePath();
+                c.fill();
+
+                c.shadowColor = "transparent";
+                c.strokeStyle = "rgba(110, 96, 84, 0.45)";
+                c.lineWidth = 1.4;
+                [-10, -2, 6, 13].forEach((sx, idx) => {
+                    const h = 11 - idx * 2;
+                    c.beginPath();
+                    c.moveTo(sx, -h);
+                    c.quadraticCurveTo(sx + 3, 0, sx, h);
+                    c.stroke();
+                });
+                return sc;
+            })(),
+
+            // 2: Spiky Murex Shell (Kerang Duri seperti pojok kiri bawah foto)
+            (function () {
+                const sc = document.createElement("canvas");
+                sc.width = 74; sc.height = 68;
+                const c = sc.getContext("2d");
+                c.translate(36, 34);
+                c.shadowColor = "rgba(75, 60, 48, 0.35)";
+                c.shadowBlur = 6; c.shadowOffsetX = 2; c.shadowOffsetY = 3;
+
+                c.fillStyle = "#ebe3d5";
+                // Ekor panjang
+                c.beginPath();
+                c.moveTo(4, -2);
+                c.lineTo(30, -3);
+                c.lineTo(30, 2);
+                c.lineTo(4, 3);
+                c.closePath();
+                c.fill();
+
+                // Duri-duri lembut
+                const spikes = [[-12, -18], [-4, -20], [4, -17], [-12, 18], [-3, 19], [5, 16]];
+                spikes.forEach(([sx, sy]) => {
+                    c.beginPath();
+                    c.moveTo(sx - 3, 0);
+                    c.lineTo(sx, sy);
+                    c.lineTo(sx + 3, 0);
+                    c.closePath();
+                    c.fill();
+                });
+
+                // Badan bulat bergaris
+                const grad = c.createRadialGradient(-6, -3, 2, -4, 0, 16);
+                grad.addColorStop(0, "#fffdf9");
+                grad.addColorStop(0.7, "#dfd4c3");
+                grad.addColorStop(1, "#a89886");
+                c.fillStyle = grad;
+                c.beginPath();
+                c.ellipse(-5, 0, 15, 11, 0, 0, Math.PI * 2);
+                c.fill();
+                return sc;
+            })(),
+
+            // 3: Mottled White & Charcoal Clam (Kerang Putih Motif Bercak Gelap seperti tengah foto)
+            (function () {
+                const sc = document.createElement("canvas");
+                sc.width = 68; sc.height = 64;
+                const c = sc.getContext("2d");
+                c.translate(34, 32);
+                c.shadowColor = "rgba(75, 60, 48, 0.35)";
+                c.shadowBlur = 6; c.shadowOffsetX = 2; c.shadowOffsetY = 3;
+
+                const grad = c.createRadialGradient(-4, -4, 2, 0, 0, 24);
+                grad.addColorStop(0, "#ffffff");
+                grad.addColorStop(0.75, "#edeae4");
+                grad.addColorStop(1, "#b8b2a8");
+                c.fillStyle = grad;
+
+                c.beginPath();
+                c.ellipse(0, 0, 22, 14, -0.15, 0, Math.PI * 2);
+                c.fill();
+
+                // Bercak alami di sisi kerang
+                c.shadowColor = "transparent";
+                c.fillStyle = "rgba(78, 72, 68, 0.55)";
+                c.beginPath();
+                c.arc(12, 4, 4.5, 0, Math.PI * 2);
+                c.arc(16, -2, 3.2, 0, Math.PI * 2);
+                c.arc(7, 8, 2.8, 0, Math.PI * 2);
+                c.fill();
+                return sc;
+            })()
+        ];
+
+        // D. Sprite Mutiara Berkilau (Lustrous Pearl Sprite)
+        const pearlSprite = (function () {
+            const pc = document.createElement("canvas");
+            pc.width = 32; pc.height = 32;
+            const c = pc.getContext("2d");
+            c.translate(16, 16);
+
+            c.shadowColor = "rgba(68, 52, 40, 0.42)";
+            c.shadowBlur = 4;
+            c.shadowOffsetX = 1.5;
+            c.shadowOffsetY = 2;
+
+            const grad = c.createRadialGradient(-3.5, -3.5, 1, 0, 0, 10);
+            grad.addColorStop(0, "#ffffff");
+            grad.addColorStop(0.35, "#faf6f2");
+            grad.addColorStop(0.78, "#ded6ce");
+            grad.addColorStop(1, "#b5aba2");
+            c.fillStyle = grad;
+
+            c.beginPath();
+            c.arc(0, 0, 9.5, 0, Math.PI * 2);
+            c.fill();
+
+            // Kilau pantulan cahaya mutiara
+            c.shadowColor = "transparent";
+            c.fillStyle = "rgba(255, 255, 255, 0.95)";
+            c.beginPath();
+            c.ellipse(-3.2, -3.5, 2.8, 1.7, -0.6, 0, Math.PI * 2);
+            c.fill();
+
+            return pc;
+        })();
+
+        // ============================================================
+        // 3. PRE-RENDERED MAPLE SPRITES (AUTUMN)
         // ============================================================
         const MAPLE_PALETTE = [
             { main: "#e8a576", vein: "#bd784b" },
@@ -788,10 +1050,18 @@
         });
 
         // ============================================================
-        // 3. POINTER & TOUCH TRACKING
+        // 4. POINTER & TOUCH TRACKING
         // ============================================================
         const pointer = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, vx: 0, vy: 0, active: false };
         let lastRippleTime = 0;
+
+        // Fungsi batas garis ombak diagonal untuk Summer (pojok kiri atas menyapu ke tengah)
+        function getDiagonalWaveY(x, t) {
+            const baseDiagonal = height * 0.74 - x * (height / (width * 0.88));
+            const waveCurve = Math.sin(x * 0.015 + t * 1.4) * 14 + Math.cos(x * 0.032 - t) * 6;
+            const tideShift = Math.sin(t * 0.95) * 26;
+            return baseDiagonal + waveCurve + tideShift;
+        }
 
         function updatePointerFromClient(clientX, clientY) {
             if (!isHeroVisible) return;
@@ -814,8 +1084,14 @@
 
             const now = Date.now();
             if (now - lastRippleTime > 85) {
-                if (currentSeason === "rainy" || currentSeason === "summer") {
+                if (currentSeason === "rainy") {
                     if (ripples.length < 30) ripples.push({ x, y, r: 5, alpha: 0.65 });
+                } else if (currentSeason === "summer") {
+                    const shoreY = getDiagonalWaveY(x, time);
+                    // Jika kursor menyentuh area ombak laut atau pasir basah dekat ombak, buat riak air
+                    if (y < shoreY + 45 && ripples.length < 30) {
+                        ripples.push({ x, y, r: 5, alpha: 0.75 });
+                    }
                 } else if (currentSeason === "winter") {
                     snowTracks.push({ x, y, r: 24 + Math.random() * 8, alpha: 0.8 });
                     if (snowTracks.length > 60) snowTracks.shift();
@@ -861,7 +1137,9 @@
 
         let tulipField = [];
         let floatingPetals = [];
-        let seaShells = [];
+        let summerItems = [];
+        let summerPearls = [];
+        let seaFoamBubbles = [];
         let mapleLeaves = [];
         let fallingMapleLeaves = [];
         let raindrops = [];
@@ -872,7 +1150,7 @@
         let sparkles = [];
 
         function initWorldEntities() {
-            // 1. SPRING: Kebun Tulip Pink & Putih Berlapis (Disortir dari belakang ke depan)
+            // 1. SPRING: Kebun Tulip Pink & Putih
             tulipField = [];
             const rows = width < 600 ? 8 : 11;
             const cols = width < 600 ? 11 : 20;
@@ -880,9 +1158,9 @@
             const endY = height * 1.04;
 
             for (let r = 0; r < rows; r++) {
-                const depth = r / (rows - 1); // 0 = jauh di belakang, 1 = dekat di depan
+                const depth = r / (rows - 1);
                 const rowY = startY + depth * (endY - startY);
-                const scale = 0.44 + depth * 0.68; // Perspektif ukuran alami
+                const scale = 0.44 + depth * 0.68;
                 const rowCols = Math.round(cols * (1.25 - depth * 0.3));
                 const stepX = (width + 60) / rowCols;
 
@@ -900,12 +1178,10 @@
                         vel: 0,
                         phase: Math.random() * Math.PI * 2,
                         spriteIdx: Math.floor(Math.random() * tulipHeadSprites.length),
-                        leafDir: Math.random() > 0.5 ? 1 : -1,
                         leafCurve: 0.7 + Math.random() * 0.4
                     });
                 }
             }
-            // Urutkan berdasarkan posisi Y supaya tulip depan menutupi tulip belakang secara realistis
             tulipField.sort((a, b) => a.y - b.y);
 
             floatingPetals = Array.from({ length: width < 600 ? 14 : 22 }, () => ({
@@ -917,13 +1193,77 @@
                 color: Math.random() > 0.45 ? "rgba(245, 194, 209, 0.85)" : "rgba(255, 253, 249, 0.9)"
             }));
 
-            // 2. SUMMER
-            seaShells = Array.from({ length: width < 600 ? 14 : 22 }, () => ({
-                x: 20 + Math.random() * (width - 40),
-                y: height * 0.56 + Math.random() * (height * 0.4),
-                color: Math.random() > 0.5 ? "#f7ced5" : "#fae7c5",
-                rot: Math.random() * Math.PI * 2,
-                size: 5 + Math.random() * 3
+            // 2. SUMMER: Kerang, Bintang Laut, & Mutiara di Tepi Ombak Diagonal
+            summerItems = [];
+            const shellCount = width < 600 ? 14 : 24;
+            for (let i = 0; i < shellCount; i++) {
+                const sx = 35 + Math.random() * (width - 70);
+                const minShoreY = Math.max(40, getDiagonalWaveY(sx, 0) - 20);
+                const sy = minShoreY + Math.random() * Math.max(60, height - minShoreY - 30);
+                const isStarfish = i < (width < 600 ? 3 : 4);
+                const scale = isStarfish
+                    ? (i === 0 ? 1.15 : 0.48 + Math.random() * 0.25) // 1 bintang laut besar + beberapa kecil seperti foto
+                    : (0.72 + Math.random() * 0.42);
+
+                summerItems.push({
+                    type: isStarfish ? "starfish" : "shell",
+                    spriteIdx: Math.floor(Math.random() * shellSprites.length),
+                    baseX: sx,
+                    baseY: sy,
+                    x: sx,
+                    y: sy,
+                    vx: 0,
+                    vy: 0,
+                    rot: Math.random() * Math.PI * 2,
+                    vrot: 0,
+                    scale: scale
+                });
+            }
+
+            // Taburan mutiara (baik butiran besar tersebar maupun kelompok mutiara kecil dekat buih ombak)
+            summerPearls = [];
+            const singlePearls = width < 600 ? 22 : 36;
+            for (let i = 0; i < singlePearls; i++) {
+                const px = 25 + Math.random() * (width - 50);
+                const minY = Math.max(30, getDiagonalWaveY(px, 0) - 10);
+                const py = minY + Math.random() * Math.max(50, height - minY - 20);
+                summerPearls.push({
+                    baseX: px,
+                    baseY: py,
+                    x: px,
+                    y: py,
+                    vx: 0,
+                    vy: 0,
+                    scale: 0.45 + Math.random() * 0.45
+                });
+            }
+            // 2 kelompok mutiara kecil manis di pinggir ombak (seperti di foto)
+            const clusterCenters = [
+                { cx: width * 0.46, cy: height * 0.38 },
+                { cx: width * 0.62, cy: height * 0.24 }
+            ];
+            clusterCenters.forEach((cl) => {
+                for (let k = 0; k < 14; k++) {
+                    const px = cl.cx + (Math.random() - 0.5) * 34;
+                    const py = cl.cy + (Math.random() - 0.5) * 26;
+                    summerPearls.push({
+                        baseX: px,
+                        baseY: py,
+                        x: px,
+                        y: py,
+                        vx: 0,
+                        vy: 0,
+                        scale: 0.28 + Math.random() * 0.14
+                    });
+                }
+            });
+
+            // Titik-titik buih renda di tepi ombak
+            seaFoamBubbles = Array.from({ length: 75 }, () => ({
+                xRatio: Math.random() * 0.92,
+                offsetY: (Math.random() - 0.5) * 28,
+                r: 2 + Math.random() * 4.5,
+                alpha: 0.45 + Math.random() * 0.45
             }));
 
             // 3. AUTUMN
@@ -1055,7 +1395,6 @@
             // 1. SPRING: HAMPARAN KEBUN TULIP PINK & PUTIH REALISTIS 🌷
             // ==========================================================
             if (currentSeason === "spring") {
-                // Latar langit pagi lembut + dedaunan dasar kebun
                 const bgGrad = ctx.createLinearGradient(0, 0, 0, height);
                 bgGrad.addColorStop(0, isDark ? "#232e25" : "#eef5ea");
                 bgGrad.addColorStop(0.14, isDark ? "#2a3b2c" : "#cfe0c6");
@@ -1064,7 +1403,6 @@
                 ctx.fillStyle = bgGrad;
                 ctx.fillRect(0, 0, width, height);
 
-                // Semak pagar hijau di kejauhan (seperti bagian atas foto referensi)
                 ctx.fillStyle = isDark ? "#253b26" : "#678c58";
                 ctx.beginPath();
                 ctx.moveTo(0, height * 0.15);
@@ -1078,7 +1416,6 @@
 
                 const interactRadiusSq = 135 * 135;
 
-                // Gambar setiap tulip dari belakang ke depan
                 for (let i = 0; i < tulipField.length; i++) {
                     const t = tulipField[i];
                     const wind = Math.sin(time * 1.1 + t.phase + t.x * 0.008) * 0.09;
@@ -1096,19 +1433,16 @@
                         }
                     }
 
-                    // Fisika pegas tangkai tulip (melengkung lembut lalu membal)
                     t.vel = (t.vel + (t.baseLean + wind + push - t.angle) * 0.055) * 0.85;
                     t.angle += t.vel;
 
                     const tipX = t.x + Math.sin(t.angle) * t.stemH;
                     const tipY = t.y - Math.cos(t.angle) * t.stemH;
 
-                    // 1. Daun tulip lebar melengkung di kiri & kanan pangkal tangkai
                     const leafH = t.stemH * 0.92;
                     const leafW = 13 * t.scale;
                     const swayLeaf = t.angle * 0.55;
 
-                    // Daun kiri
                     ctx.fillStyle = isDark ? "#335236" : "#5c8559";
                     ctx.beginPath();
                     ctx.moveTo(t.x - 2 * t.scale, t.y + 8 * t.scale);
@@ -1126,7 +1460,6 @@
                     );
                     ctx.fill();
 
-                    // Daun kanan (sedikit lebih terang terkena cahaya)
                     ctx.fillStyle = isDark ? "#3e6342" : "#719c6d";
                     ctx.beginPath();
                     ctx.moveTo(t.x + 2 * t.scale, t.y + 8 * t.scale);
@@ -1144,7 +1477,6 @@
                     );
                     ctx.fill();
 
-                    // 2. Tangkai tulip kokoh melengkung halus
                     ctx.strokeStyle = isDark ? "#4e7a52" : "#7da874";
                     ctx.lineWidth = Math.max(1.6, 3.4 * t.scale);
                     ctx.lineCap = "round";
@@ -1158,7 +1490,6 @@
                     );
                     ctx.stroke();
 
-                    // 3. Kuntum bunga tulip berlapis (Pre-rendered Sprite)
                     const sprite = tulipHeadSprites[t.spriteIdx];
                     const headW = 68 * t.scale;
                     const headH = 76 * t.scale;
@@ -1169,7 +1500,6 @@
                     ctx.restore();
                 }
 
-                // Kelopak bunga melayang terbawa angin musim semi
                 for (let i = 0; i < floatingPetals.length; i++) {
                     const p = floatingPetals[i];
                     p.wobble += 0.03;
@@ -1184,56 +1514,158 @@
             }
 
             // ==========================================================
-            // 2. SUMMER (Soft Pastel Beach)
+            // 2. SUMMER: PEARL & SEASHELL SHORE (OMBAK DIAGONAL & MUTIARA) ☀️
             // ==========================================================
             else if (currentSeason === "summer") {
-                ctx.fillStyle = isDark ? "rgba(96, 80, 64, 0.72)" : "rgba(250, 237, 212, 0.88)";
+                // 1. Hamparan Pasir Pantai Bertekstur Alami
+                ctx.fillStyle = isDark ? darkSandPattern : lightSandPattern;
                 ctx.fillRect(0, 0, width, height);
 
-                for (let i = 0; i < seaShells.length; i++) {
-                    const sh = seaShells[i];
-                    ctx.save();
-                    ctx.translate(sh.x, sh.y);
-                    ctx.rotate(sh.rot);
-                    ctx.fillStyle = sh.color;
-                    ctx.beginPath();
-                    ctx.arc(0, 0, sh.size, 0, Math.PI, true);
-                    ctx.fill();
-                    ctx.restore();
-                }
-
-                const tideY = height * 0.56 + Math.sin(time * 1.2) * 26;
-                ctx.fillStyle = isDark ? "rgba(48, 94, 118, 0.72)" : "rgba(182, 228, 242, 0.78)";
+                // 2. Area Pasir Basah (Wet Sand Rim) di bawah garis ombak
+                ctx.fillStyle = isDark ? "rgba(44, 34, 26, 0.35)" : "rgba(176, 152, 130, 0.34)";
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.lineTo(width, 0);
-                for (let x = width; x >= 0; x -= 40) {
-                    ctx.lineTo(x, tideY + Math.sin(x * 0.012 + time * 1.8) * 9);
+                for (let x = width; x >= 0; x -= 32) {
+                    ctx.lineTo(x, getDiagonalWaveY(x, time) + 46);
                 }
                 ctx.closePath();
                 ctx.fill();
 
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.92)";
-                ctx.lineWidth = 4;
+                // 3. Ombak Laut Biru Pastel Diagonal dari Kiri Atas
+                const seaGrad = ctx.createLinearGradient(0, 0, width * 0.55, height * 0.55);
+                if (isDark) {
+                    seaGrad.addColorStop(0, "rgba(38, 72, 108, 0.92)");
+                    seaGrad.addColorStop(0.65, "rgba(58, 102, 142, 0.78)");
+                    seaGrad.addColorStop(1, "rgba(92, 138, 172, 0.45)");
+                } else {
+                    seaGrad.addColorStop(0, "rgba(108, 158, 206, 0.92)");
+                    seaGrad.addColorStop(0.65, "rgba(148, 194, 232, 0.78)");
+                    seaGrad.addColorStop(1, "rgba(196, 226, 245, 0.42)");
+                }
+
+                ctx.fillStyle = seaGrad;
                 ctx.beginPath();
-                for (let x = 0; x <= width; x += 30) {
-                    const wave = Math.sin(x * 0.012 + time * 1.8) * 9;
-                    if (x === 0) ctx.moveTo(x, tideY + wave);
-                    else ctx.lineTo(x, tideY + wave);
+                ctx.moveTo(0, 0);
+                ctx.lineTo(width, 0);
+                for (let x = width; x >= 0; x -= 24) {
+                    ctx.lineTo(x, getDiagonalWaveY(x, time));
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                // 4. Buih Ombak Putih Berenda (Lacy White Seafoam)
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.94)";
+                ctx.lineWidth = 7;
+                ctx.lineCap = "round";
+                ctx.beginPath();
+                for (let x = 0; x <= width; x += 20) {
+                    const wy = getDiagonalWaveY(x, time);
+                    if (x === 0) ctx.moveTo(x, wy);
+                    else ctx.lineTo(x, wy);
                 }
                 ctx.stroke();
 
+                // Buih kedua lebih tipis di dalam laut
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let x = 0; x <= width; x += 24) {
+                    const wy = getDiagonalWaveY(x, time) - 24 + Math.cos(x * 0.02 + time) * 4;
+                    if (x === 0) ctx.moveTo(x, wy);
+                    else ctx.lineTo(x, wy);
+                }
+                ctx.stroke();
+
+                // Gelembung buih renda organik di sepanjang tepi ombak
+                for (let i = 0; i < seaFoamBubbles.length; i++) {
+                    const b = seaFoamBubbles[i];
+                    const bx = b.xRatio * width;
+                    const baseWy = getDiagonalWaveY(bx, time);
+                    if (baseWy < -15) continue;
+                    const by = baseWy + b.offsetY;
+                    ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(bx, by, b.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 5. Bintang Laut & Aneka Kerang Realistis (Interaktif ringan saat tersentuh)
+                const itemRadiusSq = 110 * 110;
+                for (let i = 0; i < summerItems.length; i++) {
+                    const it = summerItems[i];
+                    if (pointer.active) {
+                        const dx = it.x - pointer.x;
+                        const dy = it.y - pointer.y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq < itemRadiusSq && distSq > 1) {
+                            const dist = Math.sqrt(distSq);
+                            const force = (1 - dist / 110) * 1.4;
+                            it.vx += (dx / dist) * force;
+                            it.vy += (dy / dist) * force;
+                            it.vrot += (Math.random() - 0.5) * 0.02;
+                        }
+                    }
+
+                    it.vx = (it.vx + (it.baseX - it.x) * 0.02) * 0.84;
+                    it.vy = (it.vy + (it.baseY - it.y) * 0.02) * 0.84;
+                    it.vrot *= 0.86;
+                    it.x += it.vx;
+                    it.y += it.vy;
+                    it.rot += it.vrot;
+
+                    ctx.save();
+                    ctx.translate(it.x, it.y);
+                    ctx.rotate(it.rot);
+                    if (it.type === "starfish") {
+                        const sSize = 120 * it.scale;
+                        ctx.drawImage(starfishSprite, -sSize * 0.5, -sSize * 0.5, sSize, sSize);
+                    } else {
+                        const spr = shellSprites[it.spriteIdx];
+                        const w = spr.width * it.scale;
+                        const h = spr.height * it.scale;
+                        ctx.drawImage(spr, -w * 0.5, -h * 0.5, w, h);
+                    }
+                    ctx.restore();
+                }
+
+                // 6. Taburan Mutiara Berkilau (Menggelinding halus saat disentuh kursor)
+                const pearlRadiusSq = 100 * 100;
+                for (let i = 0; i < summerPearls.length; i++) {
+                    const pr = summerPearls[i];
+                    if (pointer.active) {
+                        const dx = pr.x - pointer.x;
+                        const dy = pr.y - pointer.y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq < pearlRadiusSq && distSq > 1) {
+                            const dist = Math.sqrt(distSq);
+                            const force = (1 - dist / 100) * 3.2;
+                            pr.vx += (dx / dist) * force + pointer.vx * 0.12;
+                            pr.vy += (dy / dist) * force + pointer.vy * 0.12;
+                        }
+                    }
+
+                    pr.vx = (pr.vx + (pr.baseX - pr.x) * 0.018) * 0.88;
+                    pr.vy = (pr.vy + (pr.baseY - pr.y) * 0.018) * 0.88;
+                    pr.x += pr.vx;
+                    pr.y += pr.vy;
+
+                    const pSize = 32 * pr.scale;
+                    ctx.drawImage(pearlSprite, pr.x - pSize * 0.5, pr.y - pSize * 0.5, pSize, pSize);
+                }
+
+                // 7. Riak Air Bening di area ombak
                 for (let i = ripples.length - 1; i >= 0; i--) {
                     const rp = ripples[i];
                     rp.r += 1.6;
-                    rp.alpha -= 0.015;
+                    rp.alpha -= 0.016;
                     if (rp.alpha <= 0) {
                         ripples.splice(i, 1);
                     } else {
                         ctx.strokeStyle = `rgba(255, 255, 255, ${rp.alpha})`;
                         ctx.lineWidth = 2;
                         ctx.beginPath();
-                        ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.45, 0, 0, Math.PI * 2);
+                        ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.48, 0, 0, Math.PI * 2);
                         ctx.stroke();
                     }
                 }
