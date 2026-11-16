@@ -52,8 +52,8 @@
             z-index: 2;
             background: radial-gradient(
                 ellipse 54% 74% at 28% 50%,
-                rgba(255, 250, 243, 0.9) 0%,
-                rgba(255, 250, 243, 0.62) 55%,
+                rgba(255, 250, 243, 0.91) 0%,
+                rgba(255, 250, 243, 0.64) 55%,
                 rgba(255, 250, 243, 0) 100%
             );
         }
@@ -544,10 +544,10 @@
 
     <!-- PEMILIH MUSIM DI POJOK KIRI BAWAH -->
     <div id="seasonSwitcherDock" title="Change seasonal world">
-        <span id="seasonEmoji">🍂</span>
+        <span id="seasonEmoji">🌷</span>
         <select id="seasonSelect" aria-label="Select Season">
             <option value="auto">Auto (Calendar)</option>
-            <option value="spring">🌸 Spring (Flower Field)</option>
+            <option value="spring">🌷 Spring (Tulip Garden)</option>
             <option value="summer">☀️ Summer (Pastel Beach)</option>
             <option value="autumn">🍂 Autumn (Maple Leaves)</option>
             <option value="rainy">🌧️ Rainy (Koi Pond)</option>
@@ -558,7 +558,7 @@
     <!-- JAVASCRIPT GLOBAL -->
     <script src="js/script.js"></script>
 
-    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD (SOFT & HARMONIZED 60FPS SPRITES) -->
+    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD (REALISTIC TULIP GARDEN + 60FPS SPRITES) -->
     <script>
     window.addEventListener("load", function () {
         const heroSection = document.getElementById("heroSection");
@@ -590,15 +590,150 @@
             }, { threshold: 0.05 }).observe(heroSection);
         }
 
-        // PRE-RENDERED SPRITES (Warna lembut & menyatu dengan palet Little Universe)
+        // ============================================================
+        // 1. PRE-RENDERED REALISTIC TULIP HEAD SPRITES (Pink & White)
+        // ============================================================
+        const TULIP_PALETTES = [
+            // 0: Soft Pastel Pink Tulip
+            {
+                back: "#d48ca3",
+                sideTop: "#f5c2d1",
+                sideBottom: "#d991a7",
+                frontTop: "#fae0e8",
+                frontMid: "#eba8bd",
+                frontBase: "#cfe0b4",
+                vein: "rgba(186, 104, 130, 0.26)",
+                edge: "rgba(255, 245, 248, 0.7)"
+            },
+            // 1: Dusty Blush Rose Tulip
+            {
+                back: "#c47890",
+                sideTop: "#ebb0c2",
+                sideBottom: "#c97d95",
+                frontTop: "#f7d4df",
+                frontMid: "#de95ac",
+                frontBase: "#c5d9a9",
+                vein: "rgba(168, 86, 112, 0.28)",
+                edge: "rgba(255, 240, 245, 0.65)"
+            },
+            // 2: Creamy White Tulip dengan pangkal hijau lembut
+            {
+                back: "#dfe3da",
+                sideTop: "#ffffff",
+                sideBottom: "#e6ebe1",
+                frontTop: "#ffffff",
+                frontMid: "#f5f7f2",
+                frontBase: "#d6e6bd",
+                vein: "rgba(175, 186, 168, 0.25)",
+                edge: "rgba(255, 255, 255, 0.9)"
+            },
+            // 3: Ivory Pearl Tulip
+            {
+                back: "#e6e2d8",
+                sideTop: "#fffdf9",
+                sideBottom: "#ebe8df",
+                frontTop: "#ffffff",
+                frontMid: "#faf7f0",
+                frontBase: "#dde6c5",
+                vein: "rgba(186, 179, 162, 0.24)",
+                edge: "rgba(255, 255, 255, 0.85)"
+            }
+        ];
+
+        const tulipHeadSprites = TULIP_PALETTES.map((pal) => {
+            const tCanvas = document.createElement("canvas");
+            tCanvas.width = 68;
+            tCanvas.height = 76;
+            const c = tCanvas.getContext("2d");
+
+            // Titik pangkal bunga berada di (34, 62) agar mudah diputar menempel di ujung tangkai
+            c.translate(34, 62);
+
+            c.shadowColor = "rgba(35, 58, 38, 0.24)";
+            c.shadowBlur = 5;
+            c.shadowOffsetX = 1.5;
+            c.shadowOffsetY = 2.5;
+
+            // 1. Kelopak Dalam Belakang (Puncak tengah)
+            c.fillStyle = pal.back;
+            c.beginPath();
+            c.moveTo(-10, -16);
+            c.quadraticCurveTo(0, -52, 0, -52);
+            c.quadraticCurveTo(0, -52, 10, -16);
+            c.closePath();
+            c.fill();
+
+            // 2. Kelopak Kiri Melengkung
+            const leftGrad = c.createLinearGradient(-18, -46, -2, 0);
+            leftGrad.addColorStop(0, pal.sideTop);
+            leftGrad.addColorStop(0.85, pal.sideBottom);
+            leftGrad.addColorStop(1, pal.frontBase);
+            c.fillStyle = leftGrad;
+            c.beginPath();
+            c.moveTo(0, 0);
+            c.bezierCurveTo(-18, -3, -24, -26, -15, -45);
+            c.quadraticCurveTo(-7, -42, -2, -22);
+            c.closePath();
+            c.fill();
+
+            // 3. Kelopak Kanan Melengkung
+            const rightGrad = c.createLinearGradient(18, -46, 2, 0);
+            rightGrad.addColorStop(0, pal.sideTop);
+            rightGrad.addColorStop(0.85, pal.sideBottom);
+            rightGrad.addColorStop(1, pal.frontBase);
+            c.fillStyle = rightGrad;
+            c.beginPath();
+            c.moveTo(0, 0);
+            c.bezierCurveTo(18, -3, 24, -26, 15, -45);
+            c.quadraticCurveTo(7, -42, 2, -22);
+            c.closePath();
+            c.fill();
+
+            // 4. Kelopak Depan Tengah (Cup utama tulip)
+            const frontGrad = c.createLinearGradient(0, -48, 0, 2);
+            frontGrad.addColorStop(0, pal.frontTop);
+            frontGrad.addColorStop(0.65, pal.frontMid);
+            frontGrad.addColorStop(1, pal.frontBase);
+            c.fillStyle = frontGrad;
+            c.beginPath();
+            c.moveTo(0, 2);
+            c.bezierCurveTo(-15, 0, -17, -28, -7, -46);
+            c.quadraticCurveTo(0, -51, 7, -46);
+            c.bezierCurveTo(17, -28, 15, 0, 0, 2);
+            c.closePath();
+            c.fill();
+
+            // Highlight tepi kelopak & urat vertikal halus khas tulip
+            c.shadowColor = "transparent";
+            c.strokeStyle = pal.edge;
+            c.lineWidth = 1.1;
+            c.stroke();
+
+            c.strokeStyle = pal.vein;
+            c.lineWidth = 0.85;
+            c.beginPath();
+            c.moveTo(0, -3);
+            c.quadraticCurveTo(0, -25, 0, -46);
+            c.moveTo(-4, -3);
+            c.quadraticCurveTo(-8, -24, -5, -43);
+            c.moveTo(4, -3);
+            c.quadraticCurveTo(8, -24, 5, -43);
+            c.stroke();
+
+            return tCanvas;
+        });
+
+        // ============================================================
+        // 2. PRE-RENDERED MAPLE SPRITES (AUTUMN)
+        // ============================================================
         const MAPLE_PALETTE = [
-            { main: "#e8a576", vein: "#bd784b" }, // Soft Apricot
-            { main: "#f0be7a", vein: "#c7944e" }, // Warm Honey
-            { main: "#d98977", vein: "#a85d4d" }, // Dusty Terracotta
-            { main: "#f5d48c", vein: "#cca85c" }, // Soft Gold
-            { main: "#e0996c", vein: "#b36d44" }, // Muted Peach
-            { main: "#c4846c", vein: "#945a45" }, // Soft Cinnamon
-            { main: "#e6be9a", vein: "#b8906e" }  // Warm Sand Leaf
+            { main: "#e8a576", vein: "#bd784b" },
+            { main: "#f0be7a", vein: "#c7944e" },
+            { main: "#d98977", vein: "#a85d4d" },
+            { main: "#f5d48c", vein: "#cca85c" },
+            { main: "#e0996c", vein: "#b36d44" },
+            { main: "#c4846c", vein: "#945a45" },
+            { main: "#e6be9a", vein: "#b8906e" }
         ];
 
         const mapleSprites = MAPLE_PALETTE.map((pal) => {
@@ -652,28 +787,9 @@
             return sCanvas;
         });
 
-        const FLOWER_COLORS = ["#f7b5ca", "#fae094", "#fffdf9", "#dec7f7", "#ffd6e2", "#fac7bc"];
-        const flowerSprites = FLOWER_COLORS.map((col) => {
-            const fCanvas = document.createElement("canvas");
-            fCanvas.width = 24;
-            fCanvas.height = 24;
-            const fCtx = fCanvas.getContext("2d");
-            fCtx.translate(12, 12);
-            fCtx.fillStyle = col;
-            for (let k = 0; k < 5; k++) {
-                const a = (k * Math.PI * 2) / 5;
-                fCtx.beginPath();
-                fCtx.arc(Math.cos(a) * 4, Math.sin(a) * 4, 3.2, 0, Math.PI * 2);
-                fCtx.fill();
-            }
-            fCtx.fillStyle = "#f7dc81";
-            fCtx.beginPath();
-            fCtx.arc(0, 0, 2.3, 0, Math.PI * 2);
-            fCtx.fill();
-            return fCanvas;
-        });
-
-        // POINTER TRACKING
+        // ============================================================
+        // 3. POINTER & TOUCH TRACKING
+        // ============================================================
         const pointer = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, vx: 0, vy: 0, active: false };
         let lastRippleTime = 0;
 
@@ -732,7 +848,7 @@
         }
 
         const SEASON_EMOJIS = {
-            spring: "🌸",
+            spring: "🌷",
             summer: "☀️",
             autumn: "🍂",
             rainy: "🌧️",
@@ -743,7 +859,7 @@
         const seasonEmoji = document.getElementById("seasonEmoji");
         let currentSeason = getCalendarSeason();
 
-        let springTufts = [];
+        let tulipField = [];
         let floatingPetals = [];
         let seaShells = [];
         let mapleLeaves = [];
@@ -756,34 +872,49 @@
         let sparkles = [];
 
         function initWorldEntities() {
-            // 1. SPRING
-            springTufts = [];
-            const cols = width < 600 ? 16 : 28;
-            const rows = width < 600 ? 9 : 14;
-            const cellW = width / cols;
-            const cellH = height / rows;
+            // 1. SPRING: Kebun Tulip Pink & Putih Berlapis (Disortir dari belakang ke depan)
+            tulipField = [];
+            const rows = width < 600 ? 8 : 11;
+            const cols = width < 600 ? 11 : 20;
+            const startY = height * 0.14;
+            const endY = height * 1.04;
 
-            for (let r = 0; r <= rows; r++) {
-                for (let c = 0; c <= cols; c++) {
-                    springTufts.push({
-                        x: c * cellW + (Math.random() - 0.5) * cellW * 0.7,
-                        y: r * cellH + (Math.random() - 0.5) * cellH * 0.7,
-                        h: 24 + Math.random() * 18,
-                        angle: 0,
+            for (let r = 0; r < rows; r++) {
+                const depth = r / (rows - 1); // 0 = jauh di belakang, 1 = dekat di depan
+                const rowY = startY + depth * (endY - startY);
+                const scale = 0.44 + depth * 0.68; // Perspektif ukuran alami
+                const rowCols = Math.round(cols * (1.25 - depth * 0.3));
+                const stepX = (width + 60) / rowCols;
+
+                for (let c = 0; c <= rowCols; c++) {
+                    const jitterX = (Math.random() - 0.5) * stepX * 0.85;
+                    const jitterY = (Math.random() - 0.5) * 18 * scale;
+                    tulipField.push({
+                        x: -30 + c * stepX + jitterX,
+                        y: rowY + jitterY,
+                        stemH: (46 + Math.random() * 22) * scale,
+                        scale: scale,
+                        depth: depth,
+                        angle: (Math.random() - 0.5) * 0.12,
+                        baseLean: (Math.random() - 0.5) * 0.1,
                         vel: 0,
                         phase: Math.random() * Math.PI * 2,
-                        hasFlower: Math.random() < 0.48,
-                        spriteIdx: Math.floor(Math.random() * flowerSprites.length)
+                        spriteIdx: Math.floor(Math.random() * tulipHeadSprites.length),
+                        leafDir: Math.random() > 0.5 ? 1 : -1,
+                        leafCurve: 0.7 + Math.random() * 0.4
                     });
                 }
             }
+            // Urutkan berdasarkan posisi Y supaya tulip depan menutupi tulip belakang secara realistis
+            tulipField.sort((a, b) => a.y - b.y);
 
-            floatingPetals = Array.from({ length: width < 600 ? 16 : 26 }, () => ({
+            floatingPetals = Array.from({ length: width < 600 ? 14 : 22 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 r: 3.5 + Math.random() * 2.5,
-                vy: 0.55 + Math.random() * 0.85,
-                wobble: Math.random() * Math.PI * 2
+                vy: 0.5 + Math.random() * 0.8,
+                wobble: Math.random() * Math.PI * 2,
+                color: Math.random() > 0.45 ? "rgba(245, 194, 209, 0.85)" : "rgba(255, 253, 249, 0.9)"
             }));
 
             // 2. SUMMER
@@ -795,7 +926,7 @@
                 size: 5 + Math.random() * 3
             }));
 
-            // 3. AUTUMN (Daun diperbanyak & lembut menyatu dengan background!)
+            // 3. AUTUMN
             const leafCount = width < 600 ? 210 : 380;
             mapleLeaves = Array.from({ length: leafCount }, () => {
                 const bx = Math.random() * width;
@@ -920,58 +1051,141 @@
             time += 0.025;
             const isDark = document.body.classList.contains("dark-mode");
 
-            // 1. SPRING (Soft Pastel Meadow)
+            // ==========================================================
+            // 1. SPRING: HAMPARAN KEBUN TULIP PINK & PUTIH REALISTIS 🌷
+            // ==========================================================
             if (currentSeason === "spring") {
-                ctx.fillStyle = isDark ? "rgba(42, 54, 44, 0.62)" : "rgba(232, 246, 229, 0.85)";
+                // Latar langit pagi lembut + dedaunan dasar kebun
+                const bgGrad = ctx.createLinearGradient(0, 0, 0, height);
+                bgGrad.addColorStop(0, isDark ? "#232e25" : "#eef5ea");
+                bgGrad.addColorStop(0.14, isDark ? "#2a3b2c" : "#cfe0c6");
+                bgGrad.addColorStop(0.35, isDark ? "#243827" : "#6b8f68");
+                bgGrad.addColorStop(1, isDark ? "#1a2b1d" : "#446943");
+                ctx.fillStyle = bgGrad;
                 ctx.fillRect(0, 0, width, height);
 
-                ctx.strokeStyle = isDark ? "#668c6a" : "#8ec28b";
-                ctx.lineWidth = 2.2;
-                ctx.lineCap = "round";
+                // Semak pagar hijau di kejauhan (seperti bagian atas foto referensi)
+                ctx.fillStyle = isDark ? "#253b26" : "#678c58";
+                ctx.beginPath();
+                ctx.moveTo(0, height * 0.15);
+                for (let x = 0; x <= width; x += 45) {
+                    ctx.lineTo(x, height * 0.12 + Math.sin(x * 0.03) * 5);
+                }
+                ctx.lineTo(width, height * 0.22);
+                ctx.lineTo(0, height * 0.22);
+                ctx.closePath();
+                ctx.fill();
 
-                for (let i = 0; i < springTufts.length; i++) {
-                    const s = springTufts[i];
-                    const wind = Math.sin(time + s.phase + s.x * 0.01) * 0.16;
+                const interactRadiusSq = 135 * 135;
+
+                // Gambar setiap tulip dari belakang ke depan
+                for (let i = 0; i < tulipField.length; i++) {
+                    const t = tulipField[i];
+                    const wind = Math.sin(time * 1.1 + t.phase + t.x * 0.008) * 0.09;
                     let push = 0;
+
                     if (pointer.active) {
-                        const dx = s.x - pointer.x;
-                        const dy = s.y - pointer.y;
+                        const headApproxY = t.y - t.stemH * 0.7;
+                        const dx = t.x - pointer.x;
+                        const dy = headApproxY - pointer.y;
                         const distSq = dx * dx + dy * dy;
-                        if (distSq < 14400) {
+                        if (distSq < interactRadiusSq) {
                             const dist = Math.sqrt(distSq);
-                            push = (dx >= 0 ? 1 : -1) * (1 - dist / 120) * 0.95;
+                            const factor = 1 - dist / 135;
+                            push = (dx >= 0 ? 1 : -1) * factor * 0.68 + pointer.vx * 0.015 * factor;
                         }
                     }
-                    s.vel = (s.vel + (wind + push - s.angle) * 0.05) * 0.86;
-                    s.angle += s.vel;
 
-                    const tipX = s.x + Math.sin(s.angle) * s.h;
-                    const tipY = s.y - Math.cos(s.angle) * s.h;
+                    // Fisika pegas tangkai tulip (melengkung lembut lalu membal)
+                    t.vel = (t.vel + (t.baseLean + wind + push - t.angle) * 0.055) * 0.85;
+                    t.angle += t.vel;
 
+                    const tipX = t.x + Math.sin(t.angle) * t.stemH;
+                    const tipY = t.y - Math.cos(t.angle) * t.stemH;
+
+                    // 1. Daun tulip lebar melengkung di kiri & kanan pangkal tangkai
+                    const leafH = t.stemH * 0.92;
+                    const leafW = 13 * t.scale;
+                    const swayLeaf = t.angle * 0.55;
+
+                    // Daun kiri
+                    ctx.fillStyle = isDark ? "#335236" : "#5c8559";
                     ctx.beginPath();
-                    ctx.moveTo(s.x, s.y);
-                    ctx.quadraticCurveTo(s.x + Math.sin(s.angle * 0.5) * s.h * 0.5, s.y - s.h * 0.5, tipX, tipY);
+                    ctx.moveTo(t.x - 2 * t.scale, t.y + 8 * t.scale);
+                    ctx.quadraticCurveTo(
+                        t.x - leafW * 1.5 + swayLeaf * 18,
+                        t.y - leafH * 0.55,
+                        t.x - leafW * 1.1 * t.leafCurve + swayLeaf * 26,
+                        t.y - leafH * 0.85
+                    );
+                    ctx.quadraticCurveTo(
+                        t.x - leafW * 0.3 + swayLeaf * 14,
+                        t.y - leafH * 0.45,
+                        t.x + 2 * t.scale,
+                        t.y + 8 * t.scale
+                    );
+                    ctx.fill();
+
+                    // Daun kanan (sedikit lebih terang terkena cahaya)
+                    ctx.fillStyle = isDark ? "#3e6342" : "#719c6d";
+                    ctx.beginPath();
+                    ctx.moveTo(t.x + 2 * t.scale, t.y + 8 * t.scale);
+                    ctx.quadraticCurveTo(
+                        t.x + leafW * 1.5 + swayLeaf * 18,
+                        t.y - leafH * 0.5,
+                        t.x + leafW * 1.15 * t.leafCurve + swayLeaf * 26,
+                        t.y - leafH * 0.82
+                    );
+                    ctx.quadraticCurveTo(
+                        t.x + leafW * 0.3 + swayLeaf * 14,
+                        t.y - leafH * 0.4,
+                        t.x - 1 * t.scale,
+                        t.y + 8 * t.scale
+                    );
+                    ctx.fill();
+
+                    // 2. Tangkai tulip kokoh melengkung halus
+                    ctx.strokeStyle = isDark ? "#4e7a52" : "#7da874";
+                    ctx.lineWidth = Math.max(1.6, 3.4 * t.scale);
+                    ctx.lineCap = "round";
+                    ctx.beginPath();
+                    ctx.moveTo(t.x, t.y + 6 * t.scale);
+                    ctx.quadraticCurveTo(
+                        t.x + Math.sin(t.angle * 0.45) * t.stemH * 0.45,
+                        t.y - t.stemH * 0.5,
+                        tipX,
+                        tipY
+                    );
                     ctx.stroke();
 
-                    if (s.hasFlower) {
-                        ctx.drawImage(flowerSprites[s.spriteIdx], tipX - 12, tipY - 12);
-                    }
+                    // 3. Kuntum bunga tulip berlapis (Pre-rendered Sprite)
+                    const sprite = tulipHeadSprites[t.spriteIdx];
+                    const headW = 68 * t.scale;
+                    const headH = 76 * t.scale;
+                    ctx.save();
+                    ctx.translate(tipX, tipY + 4 * t.scale);
+                    ctx.rotate(t.angle * 0.9);
+                    ctx.drawImage(sprite, -headW * 0.5, -62 * t.scale, headW, headH);
+                    ctx.restore();
                 }
 
-                ctx.fillStyle = "rgba(255, 200, 218, 0.85)";
+                // Kelopak bunga melayang terbawa angin musim semi
                 for (let i = 0; i < floatingPetals.length; i++) {
                     const p = floatingPetals[i];
                     p.wobble += 0.03;
                     p.y += p.vy;
                     p.x += Math.sin(p.wobble) * 0.9;
                     if (p.y > height + 10) { p.y = -10; p.x = Math.random() * width; }
+                    ctx.fillStyle = p.color;
                     ctx.beginPath();
                     ctx.ellipse(p.x, p.y, p.r, p.r * 0.55, p.wobble, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
 
+            // ==========================================================
             // 2. SUMMER (Soft Pastel Beach)
+            // ==========================================================
             else if (currentSeason === "summer") {
                 ctx.fillStyle = isDark ? "rgba(96, 80, 64, 0.72)" : "rgba(250, 237, 212, 0.88)";
                 ctx.fillRect(0, 0, width, height);
@@ -1025,7 +1239,9 @@
                 }
             }
 
-            // 3. AUTUMN (Soft & Rimbun Maple Leaves menyatu dengan tema)
+            // ==========================================================
+            // 3. AUTUMN (Soft & Rimbun Maple Leaves)
+            // ==========================================================
             else if (currentSeason === "autumn") {
                 ctx.fillStyle = isDark ? "rgba(52, 38, 30, 0.75)" : "rgba(252, 236, 217, 0.85)";
                 ctx.fillRect(0, 0, width, height);
@@ -1082,7 +1298,9 @@
                 }
             }
 
+            // ==========================================================
             // 4. RAINY (Soft Misty Koi Pond)
+            // ==========================================================
             else if (currentSeason === "rainy") {
                 ctx.fillStyle = isDark ? "rgba(32, 54, 64, 0.82)" : "rgba(196, 230, 237, 0.84)";
                 ctx.fillRect(0, 0, width, height);
@@ -1155,7 +1373,9 @@
                 }
             }
 
+            // ==========================================================
             // 5. WINTER (Soft Snow Field)
+            // ==========================================================
             else if (currentSeason === "winter") {
                 ctx.fillStyle = isDark ? "rgba(58, 70, 88, 0.82)" : "rgba(234, 242, 252, 0.9)";
                 ctx.fillRect(0, 0, width, height);
