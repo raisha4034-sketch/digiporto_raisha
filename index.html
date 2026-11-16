@@ -20,6 +20,92 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* Kanvas Interaktif Penuh di Area Hero */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #heroSeasonalCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            /* Gradasi halus di bagian bawah Hero agar transisi ke section bawah tetap lembut */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+        }
+
+        .hero-content,
+        .hero-visual {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Lapisan lembut di balik teks Hero agar tulisan selalu kontras & mudah dibaca */
+        .hero-content {
+            background: rgba(255, 250, 243, 0.76);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 28px 30px;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 14px 35px rgba(157, 111, 105, 0.08);
+        }
+
+        body.dark-mode .hero-content {
+            background: rgba(36, 30, 34, 0.78);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Pemilih Musim di Pojok Kiri Bawah */
+        #seasonSwitcherDock {
+            position: fixed;
+            bottom: 18px;
+            left: 18px;
+            z-index: 9997;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 253, 249, 0.94);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid var(--blush, #e9b7c7);
+            padding: 7px 14px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(157, 111, 105, 0.2);
+            font-family: var(--body, sans-serif);
+            font-size: 11.5px;
+        }
+
+        body.dark-mode #seasonSwitcherDock {
+            background: rgba(48, 40, 45, 0.94);
+        }
+
+        #seasonSelect {
+            border: none;
+            background: transparent;
+            color: var(--dark-rose, #a96870);
+            font-weight: 700;
+            font-size: 11.5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .hero-content {
+                padding: 22px 20px;
+            }
+            #seasonSwitcherDock {
+                bottom: 66px;
+                left: 14px;
+                padding: 5px 10px;
+            }
+        }
+    </style>
 </head>
 
 <body class="home-page">
@@ -68,8 +154,11 @@
 
     <main>
 
-        <!-- HERO SECTION -->
-        <section class="hero">
+        <!-- HERO SECTION DENGAN FULL INTERACTIVE BACKGROUND -->
+        <section class="hero" id="heroSection">
+
+            <!-- Kanvas Interaktif Penuh di Area Hero -->
+            <canvas id="heroSeasonalCanvas"></canvas>
 
             <div class="hero-content">
 
@@ -379,95 +468,54 @@
 
     </footer>
 
-    <!-- JAVASCRIPT GLOBAL -->
-    <script src="js/script.js"></script>
-
-    <!-- =========================================================
-         INTERACTIVE 5-WORLD SEASONAL BACKGROUND (HOME PAGE) ✿
-         ========================================================= -->
-    <style>
-        #seasonalWorldCanvas {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .navbar, main, .footer {
-            position: relative;
-            z-index: 2;
-        }
-
-        #seasonSwitcherDock {
-            position: fixed;
-            bottom: 18px;
-            left: 18px;
-            z-index: 9997;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 253, 249, 0.92);
-            backdrop-filter: blur(8px);
-            border: 1.5px solid var(--blush, #e9b7c7);
-            padding: 6px 12px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(157, 111, 105, 0.18);
-            font-family: var(--body, sans-serif);
-            font-size: 11.5px;
-        }
-
-        body.dark-mode #seasonSwitcherDock {
-            background: rgba(48, 40, 45, 0.92);
-        }
-
-        #seasonSelect {
-            border: none;
-            background: transparent;
-            color: var(--dark-rose, #a96870);
-            font-weight: 700;
-            font-size: 11.5px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            #seasonSwitcherDock {
-                bottom: 66px;
-                left: 14px;
-                padding: 5px 10px;
-            }
-        }
-    </style>
-
-    <canvas id="seasonalWorldCanvas"></canvas>
-
+    <!-- PEMILIH MUSIM DI POJOK KIRI BAWAH -->
     <div id="seasonSwitcherDock" title="Change seasonal world">
         <span id="seasonEmoji">🍂</span>
         <select id="seasonSelect" aria-label="Select Season">
             <option value="auto">Auto (Calendar)</option>
             <option value="spring">🌸 Spring (Flower Field)</option>
             <option value="summer">☀️ Summer (Pastel Beach)</option>
-            <option value="autumn">🍂 Autumn (Orange Leaves)</option>
+            <option value="autumn">🍂 Autumn (Maple Leaves)</option>
             <option value="rainy">🌧️ Rainy (Koi Pond)</option>
-            <option value="winter">❄️ Winter (Snowy Hills)</option>
+            <option value="winter">❄️ Winter (Snow Field)</option>
         </select>
     </div>
 
+    <!-- JAVASCRIPT GLOBAL -->
+    <script src="js/script.js"></script>
+
+    <!-- JAVASCRIPT FULL HERO INTERACTIVE SEASONAL WORLD -->
     <script>
     (function () {
-        const canvas = document.getElementById("seasonalWorldCanvas");
-        if (!canvas) return;
+        const heroSection = document.getElementById("heroSection");
+        const canvas = document.getElementById("heroSeasonalCanvas");
+        if (!heroSection || !canvas) return;
         const ctx = canvas.getContext("2d");
 
-        let width = (canvas.width = window.innerWidth);
-        let height = (canvas.height = window.innerHeight);
+        let width = 0;
+        let height = 0;
+
+        function resizeCanvas() {
+            const rect = heroSection.getBoundingClientRect();
+            width = canvas.width = rect.width;
+            height = canvas.height = rect.height;
+        }
+
+        resizeCanvas();
 
         const pointer = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, vx: 0, vy: 0, active: false };
         let lastRippleTime = 0;
 
-        function updatePointer(x, y) {
+        function updatePointerFromClient(clientX, clientY) {
+            const rect = heroSection.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            if (x < -40 || x > rect.width + 40 || y < -40 || y > rect.height + 40) {
+                pointer.active = false;
+                return;
+            }
+
             pointer.vx = x - (pointer.prevX === -9999 ? x : pointer.prevX);
             pointer.vy = y - (pointer.prevY === -9999 ? y : pointer.prevY);
             pointer.prevX = x;
@@ -477,21 +525,33 @@
             pointer.active = true;
 
             const now = Date.now();
-            if (now - lastRippleTime > 110) {
+            if (now - lastRippleTime > 85) {
                 if (currentSeason === "rainy" || currentSeason === "summer") {
-                    ripples.push({ x, y, r: 4, maxR: 55, alpha: 0.55 });
+                    ripples.push({ x, y, r: 5, alpha: 0.65 });
                 } else if (currentSeason === "winter") {
-                    sparkles.push({ x, y, vx: (Math.random() - 0.5) * 2, vy: -1 - Math.random() * 1.5, alpha: 1, size: 3 });
+                    snowTracks.push({ x, y, r: 22 + Math.random() * 10, alpha: 0.85 });
+                    if (snowTracks.length > 75) snowTracks.shift();
+                    for (let i = 0; i < 3; i++) {
+                        sparkles.push({
+                            x, y,
+                            vx: (Math.random() - 0.5) * 3,
+                            vy: -1 - Math.random() * 2,
+                            alpha: 1,
+                            size: 2.5 + Math.random() * 2
+                        });
+                    }
                 }
                 lastRippleTime = now;
             }
         }
 
-        window.addEventListener("mousemove", (e) => updatePointer(e.clientX, e.clientY));
+        window.addEventListener("mousemove", (e) => updatePointerFromClient(e.clientX, e.clientY));
         window.addEventListener("touchmove", (e) => {
-            if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+            if (e.touches && e.touches[0]) {
+                updatePointerFromClient(e.touches[0].clientX, e.touches[0].clientY);
+            }
         }, { passive: true });
-        window.addEventListener("mouseleave", () => { pointer.active = false; });
+        heroSection.addEventListener("mouseleave", () => { pointer.active = false; });
 
         function getCalendarSeason() {
             const month = new Date().getMonth() + 1;
@@ -513,59 +573,79 @@
         const seasonEmoji = document.getElementById("seasonEmoji");
         let currentSeason = getCalendarSeason();
 
-        // Entitas masing-masing dunia musim
-        let flowerStems = [];
-        let petals = [];
-        let shells = [];
-        let autumnLeaves = [];
-        let fallingLeaves = [];
+        // Entitas masing-masing dunia musim (Full Hero Area)
+        let springTufts = [];
+        let floatingPetals = [];
+        let seaShells = [];
+        let mapleLeaves = [];
+        let fallingMapleLeaves = [];
         let raindrops = [];
         let ripples = [];
         let koiFishes = [];
         let snowflakes = [];
-        let snowDents = [];
+        let snowTracks = [];
         let sparkles = [];
 
         function initWorldEntities() {
-            // 1. SPRING: Padang Bunga Interaktif
-            flowerStems = [];
-            const spacing = width < 600 ? 9 : 8;
-            const stemCount = Math.ceil(width / spacing) + 4;
-            const flowerPalette = ["#ff9ebb", "#ffd166", "#ffffff", "#d8b4f8", "#ffcad4"];
-            for (let i = 0; i < stemCount; i++) {
-                flowerStems.push({
-                    x: i * spacing,
-                    h: (width < 600 ? 60 : 88) + Math.random() * 58,
-                    angle: 0,
-                    vel: 0,
-                    phase: Math.random() * Math.PI * 2,
-                    hasFlower: Math.random() < 0.34,
-                    flowerSize: 4.5 + Math.random() * 3.5,
-                    flowerColor: flowerPalette[Math.floor(Math.random() * flowerPalette.length)]
-                });
+            // 1. SPRING: Padang Rumput & Bunga Penuh di Seluruh Hero
+            springTufts = [];
+            const cols = width < 600 ? 18 : 34;
+            const rows = width < 600 ? 10 : 16;
+            const cellW = width / cols;
+            const cellH = height / rows;
+            const flowerColors = ["#ff9ebb", "#ffd166", "#ffffff", "#d8b4f8", "#ffcad4", "#ffb5a7"];
+
+            for (let r = 0; r <= rows; r++) {
+                for (let c = 0; c <= cols; c++) {
+                    const bx = c * cellW + (Math.random() - 0.5) * cellW * 0.7;
+                    const by = r * cellH + (Math.random() - 0.5) * cellH * 0.7;
+                    springTufts.push({
+                        x: bx,
+                        y: by,
+                        h: 22 + Math.random() * 20,
+                        angle: 0,
+                        vel: 0,
+                        phase: Math.random() * Math.PI * 2,
+                        hasFlower: Math.random() < 0.42,
+                        flowerColor: flowerColors[Math.floor(Math.random() * flowerColors.length)],
+                        flowerSize: 4 + Math.random() * 3
+                    });
+                }
             }
-            petals = Array.from({ length: width < 600 ? 22 : 36 }, () => ({
+
+            floatingPetals = Array.from({ length: width < 600 ? 20 : 35 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 r: 3.5 + Math.random() * 3,
-                vy: 0.6 + Math.random() * 1.1,
+                vy: 0.5 + Math.random() * 1,
                 wobble: Math.random() * Math.PI * 2
             }));
 
-            // 2. SUMMER: Kerang & Bintang Laut di Pasir Pantai
-            shells = Array.from({ length: width < 600 ? 10 : 18 }, () => ({
-                x: 30 + Math.random() * (width - 60),
-                y: height - 14 - Math.random() * 38,
-                type: Math.random() > 0.4 ? "shell" : "star",
+            // 2. SUMMER: Pantai & Kerang di Area Pasir
+            seaShells = Array.from({ length: width < 600 ? 16 : 28 }, () => ({
+                x: 20 + Math.random() * (width - 40),
+                y: height * 0.58 + Math.random() * (height * 0.38),
                 color: Math.random() > 0.5 ? "#f7c5cc" : "#ffe5b4",
-                rot: Math.random() * Math.PI
+                rot: Math.random() * Math.PI * 2,
+                size: 5 + Math.random() * 3
             }));
 
-            // 3. AUTUMN: Hamparan Daun Jingga di Tanah & Daun Gugur
-            const orangePalette = ["#e87a3d", "#f49d52", "#d95d39", "#f7b267", "#c8553d"];
-            autumnLeaves = Array.from({ length: width < 600 ? 55 : 110 }, () => {
+            // 3. AUTUMN: Hamparan Penuh Daun Maple Jingga Realistis di Seluruh Hero!
+            const maplePalette = [
+                { main: "#e86f2c", vein: "#b84a14" },
+                { main: "#f29d38", vein: "#c77416" },
+                { main: "#c94328", vein: "#8f2511" },
+                { main: "#f7c252", vein: "#cf9725" },
+                { main: "#d96b38", vein: "#9e4219" },
+                { main: "#9e3623", vein: "#6b1d0f" },
+                { main: "#e6a76c", vein: "#b57840" }
+            ];
+
+            const leafCount = width < 600 ? 190 : 380;
+            mapleLeaves = Array.from({ length: leafCount }, () => {
                 const bx = Math.random() * width;
-                const by = height - 8 - Math.random() * 68;
+                const by = Math.random() * height;
+                const pal = maplePalette[Math.floor(Math.random() * maplePalette.length)];
                 return {
                     baseX: bx,
                     baseY: by,
@@ -575,20 +655,26 @@
                     vy: 0,
                     rot: Math.random() * Math.PI * 2,
                     vrot: 0,
-                    size: 7 + Math.random() * 6,
-                    color: orangePalette[Math.floor(Math.random() * orangePalette.length)]
+                    size: (width < 600 ? 16 : 23) + Math.random() * 13,
+                    color: pal.main,
+                    vein: pal.vein
                 };
             });
-            fallingLeaves = Array.from({ length: width < 600 ? 18 : 30 }, () => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                size: 6 + Math.random() * 5,
-                vy: 0.8 + Math.random() * 1.3,
-                wobble: Math.random() * Math.PI * 2,
-                color: orangePalette[Math.floor(Math.random() * orangePalette.length)]
-            }));
 
-            // 4. RAINY: Kolam Ikan Koi & Hujan
+            fallingMapleLeaves = Array.from({ length: width < 600 ? 14 : 24 }, () => {
+                const pal = maplePalette[Math.floor(Math.random() * maplePalette.length)];
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: 13 + Math.random() * 8,
+                    vy: 0.7 + Math.random() * 1.1,
+                    wobble: Math.random() * Math.PI * 2,
+                    color: pal.main,
+                    vein: pal.vein
+                };
+            });
+
+            // 4. RAINY: Kolam Ikan Koi Penuh di Seluruh Hero
             raindrops = Array.from({ length: width < 600 ? 45 : 85 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
@@ -598,28 +684,29 @@
             ripples = [];
             const koiStyles = [
                 { body: "#ff9e7d", spot: "#ffffff" },
-                { body: "#ffffff", spot: "#ff7b7b" },
-                { body: "#ffd180", spot: "#ff8a65" }
+                { body: "#ffffff", spot: "#ff7575" },
+                { body: "#ffd180", spot: "#ff8a65" },
+                { body: "#ffb5a7", spot: "#fff1e6" }
             ];
-            koiFishes = Array.from({ length: width < 600 ? 4 : 7 }, (_, i) => ({
-                x: (width / 8) * (i + 1),
-                y: height - 45 - Math.random() * 75,
-                vx: (Math.random() > 0.5 ? 1 : -1) * (0.7 + Math.random() * 0.7),
-                vy: (Math.random() - 0.5) * 0.3,
-                size: 13 + Math.random() * 5,
+            koiFishes = Array.from({ length: width < 600 ? 6 : 11 }, (_, i) => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.9),
+                vy: (Math.random() - 0.5) * 0.8,
+                size: 15 + Math.random() * 6,
                 tailPhase: Math.random() * Math.PI * 2,
                 style: koiStyles[i % koiStyles.length]
             }));
 
-            // 5. WINTER: Salju & Jejak Salju
-            snowflakes = Array.from({ length: width < 600 ? 40 : 75 }, () => ({
+            // 5. WINTER: Salju Penuh & Jejak Kursor
+            snowflakes = Array.from({ length: width < 600 ? 45 : 85 }, () => ({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                r: 2 + Math.random() * 3.5,
+                r: 2 + Math.random() * 3.8,
                 vy: 0.5 + Math.random() * 1.1,
                 wobble: Math.random() * Math.PI * 2
             }));
-            snowDents = [];
+            snowTracks = [];
             sparkles = [];
         }
 
@@ -639,26 +726,68 @@
         });
 
         window.addEventListener("resize", () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            resizeCanvas();
             initWorldEntities();
         });
 
-        // Helper gambar bentuk daun
-        function drawLeafShape(x, y, size, rot, color) {
+        // Gambar Daun Maple 5-Lobus Realistis
+        function drawRealisticMapleLeaf(x, y, size, rot, fillColor, veinColor) {
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(rot);
-            ctx.fillStyle = color;
+
+            // Bayangan halus daun agar terlihat bertumpuk 3D
+            ctx.shadowColor = "rgba(74, 32, 12, 0.22)";
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 3;
+
+            ctx.fillStyle = fillColor;
             ctx.beginPath();
-            ctx.moveTo(-size, 0);
-            ctx.quadraticCurveTo(0, -size * 0.65, size, 0);
-            ctx.quadraticCurveTo(0, size * 0.65, -size, 0);
+            // Tangkai daun
+            ctx.moveTo(0, size * 0.95);
+            ctx.lineTo(0, size * 0.45);
+            // Lobus kiri bawah
+            ctx.lineTo(-size * 0.65, size * 0.55);
+            ctx.lineTo(-size * 0.45, size * 0.2);
+            // Lobus kiri tengah
+            ctx.lineTo(-size * 0.95, 0);
+            ctx.lineTo(-size * 0.45, -size * 0.18);
+            // Lobus atas utama
+            ctx.lineTo(-size * 0.35, -size * 0.55);
+            ctx.lineTo(0, -size * 0.95);
+            ctx.lineTo(size * 0.35, -size * 0.55);
+            // Lobus kanan tengah
+            ctx.lineTo(size * 0.45, -size * 0.18);
+            ctx.lineTo(size * 0.95, 0);
+            // Lobus kanan bawah
+            ctx.lineTo(size * 0.45, size * 0.2);
+            ctx.lineTo(size * 0.65, size * 0.55);
+            ctx.lineTo(0, size * 0.45);
+            ctx.closePath();
             ctx.fill();
+
+            // Tulang daun halus
+            ctx.shadowColor = "transparent";
+            ctx.strokeStyle = veinColor;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, size * 0.95);
+            ctx.lineTo(0, -size * 0.8);
+            ctx.moveTo(0, size * 0.25);
+            ctx.lineTo(-size * 0.75, 0);
+            ctx.moveTo(0, size * 0.25);
+            ctx.lineTo(size * 0.75, 0);
+            ctx.moveTo(0, size * 0.38);
+            ctx.lineTo(-size * 0.5, size * 0.45);
+            ctx.moveTo(0, size * 0.38);
+            ctx.lineTo(size * 0.5, size * 0.45);
+            ctx.stroke();
+
             ctx.restore();
         }
 
-        // Helper gambar ikan koi pastel
+        // Gambar Ikan Koi Pastel
         function drawKoiFish(fish, time) {
             const angle = Math.atan2(fish.vy, fish.vx);
             const wag = Math.sin(time * 6 + fish.tailPhase) * 0.35;
@@ -667,7 +796,6 @@
             ctx.translate(fish.x, fish.y);
             ctx.rotate(angle);
 
-            // Ekor bergoyang
             ctx.fillStyle = fish.style.body;
             ctx.beginPath();
             ctx.moveTo(-fish.size * 0.7, 0);
@@ -676,334 +804,10 @@
             ctx.closePath();
             ctx.fill();
 
-            // Badan koi
             ctx.beginPath();
             ctx.ellipse(0, 0, fish.size, fish.size * 0.42, 0, 0, Math.PI * 2);
             ctx.fill();
 
-            // Corak warna koi
             ctx.fillStyle = fish.style.spot;
             ctx.beginPath();
             ctx.ellipse(fish.size * 0.15, -1, fish.size * 0.42, fish.size * 0.22, 0.2, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.restore();
-        }
-
-        let time = 0;
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            time += 0.025;
-            const isDark = document.body.classList.contains("dark-mode");
-
-            // ==========================================
-            // 1. SPRING: PADANG BUNGA INTERAKTIF 🌸
-            // ==========================================
-            if (currentSeason === "spring") {
-                // Kelopak bunga melayang
-                petals.forEach((p) => {
-                    p.wobble += 0.03;
-                    p.y += p.vy;
-                    p.x += Math.sin(p.wobble) * 0.9;
-                    if (p.y > height + 10) { p.y = -10; p.x = Math.random() * width; }
-
-                    ctx.fillStyle = "rgba(255, 183, 206, 0.78)";
-                    ctx.beginPath();
-                    ctx.ellipse(p.x, p.y, p.r, p.r * 0.55, p.wobble, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                // Rumput & bunga bergoyang
-                flowerStems.forEach((s) => {
-                    const wind = Math.sin(time + s.phase + s.x * 0.01) * 0.14;
-                    let push = 0;
-                    if (pointer.active) {
-                        const dx = s.x - pointer.x;
-                        const dy = (height - s.h * 0.5) - pointer.y;
-                        const dist = Math.hypot(dx, dy);
-                        if (dist < 130) {
-                            push = (dx >= 0 ? 1 : -1) * (1 - dist / 130) * 0.85;
-                        }
-                    }
-                    s.vel = (s.vel + (wind + push - s.angle) * 0.045) * 0.87;
-                    s.angle += s.vel;
-
-                    const tipX = s.x + Math.sin(s.angle) * s.h;
-                    const tipY = height + 4 - Math.cos(s.angle) * s.h;
-
-                    ctx.strokeStyle = isDark ? "#5d8762" : "#8ec28b";
-                    ctx.lineWidth = 2.4;
-                    ctx.lineCap = "round";
-                    ctx.beginPath();
-                    ctx.moveTo(s.x, height + 4);
-                    ctx.quadraticCurveTo(s.x + Math.sin(s.angle * 0.5) * s.h * 0.5, height - s.h * 0.5, tipX, tipY);
-                    ctx.stroke();
-
-                    if (s.hasFlower) {
-                        ctx.fillStyle = s.flowerColor;
-                        for (let k = 0; k < 5; k++) {
-                            const a = (k * Math.PI * 2) / 5 + time * 0.4;
-                            ctx.beginPath();
-                            ctx.arc(tipX + Math.cos(a) * 3.5, tipY + Math.sin(a) * 3.5, s.flowerSize * 0.52, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-                        ctx.fillStyle = "#ffe066";
-                        ctx.beginPath();
-                        ctx.arc(tipX, tipY, s.flowerSize * 0.35, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                });
-            }
-
-            // ==========================================
-            // 2. SUMMER: PANTAI & OMBAK PASTEL ☀️
-            // ==========================================
-            else if (currentSeason === "summer") {
-                const waveOffset = Math.sin(time * 1.3) * 18;
-                const waterTop = height - 115 + waveOffset;
-
-                // Air laut biru pastel
-                const seaGrad = ctx.createLinearGradient(0, waterTop, 0, height);
-                seaGrad.addColorStop(0, isDark ? "rgba(64, 126, 156, 0.48)" : "rgba(147, 213, 232, 0.55)");
-                seaGrad.addColorStop(1, isDark ? "rgba(42, 92, 120, 0.65)" : "rgba(116, 195, 222, 0.7)");
-                ctx.fillStyle = seaGrad;
-                ctx.beginPath();
-                ctx.moveTo(0, waterTop);
-                for (let x = 0; x <= width; x += 40) {
-                    const y = waterTop + Math.sin(x * 0.012 + time * 1.8) * 7;
-                    ctx.lineTo(x, y);
-                }
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-                ctx.fill();
-
-                // Buih ombak putih
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
-                ctx.lineWidth = 3.5;
-                ctx.beginPath();
-                for (let x = 0; x <= width; x += 30) {
-                    const y = waterTop + Math.sin(x * 0.012 + time * 1.8) * 7;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                // Pasir pantai hangat di bawah
-                const sandTop = height - 56;
-                ctx.fillStyle = isDark ? "#78634d" : "#f7e3be";
-                ctx.beginPath();
-                ctx.moveTo(0, sandTop);
-                for (let x = 0; x <= width; x += 60) {
-                    ctx.lineTo(x, sandTop + Math.sin(x * 0.008) * 5);
-                }
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-                ctx.fill();
-
-                // Kerang & bintang laut di pasir
-                shells.forEach((sh) => {
-                    ctx.save();
-                    ctx.translate(sh.x, sh.y);
-                    ctx.rotate(sh.rot);
-                    ctx.fillStyle = sh.color;
-                    ctx.beginPath();
-                    ctx.arc(0, 0, 5.5, 0, Math.PI, true);
-                    ctx.fill();
-                    ctx.restore();
-                });
-
-                // Riak air saat kursor menyentuh laut
-                ripples.forEach((rp, idx) => {
-                    rp.r += 1.4;
-                    rp.alpha -= 0.014;
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, rp.alpha)})`;
-                    ctx.lineWidth = 1.8;
-                    ctx.beginPath();
-                    ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.45, 0, 0, Math.PI * 2);
-                    ctx.stroke();
-                    if (rp.alpha <= 0) ripples.splice(idx, 1);
-                });
-            }
-
-            // ==========================================
-            // 3. AUTUMN: DAUN JINGGA BERHAMBURAN 🍂
-            // ==========================================
-            else if (currentSeason === "autumn") {
-                // Daun jingga gugur dari atas
-                fallingLeaves.forEach((fl) => {
-                    fl.wobble += 0.03;
-                    fl.y += fl.vy;
-                    fl.x += Math.sin(fl.wobble) * 1.1;
-                    if (fl.y > height + 15) { fl.y = -15; fl.x = Math.random() * width; }
-                    drawLeafShape(fl.x, fl.y, fl.size, fl.wobble, fl.color);
-                });
-
-                // Hamparan daun jingga di bawah yang tersapu kursor
-                autumnLeaves.forEach((lf) => {
-                    if (pointer.active) {
-                        const dx = lf.x - pointer.x;
-                        const dy = lf.y - pointer.y;
-                        const dist = Math.hypot(dx, dy);
-                        if (dist < 110 && dist > 0) {
-                            const force = (1 - dist / 110) * 4.5;
-                            lf.vx += (dx / dist) * force + pointer.vx * 0.12;
-                            lf.vy += (dy / dist) * force - 1.4;
-                            lf.vrot += (Math.random() - 0.5) * 0.25;
-                        }
-                    }
-
-                    // Kembali perlahan ke posisi semula
-                    lf.vx += (lf.baseX - lf.x) * 0.02;
-                    lf.vy += (lf.baseY - lf.y) * 0.025;
-                    lf.vx *= 0.9;
-                    lf.vy *= 0.9;
-                    lf.vrot *= 0.92;
-
-                    lf.x += lf.vx;
-                    lf.y += lf.vy;
-                    lf.rot += lf.vrot;
-
-                    drawLeafShape(lf.x, lf.y, lf.size, lf.rot, lf.color);
-                });
-            }
-
-            // ==========================================
-            // 4. RAINY: KOLAM IKAN KOI KEHUJANAN 🌧️
-            // ==========================================
-            else if (currentSeason === "rainy") {
-                const pondTop = height - 140;
-
-                // Air kolam tenang biru-sage
-                const pondGrad = ctx.createLinearGradient(0, pondTop, 0, height);
-                pondGrad.addColorStop(0, isDark ? "rgba(42, 74, 84, 0.55)" : "rgba(148, 201, 209, 0.52)");
-                pondGrad.addColorStop(1, isDark ? "rgba(28, 54, 64, 0.78)" : "rgba(111, 174, 186, 0.72)");
-                ctx.fillStyle = pondGrad;
-                ctx.fillRect(0, pondTop, width, 140);
-
-                // Rintik hujan jatuh & memicu riak air di kolam
-                raindrops.forEach((rd) => {
-                    rd.y += rd.vy;
-                    rd.x -= 0.8;
-                    ctx.strokeStyle = isDark ? "rgba(186, 224, 240, 0.45)" : "rgba(116, 168, 196, 0.52)";
-                    ctx.lineWidth = 1.3;
-                    ctx.beginPath();
-                    ctx.moveTo(rd.x, rd.y);
-                    ctx.lineTo(rd.x - 2, rd.y + rd.len);
-                    ctx.stroke();
-
-                    if (rd.y > pondTop + 15 && Math.random() < 0.06) {
-                        ripples.push({ x: rd.x, y: rd.y, r: 2, maxR: 32, alpha: 0.45 });
-                        rd.y = -15;
-                        rd.x = Math.random() * width;
-                    } else if (rd.y > height) {
-                        rd.y = -15;
-                        rd.x = Math.random() * width;
-                    }
-                });
-
-                // Ikan koi berenang & menghindar lucu dari kursor
-                koiFishes.forEach((fish) => {
-                    if (pointer.active) {
-                        const dx = fish.x - pointer.x;
-                        const dy = fish.y - pointer.y;
-                        const dist = Math.hypot(dx, dy);
-                        if (dist < 120 && dist > 0) {
-                            fish.vx += (dx / dist) * 0.25;
-                            fish.vy += (dy / dist) * 0.22;
-                        }
-                    }
-
-                    // Batasi kecepatan & jaga agar tetap di area kolam
-                    const speed = Math.hypot(fish.vx, fish.vy);
-                    if (speed > 2.6) {
-                        fish.vx = (fish.vx / speed) * 2.6;
-                        fish.vy = (fish.vy / speed) * 2.6;
-                    } else if (speed < 0.7) {
-                        fish.vx *= 1.03;
-                    }
-
-                    fish.x += fish.vx;
-                    fish.y += fish.vy;
-
-                    if (fish.x < 25 || fish.x > width - 25) fish.vx *= -1;
-                    if (fish.y < pondTop + 18 || fish.y > height - 18) fish.vy *= -1;
-
-                    drawKoiFish(fish, time);
-                });
-
-                // Riak air lingkaran di kolam
-                ripples.forEach((rp, idx) => {
-                    rp.r += 0.95;
-                    rp.alpha -= 0.012;
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, rp.alpha)})`;
-                    ctx.lineWidth = 1.4;
-                    ctx.beginPath();
-                    ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.42, 0, 0, Math.PI * 2);
-                    ctx.stroke();
-                    if (rp.alpha <= 0) ripples.splice(idx, 1);
-                });
-            }
-
-            // ==========================================
-            // 5. WINTER: BUKIT SALJU & JEJAK KURSOR ❄️
-            // ==========================================
-            else if (currentSeason === "winter") {
-                // Butiran salju turun perlahan
-                snowflakes.forEach((sf) => {
-                    sf.wobble += 0.025;
-                    sf.y += sf.vy;
-                    sf.x += Math.sin(sf.wobble) * 0.7;
-                    if (sf.y > height + 10) { sf.y = -10; sf.x = Math.random() * width; }
-
-                    ctx.fillStyle = "rgba(255, 255, 255, 0.88)";
-                    ctx.beginPath();
-                    ctx.arc(sf.x, sf.y, sf.r, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                // Hamparan bukit salju lembut di bawah
-                const snowTop = height - 68;
-                const snowGrad = ctx.createLinearGradient(0, snowTop, 0, height);
-                snowGrad.addColorStop(0, isDark ? "#8b9bb0" : "#f4f8fc");
-                snowGrad.addColorStop(1, isDark ? "#6b7b91" : "#dce7f5");
-                ctx.fillStyle = snowGrad;
-                ctx.beginPath();
-                ctx.moveTo(0, snowTop);
-                for (let x = 0; x <= width; x += 50) {
-                    let dip = 0;
-                    if (pointer.active && pointer.y > snowTop - 30) {
-                        const dx = Math.abs(x - pointer.x);
-                        if (dx < 75) dip = (1 - dx / 75) * 16;
-                    }
-                    ctx.lineTo(x, snowTop + Math.sin(x * 0.009) * 8 + dip);
-                }
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-                ctx.fill();
-
-                // Percikan kristal salju saat kursor bergerak
-                sparkles.forEach((sp, idx) => {
-                    sp.x += sp.vx;
-                    sp.y += sp.vy;
-                    sp.alpha -= 0.025;
-                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, sp.alpha)})`;
-                    ctx.beginPath();
-                    ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    if (sp.alpha <= 0) sparkles.splice(idx, 1);
-                });
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    })();
-    </script>
-
-</body>
-</html>
