@@ -117,13 +117,13 @@ if (quoteElement && newQuoteButton) {
 
 
 // =========================================================
-// 4. PRIVATE LOCK SCREEN + VISUAL TEXT & PHOTO EDITOR ✿
+// 4. GLOBAL PHOTO LIGHTBOX + LOCK SCREEN + VISUAL EDITOR ✿
 // =========================================================
 
 (function () {
-    // PIN Rahasia Caca
     const SECRET_PIN = "220408";
     const PRIVATE_PAGES = ["diary.html", "planner.html"];
+    let isVisualEditActive = false;
 
     // Otomatis arahkan link "surprises.html" ke "surprise.html"
     document.querySelectorAll('a[href="surprises.html"]').forEach(link => {
@@ -145,7 +145,128 @@ if (quoteElement && newQuoteButton) {
         }
     }
 
-    // Kompresi gambar otomatis sebelum disimpan ke localStorage biar ringan & muat banyak
+    // A. GLOBAL PHOTO LIGHTBOX (Setiap foto di halaman bisa diklik untuk diperbesar!)
+    function setupGlobalPhotoLightbox() {
+        const style = document.createElement("style");
+        style.textContent = `
+            main img {
+                cursor: zoom-in;
+                transition: transform 0.3s ease, filter 0.3s ease;
+            }
+            main img:hover {
+                transform: scale(1.02);
+            }
+            #globalPhotoLightbox {
+                position: fixed;
+                inset: 0;
+                background: rgba(33, 25, 29, 0.85);
+                backdrop-filter: blur(8px);
+                z-index: 999999;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                padding: 24px;
+            }
+            #globalPhotoLightbox.open {
+                display: flex;
+                animation: lbFadeIn 0.28s ease;
+            }
+            @keyframes lbFadeIn {
+                from { opacity: 0; transform: scale(0.94); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            .lb-frame {
+                position: relative;
+                background: var(--cream, #fffaf3);
+                padding: 14px 14px 22px;
+                border-radius: 22px;
+                max-width: 90vw;
+                max-height: 88vh;
+                text-align: center;
+                box-shadow: 0 25px 65px rgba(0, 0, 0, 0.45);
+                border: 2px solid var(--blush, #e9b7c7);
+            }
+            body.dark-mode .lb-frame {
+                background: #2b2429;
+            }
+            .lb-frame img {
+                max-width: 82vw;
+                max-height: 70vh;
+                border-radius: 14px;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto 12px;
+            }
+            .lb-caption {
+                font-family: var(--heading, Georgia, serif);
+                font-style: italic;
+                font-size: 16px;
+                color: var(--dark-rose, #a96870);
+            }
+            .lb-close {
+                position: absolute;
+                top: -14px;
+                right: -14px;
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                border: none;
+                background: var(--pink, #fcecf1);
+                color: var(--dark-rose, #a96870);
+                font-size: 16px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            }
+            .lb-close:hover {
+                background: var(--dark-rose, #a96870);
+                color: white;
+            }
+        `;
+        document.head.appendChild(style);
+
+        const lightbox = document.createElement("div");
+        lightbox.id = "globalPhotoLightbox";
+        lightbox.innerHTML = `
+            <div class="lb-frame">
+                <button type="button" class="lb-close" id="lbCloseBtn" aria-label="Close photo">✕</button>
+                <img id="lbImage" src="" alt="Preview">
+                <div class="lb-caption" id="lbCaption"></div>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+
+        const lbImage = document.getElementById("lbImage");
+        const lbCaption = document.getElementById("lbCaption");
+        const lbCloseBtn = document.getElementById("lbCloseBtn");
+
+        // Event delegation: otomatis bekerja untuk semua foto lama maupun foto baru!
+        document.addEventListener("click", (e) => {
+            if (isVisualEditActive) return; // Saat Edit Mode aktif, biarkan fungsi ganti foto yang bekerja
+
+            const clickedImg = e.target.closest("main img");
+            if (!clickedImg) return;
+
+            // Cari caption terdekat dari kartu foto jika ada
+            const cardParent = clickedImg.closest("figure, article, div");
+            const nearbyTitle = cardParent ? cardParent.querySelector("figcaption, h3, h4, span") : null;
+            const captionText = clickedImg.alt || (nearbyTitle ? nearbyTitle.textContent.trim() : "Little Universe Snapshot ✿");
+
+            lbImage.src = clickedImg.src;
+            lbCaption.textContent = captionText;
+            lightbox.classList.add("open");
+        });
+
+        lbCloseBtn.addEventListener("click", () => lightbox.classList.remove("open"));
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) lightbox.classList.remove("open");
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") lightbox.classList.remove("open");
+        });
+    }
+
+    // Kompresi gambar saat upload dari folder
     function compressImageFile(file, callback) {
         const reader = new FileReader();
         reader.onload = function (event) {
@@ -166,15 +287,14 @@ if (quoteElement && newQuoteButton) {
                 const ctx = canvas.getContext("2d");
                 ctx.drawImage(img, 0, 0, width, height);
 
-                const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.82);
-                callback(compressedDataUrl);
+                callback(canvas.toDataURL("image/jpeg", 0.82));
             };
             img.src = event.target.result;
         };
         reader.readAsDataURL(file);
     }
 
-    // A. LAYAR GEMBOK PIN
+    // B. LAYAR GEMBOK PIN
     function renderLockScreen() {
         if (!isPrivatePage || isUnlocked()) return;
 
@@ -183,27 +303,18 @@ if (quoteElement && newQuoteButton) {
         lockOverlay.innerHTML = `
             <style>
                 #privateLockOverlay {
-                    position: fixed;
-                    inset: 0;
+                    position: fixed; inset: 0;
                     background: rgba(255, 250, 243, 0.92);
                     backdrop-filter: blur(14px);
-                    z-index: 99999;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 20px;
+                    z-index: 99999; display: flex;
+                    justify-content: center; align-items: center; padding: 20px;
                 }
-                body.dark-mode #privateLockOverlay {
-                    background: rgba(33, 29, 32, 0.94);
-                }
+                body.dark-mode #privateLockOverlay { background: rgba(33, 29, 32, 0.94); }
                 .lock-card {
                     background: var(--white, #ffffff);
                     border: 1.5px dashed var(--rose, #d99a9e);
-                    border-radius: 26px;
-                    padding: 38px 30px;
-                    max-width: 390px;
-                    width: 100%;
-                    text-align: center;
+                    border-radius: 26px; padding: 38px 30px;
+                    max-width: 390px; width: 100%; text-align: center;
                     box-shadow: 0 20px 50px rgba(157, 111, 105, 0.18);
                 }
                 body.dark-mode .lock-card { background: #30282d; }
@@ -283,13 +394,12 @@ if (quoteElement && newQuoteButton) {
         });
     }
 
-    // B. PENYIMPANAN TEKS, GANTI FOTO, & TAMBAH FOTO BARU
+    // C. PENYIMPANAN TEKS, GANTI FOTO, & TAMBAH FOTO BARU
     const textStorageKey = "littleUniverseCustomEdits_" + currentPath;
     const imgReplaceKey = "littleUniverseImgReplace_" + currentPath;
     const addedPhotosKey = "littleUniverseAddedPhotos_" + currentPath;
 
     function loadSavedContent() {
-        // 1. Muat teks yang diedit
         const savedText = localStorage.getItem(textStorageKey);
         if (savedText) {
             const edits = JSON.parse(savedText);
@@ -299,7 +409,6 @@ if (quoteElement && newQuoteButton) {
             });
         }
 
-        // 2. Muat foto lama yang diganti
         const savedImgs = localStorage.getItem(imgReplaceKey);
         if (savedImgs) {
             const imgMap = JSON.parse(savedImgs);
@@ -309,7 +418,6 @@ if (quoteElement && newQuoteButton) {
             });
         }
 
-        // 3. Muat kartu foto baru yang ditambahkan dari folder
         renderAddedPhotos();
     }
 
@@ -343,13 +451,9 @@ if (quoteElement && newQuoteButton) {
         savedPhotos.forEach((item, index) => {
             const card = document.createElement("div");
             card.style.cssText = `
-                background: var(--white);
-                border: 1px solid var(--border);
-                border-radius: 18px;
-                padding: 14px 14px 20px;
-                box-shadow: var(--shadow);
-                text-align: center;
-                position: relative;
+                background: var(--white); border: 1px solid var(--border);
+                border-radius: 18px; padding: 14px 14px 20px;
+                box-shadow: var(--shadow); text-align: center;
             `;
             card.innerHTML = `
                 <img src="${item.src}" alt="${item.title}" style="width:100%; aspect-ratio: 4/4; object-fit: cover; border-radius: 12px; margin-bottom: 12px;">
@@ -371,7 +475,7 @@ if (quoteElement && newQuoteButton) {
         });
     }
 
-    // C. POPUP TAMBAH FOTO DARI FOLDER PERANGKAT
+    // D. POPUP TAMBAH FOTO DARI FOLDER
     function openAddPhotoModal() {
         const oldModal = document.getElementById("addPhotoModal");
         if (oldModal) oldModal.remove();
@@ -432,7 +536,7 @@ if (quoteElement && newQuoteButton) {
         });
     }
 
-    // D. TOOLBAR ADMIN DI POJOK KANAN BAWAH
+    // E. TOOLBAR ADMIN DI POJOK KANAN BAWAH
     function renderAdminBar() {
         const existing = document.getElementById("raishaAdminDock");
         if (existing) existing.remove();
@@ -489,9 +593,6 @@ if (quoteElement && newQuoteButton) {
             });
             dock.appendChild(keyBtn);
         } else {
-            let isEditing = false;
-
-            // Input file tersembunyi untuk mengganti foto yang diklik
             const hiddenReplaceInput = document.createElement("input");
             hiddenReplaceInput.type = "file";
             hiddenReplaceInput.accept = "image/*";
@@ -538,19 +639,19 @@ if (quoteElement && newQuoteButton) {
             lockNowBtn.innerHTML = "🔒 Lock";
 
             editToggleBtn.addEventListener("click", () => {
-                isEditing = !isEditing;
+                isVisualEditActive = !isVisualEditActive;
                 const editableEls = document.querySelectorAll("main h1, main h2, main h3, main h4, main p, main blockquote");
                 const pageImgs = document.querySelectorAll("main img");
 
                 editableEls.forEach(el => {
-                    el.contentEditable = isEditing ? "true" : "false";
-                    el.classList.toggle("visual-editing-highlight", isEditing);
+                    el.contentEditable = isVisualEditActive ? "true" : "false";
+                    el.classList.toggle("visual-editing-highlight", isVisualEditActive);
                 });
 
                 pageImgs.forEach((img, idx) => {
-                    img.classList.toggle("img-editing-highlight", isEditing);
-                    img.title = isEditing ? "Click to replace this photo from folder 📷" : "";
-                    img.onclick = isEditing
+                    img.classList.toggle("img-editing-highlight", isVisualEditActive);
+                    img.title = isVisualEditActive ? "Click to replace this photo from folder 📷" : "";
+                    img.onclick = isVisualEditActive
                         ? (e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -560,10 +661,10 @@ if (quoteElement && newQuoteButton) {
                         : null;
                 });
 
-                editToggleBtn.classList.toggle("active-edit", isEditing);
-                editToggleBtn.innerHTML = isEditing ? "✓ Editing On" : "✎ Edit Mode";
-                saveBtn.style.display = isEditing ? "inline-block" : "none";
-                resetBtn.style.display = isEditing ? "inline-block" : "none";
+                editToggleBtn.classList.toggle("active-edit", isVisualEditActive);
+                editToggleBtn.innerHTML = isVisualEditActive ? "✓ Editing On" : "✎ Edit Mode";
+                saveBtn.style.display = isVisualEditActive ? "inline-block" : "none";
+                resetBtn.style.display = isVisualEditActive ? "inline-block" : "none";
             });
 
             addPhotoBtn.addEventListener("click", openAddPhotoModal);
@@ -592,6 +693,7 @@ if (quoteElement && newQuoteButton) {
 
             lockNowBtn.addEventListener("click", () => {
                 setUnlocked(false);
+                isVisualEditActive = false;
                 if (isPrivatePage) {
                     location.reload();
                 } else {
@@ -610,16 +712,17 @@ if (quoteElement && newQuoteButton) {
         document.body.appendChild(dock);
     }
 
-    function initPrivateAndAdmin() {
+    function initAllFeatures() {
+        setupGlobalPhotoLightbox();
         loadSavedContent();
         renderLockScreen();
         renderAdminBar();
     }
 
     if (document.readyState === "loading") {
-        window.addEventListener("DOMContentLoaded", initPrivateAndAdmin);
+        window.addEventListener("DOMContentLoaded", initAllFeatures);
     } else {
-        initPrivateAndAdmin();
+        initAllFeatures();
     }
 })();
 
