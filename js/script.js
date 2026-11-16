@@ -121,8 +121,12 @@ if (quoteElement && newQuoteButton) {
 // =========================================================
 
 (function () {
+    // PIN Rahasia Caca (bisa diganti kapan saja di sini)
     const SECRET_PIN = "220408";
-    const PRIVATE_PAGES = ["diary.html", "planner.html"];
+
+    // Daftar halaman pribadi yang otomatis terkunci gembok
+    const PRIVATE_PAGES = ["diary.html", "planner.html", "campus.html"];
+
     let isVisualEditActive = false;
 
     // Otomatis arahkan link "surprises.html" ke "surprise.html"
@@ -240,14 +244,12 @@ if (quoteElement && newQuoteButton) {
         const lbCaption = document.getElementById("lbCaption");
         const lbCloseBtn = document.getElementById("lbCloseBtn");
 
-        // Event delegation: otomatis bekerja untuk semua foto lama maupun foto baru!
         document.addEventListener("click", (e) => {
-            if (isVisualEditActive) return; // Saat Edit Mode aktif, biarkan fungsi ganti foto yang bekerja
+            if (isVisualEditActive) return;
 
             const clickedImg = e.target.closest("main img");
             if (!clickedImg) return;
 
-            // Cari caption terdekat dari kartu foto jika ada
             const cardParent = clickedImg.closest("figure, article, div");
             const nearbyTitle = cardParent ? cardParent.querySelector("figcaption, h3, h4, span") : null;
             const captionText = clickedImg.alt || (nearbyTitle ? nearbyTitle.textContent.trim() : "Little Universe Snapshot ✿");
@@ -294,7 +296,7 @@ if (quoteElement && newQuoteButton) {
         reader.readAsDataURL(file);
     }
 
-    // B. LAYAR GEMBOK PIN
+    // B. LAYAR GEMBOK PIN (Diary, Planner, & Campus Life)
     function renderLockScreen() {
         if (!isPrivatePage || isUnlocked()) return;
 
@@ -362,7 +364,7 @@ if (quoteElement && newQuoteButton) {
             <div class="lock-card">
                 <div class="lock-icon">🔒</div>
                 <h2>Private Little Space</h2>
-                <p>This page holds Raisha's personal diary & plans. Enter the secret PIN to unlock ✿</p>
+                <p>This page holds Raisha's personal diary, campus journey & plans. Enter the secret PIN to unlock ✿</p>
                 <form id="pinUnlockForm">
                     <input type="password" id="pinInputField" class="lock-input" maxlength="8" placeholder="••••••" required autofocus>
                     <div class="lock-error" id="pinErrorText"></div>
@@ -386,6 +388,7 @@ if (quoteElement && newQuoteButton) {
                 setUnlocked(true);
                 lockOverlay.remove();
                 renderAdminBar();
+                renderAddedPhotos();
             } else {
                 errorText.textContent = "Oops! Wrong PIN, try again ♡";
                 input.value = "";
