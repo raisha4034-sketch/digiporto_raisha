@@ -1600,7 +1600,7 @@
     <!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
     <script src="js/script.js"></script>
     <!-- Modul Terpisah Lab Logika & Algoritma -->
-    <script src="js/lab-logal.js?v=2"></script>
+    <script src="js/lab-logal.js?v=3"></script>
 
     <script>
     (function () {
@@ -1828,8 +1828,7 @@
                 pill.className = "day-pill" + (dName === selectedDayName ? " selected" : "");
                 pill.innerHTML = `
                     <span class="d-name">${dName.slice(0, 3)}</span>
-                    <span class="d-date">${d.getDate()}</span>
-                    ${hasClass ? '<div class="d-dot"></div>' : '<div style="height:10px;"></div>'}
+                    <span class="d-date">${d.getDate()}</span>${hasClass ? '<div class="d-dot"></div>' : '<div style="height:10px;"></div>'}
                 `;
                 pill.addEventListener("click", () => {
                     selectedDayName = dName;
@@ -1876,7 +1875,7 @@
                     item.className = "rec-item";
                     item.innerHTML = `
                         <div class="rec-item-info">
-                            <strong>${course.icon} ${escapeHtml(course.name)}</strong>
+                            <strong>${course.icon}${escapeHtml(course.name)}</strong>
                             <span>Selesai ${doneCount}/16 Buku • Lanjut Pertemuan ${nextMeeting.number}</span>
                         </div>
                         <button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka Lemari</button>
@@ -1977,8 +1976,7 @@
                 section.innerHTML = `
                     <div class="day-section-head">
                         <div class="day-section-title">
-                            <h3>📅 Folder Hari ${dayName}</h3>
-                            ${isToday ? '<span class="today-tag">Hari Ini</span>' : ''}
+                            <h3>📅 Folder Hari ${dayName}</h3>${isToday ? '<span class="today-tag">Hari Ini</span>' : ''}
                             <span style="font-size:12.5px; font-weight:700; color:var(--green-muted);">(${dayCourses.length} Matkul)</span>
                         </div>
                         <button type="button" class="btn-add-day-course">
@@ -2034,7 +2032,7 @@
         function updateShelfHeader(course) {
             const doneCount = course.meetings.filter(m => m.completed).length;
             const pct = Math.round((doneCount / 16) * 100);
-            document.getElementById("detailCourseTitle").textContent = `${course.icon} Lemari Buku: ${course.name}`;
+            document.getElementById("detailCourseTitle").textContent = `${course.icon} Lemari Buku:${course.name}`;
             document.getElementById("detailCourseMeta").textContent =
                 `Folder Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 Buku (${pct}%)`;
         }
@@ -2080,8 +2078,7 @@
                         <span></span>
                     </div>
                     <span class="spine-number-badge">${m.number}</span>
-                    <div class="spine-vertical-label">Pertemuan ${m.number}</div>
-                    ${isExam ? `<span class="spine-exam-tag">${m.number === 8 ? "UTS" : "UAS"}</span>` : ""}
+                    <div class="spine-vertical-label">Pertemuan ${m.number}</div>${isExam ? `<span class="spine-exam-tag">${m.number === 8 ? "UTS" : "UAS"}</span>` : ""}
                     <span class="spine-status-icon">${m.completed ? "✓" : hasContent ? "•" : "🌿"}</span>
                     <div class="spine-gold-bands">
                         <span></span>
@@ -2114,7 +2111,7 @@
         }
 
         // ============================================================
-        // 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS + LAB TERPISAH)
+        // 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS + LAB KHUSUS MATKUL)
         // ============================================================
         function openSingleBook(meetingNum) {
             activeBookNumber = meetingNum;
@@ -2127,8 +2124,7 @@
             document.getElementById("openBookView").style.display = "block";
 
             const examSuffix = meeting.number === 8 ? " (UTS)" : meeting.number === 16 ? " (UAS)" : "";
-            document.getElementById("openBookHeading").textContent = `📖 Buku Pertemuan ${meeting.number}${examSuffix}`;
-            document.getElementById("openBookCourseSub").textContent = `${course.icon} ${course.name} • Hari ${course.day}`;
+            document.getElementById("openBookHeading").textContent = `📖 Buku Pertemuan ${meeting.number}${examSuffix}`; document.getElementById("openBookCourseSub").textContent = `${course.icon} ${course.name} • Hari ${course.day}`;
 
             const doneCheck = document.getElementById("openBookDoneCheckbox");
             const doneText = document.getElementById("openBookDoneText");
@@ -2143,16 +2139,19 @@
 
             renderOpenBookMaterials(meeting);
 
-            // Sambungkan Modul Lab Terpisah (js/lab-logal.js) untuk Pertemuan 1 - 7 dan Pertemuan 9
+            // Sambungkan Modul Lab Terpisah KHUSUS untuk mata kuliah Logika & Algoritma
             const labPanelEl = document.getElementById("tabPanel-lab");
-            if (typeof window.renderLogalLab === "function" && (meeting.number <= 7 || meeting.number === 9)) {
+            const courseNameLower = (course.name || "").toLowerCase();
+            const isLogalCourse = courseNameLower.includes("logika") || courseNameLower.includes("algoritma");
+
+            if (isLogalCourse && typeof window.renderLogalLab === "function" && (meeting.number <= 7 || meeting.number === 9)) {
                 window.renderLogalLab(labPanelEl, meeting, () => saveCourse(course));
             } else {
                 labPanelEl.innerHTML = `
                     <div class="lab-placeholder-box">
                         <div style="font-size:38px;">🧪🌿</div>
-                        <h3>Ruang Praktik &amp; Latihan Interaktif</h3>
-                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Untuk Pertemuan 1–7 dan Pertemuan 9 tersedia Studio Logika &amp; Algoritma (Deskriptif, Flowchart, Pseudocode, &amp; Java).</p>
+                        <h3>Ruang Praktik &amp; Latihan Interaktif (${escapeHtml(course.name)})</h3>
+                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Kamu bisa menambahkan modul latihan atau studi kasus khusus untuk mata kuliah <strong>${escapeHtml(course.name)}</strong> di sini.</p>
                     </div>
                 `;
             }
@@ -2199,364 +2198,4 @@
                         <a href="${escapeHtml(mat.url)}" target="_blank" rel="noopener">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(mat.title)}
                         </a>
-                        <button type="button" class="del-mat-btn" title="Hapus link"><i class="fa-solid fa-trash-can"></i></button>
-                    `;
-                }
-
-                chip.querySelector(".del-mat-btn").addEventListener("click", async () => {
-                    const course = courses.find(c => c.id === activeCourseId);
-                    if (mat.kind === "file" && mat.fileId) {
-                        await deleteFileBlob(mat.fileId);
-                    }
-                    meeting.materials.splice(matIdx, 1);
-                    await saveCourse(course);
-                    renderOpenBookMaterials(meeting);
-                });
-
-                listEl.appendChild(chip);
-            });
-        }
-
-        document.querySelectorAll(".book-tab-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".book-tab-btn").forEach(b => b.classList.remove("active"));
-                document.querySelectorAll(".book-tab-panel").forEach(p => p.classList.remove("active"));
-                btn.classList.add("active");
-                document.getElementById("tabPanel-" + btn.dataset.tab).classList.add("active");
-            });
-        });
-
-        document.getElementById("openBookDoneCheckbox").addEventListener("change", async (e) => {
-            const course = courses.find(c => c.id === activeCourseId);
-            const meeting = course.meetings.find(m => m.number === activeBookNumber);
-            meeting.completed = e.target.checked;
-            document.getElementById("openBookDoneText").textContent = meeting.completed ? "Buku Selesai ✓" : "Tandai Buku Selesai";
-            await saveCourse(course);
-        });
-
-        document.getElementById("openBookTopicInput").addEventListener("input", async (e) => {
-            const course = courses.find(c => c.id === activeCourseId);
-            const meeting = course.meetings.find(m => m.number === activeBookNumber);
-            meeting.topic = e.target.value;
-            await saveCourse(course);
-        });
-
-        document.getElementById("openBookNotesInput").addEventListener("input", async (e) => {
-            const course = courses.find(c => c.id === activeCourseId);
-            const meeting = course.meetings.find(m => m.number === activeBookNumber);
-            meeting.notes = e.target.value;
-            await saveCourse(course);
-        });
-
-        document.getElementById("bookUploadFileBtn").addEventListener("click", () => {
-            document.getElementById("hiddenMaterialFileInput").click();
-        });
-
-        document.getElementById("hiddenMaterialFileInput").addEventListener("change", async (e) => {
-            const file = e.target.files[0];
-            if (!file || !activeCourseId) return;
-
-            const course = courses.find(c => c.id === activeCourseId);
-            const meeting = course.meetings.find(m => m.number === activeBookNumber);
-            const fileId = "file-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
-
-            await saveFileBlob(fileId, file);
-            meeting.materials.push({
-                id: "mat-" + Date.now(),
-                kind: "file",
-                title: file.name,
-                fileId: fileId
-            });
-            await saveCourse(course);
-            e.target.value = "";
-            renderOpenBookMaterials(meeting);
-        });
-
-        document.getElementById("bookAddLinkBtn").addEventListener("click", async () => {
-            const title = prompt("Nama bahan ajar / link:");
-            if (!title) return;
-            const url = prompt("Tempel URL link:");
-            if (!url) return;
-
-            const course = courses.find(c => c.id === activeCourseId);
-            const meeting = course.meetings.find(m => m.number === activeBookNumber);
-            meeting.materials.push({
-                id: "mat-" + Date.now(),
-                kind: "link",
-                title: title.trim(),
-                url: url.startsWith("http") ? url.trim() : "https://" + url.trim()
-            });
-            await saveCourse(course);
-            renderOpenBookMaterials(meeting);
-        });
-
-        document.getElementById("backToShelfBtn").addEventListener("click", () => {
-            openBookshelf(activeCourseId);
-        });
-
-        document.getElementById("prevBookBtn").addEventListener("click", () => {
-            if (activeBookNumber > 1) openSingleBook(activeBookNumber - 1);
-        });
-
-        document.getElementById("nextBookBtn").addEventListener("click", () => {
-            if (activeBookNumber < 16) openSingleBook(activeBookNumber + 1);
-        });
-
-        document.getElementById("backToFoldersBtn").addEventListener("click", () => {
-            activeCourseId = null;
-            document.getElementById("bookshelfView").style.display = "none";
-            document.getElementById("openBookView").style.display = "none";
-            document.getElementById("foldersHomeView").style.display = "block";
-            renderCalendarAndRecommendations();
-            renderFoldersByDay();
-        });
-
-        document.getElementById("editCourseScheduleBtn").addEventListener("click", async () => {
-            const course = courses.find(c => c.id === activeCourseId);
-            if (!course) return;
-            const newDay = prompt("Pindahkan ke folder hari (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu / Minggu):", course.day);
-            if (!newDay) return;
-            const formatted = newDay.trim().charAt(0).toUpperCase() + newDay.trim().slice(1).toLowerCase();
-            if (ORDERED_DAYS.includes(formatted)) {
-                course.day = formatted;
-                await saveCourse(course);
-                updateShelfHeader(course);
-            } else {
-                alert("Nama hari tidak valid.");
-            }
-        });
-
-        document.getElementById("deleteCourseBtn").addEventListener("click", async () => {
-            const course = courses.find(c => c.id === activeCourseId);
-            if (!course) return;
-            if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta lemari bukunya?`)) {
-                await deleteCourseById(course.id);
-                courses = courses.filter(c => c.id !== course.id);
-                document.getElementById("backToFoldersBtn").click();
-            }
-        });
-
-        // ============================================================
-        // 10. MODAL TAMBAH FOLDER MATKUL
-        // ============================================================
-        const modal = document.getElementById("addCourseModal");
-        function openCourseModal(presetDay) {
-            if (presetDay) {
-                document.getElementById("newCourseDay").value = presetDay;
-            }
-            modal.classList.add("open");
-            document.getElementById("newCourseName").focus();
-        }
-        document.getElementById("openAddCourseModalBtn").addEventListener("click", () => openCourseModal());
-        document.getElementById("emptyAddCourseBtn").addEventListener("click", () => openCourseModal());
-        document.getElementById("closeAddCourseModalBtn").addEventListener("click", () => {
-            modal.classList.remove("open");
-        });
-
-        document.getElementById("saveNewCourseBtn").addEventListener("click", async () => {
-            const name = document.getElementById("newCourseName").value.trim();
-            if (!name) {
-                alert("Nama mata kuliah wajib diisi ya!");
-                return;
-            }
-            const code = document.getElementById("newCourseCode").value.trim() || "MATKUL";
-            const day = document.getElementById("newCourseDay").value;
-            const lecturer = document.getElementById("newCourseLecturer").value.trim();
-            const [icon, color] = document.getElementById("newCourseTheme").value.split("|");
-
-            const newCourse = {
-                id: "c-" + Date.now(),
-                code,
-                name,
-                day,
-                lecturer,
-                icon,
-                color,
-                meetings: createEmptyMeetings()
-            };
-
-            await saveCourse(newCourse);
-            courses.push(newCourse);
-
-            document.getElementById("newCourseName").value = "";
-            document.getElementById("newCourseCode").value = "";
-            document.getElementById("newCourseLecturer").value = "";
-            modal.classList.remove("open");
-
-            renderCalendarAndRecommendations();
-            renderFoldersByDay();
-        });
-
-        // ============================================================
-        // 11. DRAGGABLE & DOCKABLE POMODORO ALARM
-        // ============================================================
-        const pomoWidget = document.getElementById("pomodoroWidget");
-        const pomoDragHandle = document.getElementById("pomoDragHandle");
-        const pomoMinBtn = document.getElementById("pomoMinBtn");
-        const pomoDockBtn = document.getElementById("pomoDockBtn");
-
-        let isDragging = false;
-        let dragOffsetX = 0;
-        let dragOffsetY = 0;
-
-        function startDrag(clientX, clientY) {
-            if (pomoWidget.classList.contains("docked")) return;
-            isDragging = true;
-            const rect = pomoWidget.getBoundingClientRect();
-            dragOffsetX = clientX - rect.left;
-            dragOffsetY = clientY - rect.top;
-            pomoWidget.style.right = "auto";
-            pomoWidget.style.bottom = "auto";
-            pomoWidget.style.left = rect.left + "px";
-            pomoWidget.style.top = rect.top + "px";
-        }
-
-        function moveDrag(clientX, clientY) {
-            if (!isDragging) return;
-            const maxX = window.innerWidth - pomoWidget.offsetWidth - 8;
-            const maxY = window.innerHeight - pomoWidget.offsetHeight - 8;
-            const nextX = Math.max(8, Math.min(maxX, clientX - dragOffsetX));
-            const nextY = Math.max(8, Math.min(maxY, clientY - dragOffsetY));
-            pomoWidget.style.left = nextX + "px";
-            pomoWidget.style.top = nextY + "px";
-        }
-
-        function endDrag() {
-            isDragging = false;
-        }
-
-        pomoDragHandle.addEventListener("mousedown", (e) => {
-            if (e.target.closest("button")) return;
-            startDrag(e.clientX, e.clientY);
-        });
-        window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
-        window.addEventListener("mouseup", endDrag);
-
-        pomoDragHandle.addEventListener("touchstart", (e) => {
-            if (e.target.closest("button")) return;
-            if (e.touches[0]) startDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }, { passive: true });
-        window.addEventListener("touchmove", (e) => {
-            if (e.touches[0]) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }, { passive: true });
-        window.addEventListener("touchend", endDrag);
-
-        pomoMinBtn.addEventListener("click", () => {
-            pomoWidget.classList.remove("docked");
-            pomoWidget.classList.toggle("minimized");
-            pomoMinBtn.innerHTML = pomoWidget.classList.contains("minimized")
-                ? '<i class="fa-solid fa-plus"></i>'
-                : '<i class="fa-solid fa-minus"></i>';
-        });
-
-        pomoDockBtn.addEventListener("click", () => {
-            pomoWidget.classList.toggle("docked");
-            pomoDockBtn.innerHTML = pomoWidget.classList.contains("docked")
-                ? '<i class="fa-solid fa-angles-left"></i>'
-                : '<i class="fa-solid fa-angles-right"></i>';
-        });
-
-        let pomoSeconds = 25 * 60;
-        let pomoInitialSeconds = 25 * 60;
-        let pomoInterval = null;
-        let pomoRunning = false;
-
-        const pomoClock = document.getElementById("pomoClockDisplay");
-        const pomoMiniClock = document.getElementById("pomoMiniClock");
-        const pomoStartBtn = document.getElementById("pomoStartBtn");
-        const pomoResetBtn = document.getElementById("pomoResetBtn");
-
-        function updatePomoDisplay() {
-            const m = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
-            const s = String(pomoSeconds % 60).padStart(2, "0");
-            const formatted = `${m}:${s}`;
-            pomoClock.textContent = formatted;
-            pomoMiniClock.textContent = formatted;
-        }
-
-        function playGentleBell() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = "sine";
-                    osc.frequency.value = freq;
-                    gain.gain.setValueAtTime(0.14, audioCtx.currentTime + idx * 0.18);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.18 + 0.9);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + idx * 0.18);
-                    osc.stop(audioCtx.currentTime + idx * 0.18 + 0.95);
-                });
-            } catch (err) {}
-        }
-
-        document.querySelectorAll(".pomo-mode-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                clearInterval(pomoInterval);
-                pomoRunning = false;
-                pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
-                document.querySelectorAll(".pomo-mode-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                pomoInitialSeconds = parseInt(btn.dataset.mins, 10) * 60;
-                pomoSeconds = pomoInitialSeconds;
-                updatePomoDisplay();
-            });
-        });
-
-        pomoStartBtn.addEventListener("click", () => {
-            if (pomoRunning) {
-                clearInterval(pomoInterval);
-                pomoRunning = false;
-                pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Lanjut';
-            } else {
-                pomoRunning = true;
-                pomoStartBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Jeda';
-                pomoInterval = setInterval(() => {
-                    if (pomoSeconds > 0) {
-                        pomoSeconds--;
-                        updatePomoDisplay();
-                    } else {
-                        clearInterval(pomoInterval);
-                        pomoRunning = false;
-                        pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
-                        playGentleBell();
-                        alert("🍵 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu 🌿");
-                    }
-                }, 1000);
-            }
-        });
-
-        pomoResetBtn.addEventListener("click", () => {
-            clearInterval(pomoInterval);
-            pomoRunning = false;
-            pomoSeconds = pomoInitialSeconds;
-            pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
-            updatePomoDisplay();
-        });
-
-        function escapeHtml(str) {
-            return String(str || "")
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;");
-        }
-
-        // ============================================================
-        // 12. INISIALISASI DATABASE, WALLPAPER, & TAMPILAN PER HARI
-        // ============================================================
-        openStudyDB().then(async () => {
-            const savedWp = await getSetting("customWallpaper");
-            if (savedWp) {
-                applyWallpaperBlob(savedWp);
-            }
-            courses = await getAllCourses();
-            renderCalendarAndRecommendations();
-            renderFoldersByDay();
-        });
-    })();
-    </script>
-</body>
-</html>
+                        <button type="button" class="del-mat
