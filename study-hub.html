@@ -1,690 +1,885 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Hub ✿ | Little Universe</title>
 
-    <title>Study & Task Hub ✿ | Little Universe</title>
-    <meta name="description" content="Private task deadline tracker with notifications, Pomodoro study timer, Semester 1 notes, and NotebookLM links.">
-
-    <!-- CSS Global -->
+    <!-- CSS Global Little Universe -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS KHUSUS STUDY & TASK HUB -->
     <style>
-        .hub-container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 55px 22px 95px;
+        :root {
+            --bg-cream: #fffaf4;
+            --card-white: #ffffff;
+            --rose-main: #c96b78;
+            --rose-dark: #8f434e;
+            --rose-soft: #fce8ec;
+            --peach-soft: #ffefe2;
+            --mint-soft: #e6f5ec;
+            --lavender-soft: #f1ebfc;
+            --sky-soft: #e6f2fc;
+            --butter-soft: #fdf6dc;
+            --text-dark: #3d2e32;
+            --text-muted: #756167;
+            --border-soft: #f0dce0;
+            --read-scale: 1;
         }
 
-        /* 1. HEADER */
-        .hub-header {
-            text-align: center;
-            max-width: 660px;
-            margin: 0 auto 40px;
+        body.dark-mode {
+            --bg-cream: #1f1b1e;
+            --card-white: #2b2529;
+            --rose-main: #e88d9a;
+            --rose-dark: #f7c3cb;
+            --rose-soft: #3d2b31;
+            --peach-soft: #3d3129;
+            --mint-soft: #27382e;
+            --lavender-soft: #332c40;
+            --sky-soft: #263440;
+            --butter-soft: #3d3826;
+            --text-dark: #f7eef0;
+            --text-muted: #bfa9b0;
+            --border-soft: #42363c;
         }
 
-        .hub-header .eyebrow {
-            background: var(--pink);
-            color: var(--dark-rose);
-            padding: 7px 16px;
-            border-radius: 30px;
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding-bottom: 90px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .study-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 28px 20px;
+        }
+
+        /* HEADER BANNER */
+        .study-hero {
+            background: linear-gradient(135deg, var(--rose-soft) 0%, var(--peach-soft) 100%);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 26px;
+            padding: 26px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 12px 30px rgba(185, 118, 128, 0.12);
+            margin-bottom: 24px;
+        }
+
+        .study-hero-text .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card-white);
+            color: var(--rose-main);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 13px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+
+        .study-hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin: 0 0 6px 0;
+            color: var(--text-dark);
+        }
+
+        .study-hero-text p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
+
+        /* CONTROL BAR: FONT SIZE & BACKUP */
+        .comfort-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .font-sizer-box {
+            display: inline-flex;
+            align-items: center;
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .font-sizer-box span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 0 10px;
+        }
+
+        .font-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 6px 11px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .font-btn.active, .font-btn:hover {
+            background: var(--rose-main);
+            color: #fff;
+        }
+
+        /* DASHBOARD TOP: KALENDER + REKOMENDASI BELAJAR */
+        .top-planner-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 860px) {
+            .top-planner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 10px 26px rgba(150, 110, 118, 0.08);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .panel-header h2 {
+            font-size: 17px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* MINI KALENDER MINGGUAN INTERAKTIF */
+        .week-days-strip {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
             margin-bottom: 14px;
         }
 
-        .hub-header h1 {
-            font-family: var(--heading);
-            font-size: clamp(32px, 5vw, 50px);
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 12px;
-        }
-
-        .hub-header h1 span {
-            font-style: italic;
-            color: var(--dark-rose);
-        }
-
-        .hub-header p {
-            font-size: 14px;
-            color: var(--muted);
-            line-height: 1.85;
-            margin-bottom: 18px;
-        }
-
-        .notif-bar {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: var(--white);
-            border: 1px dashed var(--rose);
-            padding: 10px 18px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-        }
-
-        .notif-btn {
-            background: var(--yellow);
-            color: var(--text);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+        .day-pill {
+            background: var(--bg-cream);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 10px 4px;
+            text-align: center;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.22s ease;
+            position: relative;
         }
 
-        .notif-btn:hover {
-            background: var(--dark-rose);
-            color: white;
+        .day-pill:hover {
+            transform: translateY(-3px);
+            border-color: var(--rose-main);
         }
 
-        .notif-status {
-            font-size: 12px;
-            color: var(--muted);
-            font-weight: 600;
+        .day-pill.selected {
+            background: linear-gradient(135deg, #d97785, #c25b6a);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 8px 18px rgba(201, 107, 120, 0.32);
         }
 
-        /* 2. TOP GRID: DEADLINE CHECKLIST & POMODORO */
-        .hub-top-grid {
-            display: grid;
-            grid-template-columns: 1.35fr 0.65fr;
-            gap: 26px;
-            margin-bottom: 55px;
-            align-items: start;
-        }
-
-        .hub-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 26px;
-            padding: 30px 26px;
-            box-shadow: var(--shadow);
-        }
-
-        .card-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .card-title-row h2 {
-            font-family: var(--heading);
-            font-size: 25px;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .count-pill {
-            background: var(--pink);
-            color: var(--dark-rose);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 11.5px;
+        .day-pill .d-name {
+            font-size: 11px;
             font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.85;
+            display: block;
         }
 
-        /* Form Tambah Deadline */
-        .deadline-form {
-            display: grid;
-            grid-template-columns: 1.2fr 0.9fr;
+        .day-pill .d-date {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 3px;
+            display: block;
+        }
+
+        .day-pill .d-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--rose-main);
+            margin: 4px auto 0;
+        }
+
+        .day-pill.selected .d-dot {
+            background: #fff;
+        }
+
+        .selected-day-summary {
+            background: var(--bg-cream);
+            border-radius: 14px;
+            padding: 12px 15px;
+            font-size: calc(13.5px * var(--read-scale));
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
+        }
+
+        /* BLOK REKOMENDASI BELAJAR */
+        .rec-box {
+            background: linear-gradient(145deg, var(--card-white), var(--lavender-soft));
+        }
+
+        .rec-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rec-item {
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+
+        .rec-item:hover {
+            transform: translateX(4px);
+        }
+
+        .rec-item-info strong {
+            display: block;
+            font-size: calc(14.5px * var(--read-scale));
+            color: var(--text-dark);
+        }
+
+        .rec-item-info span {
+            font-size: calc(12.5px * var(--read-scale));
+            color: var(--text-muted);
+        }
+
+        .btn-mini-open {
+            background: var(--rose-soft);
+            color: var(--rose-dark);
+            border: none;
+            padding: 7px 13px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 12.5px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .btn-mini-open:hover {
+            background: var(--rose-main);
+            color: #fff;
+        }
+
+        /* SECTION HEADER FOLDER MATKUL */
+        .folders-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
             margin-bottom: 22px;
         }
 
-        .deadline-form input,
-        .deadline-form select {
-            width: 100%;
-            padding: 11px 14px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: var(--cream);
-            color: var(--text);
-            font-family: var(--body);
-            font-size: 13px;
-            outline: none;
+        .folders-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            margin: 0;
         }
 
-        .deadline-form input:focus,
-        .deadline-form select:focus {
-            border-color: var(--rose);
-            background: var(--white);
-        }
-
-        .deadline-submit {
-            grid-column: 1 / -1;
-            background: var(--pink);
-            color: var(--dark-rose);
+        .btn-primary-cute {
+            background: linear-gradient(135deg, #d67482, #bd5766);
+            color: #fff;
             border: none;
-            padding: 12px;
+            padding: 11px 18px;
             border-radius: 16px;
-            font-size: 13px;
             font-weight: 700;
+            font-size: 13.5px;
             cursor: pointer;
-            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(198, 96, 111, 0.28);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .deadline-submit:hover {
-            background: var(--dark-rose);
-            color: white;
+        .btn-primary-cute:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 11px 24px rgba(198, 96, 111, 0.36);
         }
 
-        /* List Tugas & Deadline */
-        .task-items {
+        /* GRID FOLDER MATKUL BERDIMENSI (NON-FLAT) */
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+            gap: 24px;
+            padding-top: 10px;
+        }
+
+        .course-folder {
+            position: relative;
+            border-radius: 6px 22px 22px 22px;
+            padding: 20px;
+            cursor: pointer;
+            border: 1.5px solid rgba(160, 120, 128, 0.22);
+            box-shadow: 0 12px 24px rgba(145, 105, 112, 0.11), inset 0 2px 0 rgba(255,255,255,0.65);
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 175px;
+        }
+
+        /* Tab Pita di Atas Folder */
+        .course-folder::before {
+            content: attr(data-code);
+            position: absolute;
+            top: -15px;
+            left: -1.5px;
+            height: 16px;
+            padding: 2px 14px 0 12px;
+            background: inherit;
+            border: 1.5px solid rgba(160, 120, 128, 0.22);
+            border-bottom: none;
+            border-radius: 12px 14px 0 0;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+        }
+
+        .course-folder:hover {
+            transform: translateY(-6px) rotate(-0.5deg);
+            box-shadow: 0 18px 34px rgba(145, 105, 112, 0.18), inset 0 2px 0 rgba(255,255,255,0.8);
+        }
+
+        .folder-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .folder-icon-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode .folder-icon-badge {
+            background: rgba(35, 30, 33, 0.8);
+        }
+
+        .folder-day-chip {
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--rose-dark);
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        body.dark-mode .folder-day-chip {
+            background: rgba(35, 30, 33, 0.85);
+        }
+
+        .course-folder h3 {
+            margin: 0 0 6px 0;
+            font-size: calc(17px * var(--read-scale));
+            line-height: 1.35;
+            color: var(--text-dark);
+        }
+
+        .course-folder .lecturer-tag {
+            font-size: calc(12.5px * var(--read-scale));
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .folder-progress-wrap {
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 12px;
+            padding: 8px 11px;
+        }
+
+        body.dark-mode .folder-progress-wrap {
+            background: rgba(28, 24, 27, 0.65);
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(160, 120, 128, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e08290, #c25b6a);
+            border-radius: 10px;
+            transition: width 0.35s ease;
+        }
+
+        /* ============================================================
+           TAMPILAN DALAM FOLDER (PERTEMUAN 1 - 16)
+           ============================================================ */
+        #folderDetailView {
+            display: none;
+            animation: fadeSlideUp 0.28s ease;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-topbar {
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 22px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            box-shadow: 0 10px 25px rgba(150, 110, 118, 0.08);
+        }
+
+        .btn-back-folder {
+            background: var(--rose-soft);
+            color: var(--rose-dark);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-title-group h2 {
+            margin: 0 0 4px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: calc(22px * var(--read-scale));
+        }
+
+        .detail-title-group p {
+            margin: 0;
+            font-size: calc(13.5px * var(--read-scale));
+            color: var(--text-muted);
+        }
+
+        /* GRID PERTEMUAN 1 - 16 */
+        .meetings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 18px;
+        }
+
+        .meeting-card {
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(150, 110, 118, 0.07);
+            transition: border-color 0.2s, transform 0.2s;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .dl-item {
+        .meeting-card.completed {
+            border-color: #8cc9a3;
+            background: linear-gradient(180deg, var(--card-white) 0%, var(--mint-soft) 100%);
+        }
+
+        .meeting-card-head {
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 10px;
+        }
+
+        .meeting-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            border-radius: 18px;
-            background: var(--cream);
-            border: 1px solid var(--border);
-            transition: 0.25s;
-        }
-
-        .dl-item.urgent {
-            border: 1.5px solid #e58e98;
-            background: #fff4f6;
-        }
-
-        .dl-item.done {
-            opacity: 0.65;
-        }
-
-        .dl-left {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .dl-check {
-            width: 22px;
-            height: 22px;
-            margin-top: 2px;
-            border-radius: 50%;
-            border: 2px solid var(--rose);
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: transparent;
-            flex-shrink: 0;
-        }
-
-        .dl-item.done .dl-check {
-            background: var(--dark-rose);
-            border-color: var(--dark-rose);
-            color: white;
-        }
-
-        .dl-info h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .dl-item.done .dl-info h4 {
-            text-decoration: line-through;
-        }
-
-        .dl-meta {
-            display: flex;
-            flex-wrap: wrap;
             gap: 6px;
-            align-items: center;
-            font-size: 11.5px;
-            color: var(--muted);
-        }
-
-        .dl-badge {
-            padding: 3px 9px;
-            border-radius: 12px;
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 700;
-            background: var(--white);
-            border: 1px solid var(--border);
-            color: var(--dark-rose);
+            padding: 5px 12px;
+            border-radius: 12px;
+            background: var(--rose-soft);
+            color: var(--rose-dark);
         }
 
-        .dl-badge.soon {
-            background: #ffe1e6;
-            color: #b54554;
-            border-color: #f3b5be;
+        .meeting-badge.exam {
+            background: #ffe1a8;
+            color: #7d5100;
         }
 
-        .dl-del {
+        .check-done-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-muted);
+            user-select: none;
+        }
+
+        .check-done-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: #4aa870;
+            cursor: pointer;
+        }
+
+        .meeting-topic-input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1.5px solid var(--border-soft);
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            border-radius: 12px;
+            padding: 9px 12px;
+            font-family: inherit;
+            font-size: calc(14.5px * var(--read-scale));
+            font-weight: 700;
+        }
+
+        .meeting-notes-input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1.5px solid var(--border-soft);
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            border-radius: 12px;
+            padding: 9px 12px;
+            font-family: inherit;
+            font-size: calc(13.5px * var(--read-scale));
+            line-height: 1.55;
+            resize: vertical;
+            min-height: 68px;
+        }
+
+        /* DAFTAR FILE & LINK BAHAN AJAR */
+        .materials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .material-chip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            border-radius: 11px;
+            padding: 7px 11px;
+            font-size: calc(13px * var(--read-scale));
+        }
+
+        .material-chip a, .material-chip button.open-file-btn {
             background: none;
             border: none;
-            color: var(--muted);
+            padding: 0;
+            color: var(--rose-dark);
+            font-weight: 700;
+            font-size: calc(13px * var(--read-scale));
+            text-decoration: none;
+            cursor: pointer;
+            text-align: left;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            word-break: break-word;
+        }
+
+        .material-chip a:hover, .material-chip button.open-file-btn:hover {
+            text-decoration: underline;
+        }
+
+        .del-mat-btn {
+            background: none;
+            border: none;
+            color: #b56570;
             cursor: pointer;
             font-size: 13px;
-            padding: 4px;
+            padding: 2px 5px;
         }
 
-        .dl-del:hover {
-            color: #c95c68;
+        .meeting-actions-row {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
         }
 
-        /* 3. POMODORO STUDY TIMER */
-        .pomo-card {
-            text-align: center;
-            background: linear-gradient(145deg, #fffdf9 0%, #fcecf1 100%);
-            border: 1.5px solid var(--blush);
+        .btn-upload-mat, .btn-link-mat {
+            flex: 1;
+            border: 1.5px dashed var(--rose-main);
+            background: var(--rose-soft);
+            color: var(--rose-dark);
+            border-radius: 12px;
+            padding: 8px 10px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .btn-link-mat {
+            border-color: #8aa8d6;
+            background: var(--sky-soft);
+            color: #36598a;
+        }
+
+        body.dark-mode .btn-link-mat {
+            color: #a8c9f7;
+        }
+
+        /* ============================================================
+           FLOATING POMODORO ALARM (SELALU ADA DI SETIAP HALAMAN & FOLDER)
+           ============================================================ */
+        #pomodoroWidget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: var(--card-white);
+            border: 2px solid var(--rose-main);
+            border-radius: 24px;
+            padding: 14px 18px;
+            box-shadow: 0 14px 34px rgba(157, 92, 103, 0.26);
+            width: 245px;
+            transition: all 0.25s ease;
+        }
+
+        #pomodoroWidget.minimized {
+            width: auto;
+            padding: 10px 16px;
+            border-radius: 30px;
+        }
+
+        #pomodoroWidget.minimized .pomo-body {
+            display: none;
+        }
+
+        .pomo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .pomo-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--rose-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .pomo-modes {
             display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 20px;
+            gap: 5px;
+            margin: 10px 0 8px;
         }
 
         .pomo-mode-btn {
-            padding: 6px 12px;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            background: var(--white);
-            color: var(--muted);
+            flex: 1;
+            border: 1px solid var(--border-soft);
+            background: var(--bg-cream);
+            color: var(--text-muted);
             font-size: 11px;
             font-weight: 700;
+            padding: 5px 4px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.25s;
         }
 
         .pomo-mode-btn.active {
-            background: var(--dark-rose);
-            color: white;
-            border-color: var(--dark-rose);
+            background: var(--rose-main);
+            color: #fff;
+            border-color: var(--rose-main);
         }
 
-        .pomo-circle {
-            width: 185px;
-            height: 185px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: var(--white);
-            border: 4px dashed var(--rose);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 12px 30px rgba(157, 111, 105, 0.14);
-        }
-
-        .pomo-time {
-            font-family: var(--heading);
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--dark-rose);
-            line-height: 1.1;
-        }
-
-        .pomo-label {
-            font-size: 11px;
+        .pomo-clock {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
             font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--muted);
-            margin-top: 4px;
+            text-align: center;
+            color: var(--text-dark);
+            margin: 4px 0 10px;
+            letter-spacing: 1px;
         }
 
         .pomo-controls {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 8px;
         }
 
-        .pomo-btn {
-            padding: 10px 20px;
-            border-radius: 22px;
+        .pomo-controls button {
+            flex: 1;
             border: none;
-            font-size: 12.5px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-
-        .pomo-start {
-            background: var(--dark-rose);
-            color: white;
-        }
-
-        .pomo-reset {
-            background: var(--white);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .pomo-sessions {
-            font-size: 12px;
-            color: var(--dark-rose);
-            font-weight: 600;
-            background: var(--white);
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-        }
-
-        /* 4. SEMESTER 1 COURSES + NOTEBOOKLM LINKS + DAILY NOTES */
-        .courses-section-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .courses-section-header h2 {
-            font-family: var(--heading);
-            font-size: 30px;
-            font-weight: 500;
-            color: var(--text);
-            margin-top: 8px;
-        }
-
-        .courses-section-header h2 span {
-            font-style: italic;
-            color: var(--dark-rose);
-        }
-
-        .sem1-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
-        }
-
-        .matkul-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 24px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .matkul-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .matkul-tag {
-            background: var(--sage);
-            color: #4f6349;
-            padding: 4px 12px;
-            border-radius: 14px;
-            font-size: 10.5px;
-            font-weight: 700;
-        }
-
-        .matkul-card:nth-child(even) .matkul-tag {
-            background: var(--yellow);
-            color: #7d632c;
-        }
-
-        .edit-nlm-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 4px 10px;
             border-radius: 12px;
-            font-size: 10.5px;
+            padding: 8px;
             font-weight: 700;
+            font-size: 12.5px;
             cursor: pointer;
-            transition: 0.25s;
         }
 
-        .edit-nlm-btn:hover {
-            border-color: var(--dark-rose);
-            color: var(--dark-rose);
+        #pomoStartBtn {
+            background: var(--rose-main);
+            color: #fff;
         }
 
-        .matkul-card h3 {
-            font-family: var(--heading);
-            font-size: 20px;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 12px;
+        #pomoResetBtn {
+            background: var(--rose-soft);
+            color: var(--rose-dark);
         }
 
-        /* Tombol Link NotebookLM (Daily & UTS/UAS) */
-        .nlm-links-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .nlm-pill {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 10px;
-            border-radius: 13px;
-            font-size: 11.5px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: 0.25s;
-            text-align: center;
-        }
-
-        .nlm-daily {
-            background: #eef4eb;
-            color: #465e40;
-            border: 1px solid #d1e0ca;
-        }
-
-        .nlm-daily:hover {
-            background: #465e40;
-            color: white;
-        }
-
-        .nlm-exam {
-            background: #fff8e2;
-            color: #826629;
-            border: 1px solid #eddca6;
-        }
-
-        .nlm-exam:hover {
-            background: #826629;
-            color: white;
-        }
-
-        .nlm-pill.unset {
-            opacity: 0.65;
-            border-style: dashed;
-        }
-
-        /* Form Input Link NotebookLM (Muncul saat diklik Set Links) */
-        .nlm-editor-box {
+        /* MODAL TAMBAH MATKUL */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(35, 25, 28, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
             display: none;
-            background: var(--cream);
-            border: 1px dashed var(--rose);
-            border-radius: 14px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-
-        .nlm-editor-box.show {
-            display: block;
-        }
-
-        .nlm-editor-box input {
-            width: 100%;
-            padding: 8px 10px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--white);
-            color: var(--text);
-            font-size: 11.5px;
-            margin-bottom: 8px;
-            outline: none;
-        }
-
-        .nlm-save-links {
-            background: var(--dark-rose);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .matkul-note-area {
-            width: 100%;
-            min-height: 78px;
-            padding: 11px 13px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: var(--cream);
-            color: var(--text);
-            font-family: var(--body);
-            font-size: 12.5px;
-            line-height: 1.7;
-            resize: vertical;
-            outline: none;
-            margin-bottom: 10px;
-        }
-
-        .matkul-note-area:focus {
-            border-color: var(--rose);
-            background: var(--white);
-        }
-
-        .matkul-footer {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            padding: 16px;
         }
 
-        .matkul-saved-info {
-            font-size: 11px;
-            color: var(--muted);
+        .modal-backdrop.open {
+            display: flex;
         }
 
-        .save-note-btn {
-            background: var(--pink);
-            color: var(--dark-rose);
-            border: none;
-            padding: 6px 14px;
-            border-radius: 16px;
-            font-size: 11.5px;
+        .modal-card {
+            background: var(--card-white);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.22);
+        }
+
+        .modal-card h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 14px 0;
+            font-size: 21px;
+        }
+
+        .form-group {
+            margin-bottom: 13px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
             font-weight: 700;
-            cursor: pointer;
-            transition: 0.25s;
+            margin-bottom: 5px;
+            color: var(--text-dark);
         }
 
-        .save-note-btn:hover {
-            background: var(--dark-rose);
-            color: white;
+        .form-group input, .form-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-soft);
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: inherit;
+            font-size: 14px;
         }
 
-        /* 5. DARK MODE */
-        body.dark-mode .hub-card,
-        body.dark-mode .matkul-card,
-        body.dark-mode .notif-bar {
-            background: #30282d;
-            border-color: var(--border);
-        }
-
-        body.dark-mode .pomo-card {
-            background: linear-gradient(145deg, #30282d 0%, #3d2a32 100%);
-        }
-
-        body.dark-mode .dl-item,
-        body.dark-mode .deadline-form input,
-        body.dark-mode .deadline-form select,
-        body.dark-mode .matkul-note-area,
-        body.dark-mode .nlm-editor-box,
-        body.dark-mode .nlm-editor-box input,
-        body.dark-mode .pomo-circle,
-        body.dark-mode .pomo-mode-btn,
-        body.dark-mode .pomo-sessions {
-            background: #241e22;
-            border-color: var(--border);
-        }
-
-        body.dark-mode .nlm-daily {
-            background: #263327;
-            color: #b7d6b3;
-            border-color: #3a4f3b;
-        }
-
-        body.dark-mode .nlm-exam {
-            background: #383121;
-            color: #e8d297;
-            border-color: #544930;
-        }
-
-        body.dark-mode .dl-item.urgent {
-            background: #3d2429;
-        }
-
-        /* 6. RESPONSIVE MOBILE */
-        @media (max-width: 860px) {
-            .hub-top-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sem1-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 540px) {
-            .deadline-form,
-            .nlm-links-row {
-                grid-template-columns: 1fr;
-            }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 18px;
         }
     </style>
 </head>
-
 <body>
 
-    <!-- DECORATIVE BACKGROUND -->
-    <div class="background-decoration">
-        <span>✿</span>
-        <span>♡</span>
-        <span>✧</span>
-        <span>୨୧</span>
-    </div>
-
-    <!-- NAVIGATION -->
+    <!-- NAVBAR -->
     <header class="navbar">
-        <a href="index.html" class="logo">
-            little universe <span>✿</span>
-        </a>
-
+        <a href="index.html" class="logo">little universe <span>✿</span></a>
         <nav class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
@@ -699,415 +894,816 @@
             <a href="guestbook.html">Guestbook</a>
             <a href="surprise.html">Surprises</a>
         </nav>
-
         <div class="nav-actions">
-            <button id="themeToggle" aria-label="Toggle dark mode">
-                <i class="fa-regular fa-moon"></i>
-            </button>
-
-            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button id="themeToggle" aria-label="Toggle dark mode"><i class="fa-regular fa-moon"></i></button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
-    <main class="hub-container">
+    <main class="study-container">
 
-        <!-- HEADER HALAMAN -->
-        <header class="hub-header">
-            <span class="eyebrow">PRIVATE STUDY & DEADLINE SPACE 🔒</span>
-            <h1>My Little <span>Study Hub.</span></h1>
-            <p>
-                Track assignment deadlines with reminders, focus with Pomodoro sessions, 
-                jump straight to your Daily & UTS/UAS NotebookLM, and save today's lecture notes 🎓✿
-            </p>
+        <!-- HERO HEADER + PENGATUR UKURAN TULISAN -->
+        <section class="study-hero">
+            <div class="study-hero-text">
+                <div class="badge-pill"><span>📚</span> SISTEM INFORMASI • SEMESTER 1</div>
+                <h1>My Cozy Study Hub ✿</h1>
+                <p>Simpan bahan ajar Pertemuan 1–16, pantau progres belajar, dan fokus bareng Pomodoro.</p>
+            </div>
 
-            <div class="notif-bar">
-                <button type="button" class="notif-btn" id="enableNotifBtn">
-                    🔔 Enable Deadline Reminders
+            <div class="comfort-toolbar">
+                <div class="font-sizer-box" title="Atur besar-kecil tulisan agar nyaman dibaca">
+                    <span>Ukuran Teks:</span>
+                    <button class="font-btn" data-scale="0.92">A-</button>
+                    <button class="font-btn active" data-scale="1">Normal</button>
+                    <button class="font-btn" data-scale="1.15">A+</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 1: BERANDA STUDY HUB (KALENDER + REKOMENDASI + FOLDER MATKUL) -->
+        <div id="foldersHomeView">
+
+            <div class="top-planner-grid">
+                <!-- KALENDER MINGGUAN -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2><span>🗓️</span> Jadwal &amp; Kalender Mingguan</h2>
+                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--rose-main);"></span>
+                    </div>
+
+                    <div class="week-days-strip" id="weekDaysStrip"></div>
+
+                    <div class="selected-day-summary">
+                        <span id="selectedDayText">Memuat jadwal hari ini...</span>
+                        <span style="font-size:12px; font-weight:700; color:var(--rose-main);">Klik hari untuk cek jadwal</span>
+                    </div>
+                </div>
+
+                <!-- BLOK REKOMENDASI BELAJAR -->
+                <div class="panel-card rec-box">
+                    <div class="panel-header">
+                        <h2 id="recTitle"><span>✨</span> Rekomendasi Belajar Hari Ini</h2>
+                    </div>
+                    <div class="rec-list" id="recList"></div>
+                </div>
+            </div>
+
+            <!-- DAFTAR FOLDER MATA KULIAH -->
+            <div class="folders-header">
+                <h2>📁 Folder Mata Kuliah</h2>
+                <button class="btn-primary-cute" id="openAddCourseModalBtn">
+                    <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
                 </button>
-                <span class="notif-status" id="notifStatusText">Tap to allow mobile/desktop alerts</span>
-            </div>
-        </header>
-
-        <!-- BAGIAN ATAS: DEADLINE CHECKLIST & POMODORO -->
-        <section class="hub-top-grid">
-
-            <!-- 1. TASK & DEADLINE CHECKLIST -->
-            <div class="hub-card">
-                <div class="card-title-row">
-                    <h2>Task & Deadline Checklist ✎</h2>
-                    <span class="count-pill" id="activeTaskCount">0 Pending</span>
-                </div>
-
-                <form class="deadline-form" id="deadlineForm">
-                    <input type="text" id="dlTitle" placeholder="Task or assignment title..." required>
-                    <select id="dlCourse">
-                        <option value="💻 Algoritma & Java">💻 Algoritma & Java</option>
-                        <option value="🌐 Web Development">🌐 Web Development</option>
-                        <option value="📐 Matematika Diskrit">📐 Matematika Diskrit</option>
-                        <option value="🔢 Aljabar Linear">🔢 Aljabar Linear</option>
-                        <option value="📊 Praktikum Niaga & Akuntansi">📊 Praktikum Niaga & Akuntansi</option>
-                        <option value="🇮🇩 Kewarganegaraan">🇮🇩 Kewarganegaraan</option>
-                    </select>
-                    <input type="datetime-local" id="dlDateTime" required>
-                    <button type="submit" class="deadline-submit">+ Add Task & Set Reminder 🔔</button>
-                </form>
-
-                <div class="task-items" id="deadlineList"></div>
             </div>
 
-            <!-- 2. POMODORO FOCUS TIMER -->
-            <div class="hub-card pomo-card">
-                <div class="card-title-row" style="justify-content: center;">
-                    <h2>Pomodoro Study 🍅</h2>
+            <div class="folders-grid" id="foldersGrid"></div>
+        </div>
+
+        <!-- VIEW 2: ISI DALAM FOLDER (PERTEMUAN 1 - 16) -->
+        <div id="folderDetailView">
+            <div class="detail-topbar">
+                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                    <button class="btn-back-folder" id="backToFoldersBtn">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Folder
+                    </button>
+                    <div class="detail-title-group">
+                        <h2 id="detailCourseTitle">Nama Mata Kuliah</h2>
+                        <p id="detailCourseMeta">Hari Kuliah • Dosen • Progres</p>
+                    </div>
                 </div>
 
-                <div class="pomo-modes">
-                    <button type="button" class="pomo-mode-btn active" data-mins="25" data-label="FOCUS TIME">Focus 25m</button>
-                    <button type="button" class="pomo-mode-btn" data-mins="5" data-label="SHORT BREAK">Break 5m</button>
-                    <button type="button" class="pomo-mode-btn" data-mins="15" data-label="LONG REST">Rest 15m</button>
-                </div>
-
-                <div class="pomo-circle">
-                    <div class="pomo-time" id="pomoDisplay">25:00</div>
-                    <div class="pomo-label" id="pomoModeLabel">FOCUS TIME</div>
-                </div>
-
-                <div class="pomo-controls">
-                    <button type="button" class="pomo-btn pomo-start" id="pomoStartBtn">Start ▶</button>
-                    <button type="button" class="pomo-btn pomo-reset" id="pomoResetBtn">Reset ↺</button>
-                </div>
-
-                <div class="pomo-sessions" id="pomoSessionCount">
-                    Today's Focus Sessions: 0 ✿
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-mini-open" id="editCourseScheduleBtn" title="Ubah jadwal hari kuliah">
+                        <i class="fa-solid fa-calendar-day"></i> Ubah Hari
+                    </button>
+                    <button class="btn-mini-open" id="deleteCourseBtn" style="background:#ffe2e6; color:#a83244;" title="Hapus folder matkul">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
             </div>
 
-        </section>
-
-        <!-- BAGIAN BAWAH: SEMESTER 1 MATA KULIAH + NOTEBOOKLM LINKS + CATATAN HARIAN -->
-        <section>
-            <div class="courses-section-header">
-                <span class="eyebrow">INFORMATION SYSTEMS • SEMESTER 1</span>
-                <h2>NotebookLM & <span>Today's Materials.</span></h2>
-            </div>
-
-            <div class="sem1-grid" id="sem1CoursesGrid"></div>
-        </section>
+            <div class="meetings-grid" id="meetingsGrid"></div>
+        </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-logo">
-            little universe <span>✿</span>
+    <!-- FLOATING POMODORO ALARM (SELALU AKTIF DI POJOK KANAN BAWAH) -->
+    <div id="pomodoroWidget">
+        <div class="pomo-header" id="pomoToggleHeader" title="Klik untuk minimize/expand">
+            <div class="pomo-title">
+                <span>🍅</span> <span id="pomoStatusLabel">Pomodoro Fokus</span>
+            </div>
+            <i class="fa-solid fa-chevron-down" id="pomoChevron" style="font-size:12px; color:var(--text-muted);"></i>
         </div>
-
-        <p>
-            A little space on the internet,
-            made with love and a thousand little dreams.
-        </p>
-
-        <div class="footer-links">
-            <a href="about.html">About</a>
-            <a href="memories.html">Memories</a>
-            <a href="diary.html">Diary</a>
-            <a href="study-hub.html">Study Hub</a>
-            <a href="guestbook.html">Guestbook</a>
+        <div class="pomo-body">
+            <div class="pomo-modes">
+                <button class="pomo-mode-btn active" data-mins="25" data-label="Pomodoro Fokus">Fokus 25m</button>
+                <button class="pomo-mode-btn" data-mins="5" data-label="Istirahat Singkat">Break 5m</button>
+                <button class="pomo-mode-btn" data-mins="15" data-label="Istirahat Panjang">Long 15m</button>
+            </div>
+            <div class="pomo-clock" id="pomoClockDisplay">25:00</div>
+            <div class="pomo-controls">
+                <button id="pomoStartBtn"><i class="fa-solid fa-play"></i> Mulai</button>
+                <button id="pomoResetBtn"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+            </div>
         </div>
+    </div>
 
-        <div class="footer-bottom">
-            <span>© 2026 Little Universe</span>
-            <span>made with ♡ and a little sunshine</span>
+    <!-- MODAL TAMBAH FOLDER MATKUL -->
+    <div class="modal-backdrop" id="addCourseModal">
+        <div class="modal-card">
+            <h3>📁 Tambah Folder Matkul Baru</h3>
+            <div class="form-group">
+                <label>Nama Mata Kuliah</label>
+                <input type="text" id="newCourseName" placeholder="Contoh: Pemrograman Web">
+            </div>
+            <div class="form-group">
+                <label>Kode / Label Tab Folder</label>
+                <input type="text" id="newCourseCode" placeholder="Contoh: SI-101 • SEM 1">
+            </div>
+            <div class="form-group">
+                <label>Jadwal Hari Kuliah (Untuk Rekomendasi Belajar)</label>
+                <select id="newCourseDay">
+                    <option value="Senin">Senin</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Rabu" selected>Rabu</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Jumat">Jumat</option>
+                    <option value="Sabtu">Sabtu</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nama Dosen (Opsional)</label>
+                <input type="text" id="newCourseLecturer" placeholder="Contoh: Encep Supriatna, S.E, S.Kom, M.M.">
+            </div>
+            <div class="form-group">
+                <label>Ikon &amp; Warna Folder</label>
+                <select id="newCourseTheme">
+                    <option value="🌸|#fce8ec">🌸 Soft Rose Pink</option>
+                    <option value="🍑|#ffefe2">🍑 Warm Peach</option>
+                    <option value="🌿|#e6f5ec">🌿 Mint Sage</option>
+                    <option value="🪻|#f1ebfc">🪻 Soft Lavender</option>
+                    <option value="☁️|#e6f2fc">☁️ Sky Pastel</option>
+                    <option value="🍋|#fdf6dc">🍋 Butter Cream</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-mini-open" id="closeAddCourseModalBtn">Batal</button>
+                <button class="btn-primary-cute" id="saveNewCourseBtn">Simpan Folder</button>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- JAVASCRIPT GLOBAL -->
+    <!-- HIDDEN FILE INPUT UNTUK UPLOAD BAHAN AJAR KE INDEXEDDB -->
+    <input type="file" id="hiddenMaterialFileInput" style="display:none;" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,image/*">
+
     <script src="js/script.js"></script>
-
-    <!-- JAVASCRIPT STUDY HUB -->
     <script>
-        // ==========================================
-        // 1. ALARM SOUND & BROWSER NOTIFICATION
-        // ==========================================
-        function playReminderBell() {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (!AudioCtx) return;
-            const ctx = new AudioCtx();
-            const freqs = [587.33, 783.99, 987.77, 1174.66];
-            freqs.forEach((f, idx) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(f, ctx.currentTime + idx * 0.14);
-                gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.14);
-                gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + idx * 0.14 + 0.03);
-                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.14 + 0.5);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(ctx.currentTime + idx * 0.14);
-                osc.stop(ctx.currentTime + idx * 0.14 + 0.55);
+    (function () {
+        // ============================================================
+        // 1. INDEXEDDB STORAGE ENGINE (Kapasitas Besar untuk File PDF/PPT/Catatan)
+        // ============================================================
+        const DB_NAME = "LittleUniverseStudyDB";
+        const DB_VERSION = 1;
+        let db = null;
+
+        function openStudyDB() {
+            return new Promise((resolve, reject) => {
+                const req = indexedDB.open(DB_NAME, DB_VERSION);
+                req.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains("courses")) {
+                        database.createObjectStore("courses", { keyPath: "id" });
+                    }
+                    if (!database.objectStoreNames.contains("files")) {
+                        database.createObjectStore("files", { keyPath: "fileId" });
+                    }
+                };
+                req.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                req.onerror = (e) => reject(e.target.error);
             });
         }
 
-        const enableNotifBtn = document.getElementById("enableNotifBtn");
-        const notifStatusText = document.getElementById("notifStatusText");
-
-        function updateNotifStatus() {
-            if (!("Notification" in window)) {
-                notifStatusText.textContent = "In-app chime reminders active ♪";
-                return;
-            }
-            if (Notification.permission === "granted") {
-                notifStatusText.textContent = "Notifications Active ✓";
-                enableNotifBtn.textContent = "🔔 Test Reminder";
-            } else if (Notification.permission === "denied") {
-                notifStatusText.textContent = "Browser blocked popup (in-app alert active)";
-            }
+        function getAllCourses() {
+            return new Promise((resolve) => {
+                const tx = db.transaction("courses", "readonly");
+                const req = tx.objectStore("courses").getAll();
+                req.onsuccess = () => resolve(req.result || []);
+            });
         }
 
-        enableNotifBtn.addEventListener("click", () => {
-            playReminderBell();
-            if ("Notification" in window) {
-                Notification.requestPermission().then(perm => {
-                    updateNotifStatus();
-                    if (perm === "granted") {
-                        new Notification("Little Universe Study Hub ✿", {
-                            body: "Yay! Deadline & Pomodoro reminders are ready for Caca ♡"
-                        });
-                    }
+        function saveCourse(course) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("courses", "readwrite");
+                tx.objectStore("courses").put(course);
+                tx.oncomplete = () => resolve();
+            });
+        }
+
+        function deleteCourseById(id) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("courses", "readwrite");
+                tx.objectStore("courses").delete(id);
+                tx.oncomplete = () => resolve();
+            });
+        }
+
+        function saveFileBlob(fileId, fileObj) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("files", "readwrite");
+                tx.objectStore("files").put({
+                    fileId,
+                    name: fileObj.name,
+                    type: fileObj.type,
+                    blob: fileObj
                 });
+                tx.oncomplete = () => resolve();
+            });
+        }
+
+        function getFileBlob(fileId) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("files", "readonly");
+                const req = tx.objectStore("files").get(fileId);
+                req.onsuccess = () => resolve(req.result);
+            });
+        }
+
+        function deleteFileBlob(fileId) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("files", "readwrite");
+                tx.objectStore("files").delete(fileId);
+                tx.oncomplete = () => resolve();
+            });
+        }
+
+        // ============================================================
+        // 2. DATA DEFAULT MATA KULIAH SEMESTER 1 (16 PERTEMUAN)
+        // ============================================================
+        function createEmptyMeetings() {
+            return Array.from({ length: 16 }, (_, idx) => {
+                const num = idx + 1;
+                let defaultTopic = "";
+                if (num === 1) defaultTopic = "Kontrak Kuliah & Pengantar Materi";
+                if (num === 8) defaultTopic = "Ujian Tengah Semester (UTS)";
+                if (num === 16) defaultTopic = "Ujian Akhir Semester (UAS)";
+                return {
+                    number: num,
+                    topic: defaultTopic,
+                    notes: "",
+                    completed: false,
+                    materials: [] // { id, kind: 'file'|'link', title, url?, fileId? }
+                };
+            });
+        }
+
+        const DEFAULT_COURSES = [
+            {
+                id: "c-matdiskrit",
+                code: "SI-101 • SEM 1",
+                name: "Matematika Diskrit",
+                day: "Senin",
+                lecturer: "Dosen Sistem Informasi",
+                icon: "🧮",
+                color: "#fce8ec",
+                meetings: createEmptyMeetings()
+            },
+            {
+                id: "c-aljabar",
+                code: "SI-102 • SEM 1",
+                name: "Aljabar Linear",
+                day: "Selasa",
+                lecturer: "Dosen Sistem Informasi",
+                icon: "📐",
+                color: "#f1ebfc",
+                meetings: createEmptyMeetings()
+            },
+            {
+                id: "c-algo",
+                code: "SI-103 • SEM 1",
+                name: "Algoritma & Perancangan Program",
+                day: "Rabu",
+                lecturer: "Encep Supriatna, S.E, S.Kom, M.M.",
+                icon: "💻",
+                color: "#e6f2fc",
+                meetings: createEmptyMeetings()
+            },
+            {
+                id: "c-webdev",
+                code: "SI-104 • SEM 1",
+                name: "Pemrograman Web",
+                day: "Rabu",
+                lecturer: "Dosen Sistem Informasi",
+                icon: "🌐",
+                color: "#e6f5ec",
+                meetings: createEmptyMeetings()
+            },
+            {
+                id: "c-java",
+                code: "SI-105 • SEM 1",
+                name: "Pemrograman Bahasa Java",
+                day: "Kamis",
+                lecturer: "Dosen Sistem Informasi",
+                icon: "☕",
+                color: "#ffefe2",
+                meetings: createEmptyMeetings()
+            },
+            {
+                id: "c-akuntansi",
+                code: "SI-106 • SEM 1",
+                name: "Akuntansi Keuangan & Praktikum Niaga",
+                day: "Jumat",
+                lecturer: "Dosen Sistem Informasi",
+                icon: "📊",
+                color: "#fdf6dc",
+                meetings: createEmptyMeetings()
             }
+        ];
+
+        let courses = [];
+        let activeCourseId = null;
+        let pendingUploadMeetingNum = null;
+
+        // ============================================================
+        // 3. PENGATUR UKURAN TULISAN (A- / NORMAL / A+)
+        // ============================================================
+        const fontBtns = document.querySelectorAll(".font-btn");
+        const savedScale = localStorage.getItem("studyHubFontScale") || "1";
+        document.documentElement.style.setProperty("--read-scale", savedScale);
+        fontBtns.forEach(btn => {
+            if (btn.dataset.scale === savedScale) btn.classList.add("active");
+            else btn.classList.remove("active");
+
+            btn.addEventListener("click", () => {
+                fontBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const sc = btn.dataset.scale;
+                document.documentElement.style.setProperty("--read-scale", sc);
+                localStorage.setItem("studyHubFontScale", sc);
+            });
         });
 
-        updateNotifStatus();
+        // ============================================================
+        // 4. KALENDER MINGGUAN & REKOMENDASI BELAJAR OTOMATIS
+        // ============================================================
+        const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const today = new Date();
+        let selectedDayName = DAY_NAMES[today.getDay()];
 
-        function sendSmartAlert(title, bodyText) {
-            playReminderBell();
-            if ("Notification" in window && Notification.permission === "granted") {
-                new Notification(title, { body: bodyText });
-            }
-        }
-
-        // ==========================================
-        // 2. TASK & DEADLINE CHECKLIST
-        // ==========================================
-        const deadlineForm = document.getElementById("deadlineForm");
-        const deadlineList = document.getElementById("deadlineList");
-        const activeTaskCount = document.getElementById("activeTaskCount");
-
-        function getDeadlineTasks() {
-            const saved = localStorage.getItem("raishaDeadlineTasks");
-            if (saved) return JSON.parse(saved);
-
-            const tomorrow = new Date(Date.now() + 18 * 3600 * 1000).toISOString().slice(0, 16);
-            return [
-                {
-                    id: "dl-1",
-                    title: "Latihan Logika & Program Java NetBeans",
-                    course: "💻 Algoritma & Java",
-                    deadline: tomorrow,
-                    done: false,
-                    reminded: false
-                }
-            ];
-        }
-
-        function saveDeadlineTasks(list) {
-            localStorage.setItem("raishaDeadlineTasks", JSON.stringify(list));
-        }
-
-        function formatDeadlineInfo(isoStr, isDone) {
-            const target = new Date(isoStr);
-            const now = new Date();
-            const diffHours = (target - now) / (1000 * 60 * 60);
-
-            const formattedDate = target.toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "short",
-                hour: "2-digit",
-                minute: "2-digit"
+        function renderCalendarAndRecommendations() {
+            const strip = document.getElementById("weekDaysStrip");
+            const dateLabel = document.getElementById("todayDateLabel");
+            dateLabel.textContent = today.toLocaleDateString("id-ID", {
+                weekday: "long", day: "numeric", month: "long", year: "numeric"
             });
 
-            if (isDone) return { text: formattedDate, urgent: false, badge: "Completed ♡" };
-            if (diffHours < 0) return { text: formattedDate, urgent: true, badge: "⚠️ Overdue!" };
-            if (diffHours <= 24) return { text: formattedDate, urgent: true, badge: `🔥 Due in ${Math.max(1, Math.ceil(diffHours))}h!` };
-            const days = Math.ceil(diffHours / 24);
-            return { text: formattedDate, urgent: false, badge: `${days} days left` };
-        }
+            strip.innerHTML = "";
+            // Mulai dari hari Senin minggu ini
+            const currentDayIdx = today.getDay();
+            const diffToMonday = currentDayIdx === 0 ? -6 : 1 - currentDayIdx;
+            const monday = new Date(today);
+            monday.setDate(today.getDate() + diffToMonday);
 
-        function renderDeadlineTasks() {
-            const tasks = getDeadlineTasks();
-            deadlineList.innerHTML = "";
-            let pending = 0;
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(monday);
+                d.setDate(monday.getDate() + i);
+                const dName = DAY_NAMES[d.getDay()];
+                const hasClass = courses.some(c => c.day === dName);
 
-            tasks.forEach(task => {
-                if (!task.done) pending++;
-                const info = formatDeadlineInfo(task.deadline, task.done);
+                const pill = document.createElement("div");
+                pill.className = "day-pill" + (dName === selectedDayName ? " selected" : "");
+                pill.innerHTML = `
+                    <span class="d-name">${dName.slice(0, 3)}</span>
+                    <span class="d-date">${d.getDate()}</span>
+                    ${hasClass ? '<div class="d-dot"></div>' : '<div style="height:10px;"></div>'}
+                `;
+                pill.addEventListener("click", () => {
+                    selectedDayName = dName;
+                    renderCalendarAndRecommendations();
+                });
+                strip.appendChild(pill);
+            }
 
-                const item = document.createElement("div");
-                item.className = `dl-item ${info.urgent ? "urgent" : ""} ${task.done ? "done" : ""}`;
-                item.innerHTML = `
-                    <div class="dl-left" data-toggle-dl="${task.id}">
-                        <div class="dl-check"><i class="fa-solid fa-check"></i></div>
-                        <div class="dl-info">
-                            <h4>${task.title}</h4>
-                            <div class="dl-meta">
-                                <span class="dl-badge">${task.course}</span>
-                                <span class="dl-badge ${info.urgent ? "soon" : ""}">${info.badge}</span>
-                                <span>⏰ ${info.text}</span>
-                            </div>
+            // Update Rekomendasi Belajar berdasarkan hari yang dipilih
+            const matchingCourses = courses.filter(c => c.day === selectedDayName);
+            const isToday = selectedDayName === DAY_NAMES[today.getDay()];
+            document.getElementById("recTitle").innerHTML =
+                `<span>✨</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
+
+            const summaryEl = document.getElementById("selectedDayText");
+            const recList = document.getElementById("recList");
+            recList.innerHTML = "";
+
+            if (matchingCourses.length === 0) {
+                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah tetap — waktunya review catatan santai!`;
+                recList.innerHTML = `
+                    <div class="rec-item">
+                        <div class="rec-item-info">
+                            <strong>🌿 Free Study / Review Mandiri</strong>
+                            <span>Pilih salah satu folder matkul di bawah untuk mencicil rangkuman atau latihan soal.</span>
                         </div>
                     </div>
-                    <button type="button" class="dl-del" data-del-dl="${task.id}" title="Delete">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
                 `;
-                deadlineList.appendChild(item);
-            });
-
-            activeTaskCount.textContent = `${pending} Pending`;
-
-            document.querySelectorAll("[data-toggle-dl]").forEach(el => {
-                el.addEventListener("click", () => {
-                    const updated = getDeadlineTasks().map(t =>
-                        t.id === el.dataset.toggleDl ? { ...t, done: !t.done } : t
-                    );
-                    saveDeadlineTasks(updated);
-                    renderDeadlineTasks();
+            } else {
+                summaryEl.innerHTML = `Ada <strong>${matchingCourses.length} mata kuliah</strong> terjadwal pada hari <strong>${selectedDayName}</strong>.`;
+                matchingCourses.forEach(course => {
+                    const doneCount = course.meetings.filter(m => m.completed).length;
+                    const nextMeeting = course.meetings.find(m => !m.completed) || course.meetings[15];
+                    const item = document.createElement("div");
+                    item.className = "rec-item";
+                    item.innerHTML = `
+                        <div class="rec-item-info">
+                            <strong>${course.icon} ${course.name}</strong>
+                            <span>Progres ${doneCount}/16 • Lanjut Pertemuan ${nextMeeting.number}</span>
+                        </div>
+                        <button class="btn-mini-open">Buka Folder →</button>
+                    `;
+                    item.querySelector("button").addEventListener("click", () => openFolder(course.id));
+                    recList.appendChild(item);
                 });
-            });
+            }
+        }
 
-            document.querySelectorAll("[data-del-dl]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const updated = getDeadlineTasks().filter(t => t.id !== btn.dataset.delDl);
-                    saveDeadlineTasks(updated);
-                    renderDeadlineTasks();
-                });
+        // ============================================================
+        // 5. RENDER FOLDER MATA KULIAH
+        // ============================================================
+        function renderFoldersGrid() {
+            const grid = document.getElementById("foldersGrid");
+            grid.innerHTML = "";
+
+            courses.forEach(course => {
+                const doneCount = course.meetings.filter(m => m.completed).length;
+                const pct = Math.round((doneCount / 16) * 100);
+
+                const card = document.createElement("div");
+                card.className = "course-folder";
+                card.dataset.code = course.code || "SEMESTER 1";
+                card.style.backgroundColor = course.color || "#fce8ec";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="folder-top">
+                            <div class="folder-icon-badge">${course.icon}</div>
+                            <span class="folder-day-chip">📅 ${course.day}</span>
+                        </div>
+                        <h3>${course.name}</h3>
+                        <span class="lecturer-tag">${course.lecturer || "Mata Kuliah Aktif"}</span>
+                    </div>
+
+                    <div class="folder-progress-wrap">
+                        <div class="progress-labels">
+                            <span>Progres Belajar</span>
+                            <span>${doneCount}/16 (${pct}%)</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:${pct}%;"></div>
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener("click", () => openFolder(course.id));
+                grid.appendChild(card);
             });
         }
 
-        deadlineForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const title = document.getElementById("dlTitle").value.trim();
-            const course = document.getElementById("dlCourse").value;
-            const deadline = document.getElementById("dlDateTime").value;
+        // ============================================================
+        // 6. BUKA FOLDER & KELOLA PERTEMUAN 1 - 16
+        // ============================================================
+        function openFolder(courseId) {
+            activeCourseId = courseId;
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
 
-            if (!title || !deadline) return;
+            document.getElementById("foldersHomeView").style.display = "none";
+            document.getElementById("folderDetailView").style.display = "block";
+            updateDetailHeader(course);
+            renderMeetings(course);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
 
-            const list = getDeadlineTasks();
-            list.unshift({
-                id: "dl-" + Date.now(),
-                title,
-                course,
-                deadline,
-                done: false,
-                reminded: false
+        function updateDetailHeader(course) {
+            const doneCount = course.meetings.filter(m => m.completed).length;
+            const pct = Math.round((doneCount / 16) * 100);
+            document.getElementById("detailCourseTitle").textContent = `${course.icon} ${course.name}`;
+            document.getElementById("detailCourseMeta").textContent =
+                `Jadwal: Hari ${course.day} • ${course.lecturer || "Semester 1"} • Selesai ${doneCount}/16 Pertemuan (${pct}%)`;
+        }
+
+        function renderMeetings(course) {
+            const grid = document.getElementById("meetingsGrid");
+            grid.innerHTML = "";
+
+            course.meetings.forEach((m) => {
+                const isExam = m.number === 8 || m.number === 16;
+                const badgeText = m.number === 8
+                    ? "Pertemuan 8 • UTS"
+                    : m.number === 16
+                    ? "Pertemuan 16 • UAS"
+                    : `Pertemuan ${m.number}`;
+
+                const card = document.createElement("div");
+                card.className = "meeting-card" + (m.completed ? " completed" : "");
+
+                card.innerHTML = `
+                    <div class="meeting-card-head">
+                        <span class="meeting-badge ${isExam ? "exam" : ""}">${badgeText}</span>
+                        <label class="check-done-label">
+                            <input type="checkbox" ${m.completed ? "checked" : ""}>
+                            <span>${m.completed ? "Selesai ✓" : "Tandai Selesai"}</span>
+                        </label>
+                    </div>
+
+                    <input type="text" class="meeting-topic-input" placeholder="Judul / Topik Pertemuan ${m.number}..." value="${escapeHtml(m.topic)}">
+
+                    <textarea class="meeting-notes-input" placeholder="Tulis ringkasan materi atau poin penting di sini...">${escapeHtml(m.notes)}</textarea>
+
+                    <div class="materials-list"></div>
+
+                    <div class="meeting-actions-row">
+                        <button type="button" class="btn-upload-mat">
+                            <i class="fa-solid fa-file-arrow-up"></i> Upload File
+                        </button>
+                        <button type="button" class="btn-link-mat">
+                            <i class="fa-solid fa-link"></i> Tambah Link
+                        </button>
+                    </div>
+                `;
+
+                // Checkbox progres selesai
+                const checkbox = card.querySelector("input[type='checkbox']");
+                checkbox.addEventListener("change", async () => {
+                    m.completed = checkbox.checked;
+                    await saveCourse(course);
+                    updateDetailHeader(course);
+                    renderMeetings(course);
+                });
+
+                // Simpan otomatis topik pertemuan
+                const topicInput = card.querySelector(".meeting-topic-input");
+                topicInput.addEventListener("change", async () => {
+                    m.topic = topicInput.value;
+                    await saveCourse(course);
+                });
+
+                // Simpan otomatis catatan pertemuan
+                const notesInput = card.querySelector(".meeting-notes-input");
+                notesInput.addEventListener("change", async () => {
+                    m.notes = notesInput.value;
+                    await saveCourse(course);
+                });
+
+                // Render bahan ajar (file & link)
+                const matListEl = card.querySelector(".materials-list");
+                m.materials.forEach((mat, matIdx) => {
+                    const chip = document.createElement("div");
+                    chip.className = "material-chip";
+
+                    if (mat.kind === "file") {
+                        chip.innerHTML = `
+                            <button type="button" class="open-file-btn" title="Klik untuk buka / unduh file">
+                                <i class="fa-solid fa-file-lines"></i> ${escapeHtml(mat.title)}
+                            </button>
+                            <button type="button" class="del-mat-btn" title="Hapus file"><i class="fa-solid fa-xmark"></i></button>
+                        `;
+                        chip.querySelector(".open-file-btn").addEventListener("click", async () => {
+                            const record = await getFileBlob(mat.fileId);
+                            if (record && record.blob) {
+                                const url = URL.createObjectURL(record.blob);
+                                window.open(url, "_blank");
+                            } else {
+                                alert("File tidak ditemukan di penyimpanan browser.");
+                            }
+                        });
+                    } else {
+                        chip.innerHTML = `
+                            <a href="${escapeHtml(mat.url)}" target="_blank" rel="noopener">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(mat.title)}
+                            </a>
+                            <button type="button" class="del-mat-btn" title="Hapus link"><i class="fa-solid fa-xmark"></i></button>
+                        `;
+                    }
+
+                    chip.querySelector(".del-mat-btn").addEventListener("click", async () => {
+                        if (mat.kind === "file" && mat.fileId) {
+                            await deleteFileBlob(mat.fileId);
+                        }
+                        m.materials.splice(matIdx, 1);
+                        await saveCourse(course);
+                        renderMeetings(course);
+                    });
+
+                    matListEl.appendChild(chip);
+                });
+
+                // Tombol Upload File Bahan Ajar
+                card.querySelector(".btn-upload-mat").addEventListener("click", () => {
+                    pendingUploadMeetingNum = m.number;
+                    document.getElementById("hiddenMaterialFileInput").click();
+                });
+
+                // Tombol Tambah Link Materi
+                card.querySelector(".btn-link-mat").addEventListener("click", async () => {
+                    const title = prompt("Nama bahan ajar / link (contoh: Slide PPT Pertemuan " + m.number + "):");
+                    if (!title) return;
+                    const url = prompt("Tempel URL link (Google Drive / YouTube / Web):");
+                    if (!url) return;
+                    m.materials.push({
+                        id: "mat-" + Date.now(),
+                        kind: "link",
+                        title: title.trim(),
+                        url: url.startsWith("http") ? url.trim() : "https://" + url.trim()
+                    });
+                    await saveCourse(course);
+                    renderMeetings(course);
+                });
+
+                grid.appendChild(card);
             });
-            saveDeadlineTasks(list);
-            deadlineForm.reset();
-            renderDeadlineTasks();
+        }
+
+        // Handler file terpilih dari komputer -> simpan ke IndexedDB
+        document.getElementById("hiddenMaterialFileInput").addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file || !activeCourseId || !pendingUploadMeetingNum) return;
+
+            const course = courses.find(c => c.id === activeCourseId);
+            const meeting = course.meetings.find(m => m.number === pendingUploadMeetingNum);
+            const fileId = "file-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+
+            await saveFileBlob(fileId, file);
+            meeting.materials.push({
+                id: "mat-" + Date.now(),
+                kind: "file",
+                title: file.name,
+                fileId: fileId
+            });
+            await saveCourse(course);
+            e.target.value = "";
+            renderMeetings(course);
         });
 
-        function checkDueReminders() {
-            const list = getDeadlineTasks();
-            let changed = false;
-            const now = new Date();
+        // Tombol Kembali ke Daftar Folder
+        document.getElementById("backToFoldersBtn").addEventListener("click", () => {
+            activeCourseId = null;
+            document.getElementById("folderDetailView").style.display = "none";
+            document.getElementById("foldersHomeView").style.display = "block";
+            renderCalendarAndRecommendations();
+            renderFoldersGrid();
+        });
 
-            list.forEach(task => {
-                if (!task.done && !task.reminded) {
-                    const diffHours = (new Date(task.deadline) - now) / (1000 * 60 * 60);
-                    if (diffHours <= 24) {
-                        sendSmartAlert(
-                            "Deadline Reminder ✿",
-                            `${task.title} (${task.course}) sudah dekat waktunya!`
-                        );
-                        task.reminded = true;
-                        changed = true;
-                    }
-                }
-            });
+        // Ubah Hari Kuliah Matkul
+        document.getElementById("editCourseScheduleBtn").addEventListener("click", async () => {
+            const course = courses.find(c => c.id === activeCourseId);
+            if (!course) return;
+            const newDay = prompt("Masukkan hari kuliah baru (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu):", course.day);
+            if (!newDay) return;
+            const formatted = newDay.trim().charAt(0).toUpperCase() + newDay.trim().slice(1).toLowerCase();
+            if (["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"].includes(formatted)) {
+                course.day = formatted;
+                await saveCourse(course);
+                updateDetailHeader(course);
+            } else {
+                alert("Nama hari tidak valid. Gunakan Senin sampai Minggu.");
+            }
+        });
 
-            if (changed) saveDeadlineTasks(list);
-        }
+        // Hapus Folder Matkul
+        document.getElementById("deleteCourseBtn").addEventListener("click", async () => {
+            const course = courses.find(c => c.id === activeCourseId);
+            if (!course) return;
+            if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta seluruh isinya?`)) {
+                await deleteCourseById(course.id);
+                courses = courses.filter(c => c.id !== course.id);
+                document.getElementById("backToFoldersBtn").click();
+            }
+        });
 
-        renderDeadlineTasks();
-        setTimeout(checkDueReminders, 2500);
-        setInterval(checkDueReminders, 30000);
+        // ============================================================
+        // 7. MODAL TAMBAH FOLDER MATKUL BARU
+        // ============================================================
+        const modal = document.getElementById("addCourseModal");
+        document.getElementById("openAddCourseModalBtn").addEventListener("click", () => {
+            modal.classList.add("open");
+        });
+        document.getElementById("closeAddCourseModalBtn").addEventListener("click", () => {
+            modal.classList.remove("open");
+        });
+        document.getElementById("saveNewCourseBtn").addEventListener("click", async () => {
+            const name = document.getElementById("newCourseName").value.trim();
+            if (!name) {
+                alert("Nama mata kuliah wajib diisi ya!");
+                return;
+            }
+            const code = document.getElementById("newCourseCode").value.trim() || "SEMESTER 1";
+            const day = document.getElementById("newCourseDay").value;
+            const lecturer = document.getElementById("newCourseLecturer").value.trim();
+            const [icon, color] = document.getElementById("newCourseTheme").value.split("|");
 
-        // ==========================================
-        // 3. POMODORO TIMER
-        // ==========================================
+            const newCourse = {
+                id: "c-" + Date.now(),
+                code,
+                name,
+                day,
+                lecturer,
+                icon,
+                color,
+                meetings: createEmptyMeetings()
+            };
+
+            await saveCourse(newCourse);
+            courses.push(newCourse);
+
+            document.getElementById("newCourseName").value = "";
+            document.getElementById("newCourseCode").value = "";
+            document.getElementById("newCourseLecturer").value = "";
+            modal.classList.remove("open");
+
+            renderCalendarAndRecommendations();
+            renderFoldersGrid();
+        });
+
+        // ============================================================
+        // 8. FLOATING POMODORO ALARM (DENGAN SUARA LONCENG LEMBUT)
+        // ============================================================
         let pomoSeconds = 25 * 60;
+        let pomoInitialSeconds = 25 * 60;
         let pomoInterval = null;
-        let isRunning = false;
-        let currentModeLabel = "FOCUS TIME";
+        let pomoRunning = false;
 
-        const pomoDisplay = document.getElementById("pomoDisplay");
-        const pomoModeLabel = document.getElementById("pomoModeLabel");
+        const pomoWidget = document.getElementById("pomodoroWidget");
+        const pomoClock = document.getElementById("pomoClockDisplay");
         const pomoStartBtn = document.getElementById("pomoStartBtn");
         const pomoResetBtn = document.getElementById("pomoResetBtn");
-        const pomoSessionCount = document.getElementById("pomoSessionCount");
-        const modeBtns = document.querySelectorAll(".pomo-mode-btn");
+        const pomoStatusLabel = document.getElementById("pomoStatusLabel");
 
-        function updatePomoUI() {
-            const mins = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
-            const secs = String(pomoSeconds % 60).padStart(2, "0");
-            pomoDisplay.textContent = `${mins}:${secs}`;
+        function updatePomoDisplay() {
+            const m = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
+            const s = String(pomoSeconds % 60).padStart(2, "0");
+            pomoClock.textContent = `${m}:${s}`;
         }
 
-        function loadSessionCounter() {
-            const todayKey = "pomoSessions_" + new Date().toDateString();
-            const count = parseInt(localStorage.getItem(todayKey) || "0", 10);
-            pomoSessionCount.textContent = `Today's Focus Sessions: ${count} ✿`;
-            return count;
+        function playGentleBell() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const notes = [523.25, 659.25, 783.99, 1046.5];
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = "sine";
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.14, audioCtx.currentTime + idx * 0.18);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.18 + 0.9);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + idx * 0.18);
+                    osc.stop(audioCtx.currentTime + idx * 0.18 + 0.95);
+                });
+            } catch (err) {}
         }
 
-        function incrementSessionCounter() {
-            const todayKey = "pomoSessions_" + new Date().toDateString();
-            const next = loadSessionCounter() + 1;
-            localStorage.setItem(todayKey, String(next));
-            loadSessionCounter();
-        }
+        document.getElementById("pomoToggleHeader").addEventListener("click", () => {
+            pomoWidget.classList.toggle("minimized");
+            const chev = document.getElementById("pomoChevron");
+            chev.className = pomoWidget.classList.contains("minimized")
+                ? "fa-solid fa-chevron-up"
+                : "fa-solid fa-chevron-down";
+        });
 
-        modeBtns.forEach(btn => {
+        document.querySelectorAll(".pomo-mode-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 clearInterval(pomoInterval);
-                isRunning = false;
-                pomoStartBtn.textContent = "Start ▶";
-
-                modeBtns.forEach(b => b.classList.remove("active"));
+                pomoRunning = false;
+                pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+                document.querySelectorAll(".pomo-mode-btn").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-
-                pomoSeconds = parseInt(btn.dataset.mins, 10) * 60;
-                currentModeLabel = btn.dataset.label;
-                pomoModeLabel.textContent = currentModeLabel;
-                updatePomoUI();
+                pomoInitialSeconds = parseInt(btn.dataset.mins, 10) * 60;
+                pomoSeconds = pomoInitialSeconds;
+                pomoStatusLabel.textContent = btn.dataset.label;
+                updatePomoDisplay();
             });
         });
 
         pomoStartBtn.addEventListener("click", () => {
-            if (isRunning) {
+            if (pomoRunning) {
                 clearInterval(pomoInterval);
-                isRunning = false;
-                pomoStartBtn.textContent = "Resume ▶";
+                pomoRunning = false;
+                pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Lanjut';
             } else {
-                isRunning = true;
-                pomoStartBtn.textContent = "Pause ❚❚";
+                pomoRunning = true;
+                pomoStartBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Jeda';
                 pomoInterval = setInterval(() => {
                     if (pomoSeconds > 0) {
                         pomoSeconds--;
-                        updatePomoUI();
+                        updatePomoDisplay();
                     } else {
                         clearInterval(pomoInterval);
-                        isRunning = false;
-                        pomoStartBtn.textContent = "Start ▶";
-                        if (currentModeLabel === "FOCUS TIME") incrementSessionCounter();
-                        sendSmartAlert(
-                            "Pomodoro Finished! 🍅✿",
-                            `${currentModeLabel} selesai! Good job Caca, waktunya istirahat sejenak ♡`
-                        );
+                        pomoRunning = false;
+                        pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+                        playGentleBell();
+                        alert("🍅 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu ✿");
                     }
                 }, 1000);
             }
@@ -1115,157 +1711,37 @@
 
         pomoResetBtn.addEventListener("click", () => {
             clearInterval(pomoInterval);
-            isRunning = false;
-            pomoStartBtn.textContent = "Start ▶";
-            const activeBtn = document.querySelector(".pomo-mode-btn.active");
-            pomoSeconds = parseInt(activeBtn.dataset.mins, 10) * 60;
-            updatePomoUI();
+            pomoRunning = false;
+            pomoSeconds = pomoInitialSeconds;
+            pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+            updatePomoDisplay();
         });
 
-        loadSessionCounter();
-
-        // ==========================================
-        // 4. SEMESTER 1 MATA KULIAH + NOTEBOOKLM LINKS + CATATAN HARIAN
-        // ==========================================
-        const sem1Courses = [
-            {
-                id: "mk-algo",
-                code: "SEM 1 • CORE",
-                name: "Algoritma & Pemrograman (Java)",
-                placeholder: "Catat materi hari ini (misal: percabangan if-else, perulangan for/while, array di NetBeans)..."
-            },
-            {
-                id: "mk-web",
-                code: "SEM 1 • PRACTICAL",
-                name: "Pengembangan Web",
-                placeholder: "Catat materi hari ini (misal: struktur HTML5, Flexbox/Grid CSS, JavaScript DOM)..."
-            },
-            {
-                id: "mk-matdis",
-                code: "SEM 1 • LOGIC",
-                name: "Matematika Diskrit",
-                placeholder: "Catat materi hari ini (misal: logika proposisi, himpunan, relasi, aritmetika modulo)..."
-            },
-            {
-                id: "mk-aljabar",
-                code: "SEM 1 • MATH",
-                name: "Aljabar Linear",
-                placeholder: "Catat materi hari ini (misal: operasi matriks, determinan, sistem persamaan linear)..."
-            },
-            {
-                id: "mk-niaga",
-                code: "SEM 1 • DATA",
-                name: "Pengantar Praktikum Niaga & Akuntansi",
-                placeholder: "Catat materi hari ini (misal: rumus VLOOKUP/HLOOKUP Excel, jurnal umum, laporan keuangan)..."
-            },
-            {
-                id: "mk-pkn",
-                code: "SEM 1 • GENERAL",
-                name: "Pendidikan Kewarganegaraan",
-                placeholder: "Catat materi hari ini (misal: nilai Pancasila, identitas nasional, studi kasus masyarakat)..."
-            }
-        ];
-
-        const sem1Grid = document.getElementById("sem1CoursesGrid");
-
-        function renderSem1Courses() {
-            const savedNotes = JSON.parse(localStorage.getItem("raishaSem1CourseNotes") || "{}");
-            const savedLinks = JSON.parse(localStorage.getItem("raishaNotebookLMLinks") || "{}");
-            sem1Grid.innerHTML = "";
-
-            sem1Courses.forEach(mk => {
-                const links = savedLinks[mk.id] || { daily: "", exam: "" };
-                const dailyUrl = links.daily || "https://notebooklm.google.com/";
-                const examUrl = links.exam || "https://notebooklm.google.com/";
-
-                const card = document.createElement("article");
-                card.className = "matkul-card";
-                card.innerHTML = `
-                    <div>
-                        <div class="matkul-top">
-                            <span class="matkul-tag">${mk.code}</span>
-                            <button type="button" class="edit-nlm-btn" data-toggle-nlm="${mk.id}">
-                                🔗 Set NotebookLM Links
-                            </button>
-                        </div>
-
-                        <h3>${mk.name}</h3>
-
-                        <!-- Tombol Langsung ke NotebookLM Harian & UTS/UAS -->
-                        <div class="nlm-links-row">
-                            <a href="${dailyUrl}" target="_blank" rel="noopener" class="nlm-pill nlm-daily ${links.daily ? "" : "unset"}">
-                                📓 Belajar Harian ↗
-                            </a>
-                            <a href="${examUrl}" target="_blank" rel="noopener" class="nlm-pill nlm-exam ${links.exam ? "" : "unset"}">
-                                🎯 Persiapan UTS / UAS ↗
-                            </a>
-                        </div>
-
-                        <!-- Kotak Pengaturan Link NotebookLM (Tersembunyi sampai tombol Set Links diklik) -->
-                        <div class="nlm-editor-box" id="nlm-box-${mk.id}">
-                            <input type="url" id="daily-input-${mk.id}" value="${links.daily}" placeholder="Paste link NotebookLM Belajar Harian (https://notebooklm.google.com/notebook/...)">
-                            <input type="url" id="exam-input-${mk.id}" value="${links.exam}" placeholder="Paste link NotebookLM Belajar UTS/UAS (https://notebooklm.google.com/notebook/...)">
-                            <button type="button" class="nlm-save-links" data-save-nlm="${mk.id}">Save Links ✿</button>
-                        </div>
-
-                        <!-- Catatan Materi Hari Ini -->
-                        <textarea class="matkul-note-area" id="note-${mk.id}" placeholder="${mk.placeholder}">${savedNotes[mk.id] || ""}</textarea>
-                    </div>
-
-                    <div class="matkul-footer">
-                        <span class="matkul-saved-info" id="status-${mk.id}">
-                            ${savedNotes[mk.id] ? "Saved in study log ♡" : "No notes yet"}
-                        </span>
-                        <button type="button" class="save-note-btn" data-save-mk="${mk.id}">Save Note ✿</button>
-                    </div>
-                `;
-                sem1Grid.appendChild(card);
-            });
-
-            // Buka/tutup form tempel link NotebookLM
-            document.querySelectorAll("[data-toggle-nlm]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const box = document.getElementById(`nlm-box-${btn.dataset.toggleNlm}`);
-                    box.classList.toggle("show");
-                });
-            });
-
-            // Simpan link NotebookLM Harian & UTS/UAS
-            document.querySelectorAll("[data-save-nlm]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.dataset.saveNlm;
-                    const dailyVal = document.getElementById(`daily-input-${id}`).value.trim();
-                    const examVal = document.getElementById(`exam-input-${id}`).value.trim();
-
-                    const allLinks = JSON.parse(localStorage.getItem("raishaNotebookLMLinks") || "{}");
-                    allLinks[id] = { daily: dailyVal, exam: examVal };
-                    localStorage.setItem("raishaNotebookLMLinks", JSON.stringify(allLinks));
-
-                    renderSem1Courses();
-                });
-            });
-
-            // Simpan catatan materi hari ini
-            document.querySelectorAll("[data-save-mk]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.dataset.saveMk;
-                    const textVal = document.getElementById(`note-${id}`).value;
-                    const allNotes = JSON.parse(localStorage.getItem("raishaSem1CourseNotes") || "{}");
-                    allNotes[id] = textVal;
-                    localStorage.setItem("raishaSem1CourseNotes", JSON.stringify(allNotes));
-
-                    const statusEl = document.getElementById(`status-${id}`);
-                    statusEl.textContent = "Saved just now! ✓";
-                    btn.textContent = "Saved ♡";
-                    setTimeout(() => {
-                        btn.textContent = "Save Note ✿";
-                    }, 1300);
-                });
-            });
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
         }
 
-        renderSem1Courses();
+        // ============================================================
+        // 9. INISIALISASI DATABASE & TAMPILAN
+        // ============================================================
+        openStudyDB().then(async () => {
+            const existing = await getAllCourses();
+            if (existing.length === 0) {
+                for (const c of DEFAULT_COURSES) {
+                    await saveCourse(c);
+                }
+                courses = DEFAULT_COURSES;
+            } else {
+                courses = existing;
+            }
+            renderCalendarAndRecommendations();
+            renderFoldersGrid();
+        });
+    })();
     </script>
-
 </body>
 </html>
