@@ -5,9 +5,6 @@
    File: js/lab-logal.js
    ========================================================================== */
 (function () {
-    // ======================================================================
-    // PRESET PERTEMUAN 1 - 7
-    // ======================================================================
     const PRESET_EXAMPLES = {
         kelulusan: {
             title: "Cek_Kelulusan_Mahasiswa",
@@ -38,73 +35,55 @@
         }
     };
 
-    // ======================================================================
-    // PRESET KHUSUS PERTEMUAN 9 (ALGORITMA PERULANGAN FOR)
-    // ======================================================================
     const FOR_PRESETS = {
         cetak_text: {
             title: "CetakText",
             hasInputLimit: true,
             limitVar: "jumlah",
-            limitPrompt: "Masukkan jumlah Text: ",
             exp1: "i = 1",
             exp2: "i <= jumlah",
             exp3: "i++",
             loopMode: "print_text",
             statementText: "\"Algoritma dan Pemrograman\"",
-            useAccumulator: false,
-            accFormula: "",
             finalOutput: "\"Selesai mencetak teks\""
         },
         penjumlahan: {
             title: "Penjumlahan",
             hasInputLimit: true,
             limitVar: "jumlah",
-            limitPrompt: "Masukkan jumlah Bilangan: ",
             exp1: "i = 1",
             exp2: "i <= jumlah",
             exp3: "i++",
             loopMode: "input_sum",
             statementText: "Baca data ke-i, hasil = hasil + data",
-            useAccumulator: true,
-            accFormula: "hasil = hasil + data",
             finalOutput: "\"Hasil Penjumlahan adalah \" + hasil"
         },
         genap_10: {
             title: "SepuluhBilanganGenap",
             hasInputLimit: false,
             limitVar: "10",
-            limitPrompt: "",
             exp1: "i = 1",
             exp2: "i <= 10",
             exp3: "i++",
             loopMode: "print_expr",
             statementText: "i * 2",
-            useAccumulator: false,
-            accFormula: "",
             finalOutput: "\"10 Bilangan Genap Pertama selesai ditampilkan\""
         },
         ganjil_10: {
             title: "JumlahSepuluhBilanganGanjil",
             hasInputLimit: false,
             limitVar: "10",
-            limitPrompt: "",
             exp1: "i = 1",
             exp2: "i <= 10",
             exp3: "i++",
             loopMode: "sum_expr",
             statementText: "(2 * i) - 1",
-            useAccumulator: true,
-            accFormula: "hasil = hasil + ((2 * i) - 1)",
             finalOutput: "\"Jumlah 10 Bilangan Ganjil Pertama adalah \" + hasil"
         }
     };
 
-    // ======================================================================
-    // ROUTER UTAMA BERDASARKAN NOMOR PERTEMUAN
-    // ======================================================================
     window.renderLogalLab = function (containerEl, meeting, saveCallback) {
-        if (meeting.number === 9) {
+        if (Number(meeting.number) === 9) {
             renderForLoopLab(containerEl, meeting, saveCallback);
         } else {
             renderBasicLogalLab(containerEl, meeting, saveCallback);
@@ -112,7 +91,7 @@
     };
 
     // ======================================================================
-    // STUDIO PERTEMUAN 9: ALGORITMA PERULANGAN FOR (COUNTED LOOP)
+    // STUDIO PERTEMUAN 9: ALGORITMA PERULANGAN FOR
     // ======================================================================
     function renderForLoopLab(containerEl, meeting, saveCallback) {
         if (!meeting.forLoopStudio) {
@@ -130,7 +109,6 @@
 
         containerEl.innerHTML = `
             <div style="background:var(--green-bg); border:2.5px solid var(--green-main); border-radius:22px; padding:20px;">
-                <!-- HEADER -->
                 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; padding-bottom:12px; border-bottom:2px solid var(--green-border);">
                     <div>
                         <span style="background:var(--green-main); color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:10px;">COUNTED LOOP • STRUKTUR FOR (exp1; exp2; exp3)</span>
@@ -147,7 +125,6 @@
                     </div>
                 </div>
 
-                <!-- FORM KOMPONEN FOR -->
                 <div style="background:var(--green-white); border:2px solid var(--green-main); border-radius:18px; padding:16px; margin-bottom:18px;">
                     <div style="font-weight:700; color:var(--green-main); font-size:14.5px; margin-bottom:12px;">
                         ⚙️ Langkah 1: Atur Komponen Struktur Perulangan FOR
@@ -183,26 +160,25 @@
                         </div>
                     </div>
 
-                    <!-- 3 KOMPONEN INTI FOR: exp1, exp2, exp3 -->
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:12px; background:var(--green-soft); padding:12px; border-radius:14px; border:1.5px solid var(--green-main);">
                         <div>
                             <label style="display:block; font-size:12px; font-weight:700; color:var(--green-deep); margin-bottom:4px;">exp1 (Inisialisasi Awal)</label>
-                            <input type="text" id="flExp1" value="${escapeHtml(state.form.exp1)}" placeholder="i = 1"
+                            <input type="text" id="flExp1" value="${escapeHtml(state.form.exp1)}"
                                 style="width:100%; box-sizing:border-box; padding:8px 10px; border-radius:9px; border:2px solid var(--green-main); background:#fff; color:#102a1d; font-family:monospace; font-weight:700;">
                         </div>
                         <div>
                             <label style="display:block; font-size:12px; font-weight:700; color:var(--green-deep); margin-bottom:4px;">exp2 (Kondisi Boolean)</label>
-                            <input type="text" id="flExp2" value="${escapeHtml(state.form.exp2)}" placeholder="i <= jumlah"
+                            <input type="text" id="flExp2" value="${escapeHtml(state.form.exp2)}"
                                 style="width:100%; box-sizing:border-box; padding:8px 10px; border-radius:9px; border:2px solid var(--green-main); background:#fff; color:#102a1d; font-family:monospace; font-weight:700;">
                         </div>
                         <div>
                             <label style="display:block; font-size:12px; font-weight:700; color:var(--green-deep); margin-bottom:4px;">exp3 (Increment / Decrement)</label>
-                            <input type="text" id="flExp3" value="${escapeHtml(state.form.exp3)}" placeholder="i++ atau i = i + 1"
+                            <input type="text" id="flExp3" value="${escapeHtml(state.form.exp3)}"
                                 style="width:100%; box-sizing:border-box; padding:8px 10px; border-radius:9px; border:2px solid var(--green-main); background:#fff; color:#102a1d; font-family:monospace; font-weight:700;">
                         </div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;" class="fl-two-col">
+                    <div class="fl-two-col" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;">
                         <div>
                             <label style="display:block; font-size:12px; font-weight:700; margin-bottom:4px;">Badan (Body) Statement di Dalam FOR</label>
                             <input type="text" id="flStatement" value="${escapeHtml(state.form.statementText)}"
@@ -220,7 +196,6 @@
                     </button>
                 </div>
 
-                <!-- FILTER TAMPILAN -->
                 <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px;">
                     <button type="button" class="btn-green-solid fl-view-btn active" data-view="all">📋 Semua Bagian (4-in-1)</button>
                     <button type="button" class="btn-green-outline fl-view-btn" data-view="n1">1️⃣ Notasi Deskriptif</button>
@@ -229,9 +204,7 @@
                     <button type="button" class="btn-green-outline fl-view-btn" data-view="java">☕ Kode Java &amp; Penjelasan</button>
                 </div>
 
-                <!-- GRID 4 HASIL -->
                 <div id="flResultsGrid" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-                    <!-- NOTASI 1 -->
                     <div class="fl-card" data-card="n1" style="background:var(--green-white); border:2px solid var(--green-border); border-radius:18px; padding:16px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <strong style="color:var(--green-main); font-size:15px;">1️⃣ Notasi 1: Algoritma Deskriptif</strong>
@@ -240,7 +213,6 @@
                         <textarea id="flNotasi1Text" style="width:100%; box-sizing:border-box; min-height:240px; border:2px solid var(--green-border); border-radius:12px; padding:11px; font-family:inherit; font-size:13.5px; line-height:1.6; background:var(--green-bg); color:var(--green-text);">${escapeHtml(state.notasi1)}</textarea>
                     </div>
 
-                    <!-- NOTASI 2: FLOWCHART FOR (SESUAI DIAGRAM DI MODUL) -->
                     <div class="fl-card" data-card="n2" style="background:var(--green-white); border:2px solid var(--green-border); border-radius:18px; padding:16px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <strong style="color:var(--green-main); font-size:15px;">2️⃣ Notasi 2: Flowchart Struktur FOR</strong>
@@ -249,7 +221,6 @@
                         <div id="flSvgContainer" style="background:var(--green-bg); border:2px solid var(--green-border); border-radius:12px; padding:10px; overflow-x:auto; display:flex; justify-content:center; min-height:240px;"></div>
                     </div>
 
-                    <!-- NOTASI 3: PSEUDOCODE -->
                     <div class="fl-card" data-card="n3" style="background:var(--green-white); border:2px solid var(--green-border); border-radius:18px; padding:16px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <strong style="color:var(--green-main); font-size:15px;">3️⃣ Notasi 3: Pseudocode</strong>
@@ -258,7 +229,6 @@
                         <textarea id="flNotasi3Text" style="width:100%; box-sizing:border-box; min-height:260px; border:2px solid var(--green-border); border-radius:12px; padding:11px; font-family:monospace; font-size:13px; line-height:1.55; background:var(--green-bg); color:var(--green-text);">${escapeHtml(state.notasi3)}</textarea>
                     </div>
 
-                    <!-- KODE JAVA -->
                     <div class="fl-card" data-card="java" style="background:var(--green-white); border:2px solid var(--green-border); border-radius:18px; padding:16px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <strong style="color:var(--green-main); font-size:15px;">☕ Kode Program Java</strong>
@@ -268,8 +238,7 @@
                     </div>
                 </div>
 
-                <!-- SIMULASI CONSOLE OUTPUT & BEDAH SINTAKS JAVA -->
-                <div class="fl-card" data-card="java" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:16px; margin-top:16px;" class="fl-two-col">
+                <div class="fl-card fl-two-col" data-card="java" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:16px; margin-top:16px;">
                     <div style="background:#14281d; color:#e9f5db; border:2px solid var(--green-main); border-radius:18px; padding:16px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <strong style="color:#95d5b2; font-size:14px;">🖥️ Simulasi Output Console (cmd.exe)</strong>
@@ -292,7 +261,6 @@
         styleResponsive.textContent = `@media (max-width: 860px) { #flResultsGrid, .fl-two-col { grid-template-columns: 1fr !important; } }`;
         containerEl.appendChild(styleResponsive);
 
-        // Referensi Elemen
         const titleEl = containerEl.querySelector("#flTitle");
         const modeEl = containerEl.querySelector("#flLoopMode");
         const hasInputEl = containerEl.querySelector("#flHasInput");
@@ -321,15 +289,8 @@
             const statementText = stmtEl.value.trim() || "\"Algoritma dan Pemrograman\"";
             const finalOutput = finalOutEl.value.trim() || "\"Selesai\"";
 
-            state.form = {
-                title, loopMode, hasInputLimit, limitVar,
-                limitPrompt: `Masukkan ${limitVar}: `,
-                exp1, exp2, exp3, statementText, finalOutput
-            };
+            state.form = { title, loopMode, hasInputLimit, limitVar, exp1, exp2, exp3, statementText, finalOutput };
 
-            // --------------------------------------------------------------
-            // 1. NOTASI 1: ALGORITMA DESKRIPTIF (SESUAI POLA MODUL)
-            // --------------------------------------------------------------
             const desc = [
                 `Algoritma ${title} (Struktur Perulangan FOR):`,
                 `1. Mulai`,
@@ -346,9 +307,6 @@
             state.notasi1 = desc.join("\n");
             n1Text.value = state.notasi1;
 
-            // --------------------------------------------------------------
-            // 2. NOTASI 3: PSEUDOCODE (SESUAI NOTASI MODUL)
-            // --------------------------------------------------------------
             const limitNumMatch = exp2.match(/<=\s*([a-zA-Z0-9_]+)/);
             const endBound = limitNumMatch ? limitNumMatch[1] : limitVar;
             const initValMatch = exp1.match(/=\s*([0-9]+)/);
@@ -361,19 +319,12 @@
                 `DEKLARASI`,
                 hasInputLimit ? `    i, ${limitVar} : integer` : `    i : integer`
             ];
-            if (loopMode === "input_sum") {
-                pseudo.push(`    data, hasil : integer`);
-            } else if (loopMode === "sum_expr") {
-                pseudo.push(`    bilangan, hasil : integer`);
-            }
+            if (loopMode === "input_sum") pseudo.push(`    data, hasil : integer`);
+            else if (loopMode === "sum_expr") pseudo.push(`    bilangan, hasil : integer`);
 
             pseudo.push(``, `DESKRIPSI`);
-            if (loopMode === "input_sum" || loopMode === "sum_expr") {
-                pseudo.push(`    hasil <- 0`);
-            }
-            if (hasInputLimit) {
-                pseudo.push(`    read(${limitVar})`);
-            }
+            if (loopMode === "input_sum" || loopMode === "sum_expr") pseudo.push(`    hasil <- 0`);
+            if (hasInputLimit) pseudo.push(`    read(${limitVar})`);
             pseudo.push(`    for i <- ${startVal} to ${endBound} do`);
             if (loopMode === "print_text") {
                 pseudo.push(`        write(${statementText})`);
@@ -393,9 +344,6 @@
             state.notasi3 = pseudo.join("\n");
             n3Text.value = state.notasi3;
 
-            // --------------------------------------------------------------
-            // 3. KODE JAVA & BEDAH ISI KODE
-            // --------------------------------------------------------------
             let javaLines = [];
             let explain = [];
 
@@ -410,12 +358,10 @@
             javaLines.push(`public class ${title} {`);
             javaLines.push(`    public static void main(String[] args) {`);
 
-            if (loopMode === "print_text") {
+            if (loopMode === "print_text" || loopMode === "print_expr") {
                 javaLines.push(hasInputLimit ? `        int i, ${limitVar};` : `        int i;`);
             } else if (loopMode === "input_sum") {
                 javaLines.push(`        int i, data, ${limitVar}, hasil = 0;`);
-            } else if (loopMode === "print_expr") {
-                javaLines.push(hasInputLimit ? `        int i, ${limitVar};` : `        int i;`);
             } else {
                 javaLines.push(hasInputLimit ? `        int i, bilangan, ${limitVar}, hasil = 0;` : `        int i, bilangan, hasil = 0;`);
             }
@@ -461,15 +407,13 @@
                 javaLines.push(`        System.out.println();`);
             }
             javaLines.push(`        System.out.println(${finalOutput});`);
-            if (hasInputLimit) {
-                javaLines.push(`        inputan.close();`);
-            }
+            if (hasInputLimit) javaLines.push(`        inputan.close();`);
             javaLines.push(`    }`);
             javaLines.push(`}`);
 
             explain.push({
                 code: `System.out.println(${finalOutput});`,
-                desc: "Bagian terminasi setelah perulangan selesai untuk menampilkan kesimpulan/hasil akhir."
+                desc: "Bagian terminasi setelah perulangan selesai untuk menampilkan hasil akhir."
             });
 
             state.javaCode = javaLines.join("\n");
@@ -482,9 +426,6 @@
             await saveCallback();
         }
 
-        // ------------------------------------------------------------------
-        // FLOWCHART SVG PERSIS SEPERTI GAMBAR DI MODUL PERTEMUAN 8/9
-        // ------------------------------------------------------------------
         function renderForFlowchartSVG() {
             const { exp1, exp2, exp3, statementText, finalOutput } = state.form;
             const sExp1 = truncateText(exp1, 20);
@@ -500,49 +441,39 @@
                             <path d="M 0 1 L 10 5 L 0 9 z" fill="#1b4332"/>
                         </marker>
                     </defs>
-
-                    <!-- START -->
                     <rect x="165" y="8" width="110" height="36" rx="18" fill="#d8f3dc" stroke="#1b4332" stroke-width="2"/>
                     <text x="220" y="31" text-anchor="middle" font-size="13" font-weight="bold" fill="#102a1d">start</text>
                     <line x1="220" y1="44" x2="220" y2="74" stroke="#1b4332" stroke-width="2" marker-end="url(#arrFor)"/>
                     <text x="198" y="63" font-size="12" font-style="italic" font-weight="bold" fill="#2d6a4f">for</text>
 
-                    <!-- EXP 1 (INISIALISASI) -->
                     <rect x="145" y="76" width="150" height="44" rx="4" fill="#f3e5c3" stroke="#1b4332" stroke-width="2"/>
                     <text x="220" y="94" text-anchor="middle" font-size="11" fill="#5c4d3c" font-family="monospace">exp1</text>
                     <text x="220" y="111" text-anchor="middle" font-size="12" font-weight="bold" fill="#102a1d">${escapeHtml(sExp1)}</text>
                     <line x1="220" y1="120" x2="220" y2="148" stroke="#1b4332" stroke-width="2" marker-end="url(#arrFor)"/>
 
-                    <!-- EXP 2 (KONDISI BELAH KETUPAT) -->
                     <polygon points="220,150 305,196 220,242 135,196" fill="#ffe8a3" stroke="#8c5319" stroke-width="2.2"/>
                     <text x="220" y="191" text-anchor="middle" font-size="11" fill="#5c4d3c" font-family="monospace">exp2</text>
                     <text x="220" y="208" text-anchor="middle" font-size="12" font-weight="bold" fill="#102a1d">${escapeHtml(sExp2)}</text>
 
-                    <!-- CABANG SALAH -> END (KE KIRI SEPERTI DI MODUL) -->
                     <line x1="135" y1="196" x2="96" y2="196" stroke="#c1121f" stroke-width="2" marker-end="url(#arrFor)"/>
                     <text x="115" y="188" text-anchor="middle" font-size="11" font-weight="bold" fill="#c1121f">Salah</text>
                     <rect x="8" y="178" width="84" height="36" rx="18" fill="#f8d7da" stroke="#c1121f" stroke-width="2"/>
                     <text x="50" y="201" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#102a1d">end</text>
 
-                    <!-- CABANG BENAR -> STATEMENT -->
                     <line x1="220" y1="242" x2="220" y2="274" stroke="#2d6a4f" stroke-width="2" marker-end="url(#arrFor)"/>
                     <text x="246" y="262" font-size="11.5" font-weight="bold" fill="#2d6a4f">Benar</text>
 
-                    <!-- STATEMENT (INPUT/OUTPUT/PROSES) -->
                     <polygon points="135,276 325,276 305,320 115,320" fill="#cddce6" stroke="#1b4332" stroke-width="2"/>
                     <text x="220" y="303" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#102a1d">${escapeHtml(sStmt)}</text>
                     <line x1="220" y1="320" x2="220" y2="350" stroke="#1b4332" stroke-width="2" marker-end="url(#arrFor)"/>
 
-                    <!-- EXP 3 (INCREMENT / DECREMENT) -->
                     <rect x="145" y="352" width="150" height="44" rx="4" fill="#f3e5c3" stroke="#1b4332" stroke-width="2"/>
                     <text x="220" y="370" text-anchor="middle" font-size="11" fill="#5c4d3c" font-family="monospace">exp3</text>
                     <text x="220" y="387" text-anchor="middle" font-size="12" font-weight="bold" fill="#102a1d">${escapeHtml(sExp3)}</text>
 
-                    <!-- GARIS LOOP KEMBALI KE EXP 2 (SISI KANAN) -->
                     <polyline points="295,374 375,374 375,196 308,196" fill="none" stroke="#2d6a4f" stroke-width="2" marker-end="url(#arrFor)"/>
                     <text x="383" y="290" font-size="10.5" font-weight="bold" fill="#2d6a4f" transform="rotate(90 383,290)">Loop Ulang</text>
 
-                    <!-- KETERANGAN OUTPUT TERMINASI DI BAWAH -->
                     <rect x="75" y="422" width="290" height="36" rx="10" fill="#ffffff" stroke="#74c69d" stroke-width="1.8"/>
                     <text x="220" y="444" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b4332">Terminasi: ${escapeHtml(sEndOut)}</text>
                 </svg>
@@ -570,9 +501,7 @@
             if (loopMode === "print_text") {
                 if (hasInputLimit) lines.push(`Masukkan ${limitVar}: ${n}`);
                 const cleanTxt = statementText.replace(/^"|"$/g, "");
-                for (let i = 1; i <= Math.min(n, 15); i++) {
-                    lines.push(cleanTxt);
-                }
+                for (let i = 1; i <= Math.min(n, 15); i++) lines.push(cleanTxt);
             } else if (loopMode === "input_sum") {
                 const sampleData = [2, 3, 1, 5, 7, 4, 6];
                 lines.push(`Masukkan ${limitVar}: ${n}`);
@@ -585,9 +514,7 @@
                 lines.push(`Hasil Penjumlahan adalah ${sum}`);
             } else if (loopMode === "print_expr") {
                 let nums = [];
-                for (let i = 1; i <= Math.min(n, 20); i++) {
-                    nums.push(i * 2);
-                }
+                for (let i = 1; i <= Math.min(n, 20); i++) nums.push(i * 2);
                 lines.push(nums.join(" "));
                 lines.push(`10 Bilangan Genap Pertama selesai ditampilkan`);
             } else {
@@ -606,7 +533,6 @@
             consoleOut.textContent = state.simResult;
         }
 
-        // Event Listeners Pertemuan 9
         containerEl.querySelector("#flGenerateBtn").addEventListener("click", compileForLoop);
         containerEl.querySelector("#flRunSimBtn").addEventListener("click", runConsoleSimulation);
 
@@ -664,7 +590,7 @@
     }
 
     // ======================================================================
-    // STUDIO PERTEMUAN 1 - 7 (TETAP SAMA SEPERTI SEBELUMNYA)
+    // STUDIO PERTEMUAN 1 - 7
     // ======================================================================
     function renderBasicLogalLab(containerEl, meeting, saveCallback) {
         if (!meeting.logalStudio) {
