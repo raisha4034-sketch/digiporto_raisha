@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Hub 💖 | Little Universe</title>
+    <title>Cozy Green Study Hub 🌿 | Little Universe</title>
 
     <!-- CSS Global Little Universe -->
     <link rel="stylesheet" href="css/style.css">
@@ -17,46 +17,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* TEMA BARBIE SOLID & TEGAS (TANPA GRADASI) */
+        /* TEMA COZY GREEN SOLID & TEGAS (TANPA GRADASI) */
         :root {
-            --barbie-bg: #fff0f7;
-            --barbie-white: #ffffff;
-            --barbie-hot: #e0218a;
-            --barbie-deep: #ad1468;
-            --barbie-blush: #ffd6eb;
-            --barbie-border: #f5a3ce;
-            --barbie-text: #2b0d1d;
-            --barbie-muted: #703854;
-            --barbie-mint: #dff7eb;
-            --barbie-mint-border: #52b788;
+            --green-bg: #eaf5ee;
+            --green-white: #ffffff;
+            --green-main: #2d6a4f;
+            --green-deep: #1b4332;
+            --green-soft: #d8f3dc;
+            --green-border: #74c69d;
+            --green-text: #102a1d;
+            --green-muted: #3a5a40;
+            --green-done-bg: #c7edd4;
+            --green-done-border: #2d6a4f;
             --read-scale: 1;
         }
 
         body.dark-mode {
-            --barbie-bg: #240f1b;
-            --barbie-white: #361729;
-            --barbie-hot: #ff4da6;
-            --barbie-deep: #ff99cc;
-            --barbie-blush: #4d2039;
-            --barbie-border: #7a335a;
-            --barbie-text: #fff0f7;
-            --barbie-muted: #e6b3ce;
-            --barbie-mint: #1d3b2d;
-            --barbie-mint-border: #52b788;
+            --green-bg: #112119;
+            --green-white: #1b3327;
+            --green-main: #52b788;
+            --green-deep: #95d5b2;
+            --green-soft: #244233;
+            --green-border: #40916c;
+            --green-text: #eef9f2;
+            --green-muted: #b7e4c7;
+            --green-done-bg: #1e4633;
+            --green-done-border: #74c69d;
         }
 
         body {
-            background-color: var(--barbie-bg) !important;
-            color: var(--barbie-text);
+            background-color: var(--green-bg) !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-attachment: fixed !important;
+            background-repeat: no-repeat !important;
+            color: var(--green-text);
             font-family: 'DM Sans', sans-serif;
             margin: 0;
             padding-bottom: 90px;
         }
 
-        .btn-barbie-solid {
-            background-color: var(--barbie-hot);
+        .btn-green-solid {
+            background-color: var(--green-main);
             color: #ffffff;
-            border: 2px solid var(--barbie-deep);
+            border: 2px solid var(--green-deep);
             padding: 11px 20px;
             border-radius: 14px;
             font-weight: 700;
@@ -66,20 +70,24 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 0 var(--barbie-deep);
+            box-shadow: 0 4px 0 var(--green-deep);
             transition: transform 0.12s;
         }
 
-        .btn-barbie-solid:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 var(--barbie-deep);
+        body.dark-mode .btn-green-solid {
+            color: #102a1d;
         }
 
-        .btn-barbie-outline {
-            background-color: var(--barbie-white);
-            color: var(--barbie-hot);
-            border: 2px solid var(--barbie-hot);
-            padding: 9px 15px;
+        .btn-green-solid:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--green-deep);
+        }
+
+        .btn-green-outline {
+            background-color: var(--green-white);
+            color: var(--green-main);
+            border: 2px solid var(--green-main);
+            padding: 9px 14px;
             border-radius: 13px;
             font-weight: 700;
             font-size: 13px;
@@ -89,12 +97,12 @@
             gap: 6px;
         }
 
-        .btn-barbie-outline:hover {
-            background-color: var(--barbie-blush);
+        .btn-green-outline:hover {
+            background-color: var(--green-soft);
         }
 
         /* ============================================================
-           CONTAINER & HEADER BARBIE SOLID
+           CONTAINER & HEADER COZY GREEN SOLID
            ============================================================ */
         .study-container {
             max-width: 1140px;
@@ -103,8 +111,8 @@
         }
 
         .study-hero {
-            background-color: var(--barbie-white);
-            border: 2.5px solid var(--barbie-hot);
+            background-color: var(--green-white);
+            border: 2.5px solid var(--green-main);
             border-radius: 24px;
             padding: 22px 26px;
             display: flex;
@@ -112,7 +120,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            box-shadow: 0 6px 0 var(--barbie-blush);
+            box-shadow: 0 6px 0 var(--green-soft);
             margin-bottom: 24px;
         }
 
@@ -120,7 +128,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
             font-size: 12px;
             font-weight: 700;
@@ -129,16 +137,20 @@
             margin-bottom: 8px;
         }
 
+        body.dark-mode .badge-pill {
+            color: #102a1d;
+        }
+
         .study-hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 27px;
             margin: 0 0 4px;
-            color: var(--barbie-hot);
+            color: var(--green-main);
         }
 
         .study-hero p {
             margin: 0;
-            color: var(--barbie-muted);
+            color: var(--green-muted);
             font-size: 14px;
             font-weight: 500;
         }
@@ -147,14 +159,14 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
         }
 
         .font-sizer-box {
             display: inline-flex;
             align-items: center;
-            background-color: var(--barbie-bg);
-            border: 2px solid var(--barbie-hot);
+            background-color: var(--green-bg);
+            border: 2px solid var(--green-main);
             border-radius: 14px;
             padding: 4px;
         }
@@ -162,14 +174,14 @@
         .font-sizer-box span {
             font-size: 12px;
             font-weight: 700;
-            color: var(--barbie-text);
+            color: var(--green-text);
             padding: 0 9px;
         }
 
         .font-btn {
             border: none;
             background: transparent;
-            color: var(--barbie-text);
+            color: var(--green-text);
             font-weight: 700;
             padding: 6px 11px;
             border-radius: 10px;
@@ -177,12 +189,16 @@
         }
 
         .font-btn.active {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
         }
 
+        body.dark-mode .font-btn.active {
+            color: #102a1d;
+        }
+
         /* ============================================================
-           KALENDER MINGGUAN & REKOMENDASI BELAJAR (WARNA SOLID JELAS)
+           KALENDER MINGGUAN & REKOMENDASI BELAJAR
            ============================================================ */
         .top-planner-grid {
             display: grid;
@@ -198,11 +214,11 @@
         }
 
         .panel-card {
-            background-color: var(--barbie-white);
-            border: 2px solid var(--barbie-border);
+            background-color: var(--green-white);
+            border: 2.5px solid var(--green-border);
             border-radius: 22px;
             padding: 20px;
-            box-shadow: 0 5px 0 var(--barbie-blush);
+            box-shadow: 0 5px 0 var(--green-soft);
         }
 
         .panel-header {
@@ -216,7 +232,7 @@
         .panel-header h2 {
             font-size: 17px;
             margin: 0;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -230,8 +246,8 @@
         }
 
         .day-pill {
-            background-color: var(--barbie-bg);
-            border: 2px solid var(--barbie-border);
+            background-color: var(--green-bg);
+            border: 2px solid var(--green-border);
             border-radius: 14px;
             padding: 9px 4px;
             text-align: center;
@@ -239,9 +255,13 @@
         }
 
         .day-pill.selected {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
-            border-color: var(--barbie-deep);
+            border-color: var(--green-deep);
+        }
+
+        body.dark-mode .day-pill.selected {
+            color: #102a1d;
         }
 
         .day-pill .d-name {
@@ -262,7 +282,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             margin: 4px auto 0;
         }
 
@@ -271,11 +291,11 @@
         }
 
         .selected-day-summary {
-            background-color: var(--barbie-blush);
+            background-color: var(--green-soft);
             border-radius: 12px;
             padding: 11px 14px;
             font-size: calc(13.5px * var(--read-scale));
-            color: var(--barbie-text);
+            color: var(--green-text);
             font-weight: 600;
         }
 
@@ -286,8 +306,8 @@
         }
 
         .rec-item {
-            background-color: var(--barbie-bg);
-            border: 2px solid var(--barbie-border);
+            background-color: var(--green-bg);
+            border: 2px solid var(--green-border);
             border-radius: 14px;
             padding: 11px 14px;
             display: flex;
@@ -299,18 +319,22 @@
         .rec-item-info strong {
             display: block;
             font-size: calc(14.5px * var(--read-scale));
-            color: var(--barbie-text);
+            color: var(--green-text);
         }
 
         .rec-item-info span {
             font-size: calc(12.5px * var(--read-scale));
-            color: var(--barbie-muted);
+            color: var(--green-muted);
         }
 
         /* ============================================================
-           FOLDER MATA KULIAH (KOSONGAN DI AWAL + WARNA SOLID BARBIE)
+           FOLDER MATA KULIAH (KOSONGAN DI AWAL + WARNA SOLID HIJAU)
            ============================================================ */
         .folders-header {
+            background-color: var(--green-white);
+            border: 2px solid var(--green-border);
+            border-radius: 18px;
+            padding: 14px 20px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -321,14 +345,14 @@
 
         .folders-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 23px;
-            color: var(--barbie-hot);
+            font-size: 22px;
+            color: var(--green-main);
             margin: 0;
         }
 
         .empty-folder-state {
-            background-color: var(--barbie-white);
-            border: 2.5px dashed var(--barbie-hot);
+            background-color: var(--green-white);
+            border: 2.5px dashed var(--green-main);
             border-radius: 24px;
             padding: 42px 24px;
             text-align: center;
@@ -344,13 +368,13 @@
 
         .empty-folder-state h3 {
             margin: 0 0 8px;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             font-size: 20px;
         }
 
         .empty-folder-state p {
             margin: 0 0 18px;
-            color: var(--barbie-muted);
+            color: var(--green-muted);
             font-size: 14.5px;
         }
 
@@ -366,8 +390,8 @@
             border-radius: 6px 20px 20px 20px;
             padding: 18px;
             cursor: pointer;
-            border: 2.5px solid var(--barbie-hot);
-            box-shadow: 0 6px 0 var(--barbie-blush);
+            border: 2.5px solid var(--green-main);
+            box-shadow: 0 6px 0 var(--green-soft);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -382,14 +406,18 @@
             left: -2.5px;
             height: 18px;
             padding: 2px 14px 0 12px;
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
-            border: 2.5px solid var(--barbie-hot);
+            border: 2.5px solid var(--green-main);
             border-bottom: none;
             border-radius: 10px 12px 0 0;
             font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.4px;
+        }
+
+        body.dark-mode .course-folder::before {
+            color: #102a1d;
         }
 
         .course-folder:hover {
@@ -408,7 +436,7 @@
             height: 42px;
             border-radius: 12px;
             background-color: #ffffff;
-            border: 2px solid var(--barbie-hot);
+            border: 2px solid var(--green-main);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -416,7 +444,7 @@
         }
 
         .folder-day-chip {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
             font-size: 11.5px;
             font-weight: 700;
@@ -424,15 +452,19 @@
             border-radius: 10px;
         }
 
+        body.dark-mode .folder-day-chip {
+            color: #102a1d;
+        }
+
         .course-folder h3 {
             margin: 0 0 5px;
             font-size: calc(17px * var(--read-scale));
-            color: #2b0d1d;
+            color: #102a1d;
         }
 
         .course-folder .lecturer-tag {
             font-size: calc(12.5px * var(--read-scale));
-            color: #5c2743;
+            color: #2d4f3c;
             font-weight: 600;
             margin-bottom: 12px;
             display: block;
@@ -440,7 +472,7 @@
 
         .folder-progress-wrap {
             background-color: #ffffff;
-            border: 1.5px solid var(--barbie-border);
+            border: 1.5px solid var(--green-border);
             border-radius: 12px;
             padding: 8px 10px;
         }
@@ -451,20 +483,20 @@
             font-size: 12px;
             font-weight: 700;
             margin-bottom: 5px;
-            color: #2b0d1d;
+            color: #102a1d;
         }
 
         .progress-track {
             width: 100%;
             height: 9px;
-            background-color: #ffd6eb;
+            background-color: #d8f3dc;
             border-radius: 10px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background-color: #e0218a;
+            background-color: #2d6a4f;
             border-radius: 10px;
         }
 
@@ -476,8 +508,8 @@
         }
 
         .detail-topbar {
-            background-color: var(--barbie-white);
-            border: 2.5px solid var(--barbie-hot);
+            background-color: var(--green-white);
+            border: 2.5px solid var(--green-main);
             border-radius: 20px;
             padding: 16px 20px;
             margin-bottom: 20px;
@@ -486,20 +518,20 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            box-shadow: 0 5px 0 var(--barbie-blush);
+            box-shadow: 0 5px 0 var(--green-soft);
         }
 
         .detail-title-group h2 {
             margin: 0 0 3px;
             font-family: 'Playfair Display', serif;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             font-size: calc(22px * var(--read-scale));
         }
 
         .detail-title-group p {
             margin: 0;
             font-size: calc(13.5px * var(--read-scale));
-            color: var(--barbie-muted);
+            color: var(--green-muted);
             font-weight: 600;
         }
 
@@ -510,8 +542,8 @@
         }
 
         .meeting-card {
-            background-color: var(--barbie-white);
-            border: 2px solid var(--barbie-border);
+            background-color: var(--green-white);
+            border: 2px solid var(--green-border);
             border-radius: 18px;
             padding: 16px;
             display: flex;
@@ -520,8 +552,8 @@
         }
 
         .meeting-card.completed {
-            background-color: var(--barbie-mint);
-            border-color: var(--barbie-mint-border);
+            background-color: var(--green-done-bg);
+            border-color: var(--green-done-border);
         }
 
         .meeting-card-head {
@@ -535,13 +567,17 @@
             font-weight: 700;
             padding: 5px 12px;
             border-radius: 10px;
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
         }
 
+        body.dark-mode .meeting-badge {
+            color: #102a1d;
+        }
+
         .meeting-badge.exam {
-            background-color: #ffb703;
-            color: #2b0d1d;
+            background-color: #e9c46a;
+            color: #102a1d;
         }
 
         .check-done-label {
@@ -551,22 +587,22 @@
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            color: var(--barbie-text);
+            color: var(--green-text);
         }
 
         .check-done-label input {
             width: 18px;
             height: 18px;
-            accent-color: #2d9e64;
+            accent-color: #2d6a4f;
             cursor: pointer;
         }
 
         .meeting-topic-input, .meeting-notes-input {
             width: 100%;
             box-sizing: border-box;
-            border: 2px solid var(--barbie-border);
-            background-color: var(--barbie-bg);
-            color: var(--barbie-text);
+            border: 2px solid var(--green-border);
+            background-color: var(--green-bg);
+            color: var(--green-text);
             border-radius: 12px;
             padding: 9px 12px;
             font-family: inherit;
@@ -595,8 +631,8 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            background-color: var(--barbie-blush);
-            border: 1.5px solid var(--barbie-hot);
+            background-color: var(--green-soft);
+            border: 1.5px solid var(--green-main);
             border-radius: 10px;
             padding: 7px 10px;
         }
@@ -605,7 +641,7 @@
             background: none;
             border: none;
             padding: 0;
-            color: var(--barbie-text);
+            color: var(--green-text);
             font-weight: 700;
             font-size: calc(13px * var(--read-scale));
             text-decoration: none;
@@ -620,7 +656,7 @@
         .del-mat-btn {
             background: none;
             border: none;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             cursor: pointer;
             font-size: 14px;
             font-weight: 700;
@@ -634,9 +670,9 @@
 
         .btn-upload-mat, .btn-link-mat {
             flex: 1;
-            border: 2px solid var(--barbie-hot);
-            background-color: var(--barbie-blush);
-            color: var(--barbie-text);
+            border: 2px solid var(--green-main);
+            background-color: var(--green-soft);
+            color: var(--green-text);
             border-radius: 12px;
             padding: 8px 10px;
             font-size: 12.5px;
@@ -649,22 +685,22 @@
         }
 
         .btn-link-mat {
-            background-color: var(--barbie-white);
+            background-color: var(--green-white);
         }
 
         /* ============================================================
-           DRAGGABLE & DOCKABLE POMODORO ALARM (TIDAK MENGHALANGI FITUR)
+           DRAGGABLE & DOCKABLE POMODORO ALARM (COZY GREEN)
            ============================================================ */
         #pomodoroWidget {
             position: fixed;
             top: 92px;
             right: 20px;
             z-index: 9990;
-            background-color: var(--barbie-white);
-            border: 2.5px solid var(--barbie-hot);
+            background-color: var(--green-white);
+            border: 2.5px solid var(--green-main);
             border-radius: 20px;
             width: 235px;
-            box-shadow: 0 6px 0 var(--barbie-blush);
+            box-shadow: 0 6px 0 var(--green-soft);
             user-select: none;
             touch-action: none;
         }
@@ -690,7 +726,7 @@
         }
 
         .pomo-drag-bar {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
             padding: 8px 12px;
             border-radius: 16px 16px 0 0;
@@ -698,6 +734,10 @@
             align-items: center;
             justify-content: space-between;
             cursor: grab;
+        }
+
+        body.dark-mode .pomo-drag-bar {
+            color: #102a1d;
         }
 
         #pomodoroWidget.minimized .pomo-drag-bar {
@@ -723,9 +763,9 @@
         }
 
         .pomo-win-btns button {
-            background: rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.28);
             border: none;
-            color: #ffffff;
+            color: inherit;
             width: 22px;
             height: 22px;
             border-radius: 6px;
@@ -748,9 +788,9 @@
 
         .pomo-mode-btn {
             flex: 1;
-            border: 1.5px solid var(--barbie-border);
-            background-color: var(--barbie-bg);
-            color: var(--barbie-text);
+            border: 1.5px solid var(--green-border);
+            background-color: var(--green-bg);
+            color: var(--green-text);
             font-size: 11px;
             font-weight: 700;
             padding: 5px 2px;
@@ -759,9 +799,13 @@
         }
 
         .pomo-mode-btn.active {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
-            border-color: var(--barbie-hot);
+            border-color: var(--green-main);
+        }
+
+        body.dark-mode .pomo-mode-btn.active {
+            color: #102a1d;
         }
 
         .pomo-clock {
@@ -769,7 +813,7 @@
             font-size: 32px;
             font-weight: 700;
             text-align: center;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             margin: 4px 0 10px;
         }
 
@@ -780,7 +824,7 @@
 
         .pomo-controls button {
             flex: 1;
-            border: 2px solid var(--barbie-hot);
+            border: 2px solid var(--green-main);
             border-radius: 10px;
             padding: 7px;
             font-weight: 700;
@@ -789,20 +833,24 @@
         }
 
         #pomoStartBtn {
-            background-color: var(--barbie-hot);
+            background-color: var(--green-main);
             color: #ffffff;
         }
 
+        body.dark-mode #pomoStartBtn {
+            color: #102a1d;
+        }
+
         #pomoResetBtn {
-            background-color: var(--barbie-white);
-            color: var(--barbie-hot);
+            background-color: var(--green-white);
+            color: var(--green-main);
         }
 
         /* MODAL TAMBAH MATKUL */
         .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(43, 13, 29, 0.65);
+            background: rgba(16, 42, 29, 0.65);
             z-index: 10000;
             display: none;
             align-items: center;
@@ -815,18 +863,18 @@
         }
 
         .modal-card {
-            background-color: var(--barbie-white);
-            border: 3px solid var(--barbie-hot);
+            background-color: var(--green-white);
+            border: 3px solid var(--green-main);
             border-radius: 24px;
             padding: 24px;
             width: 100%;
             max-width: 440px;
-            box-shadow: 0 8px 0 var(--barbie-blush);
+            box-shadow: 0 8px 0 var(--green-soft);
         }
 
         .modal-card h3 {
             font-family: 'Playfair Display', serif;
-            color: var(--barbie-hot);
+            color: var(--green-main);
             margin: 0 0 14px;
             font-size: 22px;
         }
@@ -840,7 +888,7 @@
             font-size: 13px;
             font-weight: 700;
             margin-bottom: 5px;
-            color: var(--barbie-text);
+            color: var(--green-text);
         }
 
         .form-group input, .form-group select {
@@ -848,9 +896,9 @@
             box-sizing: border-box;
             padding: 10px 12px;
             border-radius: 12px;
-            border: 2px solid var(--barbie-border);
-            background-color: var(--barbie-bg);
-            color: var(--barbie-text);
+            border: 2px solid var(--green-border);
+            background-color: var(--green-bg);
+            color: var(--green-text);
             font-family: inherit;
             font-size: 14px;
         }
@@ -890,12 +938,12 @@
 
     <main class="study-container">
 
-        <!-- HERO HEADER + UKURAN TULISAN + TOMBOL KUNCI -->
+        <!-- HERO HEADER + WALLPAPER + UKURAN TULISAN + KUNCI -->
         <section class="study-hero">
             <div>
-                <div class="badge-pill"><span>💖</span> PRIVATE BARBIE STUDY SPACE</div>
-                <h1>My Study Hub ✿</h1>
-                <p>Ruang belajar pribadimu — atur folder matkul, Pertemuan 1–16, dan alarm fokus.</p>
+                <div class="badge-pill"><span>🌿</span> COZY GREEN STUDY SPACE</div>
+                <h1>My Study Hub 🍃</h1>
+                <p>Ruang belajar nyaman dengan wallpaper pilihanmu, folder matkul, dan Pertemuan 1–16.</p>
             </div>
 
             <div class="toolbar-actions">
@@ -906,7 +954,15 @@
                     <button class="font-btn" data-scale="1.15">A+</button>
                 </div>
 
-                <button type="button" class="btn-barbie-outline" id="lockNowBtn" title="Kunci kembali halaman ini">
+                <button type="button" class="btn-green-outline" id="uploadWallpaperBtn" title="Pilih gambar wallpaper cozy green sendiri">
+                    <i class="fa-regular fa-image"></i> Wallpaper
+                </button>
+
+                <button type="button" class="btn-green-outline" id="resetWallpaperBtn" style="display:none;" title="Hapus wallpaper dan kembali ke hijau polos">
+                    <i class="fa-solid fa-rotate-left"></i> Polos
+                </button>
+
+                <button type="button" class="btn-green-outline" id="lockNowBtn" title="Kunci kembali halaman ini">
                     <i class="fa-solid fa-lock"></i> Kunci
                 </button>
             </div>
@@ -920,7 +976,7 @@
                 <div class="panel-card">
                     <div class="panel-header">
                         <h2><span>🗓️</span> Kalender &amp; Jadwal</h2>
-                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--barbie-hot);"></span>
+                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--green-main);"></span>
                     </div>
 
                     <div class="week-days-strip" id="weekDaysStrip"></div>
@@ -933,7 +989,7 @@
                 <!-- REKOMENDASI BELAJAR -->
                 <div class="panel-card">
                     <div class="panel-header">
-                        <h2 id="recTitle"><span>✨</span> Rekomendasi Belajar Hari Ini</h2>
+                        <h2 id="recTitle"><span>🌱</span> Rekomendasi Belajar Hari Ini</h2>
                     </div>
                     <div class="rec-list" id="recList"></div>
                 </div>
@@ -942,17 +998,17 @@
             <!-- HEADER FOLDER MATKUL -->
             <div class="folders-header">
                 <h2>📁 Folder Mata Kuliah</h2>
-                <button type="button" class="btn-barbie-solid" id="openAddCourseModalBtn">
+                <button type="button" class="btn-green-solid" id="openAddCourseModalBtn">
                     <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
                 </button>
             </div>
 
             <!-- STATE KOSONG DI AWAL -->
             <div class="empty-folder-state" id="emptyFolderState" style="display:none;">
-                <span class="big-emoji">🎀</span>
+                <span class="big-emoji">🪴</span>
                 <h3>Belum Ada Folder Mata Kuliah</h3>
                 <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu lengkap dengan Pertemuan 1–16!</p>
-                <button type="button" class="btn-barbie-solid" id="emptyAddCourseBtn">
+                <button type="button" class="btn-green-solid" id="emptyAddCourseBtn">
                     <i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
                 </button>
             </div>
@@ -964,7 +1020,7 @@
         <div id="folderDetailView">
             <div class="detail-topbar">
                 <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-                    <button type="button" class="btn-barbie-outline" id="backToFoldersBtn">
+                    <button type="button" class="btn-green-outline" id="backToFoldersBtn">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </button>
                     <div class="detail-title-group">
@@ -974,10 +1030,10 @@
                 </div>
 
                 <div style="display:flex; gap:8px;">
-                    <button type="button" class="btn-barbie-outline" id="editCourseScheduleBtn">
+                    <button type="button" class="btn-green-outline" id="editCourseScheduleBtn">
                         <i class="fa-solid fa-calendar-day"></i> Ubah Hari
                     </button>
-                    <button type="button" class="btn-barbie-outline" id="deleteCourseBtn" style="border-color:#d90429; color:#d90429;">
+                    <button type="button" class="btn-green-outline" id="deleteCourseBtn" style="border-color:#c1121f; color:#c1121f;">
                         <i class="fa-solid fa-trash"></i> Hapus
                     </button>
                 </div>
@@ -993,7 +1049,7 @@
         <div class="pomo-drag-bar" id="pomoDragHandle" title="Geser untuk memindahkan posisi alarm">
             <div class="pomo-title">
                 <i class="fa-solid fa-grip-vertical"></i>
-                <span>🍅</span>
+                <span>🍵</span>
                 <span id="pomoMiniClock">25:00</span>
             </div>
             <div class="pomo-win-btns">
@@ -1018,7 +1074,7 @@
     <!-- MODAL TAMBAH FOLDER MATKUL -->
     <div class="modal-backdrop" id="addCourseModal">
         <div class="modal-card">
-            <h3>💖 Tambah Folder Matkul</h3>
+            <h3>🌿 Tambah Folder Matkul</h3>
             <div class="form-group">
                 <label>Nama Mata Kuliah</label>
                 <input type="text" id="newCourseName" placeholder="Contoh: Pemrograman Web">
@@ -1043,24 +1099,25 @@
                 <input type="text" id="newCourseLecturer" placeholder="Nama dosen pengampu...">
             </div>
             <div class="form-group">
-                <label>Ikon &amp; Warna Folder Solid</label>
+                <label>Ikon &amp; Warna Folder Hijau Solid</label>
                 <select id="newCourseTheme">
-                    <option value="💖|#ffd6eb">💖 Barbie Bubblegum Pink</option>
-                    <option value="🎀|#ffc2e2">🎀 Sweet Ribbon Pink</option>
-                    <option value="👑|#ffe5f1">👑 Princess Blush</option>
-                    <option value="💄|#ffb3d9">💄 Glam Rose Pink</option>
-                    <option value="🌸|#fff0f7">🌸 Soft Petal Pink</option>
+                    <option value="🌿|#d8f3dc">🌿 Fresh Mint Sage</option>
+                    <option value="🍃|#b7e4c7">🍃 Soft Matcha Leaf</option>
+                    <option value="🪴|#e9f5db">🪴 Cozy Pistachio Cream</option>
+                    <option value="🍀|#cdeac0">🍀 Clover Spring Green</option>
+                    <option value="🌲|#d0e8d8">🌲 Misty Pine Green</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-barbie-outline" id="closeAddCourseModalBtn">Batal</button>
-                <button type="button" class="btn-barbie-solid" id="saveNewCourseBtn">Simpan Folder</button>
+                <button type="button" class="btn-green-outline" id="closeAddCourseModalBtn">Batal</button>
+                <button type="button" class="btn-green-solid" id="saveNewCourseBtn">Simpan Folder</button>
             </div>
         </div>
     </div>
 
-    <!-- HIDDEN FILE INPUT -->
+    <!-- HIDDEN FILE INPUTS -->
     <input type="file" id="hiddenMaterialFileInput" style="display:none;" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,image/*">
+    <input type="file" id="hiddenWallpaperInput" style="display:none;" accept="image/*">
 
     <!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
     <script src="js/script.js"></script>
@@ -1075,9 +1132,9 @@
         });
 
         // ============================================================
-        // 2. INDEXEDDB STORAGE (KAPASITAS BESAR & KOSONGAN DI AWAL)
+        // 2. INDEXEDDB STORAGE (MATKUL, FILE BAHAN AJAR, & WALLPAPER)
         // ============================================================
-        const DB_NAME = "BarbiePrivateStudyDB";
+        const DB_NAME = "CozyGreenStudyDB";
         const DB_VERSION = 1;
         let db = null;
 
@@ -1092,12 +1149,39 @@
                     if (!database.objectStoreNames.contains("files")) {
                         database.createObjectStore("files", { keyPath: "fileId" });
                     }
+                    if (!database.objectStoreNames.contains("settings")) {
+                        database.createObjectStore("settings", { keyPath: "key" });
+                    }
                 };
                 req.onsuccess = (e) => {
                     db = e.target.result;
                     resolve(db);
                 };
                 req.onerror = (e) => reject(e.target.error);
+            });
+        }
+
+        function saveSetting(key, value) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("settings", "readwrite");
+                tx.objectStore("settings").put({ key, value });
+                tx.oncomplete = () => resolve();
+            });
+        }
+
+        function getSetting(key) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("settings", "readonly");
+                const req = tx.objectStore("settings").get(key);
+                req.onsuccess = () => resolve(req.result ? req.result.value : null);
+            });
+        }
+
+        function deleteSetting(key) {
+            return new Promise((resolve) => {
+                const tx = db.transaction("settings", "readwrite");
+                tx.objectStore("settings").delete(key);
+                tx.oncomplete = () => resolve();
             });
         }
 
@@ -1154,6 +1238,47 @@
             });
         }
 
+        // ============================================================
+        // 3. CUSTOM COZY GREEN WALLPAPER UPLOAD & RESTORE
+        // ============================================================
+        const uploadWpBtn = document.getElementById("uploadWallpaperBtn");
+        const resetWpBtn = document.getElementById("resetWallpaperBtn");
+        const wpInput = document.getElementById("hiddenWallpaperInput");
+        let activeWpObjectUrl = null;
+
+        function applyWallpaperBlob(blob) {
+            if (activeWpObjectUrl) {
+                URL.revokeObjectURL(activeWpObjectUrl);
+                activeWpObjectUrl = null;
+            }
+            if (blob) {
+                activeWpObjectUrl = URL.createObjectURL(blob);
+                document.body.style.setProperty("background-image", `url("${activeWpObjectUrl}")`, "important");
+                resetWpBtn.style.display = "inline-flex";
+            } else {
+                document.body.style.removeProperty("background-image");
+                resetWpBtn.style.display = "none";
+            }
+        }
+
+        uploadWpBtn.addEventListener("click", () => wpInput.click());
+
+        wpInput.addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            await saveSetting("customWallpaper", file);
+            applyWallpaperBlob(file);
+            wpInput.value = "";
+        });
+
+        resetWpBtn.addEventListener("click", async () => {
+            await deleteSetting("customWallpaper");
+            applyWallpaperBlob(null);
+        });
+
+        // ============================================================
+        // 4. STRUKTUR PERTEMUAN 1 - 16
+        // ============================================================
         function createEmptyMeetings() {
             return Array.from({ length: 16 }, (_, idx) => {
                 const num = idx + 1;
@@ -1175,7 +1300,7 @@
         let pendingUploadMeetingNum = null;
 
         // ============================================================
-        // 3. PENGATUR BESAR-KECIL TULISAN
+        // 5. PENGATUR BESAR-KECIL TULISAN
         // ============================================================
         const fontBtns = document.querySelectorAll(".font-btn");
         const savedScale = localStorage.getItem("studyHubFontScale") || "1";
@@ -1191,7 +1316,7 @@
         });
 
         // ============================================================
-        // 4. KALENDER MINGGUAN & REKOMENDASI BELAJAR
+        // 6. KALENDER MINGGUAN & REKOMENDASI BELAJAR
         // ============================================================
         const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const today = new Date();
@@ -1232,7 +1357,7 @@
             const matchingCourses = courses.filter(c => c.day === selectedDayName);
             const isToday = selectedDayName === DAY_NAMES[today.getDay()];
             document.getElementById("recTitle").innerHTML =
-                `<span>✨</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
+                `<span>🌱</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
 
             const summaryEl = document.getElementById("selectedDayText");
             const recList = document.getElementById("recList");
@@ -1243,7 +1368,7 @@
                 recList.innerHTML = `
                     <div class="rec-item">
                         <div class="rec-item-info">
-                            <strong>💖 Belum ada jadwal matkul</strong>
+                            <strong>🌿 Belum ada jadwal matkul</strong>
                             <span>Buat folder matkul &amp; pilih hari kuliahnya ya!</span>
                         </div>
                     </div>
@@ -1253,7 +1378,7 @@
                 recList.innerHTML = `
                     <div class="rec-item">
                         <div class="rec-item-info">
-                            <strong>🎀 Free Review Mandiri</strong>
+                            <strong>🍵 Free Review Mandiri</strong>
                             <span>Buka salah satu folder matkulmu untuk mencicil rangkuman.</span>
                         </div>
                     </div>
@@ -1270,7 +1395,7 @@
                             <strong>${course.icon} ${escapeHtml(course.name)}</strong>
                             <span>Progres ${doneCount}/16 • Lanjut Pertemuan ${nextMeeting.number}</span>
                         </div>
-                        <button type="button" class="btn-barbie-solid" style="padding:7px 12px; font-size:12px;">Buka</button>
+                        <button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka</button>
                     `;
                     item.querySelector("button").addEventListener("click", () => openFolder(course.id));
                     recList.appendChild(item);
@@ -1279,7 +1404,7 @@
         }
 
         // ============================================================
-        // 5. RENDER FOLDER MATA KULIAH
+        // 7. RENDER FOLDER MATA KULIAH
         // ============================================================
         function renderFoldersGrid() {
             const grid = document.getElementById("foldersGrid");
@@ -1299,7 +1424,7 @@
                 const card = document.createElement("div");
                 card.className = "course-folder";
                 card.dataset.code = course.code || "MATKUL";
-                card.style.backgroundColor = course.color || "#ffd6eb";
+                card.style.backgroundColor = course.color || "#d8f3dc";
 
                 card.innerHTML = `
                     <div>
@@ -1328,7 +1453,7 @@
         }
 
         // ============================================================
-        // 6. BUKA FOLDER & KELOLA PERTEMUAN 1 - 16
+        // 8. BUKA FOLDER & KELOLA PERTEMUAN 1 - 16
         // ============================================================
         function openFolder(courseId) {
             activeCourseId = courseId;
@@ -1530,7 +1655,7 @@
         });
 
         // ============================================================
-        // 7. MODAL TAMBAH FOLDER MATKUL
+        // 9. MODAL TAMBAH FOLDER MATKUL
         // ============================================================
         const modal = document.getElementById("addCourseModal");
         function openCourseModal() {
@@ -1578,7 +1703,7 @@
         });
 
         // ============================================================
-        // 8. DRAGGABLE & DOCKABLE POMODORO ALARM
+        // 10. DRAGGABLE & DOCKABLE POMODORO ALARM
         // ============================================================
         const pomoWidget = document.getElementById("pomodoroWidget");
         const pomoDragHandle = document.getElementById("pomoDragHandle");
@@ -1712,7 +1837,7 @@
                         pomoRunning = false;
                         pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
                         playGentleBell();
-                        alert("🍅 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu 💖");
+                        alert("🍵 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu 🌿");
                     }
                 }, 1000);
             }
@@ -1735,9 +1860,13 @@
         }
 
         // ============================================================
-        // 9. INISIALISASI DATABASE (KOSONGAN DI AWAL)
+        // 11. INISIALISASI DATABASE, WALLPAPER, & TAMPILAN
         // ============================================================
         openStudyDB().then(async () => {
+            const savedWp = await getSetting("customWallpaper");
+            if (savedWp) {
+                applyWallpaperBlob(savedWp);
+            }
             courses = await getAllCourses();
             renderCalendarAndRecommendations();
             renderFoldersGrid();
