@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Hub ✿ | Little Universe</title>
+    <title>Barbie Study Hub 💖 | Private Space</title>
 
     <!-- CSS Global Little Universe -->
     <link rel="stylesheet" href="css/style.css">
@@ -11,104 +11,210 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
+        /* TEMA BARBIE SOLID & TEGAS (TANPA GRADASI) */
         :root {
-            --bg-cream: #fffaf4;
-            --card-white: #ffffff;
-            --rose-main: #c96b78;
-            --rose-dark: #8f434e;
-            --rose-soft: #fce8ec;
-            --peach-soft: #ffefe2;
-            --mint-soft: #e6f5ec;
-            --lavender-soft: #f1ebfc;
-            --sky-soft: #e6f2fc;
-            --butter-soft: #fdf6dc;
-            --text-dark: #3d2e32;
-            --text-muted: #756167;
-            --border-soft: #f0dce0;
+            --barbie-bg: #fff0f7;
+            --barbie-white: #ffffff;
+            --barbie-hot: #e0218a;
+            --barbie-deep: #ad1468;
+            --barbie-mid: #ff69b4;
+            --barbie-blush: #ffd6eb;
+            --barbie-border: #f5a3ce;
+            --barbie-text: #2b0d1d;
+            --barbie-muted: #703854;
+            --barbie-mint: #dff7eb;
+            --barbie-mint-border: #52b788;
             --read-scale: 1;
         }
 
         body.dark-mode {
-            --bg-cream: #1f1b1e;
-            --card-white: #2b2529;
-            --rose-main: #e88d9a;
-            --rose-dark: #f7c3cb;
-            --rose-soft: #3d2b31;
-            --peach-soft: #3d3129;
-            --mint-soft: #27382e;
-            --lavender-soft: #332c40;
-            --sky-soft: #263440;
-            --butter-soft: #3d3826;
-            --text-dark: #f7eef0;
-            --text-muted: #bfa9b0;
-            --border-soft: #42363c;
+            --barbie-bg: #240f1b;
+            --barbie-white: #361729;
+            --barbie-hot: #ff4da6;
+            --barbie-deep: #ff99cc;
+            --barbie-mid: #e0218a;
+            --barbie-blush: #4d2039;
+            --barbie-border: #7a335a;
+            --barbie-text: #fff0f7;
+            --barbie-muted: #e6b3ce;
+            --barbie-mint: #1d3b2d;
+            --barbie-mint-border: #52b788;
         }
 
         body {
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
+            background-color: var(--barbie-bg) !important;
+            color: var(--barbie-text);
             font-family: 'DM Sans', sans-serif;
             margin: 0;
-            padding-bottom: 90px;
-            transition: background 0.3s ease, color 0.3s ease;
+            padding-bottom: 80px;
         }
 
-        .study-container {
-            max-width: 1160px;
-            margin: 0 auto;
-            padding: 28px 20px;
+        /* ============================================================
+           PRIVATE LOCK OVERLAY (LAYAR KUNCI PRIBADI)
+           ============================================================ */
+        #privateLockScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background-color: var(--barbie-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* HEADER BANNER */
-        .study-hero {
-            background: linear-gradient(135deg, var(--rose-soft) 0%, var(--peach-soft) 100%);
-            border: 1.5px solid var(--border-soft);
+        .lock-box {
+            background-color: var(--barbie-white);
+            border: 3px solid var(--barbie-hot);
             border-radius: 26px;
-            padding: 26px 30px;
+            padding: 32px 28px;
+            max-width: 390px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 0 var(--barbie-blush);
+        }
+
+        .lock-icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--barbie-blush);
+            color: var(--barbie-hot);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 14px;
+            border: 2px solid var(--barbie-hot);
+        }
+
+        .lock-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--barbie-hot);
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .lock-box p {
+            font-size: 14px;
+            color: var(--barbie-muted);
+            margin: 0 0 18px;
+            line-height: 1.5;
+        }
+
+        .pin-input {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 8px;
+            font-weight: 700;
+            padding: 12px;
+            border-radius: 14px;
+            border: 2.5px solid var(--barbie-hot);
+            background-color: var(--barbie-bg);
+            color: var(--barbie-text);
+            margin-bottom: 14px;
+            outline: none;
+        }
+
+        .btn-barbie-solid {
+            background-color: var(--barbie-hot);
+            color: #ffffff;
+            border: 2px solid var(--barbie-deep);
+            padding: 11px 20px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 var(--barbie-deep);
+            transition: transform 0.12s;
+        }
+
+        .btn-barbie-solid:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--barbie-deep);
+        }
+
+        .btn-barbie-outline {
+            background-color: var(--barbie-white);
+            color: var(--barbie-hot);
+            border: 2px solid var(--barbie-hot);
+            padding: 9px 15px;
+            border-radius: 13px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-barbie-outline:hover {
+            background-color: var(--barbie-blush);
+        }
+
+        /* ============================================================
+           CONTAINER & HEADER BARBIE SOLID
+           ============================================================ */
+        .study-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 24px 18px;
+        }
+
+        .study-hero {
+            background-color: var(--barbie-white);
+            border: 2.5px solid var(--barbie-hot);
+            border-radius: 24px;
+            padding: 22px 26px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            box-shadow: 0 12px 30px rgba(185, 118, 128, 0.12);
+            gap: 16px;
+            box-shadow: 0 6px 0 var(--barbie-blush);
             margin-bottom: 24px;
         }
 
-        .study-hero-text .badge-pill {
+        .badge-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: var(--card-white);
-            color: var(--rose-main);
+            background-color: var(--barbie-hot);
+            color: #ffffff;
             font-size: 12px;
             font-weight: 700;
             padding: 5px 13px;
             border-radius: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin-bottom: 8px;
         }
 
-        .study-hero-text h1 {
+        .study-hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            margin: 0 0 6px 0;
-            color: var(--text-dark);
+            font-size: 27px;
+            margin: 0 0 4px;
+            color: var(--barbie-hot);
         }
 
-        .study-hero-text p {
+        .study-hero p {
             margin: 0;
-            color: var(--text-muted);
-            font-size: 14.5px;
+            color: var(--barbie-muted);
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        /* CONTROL BAR: FONT SIZE & BACKUP */
-        .comfort-toolbar {
+        .toolbar-actions {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -118,42 +224,42 @@
         .font-sizer-box {
             display: inline-flex;
             align-items: center;
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
+            background-color: var(--barbie-bg);
+            border: 2px solid var(--barbie-hot);
+            border-radius: 14px;
             padding: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
 
         .font-sizer-box span {
             font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-            padding: 0 10px;
+            font-weight: 700;
+            color: var(--barbie-text);
+            padding: 0 9px;
         }
 
         .font-btn {
             border: none;
             background: transparent;
-            color: var(--text-dark);
+            color: var(--barbie-text);
             font-weight: 700;
             padding: 6px 11px;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .font-btn.active, .font-btn:hover {
-            background: var(--rose-main);
-            color: #fff;
+        .font-btn.active {
+            background-color: var(--barbie-hot);
+            color: #ffffff;
         }
 
-        /* DASHBOARD TOP: KALENDER + REKOMENDASI BELAJAR */
+        /* ============================================================
+           KALENDER MINGGUAN & REKOMENDASI BELAJAR (WARNA SOLID JELAS)
+           ============================================================ */
         .top-planner-grid {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         @media (max-width: 860px) {
@@ -163,71 +269,63 @@
         }
 
         .panel-card {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 24px;
-            padding: 22px;
-            box-shadow: 0 10px 26px rgba(150, 110, 118, 0.08);
+            background-color: var(--barbie-white);
+            border: 2px solid var(--barbie-border);
+            border-radius: 22px;
+            padding: 20px;
+            box-shadow: 0 5px 0 var(--barbie-blush);
         }
 
         .panel-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+            gap: 8px;
         }
 
         .panel-header h2 {
             font-size: 17px;
             margin: 0;
+            color: var(--barbie-hot);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        /* MINI KALENDER MINGGUAN INTERAKTIF */
         .week-days-strip {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 14px;
+            gap: 7px;
+            margin-bottom: 12px;
         }
 
         .day-pill {
-            background: var(--bg-cream);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 10px 4px;
+            background-color: var(--barbie-bg);
+            border: 2px solid var(--barbie-border);
+            border-radius: 14px;
+            padding: 9px 4px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.22s ease;
-            position: relative;
-        }
-
-        .day-pill:hover {
-            transform: translateY(-3px);
-            border-color: var(--rose-main);
         }
 
         .day-pill.selected {
-            background: linear-gradient(135deg, #d97785, #c25b6a);
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 8px 18px rgba(201, 107, 120, 0.32);
+            background-color: var(--barbie-hot);
+            color: #ffffff;
+            border-color: var(--barbie-deep);
         }
 
         .day-pill .d-name {
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            opacity: 0.85;
             display: block;
         }
 
         .day-pill .d-date {
             font-size: 16px;
             font-weight: 700;
-            margin-top: 3px;
+            margin-top: 2px;
             display: block;
         }
 
@@ -235,29 +333,21 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--rose-main);
+            background-color: var(--barbie-hot);
             margin: 4px auto 0;
         }
 
         .day-pill.selected .d-dot {
-            background: #fff;
+            background-color: #ffffff;
         }
 
         .selected-day-summary {
-            background: var(--bg-cream);
-            border-radius: 14px;
-            padding: 12px 15px;
+            background-color: var(--barbie-blush);
+            border-radius: 12px;
+            padding: 11px 14px;
             font-size: calc(13.5px * var(--read-scale));
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        /* BLOK REKOMENDASI BELAJAR */
-        .rec-box {
-            background: linear-gradient(145deg, var(--card-white), var(--lavender-soft));
+            color: var(--barbie-text);
+            font-weight: 600;
         }
 
         .rec-list {
@@ -267,192 +357,163 @@
         }
 
         .rec-item {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 12px 15px;
+            background-color: var(--barbie-bg);
+            border: 2px solid var(--barbie-border);
+            border-radius: 14px;
+            padding: 11px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
-        }
-
-        .rec-item:hover {
-            transform: translateX(4px);
+            gap: 10px;
         }
 
         .rec-item-info strong {
             display: block;
             font-size: calc(14.5px * var(--read-scale));
-            color: var(--text-dark);
+            color: var(--barbie-text);
         }
 
         .rec-item-info span {
             font-size: calc(12.5px * var(--read-scale));
-            color: var(--text-muted);
+            color: var(--barbie-muted);
         }
 
-        .btn-mini-open {
-            background: var(--rose-soft);
-            color: var(--rose-dark);
-            border: none;
-            padding: 7px 13px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 12.5px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.2s;
-        }
-
-        .btn-mini-open:hover {
-            background: var(--rose-main);
-            color: #fff;
-        }
-
-        /* SECTION HEADER FOLDER MATKUL */
+        /* ============================================================
+           FOLDER MATA KULIAH (KOSONGAN DI AWAL + WARNA SOLID BARBIE)
+           ============================================================ */
         .folders-header {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
-            margin-bottom: 22px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .folders-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: 23px;
+            color: var(--barbie-hot);
             margin: 0;
         }
 
-        .btn-primary-cute {
-            background: linear-gradient(135deg, #d67482, #bd5766);
-            color: #fff;
-            border: none;
-            padding: 11px 18px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 13.5px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 20px rgba(198, 96, 111, 0.28);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .empty-folder-state {
+            background-color: var(--barbie-white);
+            border: 2.5px dashed var(--barbie-hot);
+            border-radius: 24px;
+            padding: 42px 24px;
+            text-align: center;
+            max-width: 540px;
+            margin: 10px auto;
         }
 
-        .btn-primary-cute:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 11px 24px rgba(198, 96, 111, 0.36);
+        .empty-folder-state .big-emoji {
+            font-size: 44px;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        /* GRID FOLDER MATKUL BERDIMENSI (NON-FLAT) */
+        .empty-folder-state h3 {
+            margin: 0 0 8px;
+            color: var(--barbie-hot);
+            font-size: 20px;
+        }
+
+        .empty-folder-state p {
+            margin: 0 0 18px;
+            color: var(--barbie-muted);
+            font-size: 14.5px;
+        }
+
         .folders-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
             gap: 24px;
-            padding-top: 10px;
+            padding-top: 12px;
         }
 
         .course-folder {
             position: relative;
-            border-radius: 6px 22px 22px 22px;
-            padding: 20px;
+            border-radius: 6px 20px 20px 20px;
+            padding: 18px;
             cursor: pointer;
-            border: 1.5px solid rgba(160, 120, 128, 0.22);
-            box-shadow: 0 12px 24px rgba(145, 105, 112, 0.11), inset 0 2px 0 rgba(255,255,255,0.65);
-            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s;
+            border: 2.5px solid var(--barbie-hot);
+            box-shadow: 0 6px 0 var(--barbie-blush);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 175px;
+            min-height: 170px;
+            transition: transform 0.18s;
         }
 
-        /* Tab Pita di Atas Folder */
         .course-folder::before {
             content: attr(data-code);
             position: absolute;
-            top: -15px;
-            left: -1.5px;
-            height: 16px;
+            top: -18px;
+            left: -2.5px;
+            height: 18px;
             padding: 2px 14px 0 12px;
-            background: inherit;
-            border: 1.5px solid rgba(160, 120, 128, 0.22);
+            background-color: var(--barbie-hot);
+            color: #ffffff;
+            border: 2.5px solid var(--barbie-hot);
             border-bottom: none;
-            border-radius: 12px 14px 0 0;
+            border-radius: 10px 12px 0 0;
             font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.4px;
-            color: var(--text-muted);
         }
 
         .course-folder:hover {
-            transform: translateY(-6px) rotate(-0.5deg);
-            box-shadow: 0 18px 34px rgba(145, 105, 112, 0.18), inset 0 2px 0 rgba(255,255,255,0.8);
+            transform: translateY(-4px);
         }
 
         .folder-top {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .folder-icon-badge {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.85);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background-color: #ffffff;
+            border: 2px solid var(--barbie-hot);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 21px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        body.dark-mode .folder-icon-badge {
-            background: rgba(35, 30, 33, 0.8);
+            font-size: 20px;
         }
 
         .folder-day-chip {
-            background: rgba(255, 255, 255, 0.82);
-            color: var(--rose-dark);
+            background-color: var(--barbie-hot);
+            color: #ffffff;
             font-size: 11.5px;
             font-weight: 700;
             padding: 4px 10px;
-            border-radius: 12px;
-        }
-
-        body.dark-mode .folder-day-chip {
-            background: rgba(35, 30, 33, 0.85);
+            border-radius: 10px;
         }
 
         .course-folder h3 {
-            margin: 0 0 6px 0;
+            margin: 0 0 5px;
             font-size: calc(17px * var(--read-scale));
-            line-height: 1.35;
-            color: var(--text-dark);
+            color: #2b0d1d;
         }
 
         .course-folder .lecturer-tag {
             font-size: calc(12.5px * var(--read-scale));
-            color: var(--text-muted);
-            margin-bottom: 14px;
+            color: #5c2743;
+            font-weight: 600;
+            margin-bottom: 12px;
             display: block;
         }
 
         .folder-progress-wrap {
-            background: rgba(255, 255, 255, 0.72);
+            background-color: #ffffff;
+            border: 1.5px solid var(--barbie-border);
             border-radius: 12px;
-            padding: 8px 11px;
-        }
-
-        body.dark-mode .folder-progress-wrap {
-            background: rgba(28, 24, 27, 0.65);
+            padding: 8px 10px;
         }
 
         .progress-labels {
@@ -461,22 +522,21 @@
             font-size: 12px;
             font-weight: 700;
             margin-bottom: 5px;
-            color: var(--text-dark);
+            color: #2b0d1d;
         }
 
         .progress-track {
             width: 100%;
-            height: 8px;
-            background: rgba(160, 120, 128, 0.2);
+            height: 9px;
+            background-color: #ffd6eb;
             border-radius: 10px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #e08290, #c25b6a);
+            background-color: #e0218a;
             border-radius: 10px;
-            transition: width 0.35s ease;
         }
 
         /* ============================================================
@@ -484,55 +544,36 @@
            ============================================================ */
         #folderDetailView {
             display: none;
-            animation: fadeSlideUp 0.28s ease;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .detail-topbar {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 22px;
-            padding: 18px 22px;
-            margin-bottom: 22px;
+            background-color: var(--barbie-white);
+            border: 2.5px solid var(--barbie-hot);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
-            box-shadow: 0 10px 25px rgba(150, 110, 118, 0.08);
-        }
-
-        .btn-back-folder {
-            background: var(--rose-soft);
-            color: var(--rose-dark);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 13.5px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            gap: 12px;
+            box-shadow: 0 5px 0 var(--barbie-blush);
         }
 
         .detail-title-group h2 {
-            margin: 0 0 4px 0;
+            margin: 0 0 3px;
             font-family: 'Playfair Display', serif;
+            color: var(--barbie-hot);
             font-size: calc(22px * var(--read-scale));
         }
 
         .detail-title-group p {
             margin: 0;
             font-size: calc(13.5px * var(--read-scale));
-            color: var(--text-muted);
+            color: var(--barbie-muted);
+            font-weight: 600;
         }
 
-        /* GRID PERTEMUAN 1 - 16 */
         .meetings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
@@ -540,44 +581,38 @@
         }
 
         .meeting-card {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 20px;
-            padding: 18px;
-            box-shadow: 0 8px 20px rgba(150, 110, 118, 0.07);
-            transition: border-color 0.2s, transform 0.2s;
+            background-color: var(--barbie-white);
+            border: 2px solid var(--barbie-border);
+            border-radius: 18px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 11px;
         }
 
         .meeting-card.completed {
-            border-color: #8cc9a3;
-            background: linear-gradient(180deg, var(--card-white) 0%, var(--mint-soft) 100%);
+            background-color: var(--barbie-mint);
+            border-color: var(--barbie-mint-border);
         }
 
         .meeting-card-head {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
         }
 
         .meeting-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
             font-size: 12px;
             font-weight: 700;
             padding: 5px 12px;
-            border-radius: 12px;
-            background: var(--rose-soft);
-            color: var(--rose-dark);
+            border-radius: 10px;
+            background-color: var(--barbie-hot);
+            color: #ffffff;
         }
 
         .meeting-badge.exam {
-            background: #ffe1a8;
-            color: #7d5100;
+            background-color: #ffb703;
+            color: #2b0d1d;
         }
 
         .check-done-label {
@@ -587,50 +622,43 @@
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            color: var(--text-muted);
-            user-select: none;
+            color: var(--barbie-text);
         }
 
         .check-done-label input {
             width: 18px;
             height: 18px;
-            accent-color: #4aa870;
+            accent-color: #2d9e64;
             cursor: pointer;
         }
 
-        .meeting-topic-input {
+        .meeting-topic-input, .meeting-notes-input {
             width: 100%;
             box-sizing: border-box;
-            border: 1.5px solid var(--border-soft);
-            background: var(--bg-cream);
-            color: var(--text-dark);
+            border: 2px solid var(--barbie-border);
+            background-color: var(--barbie-bg);
+            color: var(--barbie-text);
             border-radius: 12px;
             padding: 9px 12px;
             font-family: inherit;
+        }
+
+        .meeting-topic-input {
             font-size: calc(14.5px * var(--read-scale));
             font-weight: 700;
         }
 
         .meeting-notes-input {
-            width: 100%;
-            box-sizing: border-box;
-            border: 1.5px solid var(--border-soft);
-            background: var(--bg-cream);
-            color: var(--text-dark);
-            border-radius: 12px;
-            padding: 9px 12px;
-            font-family: inherit;
             font-size: calc(13.5px * var(--read-scale));
             line-height: 1.55;
             resize: vertical;
-            min-height: 68px;
+            min-height: 66px;
         }
 
-        /* DAFTAR FILE & LINK BAHAN AJAR */
         .materials-list {
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 6px;
         }
 
         .material-chip {
@@ -638,18 +666,17 @@
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            background: var(--bg-cream);
-            border: 1px solid var(--border-soft);
-            border-radius: 11px;
-            padding: 7px 11px;
-            font-size: calc(13px * var(--read-scale));
+            background-color: var(--barbie-blush);
+            border: 1.5px solid var(--barbie-hot);
+            border-radius: 10px;
+            padding: 7px 10px;
         }
 
         .material-chip a, .material-chip button.open-file-btn {
             background: none;
             border: none;
             padding: 0;
-            color: var(--rose-dark);
+            color: var(--barbie-text);
             font-weight: 700;
             font-size: calc(13px * var(--read-scale));
             text-decoration: none;
@@ -661,17 +688,13 @@
             word-break: break-word;
         }
 
-        .material-chip a:hover, .material-chip button.open-file-btn:hover {
-            text-decoration: underline;
-        }
-
         .del-mat-btn {
             background: none;
             border: none;
-            color: #b56570;
+            color: var(--barbie-hot);
             cursor: pointer;
-            font-size: 13px;
-            padding: 2px 5px;
+            font-size: 14px;
+            font-weight: 700;
         }
 
         .meeting-actions-row {
@@ -682,9 +705,9 @@
 
         .btn-upload-mat, .btn-link-mat {
             flex: 1;
-            border: 1.5px dashed var(--rose-main);
-            background: var(--rose-soft);
-            color: var(--rose-dark);
+            border: 2px solid var(--barbie-hot);
+            background-color: var(--barbie-blush);
+            color: var(--barbie-text);
             border-radius: 12px;
             padding: 8px 10px;
             font-size: 12.5px;
@@ -694,128 +717,164 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            transition: 0.2s;
         }
 
         .btn-link-mat {
-            border-color: #8aa8d6;
-            background: var(--sky-soft);
-            color: #36598a;
-        }
-
-        body.dark-mode .btn-link-mat {
-            color: #a8c9f7;
+            background-color: var(--barbie-white);
         }
 
         /* ============================================================
-           FLOATING POMODORO ALARM (SELALU ADA DI SETIAP HALAMAN & FOLDER)
+           DRAGGABLE & DOCKABLE POMODORO ALARM (TIDAK MENGHALANGI FITUR)
            ============================================================ */
         #pomodoroWidget {
             position: fixed;
-            bottom: 20px;
+            top: 92px;
             right: 20px;
-            z-index: 9999;
-            background: var(--card-white);
-            border: 2px solid var(--rose-main);
-            border-radius: 24px;
-            padding: 14px 18px;
-            box-shadow: 0 14px 34px rgba(157, 92, 103, 0.26);
-            width: 245px;
-            transition: all 0.25s ease;
+            z-index: 9990;
+            background-color: var(--barbie-white);
+            border: 2.5px solid var(--barbie-hot);
+            border-radius: 20px;
+            width: 235px;
+            box-shadow: 0 6px 0 var(--barbie-blush);
+            user-select: none;
+            touch-action: none;
         }
 
         #pomodoroWidget.minimized {
-            width: auto;
-            padding: 10px 16px;
-            border-radius: 30px;
+            width: 185px;
         }
 
         #pomodoroWidget.minimized .pomo-body {
             display: none;
         }
 
-        .pomo-header {
+        /* Mode Docked: Menempel tipis di tepi kanan layar supaya 0% menghalangi */
+        #pomodoroWidget.docked {
+            left: auto !important;
+            right: -148px !important;
+            top: 50% !important;
+            width: 190px;
+            transition: right 0.25s ease;
+        }
+
+        #pomodoroWidget.docked:hover {
+            right: 6px !important;
+        }
+
+        .pomo-drag-bar {
+            background-color: var(--barbie-hot);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 16px 16px 0 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            cursor: pointer;
+            cursor: grab;
+        }
+
+        #pomodoroWidget.minimized .pomo-drag-bar {
+            border-radius: 16px;
+        }
+
+        .pomo-drag-bar:active {
+            cursor: grabbing;
         }
 
         .pomo-title {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
-            color: var(--rose-dark);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
+        .pomo-win-btns {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pomo-win-btns button {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pomo-body {
+            padding: 12px 14px 14px;
+        }
+
         .pomo-modes {
             display: flex;
-            gap: 5px;
-            margin: 10px 0 8px;
+            gap: 4px;
+            margin-bottom: 8px;
         }
 
         .pomo-mode-btn {
             flex: 1;
-            border: 1px solid var(--border-soft);
-            background: var(--bg-cream);
-            color: var(--text-muted);
+            border: 1.5px solid var(--barbie-border);
+            background-color: var(--barbie-bg);
+            color: var(--barbie-text);
             font-size: 11px;
             font-weight: 700;
-            padding: 5px 4px;
-            border-radius: 10px;
+            padding: 5px 2px;
+            border-radius: 8px;
             cursor: pointer;
         }
 
         .pomo-mode-btn.active {
-            background: var(--rose-main);
-            color: #fff;
-            border-color: var(--rose-main);
+            background-color: var(--barbie-hot);
+            color: #ffffff;
+            border-color: var(--barbie-hot);
         }
 
         .pomo-clock {
             font-family: 'Playfair Display', serif;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             text-align: center;
-            color: var(--text-dark);
+            color: var(--barbie-hot);
             margin: 4px 0 10px;
-            letter-spacing: 1px;
         }
 
         .pomo-controls {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .pomo-controls button {
             flex: 1;
-            border: none;
-            border-radius: 12px;
-            padding: 8px;
+            border: 2px solid var(--barbie-hot);
+            border-radius: 10px;
+            padding: 7px;
             font-weight: 700;
-            font-size: 12.5px;
+            font-size: 12px;
             cursor: pointer;
         }
 
         #pomoStartBtn {
-            background: var(--rose-main);
-            color: #fff;
+            background-color: var(--barbie-hot);
+            color: #ffffff;
         }
 
         #pomoResetBtn {
-            background: var(--rose-soft);
-            color: var(--rose-dark);
+            background-color: var(--barbie-white);
+            color: var(--barbie-hot);
         }
 
         /* MODAL TAMBAH MATKUL */
         .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(35, 25, 28, 0.55);
-            backdrop-filter: blur(4px);
+            background: rgba(43, 13, 29, 0.65);
             z-index: 10000;
             display: none;
             align-items: center;
@@ -828,23 +887,24 @@
         }
 
         .modal-card {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-soft);
+            background-color: var(--barbie-white);
+            border: 3px solid var(--barbie-hot);
             border-radius: 24px;
             padding: 24px;
             width: 100%;
             max-width: 440px;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.22);
+            box-shadow: 0 8px 0 var(--barbie-blush);
         }
 
         .modal-card h3 {
             font-family: 'Playfair Display', serif;
-            margin: 0 0 14px 0;
-            font-size: 21px;
+            color: var(--barbie-hot);
+            margin: 0 0 14px;
+            font-size: 22px;
         }
 
         .form-group {
-            margin-bottom: 13px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
@@ -852,7 +912,7 @@
             font-size: 13px;
             font-weight: 700;
             margin-bottom: 5px;
-            color: var(--text-dark);
+            color: var(--barbie-text);
         }
 
         .form-group input, .form-group select {
@@ -860,9 +920,9 @@
             box-sizing: border-box;
             padding: 10px 12px;
             border-radius: 12px;
-            border: 1.5px solid var(--border-soft);
-            background: var(--bg-cream);
-            color: var(--text-dark);
+            border: 2px solid var(--barbie-border);
+            background-color: var(--barbie-bg);
+            color: var(--barbie-text);
             font-family: inherit;
             font-size: 14px;
         }
@@ -871,11 +931,25 @@
             display: flex;
             justify-content: flex-end;
             gap: 10px;
-            margin-top: 18px;
+            margin-top: 16px;
         }
     </style>
 </head>
 <body>
+
+    <!-- LAYAR KUNCI PRIVATE (PIN PRIBADI) -->
+    <div id="privateLockScreen">
+        <div class="lock-box">
+            <div class="lock-icon-circle"><i class="fa-solid fa-lock"></i></div>
+            <h2 id="lockTitle">Private Study Hub 💖</h2>
+            <p id="lockSubtitle">Masukkan PIN pribadimu untuk membuka folder mata kuliah &amp; bahan ajar.</p>
+            <input type="password" id="pinInputField" class="pin-input" maxlength="6" inputmode="numeric" placeholder="••••">
+            <div id="lockErrorMsg" style="color:#d90429; font-size:12.5px; font-weight:700; margin-bottom:10px; display:none;"></div>
+            <button type="button" class="btn-barbie-solid" id="unlockBtn" style="width:100%;">
+                <i class="fa-solid fa-key"></i> <span id="unlockBtnText">Buka Study Hub</span>
+            </button>
+        </div>
+    </div>
 
     <!-- NAVBAR -->
     <header class="navbar">
@@ -902,45 +976,48 @@
 
     <main class="study-container">
 
-        <!-- HERO HEADER + PENGATUR UKURAN TULISAN -->
+        <!-- HERO HEADER + UKURAN TULISAN + TOMBOL KUNCI -->
         <section class="study-hero">
-            <div class="study-hero-text">
-                <div class="badge-pill"><span>📚</span> SISTEM INFORMASI • SEMESTER 1</div>
-                <h1>My Cozy Study Hub ✿</h1>
-                <p>Simpan bahan ajar Pertemuan 1–16, pantau progres belajar, dan fokus bareng Pomodoro.</p>
+            <div>
+                <div class="badge-pill"><span>💖</span> PRIVATE BARBIE STUDY SPACE</div>
+                <h1>My Study Hub ✿</h1>
+                <p>Ruang belajar pribadimu — atur folder matkul, Pertemuan 1–16, dan alarm fokus.</p>
             </div>
 
-            <div class="comfort-toolbar">
-                <div class="font-sizer-box" title="Atur besar-kecil tulisan agar nyaman dibaca">
-                    <span>Ukuran Teks:</span>
+            <div class="toolbar-actions">
+                <div class="font-sizer-box" title="Atur besar-kecil tulisan">
+                    <span>Teks:</span>
                     <button class="font-btn" data-scale="0.92">A-</button>
                     <button class="font-btn active" data-scale="1">Normal</button>
                     <button class="font-btn" data-scale="1.15">A+</button>
                 </div>
+
+                <button type="button" class="btn-barbie-outline" id="lockNowBtn" title="Kunci kembali halaman ini">
+                    <i class="fa-solid fa-lock"></i> Kunci
+                </button>
             </div>
         </section>
 
-        <!-- VIEW 1: BERANDA STUDY HUB (KALENDER + REKOMENDASI + FOLDER MATKUL) -->
+        <!-- VIEW 1: BERANDA STUDY HUB -->
         <div id="foldersHomeView">
 
             <div class="top-planner-grid">
                 <!-- KALENDER MINGGUAN -->
                 <div class="panel-card">
                     <div class="panel-header">
-                        <h2><span>🗓️</span> Jadwal &amp; Kalender Mingguan</h2>
-                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--rose-main);"></span>
+                        <h2><span>🗓️</span> Kalender &amp; Jadwal</h2>
+                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--barbie-hot);"></span>
                     </div>
 
                     <div class="week-days-strip" id="weekDaysStrip"></div>
 
-                    <div class="selected-day-summary">
-                        <span id="selectedDayText">Memuat jadwal hari ini...</span>
-                        <span style="font-size:12px; font-weight:700; color:var(--rose-main);">Klik hari untuk cek jadwal</span>
+                    <div class="selected-day-summary" id="selectedDayText">
+                        Pilih hari di kalender untuk melihat jadwal matkulmu.
                     </div>
                 </div>
 
-                <!-- BLOK REKOMENDASI BELAJAR -->
-                <div class="panel-card rec-box">
+                <!-- REKOMENDASI BELAJAR -->
+                <div class="panel-card">
                     <div class="panel-header">
                         <h2 id="recTitle"><span>✨</span> Rekomendasi Belajar Hari Ini</h2>
                     </div>
@@ -948,11 +1025,21 @@
                 </div>
             </div>
 
-            <!-- DAFTAR FOLDER MATA KULIAH -->
+            <!-- HEADER FOLDER MATKUL -->
             <div class="folders-header">
                 <h2>📁 Folder Mata Kuliah</h2>
-                <button class="btn-primary-cute" id="openAddCourseModalBtn">
+                <button type="button" class="btn-barbie-solid" id="openAddCourseModalBtn">
                     <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
+                </button>
+            </div>
+
+            <!-- STATE KOSONG DI AWAL -->
+            <div class="empty-folder-state" id="emptyFolderState" style="display:none;">
+                <span class="big-emoji">🎀</span>
+                <h3>Belum Ada Folder Mata Kuliah</h3>
+                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu lengkap dengan Pertemuan 1–16!</p>
+                <button type="button" class="btn-barbie-solid" id="emptyAddCourseBtn">
+                    <i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
                 </button>
             </div>
 
@@ -963,21 +1050,21 @@
         <div id="folderDetailView">
             <div class="detail-topbar">
                 <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-                    <button class="btn-back-folder" id="backToFoldersBtn">
-                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Folder
+                    <button type="button" class="btn-barbie-outline" id="backToFoldersBtn">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
                     </button>
                     <div class="detail-title-group">
                         <h2 id="detailCourseTitle">Nama Mata Kuliah</h2>
-                        <p id="detailCourseMeta">Hari Kuliah • Dosen • Progres</p>
+                        <p id="detailCourseMeta">Jadwal • Dosen • Progres</p>
                     </div>
                 </div>
 
                 <div style="display:flex; gap:8px;">
-                    <button class="btn-mini-open" id="editCourseScheduleBtn" title="Ubah jadwal hari kuliah">
+                    <button type="button" class="btn-barbie-outline" id="editCourseScheduleBtn">
                         <i class="fa-solid fa-calendar-day"></i> Ubah Hari
                     </button>
-                    <button class="btn-mini-open" id="deleteCourseBtn" style="background:#ffe2e6; color:#a83244;" title="Hapus folder matkul">
-                        <i class="fa-solid fa-trash"></i>
+                    <button type="button" class="btn-barbie-outline" id="deleteCourseBtn" style="border-color:#d90429; color:#d90429;">
+                        <i class="fa-solid fa-trash"></i> Hapus
                     </button>
                 </div>
             </div>
@@ -987,24 +1074,29 @@
 
     </main>
 
-    <!-- FLOATING POMODORO ALARM (SELALU AKTIF DI POJOK KANAN BAWAH) -->
+    <!-- FLOATING DRAGGABLE & DOCKABLE POMODORO ALARM -->
     <div id="pomodoroWidget">
-        <div class="pomo-header" id="pomoToggleHeader" title="Klik untuk minimize/expand">
+        <div class="pomo-drag-bar" id="pomoDragHandle" title="Geser untuk memindahkan posisi alarm">
             <div class="pomo-title">
-                <span>🍅</span> <span id="pomoStatusLabel">Pomodoro Fokus</span>
+                <i class="fa-solid fa-grip-vertical"></i>
+                <span>🍅</span>
+                <span id="pomoMiniClock">25:00</span>
             </div>
-            <i class="fa-solid fa-chevron-down" id="pomoChevron" style="font-size:12px; color:var(--text-muted);"></i>
+            <div class="pomo-win-btns">
+                <button type="button" id="pomoDockBtn" title="Sembunyikan ke pinggir layar"><i class="fa-solid fa-angles-right"></i></button>
+                <button type="button" id="pomoMinBtn" title="Kecilkan / Besarkan"><i class="fa-solid fa-minus"></i></button>
+            </div>
         </div>
         <div class="pomo-body">
             <div class="pomo-modes">
-                <button class="pomo-mode-btn active" data-mins="25" data-label="Pomodoro Fokus">Fokus 25m</button>
-                <button class="pomo-mode-btn" data-mins="5" data-label="Istirahat Singkat">Break 5m</button>
-                <button class="pomo-mode-btn" data-mins="15" data-label="Istirahat Panjang">Long 15m</button>
+                <button type="button" class="pomo-mode-btn active" data-mins="25">Fokus 25m</button>
+                <button type="button" class="pomo-mode-btn" data-mins="5">Break 5m</button>
+                <button type="button" class="pomo-mode-btn" data-mins="15">Long 15m</button>
             </div>
             <div class="pomo-clock" id="pomoClockDisplay">25:00</div>
             <div class="pomo-controls">
-                <button id="pomoStartBtn"><i class="fa-solid fa-play"></i> Mulai</button>
-                <button id="pomoResetBtn"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+                <button type="button" id="pomoStartBtn"><i class="fa-solid fa-play"></i> Mulai</button>
+                <button type="button" id="pomoResetBtn"><i class="fa-solid fa-rotate-right"></i> Reset</button>
             </div>
         </div>
     </div>
@@ -1012,14 +1104,14 @@
     <!-- MODAL TAMBAH FOLDER MATKUL -->
     <div class="modal-backdrop" id="addCourseModal">
         <div class="modal-card">
-            <h3>📁 Tambah Folder Matkul Baru</h3>
+            <h3>💖 Tambah Folder Matkul</h3>
             <div class="form-group">
                 <label>Nama Mata Kuliah</label>
                 <input type="text" id="newCourseName" placeholder="Contoh: Pemrograman Web">
             </div>
             <div class="form-group">
-                <label>Kode / Label Tab Folder</label>
-                <input type="text" id="newCourseCode" placeholder="Contoh: SI-101 • SEM 1">
+                <label>Label Tab Folder</label>
+                <input type="text" id="newCourseCode" placeholder="Contoh: SEMESTER 1">
             </div>
             <div class="form-group">
                 <label>Jadwal Hari Kuliah (Untuk Rekomendasi Belajar)</label>
@@ -1034,36 +1126,111 @@
             </div>
             <div class="form-group">
                 <label>Nama Dosen (Opsional)</label>
-                <input type="text" id="newCourseLecturer" placeholder="Contoh: Encep Supriatna, S.E, S.Kom, M.M.">
+                <input type="text" id="newCourseLecturer" placeholder="Nama dosen pengampu...">
             </div>
             <div class="form-group">
-                <label>Ikon &amp; Warna Folder</label>
+                <label>Ikon &amp; Warna Folder Solid</label>
                 <select id="newCourseTheme">
-                    <option value="🌸|#fce8ec">🌸 Soft Rose Pink</option>
-                    <option value="🍑|#ffefe2">🍑 Warm Peach</option>
-                    <option value="🌿|#e6f5ec">🌿 Mint Sage</option>
-                    <option value="🪻|#f1ebfc">🪻 Soft Lavender</option>
-                    <option value="☁️|#e6f2fc">☁️ Sky Pastel</option>
-                    <option value="🍋|#fdf6dc">🍋 Butter Cream</option>
+                    <option value="💖|#ffd6eb">💖 Barbie Bubblegum Pink</option>
+                    <option value="🎀|#ffc2e2">🎀 Sweet Ribbon Pink</option>
+                    <option value="👑|#ffe5f1">👑 Princess Blush</option>
+                    <option value="💄|#ffb3d9">💄 Glam Rose Pink</option>
+                    <option value="🌸|#fff0f7">🌸 Soft Petal Pink</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <button class="btn-mini-open" id="closeAddCourseModalBtn">Batal</button>
-                <button class="btn-primary-cute" id="saveNewCourseBtn">Simpan Folder</button>
+                <button type="button" class="btn-barbie-outline" id="closeAddCourseModalBtn">Batal</button>
+                <button type="button" class="btn-barbie-solid" id="saveNewCourseBtn">Simpan Folder</button>
             </div>
         </div>
     </div>
 
-    <!-- HIDDEN FILE INPUT UNTUK UPLOAD BAHAN AJAR KE INDEXEDDB -->
+    <!-- HIDDEN FILE INPUT -->
     <input type="file" id="hiddenMaterialFileInput" style="display:none;" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,image/*">
 
     <script src="js/script.js"></script>
     <script>
     (function () {
         // ============================================================
-        // 1. INDEXEDDB STORAGE ENGINE (Kapasitas Besar untuk File PDF/PPT/Catatan)
+        // 1. PRIVATE PIN LOCK SYSTEM (Kunci Sesi Pribadi)
         // ============================================================
-        const DB_NAME = "LittleUniverseStudyDB";
+        const PIN_STORAGE_KEY = "barbieStudyHubPIN";
+        const SESSION_UNLOCK_KEY = "barbieStudyHubUnlocked";
+
+        const lockScreen = document.getElementById("privateLockScreen");
+        const lockTitle = document.getElementById("lockTitle");
+        const lockSubtitle = document.getElementById("lockSubtitle");
+        const pinInput = document.getElementById("pinInputField");
+        const unlockBtn = document.getElementById("unlockBtn");
+        const unlockBtnText = document.getElementById("unlockBtnText");
+        const lockErrorMsg = document.getElementById("lockErrorMsg");
+
+        function initLockScreen() {
+            const savedPin = localStorage.getItem(PIN_STORAGE_KEY);
+            const isUnlocked = sessionStorage.getItem(SESSION_UNLOCK_KEY) === "true";
+
+            if (isUnlocked && savedPin) {
+                lockScreen.style.display = "none";
+                return;
+            }
+
+            lockScreen.style.display = "flex";
+            pinInput.value = "";
+            lockErrorMsg.style.display = "none";
+
+            if (!savedPin) {
+                lockTitle.textContent = "Buat PIN Pribadi 💖";
+                lockSubtitle.textContent = "Supaya Study Hub ini private cuma buat kamu, buat PIN rahasia (4–6 angka) dulu ya!";
+                unlockBtnText.textContent = "Simpan PIN & Masuk";
+            } else {
+                lockTitle.textContent = "Private Study Hub 💖";
+                lockSubtitle.textContent = "Masukkan PIN pribadimu untuk membuka folder mata kuliah.";
+                unlockBtnText.textContent = "Buka Study Hub";
+            }
+            setTimeout(() => pinInput.focus(), 100);
+        }
+
+        function handlePinSubmit() {
+            const val = pinInput.value.trim();
+            const savedPin = localStorage.getItem(PIN_STORAGE_KEY);
+
+            if (!savedPin) {
+                if (val.length < 4) {
+                    lockErrorMsg.textContent = "PIN minimal 4 angka ya!";
+                    lockErrorMsg.style.display = "block";
+                    return;
+                }
+                localStorage.setItem(PIN_STORAGE_KEY, val);
+                sessionStorage.setItem(SESSION_UNLOCK_KEY, "true");
+                lockScreen.style.display = "none";
+            } else {
+                if (val === savedPin) {
+                    sessionStorage.setItem(SESSION_UNLOCK_KEY, "true");
+                    lockScreen.style.display = "none";
+                } else {
+                    lockErrorMsg.textContent = "PIN salah, coba lagi ya!";
+                    lockErrorMsg.style.display = "block";
+                    pinInput.value = "";
+                }
+            }
+        }
+
+        unlockBtn.addEventListener("click", handlePinSubmit);
+        pinInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") handlePinSubmit();
+        });
+
+        document.getElementById("lockNowBtn").addEventListener("click", () => {
+            sessionStorage.removeItem(SESSION_UNLOCK_KEY);
+            initLockScreen();
+        });
+
+        initLockScreen();
+
+        // ============================================================
+        // 2. INDEXEDDB STORAGE (KAPASITAS BESAR & KOSONGAN DI AWAL)
+        // ============================================================
+        const DB_NAME = "BarbiePrivateStudyDB";
         const DB_VERSION = 1;
         let db = null;
 
@@ -1140,14 +1307,10 @@
             });
         }
 
-        // ============================================================
-        // 2. DATA DEFAULT MATA KULIAH SEMESTER 1 (16 PERTEMUAN)
-        // ============================================================
         function createEmptyMeetings() {
             return Array.from({ length: 16 }, (_, idx) => {
                 const num = idx + 1;
                 let defaultTopic = "";
-                if (num === 1) defaultTopic = "Kontrak Kuliah & Pengantar Materi";
                 if (num === 8) defaultTopic = "Ujian Tengah Semester (UTS)";
                 if (num === 16) defaultTopic = "Ujian Akhir Semester (UAS)";
                 return {
@@ -1155,99 +1318,33 @@
                     topic: defaultTopic,
                     notes: "",
                     completed: false,
-                    materials: [] // { id, kind: 'file'|'link', title, url?, fileId? }
+                    materials: []
                 };
             });
         }
-
-        const DEFAULT_COURSES = [
-            {
-                id: "c-matdiskrit",
-                code: "SI-101 • SEM 1",
-                name: "Matematika Diskrit",
-                day: "Senin",
-                lecturer: "Dosen Sistem Informasi",
-                icon: "🧮",
-                color: "#fce8ec",
-                meetings: createEmptyMeetings()
-            },
-            {
-                id: "c-aljabar",
-                code: "SI-102 • SEM 1",
-                name: "Aljabar Linear",
-                day: "Selasa",
-                lecturer: "Dosen Sistem Informasi",
-                icon: "📐",
-                color: "#f1ebfc",
-                meetings: createEmptyMeetings()
-            },
-            {
-                id: "c-algo",
-                code: "SI-103 • SEM 1",
-                name: "Algoritma & Perancangan Program",
-                day: "Rabu",
-                lecturer: "Encep Supriatna, S.E, S.Kom, M.M.",
-                icon: "💻",
-                color: "#e6f2fc",
-                meetings: createEmptyMeetings()
-            },
-            {
-                id: "c-webdev",
-                code: "SI-104 • SEM 1",
-                name: "Pemrograman Web",
-                day: "Rabu",
-                lecturer: "Dosen Sistem Informasi",
-                icon: "🌐",
-                color: "#e6f5ec",
-                meetings: createEmptyMeetings()
-            },
-            {
-                id: "c-java",
-                code: "SI-105 • SEM 1",
-                name: "Pemrograman Bahasa Java",
-                day: "Kamis",
-                lecturer: "Dosen Sistem Informasi",
-                icon: "☕",
-                color: "#ffefe2",
-                meetings: createEmptyMeetings()
-            },
-            {
-                id: "c-akuntansi",
-                code: "SI-106 • SEM 1",
-                name: "Akuntansi Keuangan & Praktikum Niaga",
-                day: "Jumat",
-                lecturer: "Dosen Sistem Informasi",
-                icon: "📊",
-                color: "#fdf6dc",
-                meetings: createEmptyMeetings()
-            }
-        ];
 
         let courses = [];
         let activeCourseId = null;
         let pendingUploadMeetingNum = null;
 
         // ============================================================
-        // 3. PENGATUR UKURAN TULISAN (A- / NORMAL / A+)
+        // 3. PENGATUR BESAR-KECIL TULISAN
         // ============================================================
         const fontBtns = document.querySelectorAll(".font-btn");
         const savedScale = localStorage.getItem("studyHubFontScale") || "1";
         document.documentElement.style.setProperty("--read-scale", savedScale);
         fontBtns.forEach(btn => {
-            if (btn.dataset.scale === savedScale) btn.classList.add("active");
-            else btn.classList.remove("active");
-
+            btn.classList.toggle("active", btn.dataset.scale === savedScale);
             btn.addEventListener("click", () => {
                 fontBtns.forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-                const sc = btn.dataset.scale;
-                document.documentElement.style.setProperty("--read-scale", sc);
-                localStorage.setItem("studyHubFontScale", sc);
+                document.documentElement.style.setProperty("--read-scale", btn.dataset.scale);
+                localStorage.setItem("studyHubFontScale", btn.dataset.scale);
             });
         });
 
         // ============================================================
-        // 4. KALENDER MINGGUAN & REKOMENDASI BELAJAR OTOMATIS
+        // 4. KALENDER MINGGUAN & REKOMENDASI BELAJAR
         // ============================================================
         const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const today = new Date();
@@ -1255,13 +1352,11 @@
 
         function renderCalendarAndRecommendations() {
             const strip = document.getElementById("weekDaysStrip");
-            const dateLabel = document.getElementById("todayDateLabel");
-            dateLabel.textContent = today.toLocaleDateString("id-ID", {
-                weekday: "long", day: "numeric", month: "long", year: "numeric"
+            document.getElementById("todayDateLabel").textContent = today.toLocaleDateString("id-ID", {
+                weekday: "long", day: "numeric", month: "short", year: "numeric"
             });
 
             strip.innerHTML = "";
-            // Mulai dari hari Senin minggu ini
             const currentDayIdx = today.getDay();
             const diffToMonday = currentDayIdx === 0 ? -6 : 1 - currentDayIdx;
             const monday = new Date(today);
@@ -1287,7 +1382,6 @@
                 strip.appendChild(pill);
             }
 
-            // Update Rekomendasi Belajar berdasarkan hari yang dipilih
             const matchingCourses = courses.filter(c => c.day === selectedDayName);
             const isToday = selectedDayName === DAY_NAMES[today.getDay()];
             document.getElementById("recTitle").innerHTML =
@@ -1297,13 +1391,23 @@
             const recList = document.getElementById("recList");
             recList.innerHTML = "";
 
-            if (matchingCourses.length === 0) {
-                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah tetap — waktunya review catatan santai!`;
+            if (courses.length === 0) {
+                summaryEl.textContent = "Tambahkan folder matkulmu dulu supaya rekomendasi jadwal muncul otomatis di sini!";
                 recList.innerHTML = `
                     <div class="rec-item">
                         <div class="rec-item-info">
-                            <strong>🌿 Free Study / Review Mandiri</strong>
-                            <span>Pilih salah satu folder matkul di bawah untuk mencicil rangkuman atau latihan soal.</span>
+                            <strong>💖 Belum ada jadwal matkul</strong>
+                            <span>Buat folder matkul &amp; pilih hari kuliahnya ya!</span>
+                        </div>
+                    </div>
+                `;
+            } else if (matchingCourses.length === 0) {
+                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah — waktunya review catatan!`;
+                recList.innerHTML = `
+                    <div class="rec-item">
+                        <div class="rec-item-info">
+                            <strong>🎀 Free Review Mandiri</strong>
+                            <span>Buka salah satu folder matkulmu untuk mencicil rangkuman.</span>
                         </div>
                     </div>
                 `;
@@ -1316,10 +1420,10 @@
                     item.className = "rec-item";
                     item.innerHTML = `
                         <div class="rec-item-info">
-                            <strong>${course.icon} ${course.name}</strong>
+                            <strong>${course.icon} ${escapeHtml(course.name)}</strong>
                             <span>Progres ${doneCount}/16 • Lanjut Pertemuan ${nextMeeting.number}</span>
                         </div>
-                        <button class="btn-mini-open">Buka Folder →</button>
+                        <button type="button" class="btn-barbie-solid" style="padding:7px 12px; font-size:12px;">Buka</button>
                     `;
                     item.querySelector("button").addEventListener("click", () => openFolder(course.id));
                     recList.appendChild(item);
@@ -1332,7 +1436,14 @@
         // ============================================================
         function renderFoldersGrid() {
             const grid = document.getElementById("foldersGrid");
+            const emptyState = document.getElementById("emptyFolderState");
             grid.innerHTML = "";
+
+            if (courses.length === 0) {
+                emptyState.style.display = "block";
+                return;
+            }
+            emptyState.style.display = "none";
 
             courses.forEach(course => {
                 const doneCount = course.meetings.filter(m => m.completed).length;
@@ -1340,8 +1451,8 @@
 
                 const card = document.createElement("div");
                 card.className = "course-folder";
-                card.dataset.code = course.code || "SEMESTER 1";
-                card.style.backgroundColor = course.color || "#fce8ec";
+                card.dataset.code = course.code || "MATKUL";
+                card.style.backgroundColor = course.color || "#ffd6eb";
 
                 card.innerHTML = `
                     <div>
@@ -1349,8 +1460,8 @@
                             <div class="folder-icon-badge">${course.icon}</div>
                             <span class="folder-day-chip">📅 ${course.day}</span>
                         </div>
-                        <h3>${course.name}</h3>
-                        <span class="lecturer-tag">${course.lecturer || "Mata Kuliah Aktif"}</span>
+                        <h3>${escapeHtml(course.name)}</h3>
+                        <span class="lecturer-tag">${escapeHtml(course.lecturer || "Folder Mata Kuliah")}</span>
                     </div>
 
                     <div class="folder-progress-wrap">
@@ -1389,7 +1500,7 @@
             const pct = Math.round((doneCount / 16) * 100);
             document.getElementById("detailCourseTitle").textContent = `${course.icon} ${course.name}`;
             document.getElementById("detailCourseMeta").textContent =
-                `Jadwal: Hari ${course.day} • ${course.lecturer || "Semester 1"} • Selesai ${doneCount}/16 Pertemuan (${pct}%)`;
+                `Jadwal: Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 (${pct}%)`;
         }
 
         function renderMeetings(course) {
@@ -1418,7 +1529,7 @@
 
                     <input type="text" class="meeting-topic-input" placeholder="Judul / Topik Pertemuan ${m.number}..." value="${escapeHtml(m.topic)}">
 
-                    <textarea class="meeting-notes-input" placeholder="Tulis ringkasan materi atau poin penting di sini...">${escapeHtml(m.notes)}</textarea>
+                    <textarea class="meeting-notes-input" placeholder="Tulis ringkasan materi atau poin penting...">${escapeHtml(m.notes)}</textarea>
 
                     <div class="materials-list"></div>
 
@@ -1432,7 +1543,6 @@
                     </div>
                 `;
 
-                // Checkbox progres selesai
                 const checkbox = card.querySelector("input[type='checkbox']");
                 checkbox.addEventListener("change", async () => {
                     m.completed = checkbox.checked;
@@ -1441,21 +1551,18 @@
                     renderMeetings(course);
                 });
 
-                // Simpan otomatis topik pertemuan
                 const topicInput = card.querySelector(".meeting-topic-input");
                 topicInput.addEventListener("change", async () => {
                     m.topic = topicInput.value;
                     await saveCourse(course);
                 });
 
-                // Simpan otomatis catatan pertemuan
                 const notesInput = card.querySelector(".meeting-notes-input");
                 notesInput.addEventListener("change", async () => {
                     m.notes = notesInput.value;
                     await saveCourse(course);
                 });
 
-                // Render bahan ajar (file & link)
                 const matListEl = card.querySelector(".materials-list");
                 m.materials.forEach((mat, matIdx) => {
                     const chip = document.createElement("div");
@@ -1463,7 +1570,7 @@
 
                     if (mat.kind === "file") {
                         chip.innerHTML = `
-                            <button type="button" class="open-file-btn" title="Klik untuk buka / unduh file">
+                            <button type="button" class="open-file-btn" title="Klik untuk membuka file">
                                 <i class="fa-solid fa-file-lines"></i> ${escapeHtml(mat.title)}
                             </button>
                             <button type="button" class="del-mat-btn" title="Hapus file"><i class="fa-solid fa-xmark"></i></button>
@@ -1474,7 +1581,7 @@
                                 const url = URL.createObjectURL(record.blob);
                                 window.open(url, "_blank");
                             } else {
-                                alert("File tidak ditemukan di penyimpanan browser.");
+                                alert("File tidak ditemukan di browser.");
                             }
                         });
                     } else {
@@ -1498,17 +1605,15 @@
                     matListEl.appendChild(chip);
                 });
 
-                // Tombol Upload File Bahan Ajar
                 card.querySelector(".btn-upload-mat").addEventListener("click", () => {
                     pendingUploadMeetingNum = m.number;
                     document.getElementById("hiddenMaterialFileInput").click();
                 });
 
-                // Tombol Tambah Link Materi
                 card.querySelector(".btn-link-mat").addEventListener("click", async () => {
-                    const title = prompt("Nama bahan ajar / link (contoh: Slide PPT Pertemuan " + m.number + "):");
+                    const title = prompt("Nama bahan ajar / link:");
                     if (!title) return;
-                    const url = prompt("Tempel URL link (Google Drive / YouTube / Web):");
+                    const url = prompt("Tempel URL link:");
                     if (!url) return;
                     m.materials.push({
                         id: "mat-" + Date.now(),
@@ -1524,7 +1629,6 @@
             });
         }
 
-        // Handler file terpilih dari komputer -> simpan ke IndexedDB
         document.getElementById("hiddenMaterialFileInput").addEventListener("change", async (e) => {
             const file = e.target.files[0];
             if (!file || !activeCourseId || !pendingUploadMeetingNum) return;
@@ -1545,7 +1649,6 @@
             renderMeetings(course);
         });
 
-        // Tombol Kembali ke Daftar Folder
         document.getElementById("backToFoldersBtn").addEventListener("click", () => {
             activeCourseId = null;
             document.getElementById("folderDetailView").style.display = "none";
@@ -1554,11 +1657,10 @@
             renderFoldersGrid();
         });
 
-        // Ubah Hari Kuliah Matkul
         document.getElementById("editCourseScheduleBtn").addEventListener("click", async () => {
             const course = courses.find(c => c.id === activeCourseId);
             if (!course) return;
-            const newDay = prompt("Masukkan hari kuliah baru (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu):", course.day);
+            const newDay = prompt("Hari kuliah baru (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu):", course.day);
             if (!newDay) return;
             const formatted = newDay.trim().charAt(0).toUpperCase() + newDay.trim().slice(1).toLowerCase();
             if (["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"].includes(formatted)) {
@@ -1566,15 +1668,14 @@
                 await saveCourse(course);
                 updateDetailHeader(course);
             } else {
-                alert("Nama hari tidak valid. Gunakan Senin sampai Minggu.");
+                alert("Nama hari tidak valid.");
             }
         });
 
-        // Hapus Folder Matkul
         document.getElementById("deleteCourseBtn").addEventListener("click", async () => {
             const course = courses.find(c => c.id === activeCourseId);
             if (!course) return;
-            if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta seluruh isinya?`)) {
+            if (confirm(`Yakin ingin menghapus folder "${course.name}"?`)) {
                 await deleteCourseById(course.id);
                 courses = courses.filter(c => c.id !== course.id);
                 document.getElementById("backToFoldersBtn").click();
@@ -1582,22 +1683,26 @@
         });
 
         // ============================================================
-        // 7. MODAL TAMBAH FOLDER MATKUL BARU
+        // 7. MODAL TAMBAH FOLDER MATKUL
         // ============================================================
         const modal = document.getElementById("addCourseModal");
-        document.getElementById("openAddCourseModalBtn").addEventListener("click", () => {
+        function openCourseModal() {
             modal.classList.add("open");
-        });
+            document.getElementById("newCourseName").focus();
+        }
+        document.getElementById("openAddCourseModalBtn").addEventListener("click", openCourseModal);
+        document.getElementById("emptyAddCourseBtn").addEventListener("click", openCourseModal);
         document.getElementById("closeAddCourseModalBtn").addEventListener("click", () => {
             modal.classList.remove("open");
         });
+
         document.getElementById("saveNewCourseBtn").addEventListener("click", async () => {
             const name = document.getElementById("newCourseName").value.trim();
             if (!name) {
                 alert("Nama mata kuliah wajib diisi ya!");
                 return;
             }
-            const code = document.getElementById("newCourseCode").value.trim() || "SEMESTER 1";
+            const code = document.getElementById("newCourseCode").value.trim() || "MATKUL";
             const day = document.getElementById("newCourseDay").value;
             const lecturer = document.getElementById("newCourseLecturer").value.trim();
             const [icon, color] = document.getElementById("newCourseTheme").value.split("|");
@@ -1626,30 +1731,99 @@
         });
 
         // ============================================================
-        // 8. FLOATING POMODORO ALARM (DENGAN SUARA LONCENG LEMBUT)
+        // 8. DRAGGABLE & DOCKABLE POMODORO ALARM
         // ============================================================
+        const pomoWidget = document.getElementById("pomodoroWidget");
+        const pomoDragHandle = document.getElementById("pomoDragHandle");
+        const pomoMinBtn = document.getElementById("pomoMinBtn");
+        const pomoDockBtn = document.getElementById("pomoDockBtn");
+
+        let isDragging = false;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+
+        function startDrag(clientX, clientY) {
+            if (pomoWidget.classList.contains("docked")) return;
+            isDragging = true;
+            const rect = pomoWidget.getBoundingClientRect();
+            dragOffsetX = clientX - rect.left;
+            dragOffsetY = clientY - rect.top;
+            pomoWidget.style.right = "auto";
+            pomoWidget.style.bottom = "auto";
+            pomoWidget.style.left = rect.left + "px";
+            pomoWidget.style.top = rect.top + "px";
+        }
+
+        function moveDrag(clientX, clientY) {
+            if (!isDragging) return;
+            const maxX = window.innerWidth - pomoWidget.offsetWidth - 8;
+            const maxY = window.innerHeight - pomoWidget.offsetHeight - 8;
+            const nextX = Math.max(8, Math.min(maxX, clientX - dragOffsetX));
+            const nextY = Math.max(8, Math.min(maxY, clientY - dragOffsetY));
+            pomoWidget.style.left = nextX + "px";
+            pomoWidget.style.top = nextY + "px";
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        pomoDragHandle.addEventListener("mousedown", (e) => {
+            if (e.target.closest("button")) return;
+            startDrag(e.clientX, e.clientY);
+        });
+        window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
+        window.addEventListener("mouseup", endDrag);
+
+        pomoDragHandle.addEventListener("touchstart", (e) => {
+            if (e.target.closest("button")) return;
+            if (e.touches[0]) startDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        window.addEventListener("touchmove", (e) => {
+            if (e.touches[0]) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        window.addEventListener("touchend", endDrag);
+
+        // Minimize / Expand Pomodoro
+        pomoMinBtn.addEventListener("click", () => {
+            pomoWidget.classList.remove("docked");
+            pomoWidget.classList.toggle("minimized");
+            pomoMinBtn.innerHTML = pomoWidget.classList.contains("minimized")
+                ? '<i class="fa-solid fa-plus"></i>'
+                : '<i class="fa-solid fa-minus"></i>';
+        });
+
+        // Dock ke pinggir layar supaya tidak menghalangi apapun
+        pomoDockBtn.addEventListener("click", () => {
+            pomoWidget.classList.toggle("docked");
+            pomoDockBtn.innerHTML = pomoWidget.classList.contains("docked")
+                ? '<i class="fa-solid fa-angles-left"></i>'
+                : '<i class="fa-solid fa-angles-right"></i>';
+        });
+
+        // Timer Logic
         let pomoSeconds = 25 * 60;
         let pomoInitialSeconds = 25 * 60;
         let pomoInterval = null;
         let pomoRunning = false;
 
-        const pomoWidget = document.getElementById("pomodoroWidget");
         const pomoClock = document.getElementById("pomoClockDisplay");
+        const pomoMiniClock = document.getElementById("pomoMiniClock");
         const pomoStartBtn = document.getElementById("pomoStartBtn");
         const pomoResetBtn = document.getElementById("pomoResetBtn");
-        const pomoStatusLabel = document.getElementById("pomoStatusLabel");
 
         function updatePomoDisplay() {
             const m = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
             const s = String(pomoSeconds % 60).padStart(2, "0");
-            pomoClock.textContent = `${m}:${s}`;
+            const formatted = `${m}:${s}`;
+            pomoClock.textContent = formatted;
+            pomoMiniClock.textContent = formatted;
         }
 
         function playGentleBell() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [523.25, 659.25, 783.99, 1046.5];
-                notes.forEach((freq, idx) => {
+                [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = "sine";
@@ -1664,14 +1838,6 @@
             } catch (err) {}
         }
 
-        document.getElementById("pomoToggleHeader").addEventListener("click", () => {
-            pomoWidget.classList.toggle("minimized");
-            const chev = document.getElementById("pomoChevron");
-            chev.className = pomoWidget.classList.contains("minimized")
-                ? "fa-solid fa-chevron-up"
-                : "fa-solid fa-chevron-down";
-        });
-
         document.querySelectorAll(".pomo-mode-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 clearInterval(pomoInterval);
@@ -1681,7 +1847,6 @@
                 btn.classList.add("active");
                 pomoInitialSeconds = parseInt(btn.dataset.mins, 10) * 60;
                 pomoSeconds = pomoInitialSeconds;
-                pomoStatusLabel.textContent = btn.dataset.label;
                 updatePomoDisplay();
             });
         });
@@ -1703,7 +1868,7 @@
                         pomoRunning = false;
                         pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
                         playGentleBell();
-                        alert("🍅 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu ✿");
+                        alert("🍅 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu 💖");
                     }
                 }, 1000);
             }
@@ -1726,18 +1891,10 @@
         }
 
         // ============================================================
-        // 9. INISIALISASI DATABASE & TAMPILAN
+        // 9. INISIALISASI DATABASE (KOSONGAN DI AWAL)
         // ============================================================
         openStudyDB().then(async () => {
-            const existing = await getAllCourses();
-            if (existing.length === 0) {
-                for (const c of DEFAULT_COURSES) {
-                    await saveCourse(c);
-                }
-                courses = DEFAULT_COURSES;
-            } else {
-                courses = existing;
-            }
+            courses = await getAllCourses();
             renderCalendarAndRecommendations();
             renderFoldersGrid();
         });
