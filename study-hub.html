@@ -1600,7 +1600,7 @@
     <!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
     <script src="js/script.js"></script>
     <!-- Modul Terpisah Lab Logika & Algoritma -->
-    <script src="js/lab-logal.js"></script>
+    <script src="js/lab-logal.js?v=2"></script>
 
     <script>
     (function () {
@@ -2143,16 +2143,16 @@
 
             renderOpenBookMaterials(meeting);
 
-            // Sambungkan Modul Lab Terpisah (js/lab-logal.js) untuk Pertemuan 1 - 7
+            // Sambungkan Modul Lab Terpisah (js/lab-logal.js) untuk Pertemuan 1 - 7 dan Pertemuan 9
             const labPanelEl = document.getElementById("tabPanel-lab");
-            if (typeof window.renderLogalLab === "function" && meeting.number <= 7) {
+            if (typeof window.renderLogalLab === "function" && (meeting.number <= 7 || meeting.number === 9)) {
                 window.renderLogalLab(labPanelEl, meeting, () => saveCourse(course));
             } else {
                 labPanelEl.innerHTML = `
                     <div class="lab-placeholder-box">
                         <div style="font-size:38px;">🧪🌿</div>
                         <h3>Ruang Praktik &amp; Latihan Interaktif</h3>
-                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Untuk Pertemuan 1–7 tersedia Studio Logika &amp; Algoritma (Deskriptif, Flowchart, Pseudocode, &amp; Java).</p>
+                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Untuk Pertemuan 1–7 dan Pertemuan 9 tersedia Studio Logika &amp; Algoritma (Deskriptif, Flowchart, Pseudocode, &amp; Java).</p>
                     </div>
                 `;
             }
