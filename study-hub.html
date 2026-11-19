@@ -328,19 +328,24 @@
         }
 
         /* ============================================================
-           FOLDER MATA KULIAH (KOSONGAN DI AWAL + WARNA SOLID HIJAU)
+           HEADER FOLDER + FILTER PER HARI
            ============================================================ */
         .folders-header {
             background-color: var(--green-white);
-            border: 2px solid var(--green-border);
-            border-radius: 18px;
-            padding: 14px 20px;
+            border: 2.5px solid var(--green-main);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 0 var(--green-soft);
+        }
+
+        .folders-header-top {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 14px;
         }
 
         .folders-header h2 {
@@ -348,6 +353,111 @@
             font-size: 22px;
             color: var(--green-main);
             margin: 0;
+        }
+
+        .day-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 7px;
+            padding-top: 12px;
+            border-top: 2px solid var(--green-soft);
+        }
+
+        .day-filter-chip {
+            background-color: var(--green-bg);
+            color: var(--green-text);
+            border: 2px solid var(--green-border);
+            padding: 6px 13px;
+            border-radius: 12px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .day-filter-chip.active {
+            background-color: var(--green-main);
+            color: #ffffff;
+            border-color: var(--green-deep);
+        }
+
+        body.dark-mode .day-filter-chip.active {
+            color: #102a1d;
+        }
+
+        .day-filter-chip .count-badge {
+            background-color: rgba(255,255,255,0.28);
+            padding: 1px 7px;
+            border-radius: 8px;
+            font-size: 11px;
+        }
+
+        /* RAK / KELOMPOK FOLDER PER HARI */
+        .day-section-block {
+            background-color: var(--green-white);
+            border: 2px solid var(--green-border);
+            border-radius: 22px;
+            padding: 18px 20px 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 0 var(--green-soft);
+        }
+
+        .day-section-block.is-today {
+            border: 2.5px solid var(--green-main);
+        }
+
+        .day-section-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--green-soft);
+        }
+
+        .day-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-section-title h3 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--green-main);
+        }
+
+        .today-tag {
+            background-color: var(--green-main);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        body.dark-mode .today-tag {
+            color: #102a1d;
+        }
+
+        .btn-add-day-course {
+            background-color: var(--green-soft);
+            color: var(--green-text);
+            border: 2px solid var(--green-main);
+            padding: 6px 12px;
+            border-radius: 11px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .empty-folder-state {
@@ -380,9 +490,9 @@
 
         .folders-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-            gap: 24px;
-            padding-top: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 22px;
+            padding-top: 10px;
         }
 
         .course-folder {
@@ -395,7 +505,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 170px;
+            min-height: 168px;
             transition: transform 0.18s;
         }
 
@@ -943,7 +1053,7 @@
             <div>
                 <div class="badge-pill"><span>🌿</span> COZY GREEN STUDY SPACE</div>
                 <h1>My Study Hub 🍃</h1>
-                <p>Ruang belajar nyaman dengan wallpaper pilihanmu, folder matkul, dan Pertemuan 1–16.</p>
+                <p>Folder matkul tersusun rapi per hari kuliah lengkap dengan materi Pertemuan 1–16.</p>
             </div>
 
             <div class="toolbar-actions">
@@ -995,25 +1105,30 @@
                 </div>
             </div>
 
-            <!-- HEADER FOLDER MATKUL -->
+            <!-- HEADER FOLDER MATKUL + FILTER PER HARI -->
             <div class="folders-header">
-                <h2>📁 Folder Mata Kuliah</h2>
-                <button type="button" class="btn-green-solid" id="openAddCourseModalBtn">
-                    <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
-                </button>
+                <div class="folders-header-top">
+                    <h2>📁 Folder Mata Kuliah Per Hari</h2>
+                    <button type="button" class="btn-green-solid" id="openAddCourseModalBtn">
+                        <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
+                    </button>
+                </div>
+
+                <div class="day-filter-bar" id="dayFilterBar"></div>
             </div>
 
             <!-- STATE KOSONG DI AWAL -->
             <div class="empty-folder-state" id="emptyFolderState" style="display:none;">
                 <span class="big-emoji">🪴</span>
                 <h3>Belum Ada Folder Mata Kuliah</h3>
-                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu lengkap dengan Pertemuan 1–16!</p>
+                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu, otomatis dikelompokkan sesuai hari kuliah!</p>
                 <button type="button" class="btn-green-solid" id="emptyAddCourseBtn">
                     <i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
                 </button>
             </div>
 
-            <div class="folders-grid" id="foldersGrid"></div>
+            <!-- CONTAINER RAK FOLDER PER HARI -->
+            <div id="foldersByDayContainer"></div>
         </div>
 
         <!-- VIEW 2: ISI DALAM FOLDER (PERTEMUAN 1 - 16) -->
@@ -1084,7 +1199,7 @@
                 <input type="text" id="newCourseCode" placeholder="Contoh: SEMESTER 1">
             </div>
             <div class="form-group">
-                <label>Jadwal Hari Kuliah (Untuk Rekomendasi Belajar)</label>
+                <label>Masuk ke Folder Hari</label>
                 <select id="newCourseDay">
                     <option value="Senin">Senin</option>
                     <option value="Selasa">Selasa</option>
@@ -1092,6 +1207,7 @@
                     <option value="Kamis">Kamis</option>
                     <option value="Jumat">Jumat</option>
                     <option value="Sabtu">Sabtu</option>
+                    <option value="Minggu">Minggu</option>
                 </select>
             </div>
             <div class="form-group">
@@ -1298,6 +1414,7 @@
         let courses = [];
         let activeCourseId = null;
         let pendingUploadMeetingNum = null;
+        let activeDayFilter = "ALL"; // "ALL" atau "Senin", "Selasa", dst.
 
         // ============================================================
         // 5. PENGATUR BESAR-KECIL TULISAN
@@ -1319,8 +1436,10 @@
         // 6. KALENDER MINGGUAN & REKOMENDASI BELAJAR
         // ============================================================
         const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const ORDERED_DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
         const today = new Date();
-        let selectedDayName = DAY_NAMES[today.getDay()];
+        const todayDayName = DAY_NAMES[today.getDay()];
+        let selectedDayName = todayDayName;
 
         function renderCalendarAndRecommendations() {
             const strip = document.getElementById("weekDaysStrip");
@@ -1355,7 +1474,7 @@
             }
 
             const matchingCourses = courses.filter(c => c.day === selectedDayName);
-            const isToday = selectedDayName === DAY_NAMES[today.getDay()];
+            const isToday = selectedDayName === todayDayName;
             document.getElementById("recTitle").innerHTML =
                 `<span>🌱</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
 
@@ -1404,12 +1523,75 @@
         }
 
         // ============================================================
-        // 7. RENDER FOLDER MATA KULIAH
+        // 7. RENDER FOLDER MATA KULIAH DIKELOMPOKKAN PER HARI
         // ============================================================
-        function renderFoldersGrid() {
-            const grid = document.getElementById("foldersGrid");
+        function createCourseFolderCard(course) {
+            const doneCount = course.meetings.filter(m => m.completed).length;
+            const pct = Math.round((doneCount / 16) * 100);
+
+            const card = document.createElement("div");
+            card.className = "course-folder";
+            card.dataset.code = course.code || "MATKUL";
+            card.style.backgroundColor = course.color || "#d8f3dc";
+
+            card.innerHTML = `
+                <div>
+                    <div class="folder-top">
+                        <div class="folder-icon-badge">${course.icon}</div>
+                        <span class="folder-day-chip">📅 ${course.day}</span>
+                    </div>
+                    <h3>${escapeHtml(course.name)}</h3>
+                    <span class="lecturer-tag">${escapeHtml(course.lecturer || "Folder Mata Kuliah")}</span>
+                </div>
+
+                <div class="folder-progress-wrap">
+                    <div class="progress-labels">
+                        <span>Progres Belajar</span>
+                        <span>${doneCount}/16 (${pct}%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:${pct}%;"></div>
+                    </div>
+                </div>
+            `;
+
+            card.addEventListener("click", () => openFolder(course.id));
+            return card;
+        }
+
+        function renderFoldersByDay() {
+            const filterBar = document.getElementById("dayFilterBar");
+            const container = document.getElementById("foldersByDayContainer");
             const emptyState = document.getElementById("emptyFolderState");
-            grid.innerHTML = "";
+
+            filterBar.innerHTML = "";
+            container.innerHTML = "";
+
+            // Render Bar Filter Per Hari
+            const allChip = document.createElement("button");
+            allChip.type = "button";
+            allChip.className = "day-filter-chip" + (activeDayFilter === "ALL" ? " active" : "");
+            allChip.innerHTML = `Semua Hari <span class="count-badge">${courses.length}</span>`;
+            allChip.addEventListener("click", () => {
+                activeDayFilter = "ALL";
+                renderFoldersByDay();
+            });
+            filterBar.appendChild(allChip);
+
+            ORDERED_DAYS.forEach(dayName => {
+                const count = courses.filter(c => c.day === dayName).length;
+                if (count === 0 && activeDayFilter !== dayName) return;
+
+                const chip = document.createElement("button");
+                chip.type = "button";
+                chip.className = "day-filter-chip" + (activeDayFilter === dayName ? " active" : "");
+                chip.innerHTML = `${dayName === todayDayName ? "🌿 " : ""}${dayName} <span class="count-badge">${count}</span>`;
+                chip.addEventListener("click", () => {
+                    activeDayFilter = dayName;
+                    renderFoldersByDay();
+                });
+                filterBar.appendChild(chip);
+            });
 
             if (courses.length === 0) {
                 emptyState.style.display = "block";
@@ -1417,38 +1599,42 @@
             }
             emptyState.style.display = "none";
 
-            courses.forEach(course => {
-                const doneCount = course.meetings.filter(m => m.completed).length;
-                const pct = Math.round((doneCount / 16) * 100);
+            // Render Rak Kelompok Per Hari
+            const daysToRender = activeDayFilter === "ALL"
+                ? ORDERED_DAYS.filter(d => courses.some(c => c.day === d))
+                : [activeDayFilter];
 
-                const card = document.createElement("div");
-                card.className = "course-folder";
-                card.dataset.code = course.code || "MATKUL";
-                card.style.backgroundColor = course.color || "#d8f3dc";
+            daysToRender.forEach(dayName => {
+                const dayCourses = courses.filter(c => c.day === dayName);
+                const isToday = dayName === todayDayName;
 
-                card.innerHTML = `
-                    <div>
-                        <div class="folder-top">
-                            <div class="folder-icon-badge">${course.icon}</div>
-                            <span class="folder-day-chip">📅 ${course.day}</span>
+                const section = document.createElement("section");
+                section.className = "day-section-block" + (isToday ? " is-today" : "");
+
+                section.innerHTML = `
+                    <div class="day-section-head">
+                        <div class="day-section-title">
+                            <h3>📅 Folder Hari ${dayName}</h3>
+                            ${isToday ? '<span class="today-tag">Hari Ini</span>' : ''}
+                            <span style="font-size:12.5px; font-weight:700; color:var(--green-muted);">(${dayCourses.length} Matkul)</span>
                         </div>
-                        <h3>${escapeHtml(course.name)}</h3>
-                        <span class="lecturer-tag">${escapeHtml(course.lecturer || "Folder Mata Kuliah")}</span>
+                        <button type="button" class="btn-add-day-course">
+                            <i class="fa-solid fa-plus"></i> Tambah di Hari ${dayName}
+                        </button>
                     </div>
-
-                    <div class="folder-progress-wrap">
-                        <div class="progress-labels">
-                            <span>Progres Belajar</span>
-                            <span>${doneCount}/16 (${pct}%)</span>
-                        </div>
-                        <div class="progress-track">
-                            <div class="progress-fill" style="width:${pct}%;"></div>
-                        </div>
-                    </div>
+                    <div class="folders-grid"></div>
                 `;
 
-                card.addEventListener("click", () => openFolder(course.id));
-                grid.appendChild(card);
+                section.querySelector(".btn-add-day-course").addEventListener("click", () => {
+                    openCourseModal(dayName);
+                });
+
+                const grid = section.querySelector(".folders-grid");
+                dayCourses.forEach(course => {
+                    grid.appendChild(createCourseFolderCard(course));
+                });
+
+                container.appendChild(section);
             });
         }
 
@@ -1472,7 +1658,7 @@
             const pct = Math.round((doneCount / 16) * 100);
             document.getElementById("detailCourseTitle").textContent = `${course.icon} ${course.name}`;
             document.getElementById("detailCourseMeta").textContent =
-                `Jadwal: Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 (${pct}%)`;
+                `Folder Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 (${pct}%)`;
         }
 
         function renderMeetings(course) {
@@ -1626,16 +1812,16 @@
             document.getElementById("folderDetailView").style.display = "none";
             document.getElementById("foldersHomeView").style.display = "block";
             renderCalendarAndRecommendations();
-            renderFoldersGrid();
+            renderFoldersByDay();
         });
 
         document.getElementById("editCourseScheduleBtn").addEventListener("click", async () => {
             const course = courses.find(c => c.id === activeCourseId);
             if (!course) return;
-            const newDay = prompt("Hari kuliah baru (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu):", course.day);
+            const newDay = prompt("Pindahkan ke folder hari (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu / Minggu):", course.day);
             if (!newDay) return;
             const formatted = newDay.trim().charAt(0).toUpperCase() + newDay.trim().slice(1).toLowerCase();
-            if (["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"].includes(formatted)) {
+            if (ORDERED_DAYS.includes(formatted)) {
                 course.day = formatted;
                 await saveCourse(course);
                 updateDetailHeader(course);
@@ -1658,12 +1844,15 @@
         // 9. MODAL TAMBAH FOLDER MATKUL
         // ============================================================
         const modal = document.getElementById("addCourseModal");
-        function openCourseModal() {
+        function openCourseModal(presetDay) {
+            if (presetDay) {
+                document.getElementById("newCourseDay").value = presetDay;
+            }
             modal.classList.add("open");
             document.getElementById("newCourseName").focus();
         }
-        document.getElementById("openAddCourseModalBtn").addEventListener("click", openCourseModal);
-        document.getElementById("emptyAddCourseBtn").addEventListener("click", openCourseModal);
+        document.getElementById("openAddCourseModalBtn").addEventListener("click", () => openCourseModal());
+        document.getElementById("emptyAddCourseBtn").addEventListener("click", () => openCourseModal());
         document.getElementById("closeAddCourseModalBtn").addEventListener("click", () => {
             modal.classList.remove("open");
         });
@@ -1699,7 +1888,7 @@
             modal.classList.remove("open");
 
             renderCalendarAndRecommendations();
-            renderFoldersGrid();
+            renderFoldersByDay();
         });
 
         // ============================================================
@@ -1860,7 +2049,7 @@
         }
 
         // ============================================================
-        // 11. INISIALISASI DATABASE, WALLPAPER, & TAMPILAN
+        // 11. INISIALISASI DATABASE, WALLPAPER, & TAMPILAN PER HARI
         // ============================================================
         openStudyDB().then(async () => {
             const savedWp = await getSetting("customWallpaper");
@@ -1869,7 +2058,7 @@
             }
             courses = await getAllCourses();
             renderCalendarAndRecommendations();
-            renderFoldersGrid();
+            renderFoldersByDay();
         });
     })();
     </script>
