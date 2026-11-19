@@ -1599,6 +1599,9 @@
 
     <!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
     <script src="js/script.js"></script>
+    <!-- Modul Terpisah Lab Logika & Algoritma -->
+    <script src="js/lab-logal.js"></script>
+
     <script>
     (function () {
         // ============================================================
@@ -2001,7 +2004,6 @@
         // ============================================================
         // 8. AESTHETIC VINTAGE BOOKSHELF (16 BUKU PUNGGUNG VERTIKAL)
         // ============================================================
-        // Palet pastel cottagecore vintage seperti referensi gambar
         const VINTAGE_SPINE_PALETTE = [
             "#e8c5d0", // Dusty Rose Pink
             "#f3e5c3", // Warm Cream Ivory
@@ -2013,7 +2015,6 @@
             "#e8d9bd"  // Antique Parchment
         ];
 
-        // Tinggi bervariasi agar punggung buku terlihat organik & estetis
         const SPINE_HEIGHTS = [184, 198, 174, 192, 180, 196, 176, 188];
 
         function openBookshelf(courseId) {
@@ -2044,7 +2045,6 @@
             rowTop.innerHTML = "";
             rowBottom.innerHTML = "";
 
-            // Ornamen Guci Keramik Sage Green di pojok kiri rak atas (seperti referensi)
             const vaseDecor = document.createElement("div");
             vaseDecor.className = "shelf-decor-vase";
             vaseDecor.title = "Guci Keramik Hias";
@@ -2098,7 +2098,6 @@
                 }
             });
 
-            // Ornamen Tumpukan Buku Kecil & Tanaman di pojok kanan rak bawah
             const miniPlantDecor = document.createElement("div");
             miniPlantDecor.className = "shelf-decor-vase";
             miniPlantDecor.title = "Tanaman Hias Rak";
@@ -2115,7 +2114,7 @@
         }
 
         // ============================================================
-        // 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS)
+        // 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS + LAB TERPISAH)
         // ============================================================
         function openSingleBook(meetingNum) {
             activeBookNumber = meetingNum;
@@ -2143,6 +2142,21 @@
             document.getElementById("nextBookBtn").disabled = meetingNum >= 16;
 
             renderOpenBookMaterials(meeting);
+
+            // Sambungkan Modul Lab Terpisah (js/lab-logal.js) untuk Pertemuan 1 - 7
+            const labPanelEl = document.getElementById("tabPanel-lab");
+            if (typeof window.renderLogalLab === "function" && meeting.number <= 7) {
+                window.renderLogalLab(labPanelEl, meeting, () => saveCourse(course));
+            } else {
+                labPanelEl.innerHTML = `
+                    <div class="lab-placeholder-box">
+                        <div style="font-size:38px;">🧪🌿</div>
+                        <h3>Ruang Praktik &amp; Latihan Interaktif</h3>
+                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Untuk Pertemuan 1–7 tersedia Studio Logika &amp; Algoritma (Deskriptif, Flowchart, Pseudocode, &amp; Java).</p>
+                    </div>
+                `;
+            }
+
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
