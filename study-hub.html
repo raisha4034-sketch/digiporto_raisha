@@ -1,2201 +1,5123 @@
 <!DOCTYPE html>
+
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cozy Green Study Hub 🌿 | Little Universe</title>
-
-    <!-- CSS Global Little Universe -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        /* TEMA COZY GREEN SOLID & TEGAS */
-        :root {
-            --green-bg: #eaf5ee;
-            --green-white: #ffffff;
-            --green-main: #2d6a4f;
-            --green-deep: #1b4332;
-            --green-soft: #d8f3dc;
-            --green-border: #74c69d;
-            --green-text: #102a1d;
-            --green-muted: #3a5a40;
-            --ivory-frame: #f7f2e7;
-            --ivory-trim: #dfd4be;
-            --ivory-border: #8c7a5b;
-            --ivory-back: #fcfaf4;
-            --read-scale: 1;
-        }
-
-        body.dark-mode {
-            --green-bg: #112119;
-            --green-white: #1b3327;
-            --green-main: #52b788;
-            --green-deep: #95d5b2;
-            --green-soft: #244233;
-            --green-border: #40916c;
-            --green-text: #eef9f2;
-            --green-muted: #b7e4c7;
-            --ivory-frame: #e8dec8;
-            --ivory-trim: #cbbba0;
-            --ivory-border: #5e503f;
-            --ivory-back: #26231d;
-        }
-
-        body {
-            background-color: var(--green-bg) !important;
-            background-size: cover !important;
-            background-position: center center !important;
-            background-attachment: fixed !important;
-            background-repeat: no-repeat !important;
-            color: var(--green-text);
-            font-family: 'DM Sans', sans-serif;
-            margin: 0;
-            padding-bottom: 90px;
-        }
-
-        .btn-green-solid {
-            background-color: var(--green-main);
-            color: #ffffff;
-            border: 2px solid var(--green-deep);
-            padding: 10px 18px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 13.5px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 0 var(--green-deep);
-            transition: transform 0.12s;
-        }
-
-        body.dark-mode .btn-green-solid {
-            color: #102a1d;
-        }
-
-        .btn-green-solid:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 var(--green-deep);
-        }
-
-        .btn-green-outline {
-            background-color: var(--green-white);
-            color: var(--green-main);
-            border: 2px solid var(--green-main);
-            padding: 8px 14px;
-            border-radius: 13px;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-green-outline:hover {
-            background-color: var(--green-soft);
-        }
-
-        /* ============================================================
-           CONTAINER & HEADER COZY GREEN SOLID
-           ============================================================ */
-        .study-container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 24px 18px;
-        }
-
-        .study-hero {
-            background-color: var(--green-white);
-            border: 2.5px solid var(--green-main);
-            border-radius: 24px;
-            padding: 20px 24px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            box-shadow: 0 6px 0 var(--green-soft);
-            margin-bottom: 24px;
-        }
-
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: var(--green-main);
-            color: #ffffff;
-            font-size: 11.5px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 6px;
-        }
-
-        body.dark-mode .badge-pill {
-            color: #102a1d;
-        }
-
-        .study-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            margin: 0 0 4px;
-            color: var(--green-main);
-        }
-
-        .study-hero p {
-            margin: 0;
-            color: var(--green-muted);
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .toolbar-actions {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .font-sizer-box {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--green-bg);
-            border: 2px solid var(--green-main);
-            border-radius: 14px;
-            padding: 3px;
-        }
-
-        .font-sizer-box span {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--green-text);
-            padding: 0 9px;
-        }
-
-        .font-btn {
-            border: none;
-            background: transparent;
-            color: var(--green-text);
-            font-weight: 700;
-            padding: 5px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .font-btn.active {
-            background-color: var(--green-main);
-            color: #ffffff;
-        }
-
-        body.dark-mode .font-btn.active {
-            color: #102a1d;
-        }
-
-        /* ============================================================
-           KALENDER MINGGUAN & REKOMENDASI BELAJAR
-           ============================================================ */
-        .top-planner-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 20px;
-            margin-bottom: 26px;
-        }
-
-        @media (max-width: 860px) {
-            .top-planner-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .panel-card {
-            background-color: var(--green-white);
-            border: 2.5px solid var(--green-border);
-            border-radius: 22px;
-            padding: 20px;
-            box-shadow: 0 5px 0 var(--green-soft);
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-            gap: 8px;
-        }
-
-        .panel-header h2 {
-            font-size: 17px;
-            margin: 0;
-            color: var(--green-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .week-days-strip {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 7px;
-            margin-bottom: 12px;
-        }
-
-        .day-pill {
-            background-color: var(--green-bg);
-            border: 2px solid var(--green-border);
-            border-radius: 14px;
-            padding: 9px 4px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .day-pill.selected {
-            background-color: var(--green-main);
-            color: #ffffff;
-            border-color: var(--green-deep);
-        }
-
-        body.dark-mode .day-pill.selected {
-            color: #102a1d;
-        }
-
-        .day-pill .d-name {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: block;
-        }
-
-        .day-pill .d-date {
-            font-size: 16px;
-            font-weight: 700;
-            margin-top: 2px;
-            display: block;
-        }
-
-        .day-pill .d-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: var(--green-main);
-            margin: 4px auto 0;
-        }
-
-        .day-pill.selected .d-dot {
-            background-color: #ffffff;
-        }
-
-        .selected-day-summary {
-            background-color: var(--green-soft);
-            border-radius: 12px;
-            padding: 11px 14px;
-            font-size: calc(13.5px * var(--read-scale));
-            color: var(--green-text);
-            font-weight: 600;
-        }
-
-        .rec-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .rec-item {
-            background-color: var(--green-bg);
-            border: 2px solid var(--green-border);
-            border-radius: 14px;
-            padding: 11px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .rec-item-info strong {
-            display: block;
-            font-size: calc(14.5px * var(--read-scale));
-            color: var(--green-text);
-        }
-
-        .rec-item-info span {
-            font-size: calc(12.5px * var(--read-scale));
-            color: var(--green-muted);
-        }
-
-        /* ============================================================
-           HEADER FOLDER + FILTER PER HARI
-           ============================================================ */
-        .folders-header {
-            background-color: var(--green-white);
-            border: 2.5px solid var(--green-main);
-            border-radius: 20px;
-            padding: 16px 20px;
-            margin-bottom: 22px;
-            box-shadow: 0 5px 0 var(--green-soft);
-        }
-
-        .folders-header-top {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .folders-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: var(--green-main);
-            margin: 0;
-        }
-
-        .day-filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 7px;
-            padding-top: 12px;
-            border-top: 2px solid var(--green-soft);
-        }
-
-        .day-filter-chip {
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            border: 2px solid var(--green-border);
-            padding: 6px 13px;
-            border-radius: 12px;
-            font-size: 12.5px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .day-filter-chip.active {
-            background-color: var(--green-main);
-            color: #ffffff;
-            border-color: var(--green-deep);
-        }
-
-        body.dark-mode .day-filter-chip.active {
-            color: #102a1d;
-        }
-
-        .day-filter-chip .count-badge {
-            background-color: rgba(255,255,255,0.28);
-            padding: 1px 7px;
-            border-radius: 8px;
-            font-size: 11px;
-        }
-
-        .day-section-block {
-            background-color: var(--green-white);
-            border: 2px solid var(--green-border);
-            border-radius: 22px;
-            padding: 18px 20px 22px;
-            margin-bottom: 22px;
-            box-shadow: 0 5px 0 var(--green-soft);
-        }
-
-        .day-section-block.is-today {
-            border: 2.5px solid var(--green-main);
-        }
-
-        .day-section-head {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 18px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--green-soft);
-        }
-
-        .day-section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .day-section-title h3 {
-            margin: 0;
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: var(--green-main);
-        }
-
-        .today-tag {
-            background-color: var(--green-main);
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
-
-        body.dark-mode .today-tag {
-            color: #102a1d;
-        }
-
-        .btn-add-day-course {
-            background-color: var(--green-soft);
-            color: var(--green-text);
-            border: 2px solid var(--green-main);
-            padding: 6px 12px;
-            border-radius: 11px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .empty-folder-state {
-            background-color: var(--green-white);
-            border: 2.5px dashed var(--green-main);
-            border-radius: 24px;
-            padding: 42px 24px;
-            text-align: center;
-            max-width: 540px;
-            margin: 10px auto;
-        }
-
-        .empty-folder-state .big-emoji {
-            font-size: 44px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .empty-folder-state h3 {
-            margin: 0 0 8px;
-            color: var(--green-main);
-            font-size: 20px;
-        }
-
-        .empty-folder-state p {
-            margin: 0 0 18px;
-            color: var(--green-muted);
-            font-size: 14.5px;
-        }
-
-        .folders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 22px;
-            padding-top: 10px;
-        }
-
-        .course-folder {
-            position: relative;
-            border-radius: 6px 20px 20px 20px;
-            padding: 18px;
-            cursor: pointer;
-            border: 2.5px solid var(--green-main);
-            box-shadow: 0 6px 0 var(--green-soft);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 168px;
-            transition: transform 0.18s;
-        }
-
-        .course-folder::before {
-            content: attr(data-code);
-            position: absolute;
-            top: -18px;
-            left: -2.5px;
-            height: 18px;
-            padding: 2px 14px 0 12px;
-            background-color: var(--green-main);
-            color: #ffffff;
-            border: 2.5px solid var(--green-main);
-            border-bottom: none;
-            border-radius: 10px 12px 0 0;
-            font-size: 10.5px;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-        }
-
-        body.dark-mode .course-folder::before {
-            color: #102a1d;
-        }
-
-        .course-folder:hover {
-            transform: translateY(-4px);
-        }
-
-        .folder-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .folder-icon-badge {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background-color: #ffffff;
-            border: 2px solid var(--green-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .folder-day-chip {
-            background-color: var(--green-main);
-            color: #ffffff;
-            font-size: 11.5px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 10px;
-        }
-
-        body.dark-mode .folder-day-chip {
-            color: #102a1d;
-        }
-
-        .course-folder h3 {
-            margin: 0 0 5px;
-            font-size: calc(17px * var(--read-scale));
-            color: #102a1d;
-        }
-
-        .course-folder .lecturer-tag {
-            font-size: calc(12.5px * var(--read-scale));
-            color: #2d4f3c;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .folder-progress-wrap {
-            background-color: #ffffff;
-            border: 1.5px solid var(--green-border);
-            border-radius: 12px;
-            padding: 8px 10px;
-        }
-
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #102a1d;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 9px;
-            background-color: #d8f3dc;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: #2d6a4f;
-            border-radius: 10px;
-        }
-
-        /* ============================================================
-           VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (GAYA ROCOCO / COTTAGECORE)
-           ============================================================ */
-        #bookshelfView {
-            display: none;
-        }
-
-        .detail-topbar {
-            background-color: var(--green-white);
-            border: 2.5px solid var(--green-main);
-            border-radius: 20px;
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            box-shadow: 0 5px 0 var(--green-soft);
-        }
-
-        .detail-title-group h2 {
-            margin: 0 0 3px;
-            font-family: 'Playfair Display', serif;
-            color: var(--green-main);
-            font-size: calc(22px * var(--read-scale));
-        }
-
-        .detail-title-group p {
-            margin: 0;
-            font-size: calc(13.5px * var(--read-scale));
-            color: var(--green-muted);
-            font-weight: 600;
-        }
-
-        /* LEMARI BUKU UKIRAN KLASIK IVORY */
-        .vintage-cabinet-wrap {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .vintage-crown-header {
-            width: 100%;
-            display: block;
-            margin-bottom: -4px;
-        }
-
-        .vintage-cabinet-body {
-            background-color: var(--ivory-back);
-            border-left: 16px solid var(--ivory-frame);
-            border-right: 16px solid var(--ivory-frame);
-            outline: 2.5px solid var(--ivory-border);
-            box-shadow: inset 10px 0 0 var(--ivory-trim), inset -10px 0 0 var(--ivory-trim), 0 10px 0 var(--green-soft);
-            padding: 20px 14px 0;
-            position: relative;
-        }
-
-        .vintage-shelf-tier {
-            padding-top: 10px;
-        }
-
-        .vintage-books-line {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 6px;
-            padding: 0 8px;
-            min-height: 205px;
-            flex-wrap: wrap;
-        }
-
-        /* ORNAMEN GUCI KERAMIK & POT BUNGA DI RAK */
-        .shelf-decor-vase {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            margin: 0 6px;
-            user-select: none;
-        }
-
-        /* PUNGGUNG BUKU VINTAGE BERDIRI (BOOK SPINE) */
-        .vintage-spine {
-            position: relative;
-            width: 68px;
-            border-radius: 7px 7px 3px 3px;
-            border: 2px solid #5c4d3c;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 4px 10px;
-            text-align: center;
-            transition: transform 0.22s ease, box-shadow 0.22s ease;
-            box-shadow: inset 4px 0 0 rgba(255, 255, 255, 0.45), inset -4px 0 0 rgba(60, 45, 30, 0.14);
-        }
-
-        .vintage-spine:hover {
-            transform: translateY(-14px) scale(1.04);
-            z-index: 10;
-            box-shadow: 0 10px 16px rgba(27, 67, 50, 0.22);
-        }
-
-        /* Garis-garis Emas / Klasik Punggung Buku Atas & Bawah */
-        .spine-gold-bands {
-            width: 82%;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .spine-gold-bands span {
-            display: block;
-            height: 2px;
-            background-color: rgba(115, 92, 58, 0.55);
-            border-radius: 2px;
-        }
-
-        .spine-number-badge {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 13px;
-            color: #2f261d;
-            background-color: rgba(255, 255, 255, 0.72);
-            border: 1px solid rgba(92, 77, 60, 0.45);
-            padding: 2px 7px;
-            border-radius: 6px;
-            margin-top: 4px;
-        }
-
-        .spine-vertical-label {
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 12.5px;
-            letter-spacing: 0.4px;
-            color: #261e16;
-            max-height: 92px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            margin: 4px 0;
-        }
-
-        .spine-exam-tag {
-            font-size: 9.5px;
-            font-weight: 700;
-            background-color: #f4d58d;
-            color: #261e16;
-            border: 1px solid #7f5539;
-            padding: 1px 6px;
-            border-radius: 6px;
-        }
-
-        .spine-status-icon {
-            font-size: 11px;
-            font-weight: 700;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.78);
-            color: #2d6a4f;
-            border: 1px solid rgba(92, 77, 60, 0.4);
-        }
-
-        .vintage-spine.completed .spine-status-icon {
-            background-color: #2d6a4f;
-            color: #ffffff;
-        }
-
-        /* PAPAN RAK KAYU GADING UKIR */
-        .ivory-shelf-plank {
-            height: 18px;
-            background-color: var(--ivory-frame);
-            border-top: 2px solid var(--ivory-border);
-            border-bottom: 3px solid var(--ivory-border);
-            margin: 0 -14px;
-            box-shadow: inset 0 4px 0 #ffffff, inset 0 -4px 0 var(--ivory-trim);
-        }
-
-        .vintage-cabinet-base {
-            height: 24px;
-            background-color: var(--ivory-frame);
-            border: 2.5px solid var(--ivory-border);
-            border-radius: 6px 6px 16px 16px;
-            margin: 0 -24px;
-            box-shadow: inset 0 5px 0 #ffffff, inset 0 -5px 0 var(--ivory-trim), 0 8px 0 var(--green-soft);
-        }
-
-        .shelf-caption-hint {
-            text-align: center;
-            margin-top: 14px;
-        }
-
-        .shelf-caption-hint span {
-            display: inline-block;
-            background-color: var(--green-white);
-            border: 2px solid var(--green-main);
-            color: var(--green-main);
-            font-size: 13px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-        }
-
-        @media (max-width: 760px) {
-            .vintage-spine {
-                width: 54px;
-            }
-            .vintage-cabinet-body {
-                border-left-width: 10px;
-                border-right-width: 10px;
-            }
-            .vintage-cabinet-base {
-                margin: 0 -14px;
-            }
-        }
-
-        /* ============================================================
-           VIEW 3: ISI BUKU TERBUKA (RUANG BELAJAR & LAB INTERAKTIF)
-           ============================================================ */
-        #openBookView {
-            display: none;
-        }
-
-        .open-book-sheet {
-            background-color: var(--green-white);
-            border: 3px solid var(--green-main);
-            border-radius: 26px;
-            padding: 24px;
-            box-shadow: 0 8px 0 var(--green-soft);
-        }
-
-        .book-nav-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding-bottom: 16px;
-            margin-bottom: 18px;
-            border-bottom: 2.5px solid var(--green-soft);
-        }
-
-        .book-chapter-title h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--green-main);
-            margin: 0 0 3px;
-            font-size: calc(24px * var(--read-scale));
-        }
-
-        .book-chapter-title span {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--green-muted);
-        }
-
-        .book-tabs-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .book-tab-btn {
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            border: 2px solid var(--green-border);
-            padding: 9px 16px;
-            border-radius: 13px;
-            font-size: 13.5px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        .book-tab-btn.active {
-            background-color: var(--green-main);
-            color: #ffffff;
-            border-color: var(--green-deep);
-        }
-
-        body.dark-mode .book-tab-btn.active {
-            color: #102a1d;
-        }
-
-        .book-tab-panel {
-            display: none;
-        }
-
-        .book-tab-panel.active {
-            display: block;
-        }
-
-        .book-field-label {
-            display: block;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--green-main);
-            margin-bottom: 6px;
-        }
-
-        .book-topic-input {
-            width: 100%;
-            box-sizing: border-box;
-            border: 2px solid var(--green-border);
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            border-radius: 14px;
-            padding: 12px 14px;
-            font-family: inherit;
-            font-size: calc(16px * var(--read-scale));
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .book-notes-textarea {
-            width: 100%;
-            box-sizing: border-box;
-            border: 2px solid var(--green-border);
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            border-radius: 16px;
-            padding: 14px 16px;
-            font-family: inherit;
-            font-size: calc(14.5px * var(--read-scale));
-            line-height: 1.65;
-            min-height: 210px;
-            resize: vertical;
-        }
-
-        .materials-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .material-chip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            background-color: var(--green-soft);
-            border: 2px solid var(--green-main);
-            border-radius: 12px;
-            padding: 10px 14px;
-        }
-
-        .material-chip a, .material-chip button.open-file-btn {
-            background: none;
-            border: none;
-            padding: 0;
-            color: var(--green-text);
-            font-weight: 700;
-            font-size: calc(14px * var(--read-scale));
-            text-decoration: none;
-            cursor: pointer;
-            text-align: left;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            word-break: break-word;
-        }
-
-        .del-mat-btn {
-            background: none;
-            border: none;
-            color: #c1121f;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .lab-placeholder-box {
-            background-color: var(--green-bg);
-            border: 2.5px dashed var(--green-main);
-            border-radius: 20px;
-            padding: 32px 22px;
-            text-align: center;
-        }
-
-        .lab-placeholder-box h3 {
-            margin: 8px 0;
-            color: var(--green-main);
-            font-size: 19px;
-        }
-
-        .lab-placeholder-box p {
-            margin: 0 auto 14px;
-            max-width: 520px;
-            color: var(--green-muted);
-            font-size: calc(14px * var(--read-scale));
-            line-height: 1.55;
-        }
-
-        .book-bottom-nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 22px;
-            padding-top: 16px;
-            border-top: 2px solid var(--green-soft);
-        }
-
-        /* ============================================================
-           DRAGGABLE & DOCKABLE POMODORO ALARM (COZY GREEN)
-           ============================================================ */
-        #pomodoroWidget {
-            position: fixed;
-            top: 92px;
-            right: 20px;
-            z-index: 9990;
-            background-color: var(--green-white);
-            border: 2.5px solid var(--green-main);
-            border-radius: 20px;
-            width: 235px;
-            box-shadow: 0 6px 0 var(--green-soft);
-            user-select: none;
-            touch-action: none;
-        }
-
-        #pomodoroWidget.minimized {
-            width: 185px;
-        }
-
-        #pomodoroWidget.minimized .pomo-body {
-            display: none;
-        }
-
-        #pomodoroWidget.docked {
-            left: auto !important;
-            right: -148px !important;
-            top: 50% !important;
-            width: 190px;
-            transition: right 0.25s ease;
-        }
-
-        #pomodoroWidget.docked:hover {
-            right: 6px !important;
-        }
-
-        .pomo-drag-bar {
-            background-color: var(--green-main);
-            color: #ffffff;
-            padding: 8px 12px;
-            border-radius: 16px 16px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: grab;
-        }
-
-        body.dark-mode .pomo-drag-bar {
-            color: #102a1d;
-        }
-
-        #pomodoroWidget.minimized .pomo-drag-bar {
-            border-radius: 16px;
-        }
-
-        .pomo-drag-bar:active {
-            cursor: grabbing;
-        }
-
-        .pomo-title {
-            font-size: 12.5px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .pomo-win-btns {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .pomo-win-btns button {
-            background: rgba(255,255,255,0.28);
-            border: none;
-            color: inherit;
-            width: 22px;
-            height: 22px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pomo-body {
-            padding: 12px 14px 14px;
-        }
-
-        .pomo-modes {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 8px;
-        }
-
-        .pomo-mode-btn {
-            flex: 1;
-            border: 1.5px solid var(--green-border);
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 5px 2px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .pomo-mode-btn.active {
-            background-color: var(--green-main);
-            color: #ffffff;
-            border-color: var(--green-main);
-        }
-
-        body.dark-mode .pomo-mode-btn.active {
-            color: #102a1d;
-        }
-
-        .pomo-clock {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            color: var(--green-main);
-            margin: 4px 0 10px;
-        }
-
-        .pomo-controls {
-            display: flex;
-            gap: 6px;
-        }
-
-        .pomo-controls button {
-            flex: 1;
-            border: 2px solid var(--green-main);
-            border-radius: 10px;
-            padding: 7px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        #pomoStartBtn {
-            background-color: var(--green-main);
-            color: #ffffff;
-        }
-
-        body.dark-mode #pomoStartBtn {
-            color: #102a1d;
-        }
-
-        #pomoResetBtn {
-            background-color: var(--green-white);
-            color: var(--green-main);
-        }
-
-        /* MODAL TAMBAH MATKUL */
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(16, 42, 29, 0.65);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-
-        .modal-backdrop.open {
-            display: flex;
-        }
-
-        .modal-card {
-            background-color: var(--green-white);
-            border: 3px solid var(--green-main);
-            border-radius: 24px;
-            padding: 24px;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 8px 0 var(--green-soft);
-        }
-
-        .modal-card h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--green-main);
-            margin: 0 0 14px;
-            font-size: 22px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--green-text);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 2px solid var(--green-border);
-            background-color: var(--green-bg);
-            color: var(--green-text);
-            font-family: inherit;
-            font-size: 14px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 16px;
-        }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cozy Green Study Hub 🌿 | Little Universe</title>
+
+
+
+<!-- CSS Global Little Universe -->
+
+<link rel="stylesheet" href="css/style.css">
+
+
+
+<!-- Google Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+
+
+
+<!-- Font Awesome -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+<style>
+
+/* TEMA COZY GREEN SOLID & TEGAS */
+
+:root {
+
+--green-bg: #eaf5ee;
+
+--green-white: #ffffff;
+
+--green-main: #2d6a4f;
+
+--green-deep: #1b4332;
+
+--green-soft: #d8f3dc;
+
+--green-border: #74c69d;
+
+--green-text: #102a1d;
+
+--green-muted: #3a5a40;
+
+--ivory-frame: #f7f2e7;
+
+--ivory-trim: #dfd4be;
+
+--ivory-border: #8c7a5b;
+
+--ivory-back: #fcfaf4;
+
+--read-scale: 1;
+
+}
+
+
+
+body.dark-mode {
+
+--green-bg: #112119;
+
+--green-white: #1b3327;
+
+--green-main: #52b788;
+
+--green-deep: #95d5b2;
+
+--green-soft: #244233;
+
+--green-border: #40916c;
+
+--green-text: #eef9f2;
+
+--green-muted: #b7e4c7;
+
+--ivory-frame: #e8dec8;
+
+--ivory-trim: #cbbba0;
+
+--ivory-border: #5e503f;
+
+--ivory-back: #26231d;
+
+}
+
+
+
+body {
+
+background-color: var(--green-bg) !important;
+
+background-size: cover !important;
+
+background-position: center center !important;
+
+background-attachment: fixed !important;
+
+background-repeat: no-repeat !important;
+
+color: var(--green-text);
+
+font-family: 'DM Sans', sans-serif;
+
+margin: 0;
+
+padding-bottom: 90px;
+
+}
+
+
+
+.btn-green-solid {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border: 2px solid var(--green-deep);
+
+padding: 10px 18px;
+
+border-radius: 14px;
+
+font-weight: 700;
+
+font-size: 13.5px;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 8px;
+
+box-shadow: 0 4px 0 var(--green-deep);
+
+transition: transform 0.12s;
+
+}
+
+
+
+body.dark-mode .btn-green-solid {
+
+color: #102a1d;
+
+}
+
+
+
+.btn-green-solid:active {
+
+transform: translateY(3px);
+
+box-shadow: 0 1px 0 var(--green-deep);
+
+}
+
+
+
+.btn-green-outline {
+
+background-color: var(--green-white);
+
+color: var(--green-main);
+
+border: 2px solid var(--green-main);
+
+padding: 8px 14px;
+
+border-radius: 13px;
+
+font-weight: 700;
+
+font-size: 13px;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 6px;
+
+}
+
+
+
+.btn-green-outline:hover {
+
+background-color: var(--green-soft);
+
+}
+
+
+
+/* ============================================================
+
+CONTAINER & HEADER COZY GREEN SOLID
+
+============================================================ */
+
+.study-container {
+
+max-width: 1140px;
+
+margin: 0 auto;
+
+padding: 24px 18px;
+
+}
+
+
+
+.study-hero {
+
+background-color: var(--green-white);
+
+border: 2.5px solid var(--green-main);
+
+border-radius: 24px;
+
+padding: 20px 24px;
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 16px;
+
+box-shadow: 0 6px 0 var(--green-soft);
+
+margin-bottom: 24px;
+
+}
+
+
+
+.badge-pill {
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 6px;
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+font-size: 11.5px;
+
+font-weight: 700;
+
+padding: 4px 12px;
+
+border-radius: 20px;
+
+margin-bottom: 6px;
+
+}
+
+
+
+body.dark-mode .badge-pill {
+
+color: #102a1d;
+
+}
+
+
+
+.study-hero h1 {
+
+font-family: 'Playfair Display', serif;
+
+font-size: 26px;
+
+margin: 0 0 4px;
+
+color: var(--green-main);
+
+}
+
+
+
+.study-hero p {
+
+margin: 0;
+
+color: var(--green-muted);
+
+font-size: 14px;
+
+font-weight: 500;
+
+}
+
+
+
+.toolbar-actions {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+gap: 9px;
+
+}
+
+
+
+.font-sizer-box {
+
+display: inline-flex;
+
+align-items: center;
+
+background-color: var(--green-bg);
+
+border: 2px solid var(--green-main);
+
+border-radius: 14px;
+
+padding: 3px;
+
+}
+
+
+
+.font-sizer-box span {
+
+font-size: 12px;
+
+font-weight: 700;
+
+color: var(--green-text);
+
+padding: 0 9px;
+
+}
+
+
+
+.font-btn {
+
+border: none;
+
+background: transparent;
+
+color: var(--green-text);
+
+font-weight: 700;
+
+padding: 5px 10px;
+
+border-radius: 10px;
+
+cursor: pointer;
+
+}
+
+
+
+.font-btn.active {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+}
+
+
+
+body.dark-mode .font-btn.active {
+
+color: #102a1d;
+
+}
+
+
+
+/* ============================================================
+
+KALENDER MINGGUAN & REKOMENDASI BELAJAR
+
+============================================================ */
+
+.top-planner-grid {
+
+display: grid;
+
+grid-template-columns: 1.15fr 0.85fr;
+
+gap: 20px;
+
+margin-bottom: 26px;
+
+}
+
+
+
+@media (max-width: 860px) {
+
+.top-planner-grid {
+
+grid-template-columns: 1fr;
+
+}
+
+}
+
+
+
+.panel-card {
+
+background-color: var(--green-white);
+
+border: 2.5px solid var(--green-border);
+
+border-radius: 22px;
+
+padding: 20px;
+
+box-shadow: 0 5px 0 var(--green-soft);
+
+}
+
+
+
+.panel-header {
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+margin-bottom: 14px;
+
+gap: 8px;
+
+}
+
+
+
+.panel-header h2 {
+
+font-size: 17px;
+
+margin: 0;
+
+color: var(--green-main);
+
+display: flex;
+
+align-items: center;
+
+gap: 8px;
+
+}
+
+
+
+.week-days-strip {
+
+display: grid;
+
+grid-template-columns: repeat(7, 1fr);
+
+gap: 7px;
+
+margin-bottom: 12px;
+
+}
+
+
+
+.day-pill {
+
+background-color: var(--green-bg);
+
+border: 2px solid var(--green-border);
+
+border-radius: 14px;
+
+padding: 9px 4px;
+
+text-align: center;
+
+cursor: pointer;
+
+}
+
+
+
+.day-pill.selected {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border-color: var(--green-deep);
+
+}
+
+
+
+body.dark-mode .day-pill.selected {
+
+color: #102a1d;
+
+}
+
+
+
+.day-pill .d-name {
+
+font-size: 11px;
+
+font-weight: 700;
+
+text-transform: uppercase;
+
+display: block;
+
+}
+
+
+
+.day-pill .d-date {
+
+font-size: 16px;
+
+font-weight: 700;
+
+margin-top: 2px;
+
+display: block;
+
+}
+
+
+
+.day-pill .d-dot {
+
+width: 6px;
+
+height: 6px;
+
+border-radius: 50%;
+
+background-color: var(--green-main);
+
+margin: 4px auto 0;
+
+}
+
+
+
+.day-pill.selected .d-dot {
+
+background-color: #ffffff;
+
+}
+
+
+
+.selected-day-summary {
+
+background-color: var(--green-soft);
+
+border-radius: 12px;
+
+padding: 11px 14px;
+
+font-size: calc(13.5px * var(--read-scale));
+
+color: var(--green-text);
+
+font-weight: 600;
+
+}
+
+
+
+.rec-list {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 10px;
+
+}
+
+
+
+.rec-item {
+
+background-color: var(--green-bg);
+
+border: 2px solid var(--green-border);
+
+border-radius: 14px;
+
+padding: 11px 14px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 10px;
+
+}
+
+
+
+.rec-item-info strong {
+
+display: block;
+
+font-size: calc(14.5px * var(--read-scale));
+
+color: var(--green-text);
+
+}
+
+
+
+.rec-item-info span {
+
+font-size: calc(12.5px * var(--read-scale));
+
+color: var(--green-muted);
+
+}
+
+
+
+/* ============================================================
+
+HEADER FOLDER + FILTER PER HARI
+
+============================================================ */
+
+.folders-header {
+
+background-color: var(--green-white);
+
+border: 2.5px solid var(--green-main);
+
+border-radius: 20px;
+
+padding: 16px 20px;
+
+margin-bottom: 22px;
+
+box-shadow: 0 5px 0 var(--green-soft);
+
+}
+
+
+
+.folders-header-top {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 12px;
+
+margin-bottom: 14px;
+
+}
+
+
+
+.folders-header h2 {
+
+font-family: 'Playfair Display', serif;
+
+font-size: 22px;
+
+color: var(--green-main);
+
+margin: 0;
+
+}
+
+
+
+.day-filter-bar {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+gap: 7px;
+
+padding-top: 12px;
+
+border-top: 2px solid var(--green-soft);
+
+}
+
+
+
+.day-filter-chip {
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+border: 2px solid var(--green-border);
+
+padding: 6px 13px;
+
+border-radius: 12px;
+
+font-size: 12.5px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 6px;
+
+}
+
+
+
+.day-filter-chip.active {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border-color: var(--green-deep);
+
+}
+
+
+
+body.dark-mode .day-filter-chip.active {
+
+color: #102a1d;
+
+}
+
+
+
+.day-filter-chip .count-badge {
+
+background-color: rgba(255,255,255,0.28);
+
+padding: 1px 7px;
+
+border-radius: 8px;
+
+font-size: 11px;
+
+}
+
+
+
+.day-section-block {
+
+background-color: var(--green-white);
+
+border: 2px solid var(--green-border);
+
+border-radius: 22px;
+
+padding: 18px 20px 22px;
+
+margin-bottom: 22px;
+
+box-shadow: 0 5px 0 var(--green-soft);
+
+}
+
+
+
+.day-section-block.is-today {
+
+border: 2.5px solid var(--green-main);
+
+}
+
+
+
+.day-section-head {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 10px;
+
+margin-bottom: 18px;
+
+padding-bottom: 10px;
+
+border-bottom: 2px solid var(--green-soft);
+
+}
+
+
+
+.day-section-title {
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+}
+
+
+
+.day-section-title h3 {
+
+margin: 0;
+
+font-family: 'Playfair Display', serif;
+
+font-size: 20px;
+
+color: var(--green-main);
+
+}
+
+
+
+.today-tag {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+font-size: 11px;
+
+font-weight: 700;
+
+padding: 3px 10px;
+
+border-radius: 10px;
+
+}
+
+
+
+body.dark-mode .today-tag {
+
+color: #102a1d;
+
+}
+
+
+
+.btn-add-day-course {
+
+background-color: var(--green-soft);
+
+color: var(--green-text);
+
+border: 2px solid var(--green-main);
+
+padding: 6px 12px;
+
+border-radius: 11px;
+
+font-size: 12px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 5px;
+
+}
+
+
+
+.empty-folder-state {
+
+background-color: var(--green-white);
+
+border: 2.5px dashed var(--green-main);
+
+border-radius: 24px;
+
+padding: 42px 24px;
+
+text-align: center;
+
+max-width: 540px;
+
+margin: 10px auto;
+
+}
+
+
+
+.empty-folder-state .big-emoji {
+
+font-size: 44px;
+
+margin-bottom: 10px;
+
+display: block;
+
+}
+
+
+
+.empty-folder-state h3 {
+
+margin: 0 0 8px;
+
+color: var(--green-main);
+
+font-size: 20px;
+
+}
+
+
+
+.empty-folder-state p {
+
+margin: 0 0 18px;
+
+color: var(--green-muted);
+
+font-size: 14.5px;
+
+}
+
+
+
+.folders-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+gap: 22px;
+
+padding-top: 10px;
+
+}
+
+
+
+.course-folder {
+
+position: relative;
+
+border-radius: 6px 20px 20px 20px;
+
+padding: 18px;
+
+cursor: pointer;
+
+border: 2.5px solid var(--green-main);
+
+box-shadow: 0 6px 0 var(--green-soft);
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: space-between;
+
+min-height: 168px;
+
+transition: transform 0.18s;
+
+}
+
+
+
+.course-folder::before {
+
+content: attr(data-code);
+
+position: absolute;
+
+top: -18px;
+
+left: -2.5px;
+
+height: 18px;
+
+padding: 2px 14px 0 12px;
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border: 2.5px solid var(--green-main);
+
+border-bottom: none;
+
+border-radius: 10px 12px 0 0;
+
+font-size: 10.5px;
+
+font-weight: 700;
+
+letter-spacing: 0.4px;
+
+}
+
+
+
+body.dark-mode .course-folder::before {
+
+color: #102a1d;
+
+}
+
+
+
+.course-folder:hover {
+
+transform: translateY(-4px);
+
+}
+
+
+
+.folder-top {
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+margin-bottom: 10px;
+
+}
+
+
+
+.folder-icon-badge {
+
+width: 42px;
+
+height: 42px;
+
+border-radius: 12px;
+
+background-color: #ffffff;
+
+border: 2px solid var(--green-main);
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+font-size: 20px;
+
+}
+
+
+
+.folder-day-chip {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+font-size: 11.5px;
+
+font-weight: 700;
+
+padding: 4px 10px;
+
+border-radius: 10px;
+
+}
+
+
+
+body.dark-mode .folder-day-chip {
+
+color: #102a1d;
+
+}
+
+
+
+.course-folder h3 {
+
+margin: 0 0 5px;
+
+font-size: calc(17px * var(--read-scale));
+
+color: #102a1d;
+
+}
+
+
+
+.course-folder .lecturer-tag {
+
+font-size: calc(12.5px * var(--read-scale));
+
+color: #2d4f3c;
+
+font-weight: 600;
+
+margin-bottom: 12px;
+
+display: block;
+
+}
+
+
+
+.folder-progress-wrap {
+
+background-color: #ffffff;
+
+border: 1.5px solid var(--green-border);
+
+border-radius: 12px;
+
+padding: 8px 10px;
+
+}
+
+
+
+.progress-labels {
+
+display: flex;
+
+justify-content: space-between;
+
+font-size: 12px;
+
+font-weight: 700;
+
+margin-bottom: 5px;
+
+color: #102a1d;
+
+}
+
+
+
+.progress-track {
+
+width: 100%;
+
+height: 9px;
+
+background-color: #d8f3dc;
+
+border-radius: 10px;
+
+overflow: hidden;
+
+}
+
+
+
+.progress-fill {
+
+height: 100%;
+
+background-color: #2d6a4f;
+
+border-radius: 10px;
+
+}
+
+
+
+/* ============================================================
+
+VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (GAYA ROCOCO / COTTAGECORE)
+
+============================================================ */
+
+#bookshelfView {
+
+display: none;
+
+}
+
+
+
+.detail-topbar {
+
+background-color: var(--green-white);
+
+border: 2.5px solid var(--green-main);
+
+border-radius: 20px;
+
+padding: 16px 20px;
+
+margin-bottom: 24px;
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 12px;
+
+box-shadow: 0 5px 0 var(--green-soft);
+
+}
+
+
+
+.detail-title-group h2 {
+
+margin: 0 0 3px;
+
+font-family: 'Playfair Display', serif;
+
+color: var(--green-main);
+
+font-size: calc(22px * var(--read-scale));
+
+}
+
+
+
+.detail-title-group p {
+
+margin: 0;
+
+font-size: calc(13.5px * var(--read-scale));
+
+color: var(--green-muted);
+
+font-weight: 600;
+
+}
+
+
+
+/* LEMARI BUKU UKIRAN KLASIK IVORY */
+
+.vintage-cabinet-wrap {
+
+max-width: 960px;
+
+margin: 0 auto;
+
+}
+
+
+
+.vintage-crown-header {
+
+width: 100%;
+
+display: block;
+
+margin-bottom: -4px;
+
+}
+
+
+
+.vintage-cabinet-body {
+
+background-color: var(--ivory-back);
+
+border-left: 16px solid var(--ivory-frame);
+
+border-right: 16px solid var(--ivory-frame);
+
+outline: 2.5px solid var(--ivory-border);
+
+box-shadow: inset 10px 0 0 var(--ivory-trim), inset -10px 0 0 var(--ivory-trim), 0 10px 0 var(--green-soft);
+
+padding: 20px 14px 0;
+
+position: relative;
+
+}
+
+
+
+.vintage-shelf-tier {
+
+padding-top: 10px;
+
+}
+
+
+
+.vintage-books-line {
+
+display: flex;
+
+align-items: flex-end;
+
+justify-content: center;
+
+gap: 6px;
+
+padding: 0 8px;
+
+min-height: 205px;
+
+flex-wrap: wrap;
+
+}
+
+
+
+/* ORNAMEN GUCI KERAMIK & POT BUNGA DI RAK */
+
+.shelf-decor-vase {
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: flex-end;
+
+margin: 0 6px;
+
+user-select: none;
+
+}
+
+
+
+/* PUNGGUNG BUKU VINTAGE BERDIRI (BOOK SPINE) */
+
+.vintage-spine {
+
+position: relative;
+
+width: 68px;
+
+border-radius: 7px 7px 3px 3px;
+
+border: 2px solid #5c4d3c;
+
+cursor: pointer;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: space-between;
+
+padding: 10px 4px 10px;
+
+text-align: center;
+
+transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+box-shadow: inset 4px 0 0 rgba(255, 255, 255, 0.45), inset -4px 0 0 rgba(60, 45, 30, 0.14);
+
+}
+
+
+
+.vintage-spine:hover {
+
+transform: translateY(-14px) scale(1.04);
+
+z-index: 10;
+
+box-shadow: 0 10px 16px rgba(27, 67, 50, 0.22);
+
+}
+
+
+
+/* Garis-garis Emas / Klasik Punggung Buku Atas & Bawah */
+
+.spine-gold-bands {
+
+width: 82%;
+
+display: flex;
+
+flex-direction: column;
+
+gap: 3px;
+
+}
+
+
+
+.spine-gold-bands span {
+
+display: block;
+
+height: 2px;
+
+background-color: rgba(115, 92, 58, 0.55);
+
+border-radius: 2px;
+
+}
+
+
+
+.spine-number-badge {
+
+font-family: 'Playfair Display', serif;
+
+font-weight: 700;
+
+font-size: 13px;
+
+color: #2f261d;
+
+background-color: rgba(255, 255, 255, 0.72);
+
+border: 1px solid rgba(92, 77, 60, 0.45);
+
+padding: 2px 7px;
+
+border-radius: 6px;
+
+margin-top: 4px;
+
+}
+
+
+
+.spine-vertical-label {
+
+writing-mode: vertical-rl;
+
+transform: rotate(180deg);
+
+font-family: 'Playfair Display', serif;
+
+font-weight: 700;
+
+font-size: 12.5px;
+
+letter-spacing: 0.4px;
+
+color: #261e16;
+
+max-height: 92px;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+white-space: nowrap;
+
+margin: 4px 0;
+
+}
+
+
+
+.spine-exam-tag {
+
+font-size: 9.5px;
+
+font-weight: 700;
+
+background-color: #f4d58d;
+
+color: #261e16;
+
+border: 1px solid #7f5539;
+
+padding: 1px 6px;
+
+border-radius: 6px;
+
+}
+
+
+
+.spine-status-icon {
+
+font-size: 11px;
+
+font-weight: 700;
+
+width: 20px;
+
+height: 20px;
+
+border-radius: 50%;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+background-color: rgba(255, 255, 255, 0.78);
+
+color: #2d6a4f;
+
+border: 1px solid rgba(92, 77, 60, 0.4);
+
+}
+
+
+
+.vintage-spine.completed .spine-status-icon {
+
+background-color: #2d6a4f;
+
+color: #ffffff;
+
+}
+
+
+
+/* PAPAN RAK KAYU GADING UKIR */
+
+.ivory-shelf-plank {
+
+height: 18px;
+
+background-color: var(--ivory-frame);
+
+border-top: 2px solid var(--ivory-border);
+
+border-bottom: 3px solid var(--ivory-border);
+
+margin: 0 -14px;
+
+box-shadow: inset 0 4px 0 #ffffff, inset 0 -4px 0 var(--ivory-trim);
+
+}
+
+
+
+.vintage-cabinet-base {
+
+height: 24px;
+
+background-color: var(--ivory-frame);
+
+border: 2.5px solid var(--ivory-border);
+
+border-radius: 6px 6px 16px 16px;
+
+margin: 0 -24px;
+
+box-shadow: inset 0 5px 0 #ffffff, inset 0 -5px 0 var(--ivory-trim), 0 8px 0 var(--green-soft);
+
+}
+
+
+
+.shelf-caption-hint {
+
+text-align: center;
+
+margin-top: 14px;
+
+}
+
+
+
+.shelf-caption-hint span {
+
+display: inline-block;
+
+background-color: var(--green-white);
+
+border: 2px solid var(--green-main);
+
+color: var(--green-main);
+
+font-size: 13px;
+
+font-weight: 700;
+
+padding: 6px 16px;
+
+border-radius: 20px;
+
+}
+
+
+
+@media (max-width: 760px) {
+
+.vintage-spine {
+
+width: 54px;
+
+}
+
+.vintage-cabinet-body {
+
+border-left-width: 10px;
+
+border-right-width: 10px;
+
+}
+
+.vintage-cabinet-base {
+
+margin: 0 -14px;
+
+}
+
+}
+
+
+
+/* ============================================================
+
+VIEW 3: ISI BUKU TERBUKA (RUANG BELAJAR & LAB INTERAKTIF)
+
+============================================================ */
+
+#openBookView {
+
+display: none;
+
+}
+
+
+
+.open-book-sheet {
+
+background-color: var(--green-white);
+
+border: 3px solid var(--green-main);
+
+border-radius: 26px;
+
+padding: 24px;
+
+box-shadow: 0 8px 0 var(--green-soft);
+
+}
+
+
+
+.book-nav-header {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 12px;
+
+padding-bottom: 16px;
+
+margin-bottom: 18px;
+
+border-bottom: 2.5px solid var(--green-soft);
+
+}
+
+
+
+.book-chapter-title h2 {
+
+font-family: 'Playfair Display', serif;
+
+color: var(--green-main);
+
+margin: 0 0 3px;
+
+font-size: calc(24px * var(--read-scale));
+
+}
+
+
+
+.book-chapter-title span {
+
+font-size: 13px;
+
+font-weight: 700;
+
+color: var(--green-muted);
+
+}
+
+
+
+.book-tabs-bar {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 8px;
+
+margin-bottom: 20px;
+
+}
+
+
+
+.book-tab-btn {
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+border: 2px solid var(--green-border);
+
+padding: 9px 16px;
+
+border-radius: 13px;
+
+font-size: 13.5px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 7px;
+
+}
+
+
+
+.book-tab-btn.active {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border-color: var(--green-deep);
+
+}
+
+
+
+body.dark-mode .book-tab-btn.active {
+
+color: #102a1d;
+
+}
+
+
+
+.book-tab-panel {
+
+display: none;
+
+}
+
+
+
+.book-tab-panel.active {
+
+display: block;
+
+}
+
+
+
+.book-field-label {
+
+display: block;
+
+font-size: 13.5px;
+
+font-weight: 700;
+
+color: var(--green-main);
+
+margin-bottom: 6px;
+
+}
+
+
+
+.book-topic-input {
+
+width: 100%;
+
+box-sizing: border-box;
+
+border: 2px solid var(--green-border);
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+border-radius: 14px;
+
+padding: 12px 14px;
+
+font-family: inherit;
+
+font-size: calc(16px * var(--read-scale));
+
+font-weight: 700;
+
+margin-bottom: 16px;
+
+}
+
+
+
+.book-notes-textarea {
+
+width: 100%;
+
+box-sizing: border-box;
+
+border: 2px solid var(--green-border);
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+border-radius: 16px;
+
+padding: 14px 16px;
+
+font-family: inherit;
+
+font-size: calc(14.5px * var(--read-scale));
+
+line-height: 1.65;
+
+min-height: 210px;
+
+resize: vertical;
+
+}
+
+
+
+.materials-list {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 8px;
+
+margin-bottom: 16px;
+
+}
+
+
+
+.material-chip {
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 10px;
+
+background-color: var(--green-soft);
+
+border: 2px solid var(--green-main);
+
+border-radius: 12px;
+
+padding: 10px 14px;
+
+}
+
+
+
+.material-chip a, .material-chip button.open-file-btn {
+
+background: none;
+
+border: none;
+
+padding: 0;
+
+color: var(--green-text);
+
+font-weight: 700;
+
+font-size: calc(14px * var(--read-scale));
+
+text-decoration: none;
+
+cursor: pointer;
+
+text-align: left;
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 8px;
+
+word-break: break-word;
+
+}
+
+
+
+.del-mat-btn {
+
+background: none;
+
+border: none;
+
+color: #c1121f;
+
+cursor: pointer;
+
+font-size: 16px;
+
+font-weight: 700;
+
+}
+
+
+
+.lab-placeholder-box {
+
+background-color: var(--green-bg);
+
+border: 2.5px dashed var(--green-main);
+
+border-radius: 20px;
+
+padding: 32px 22px;
+
+text-align: center;
+
+}
+
+
+
+.lab-placeholder-box h3 {
+
+margin: 8px 0;
+
+color: var(--green-main);
+
+font-size: 19px;
+
+}
+
+
+
+.lab-placeholder-box p {
+
+margin: 0 auto 14px;
+
+max-width: 520px;
+
+color: var(--green-muted);
+
+font-size: calc(14px * var(--read-scale));
+
+line-height: 1.55;
+
+}
+
+
+
+.book-bottom-nav {
+
+display: flex;
+
+flex-wrap: wrap;
+
+align-items: center;
+
+justify-content: space-between;
+
+gap: 10px;
+
+margin-top: 22px;
+
+padding-top: 16px;
+
+border-top: 2px solid var(--green-soft);
+
+}
+
+
+
+/* ============================================================
+
+DRAGGABLE & DOCKABLE POMODORO ALARM (COZY GREEN)
+
+============================================================ */
+
+#pomodoroWidget {
+
+position: fixed;
+
+top: 92px;
+
+right: 20px;
+
+z-index: 9990;
+
+background-color: var(--green-white);
+
+border: 2.5px solid var(--green-main);
+
+border-radius: 20px;
+
+width: 235px;
+
+box-shadow: 0 6px 0 var(--green-soft);
+
+user-select: none;
+
+touch-action: none;
+
+}
+
+
+
+#pomodoroWidget.minimized {
+
+width: 185px;
+
+}
+
+
+
+#pomodoroWidget.minimized .pomo-body {
+
+display: none;
+
+}
+
+
+
+#pomodoroWidget.docked {
+
+left: auto !important;
+
+right: -148px !important;
+
+top: 50% !important;
+
+width: 190px;
+
+transition: right 0.25s ease;
+
+}
+
+
+
+#pomodoroWidget.docked:hover {
+
+right: 6px !important;
+
+}
+
+
+
+.pomo-drag-bar {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+padding: 8px 12px;
+
+border-radius: 16px 16px 0 0;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+cursor: grab;
+
+}
+
+
+
+body.dark-mode .pomo-drag-bar {
+
+color: #102a1d;
+
+}
+
+
+
+#pomodoroWidget.minimized .pomo-drag-bar {
+
+border-radius: 16px;
+
+}
+
+
+
+.pomo-drag-bar:active {
+
+cursor: grabbing;
+
+}
+
+
+
+.pomo-title {
+
+font-size: 12.5px;
+
+font-weight: 700;
+
+display: flex;
+
+align-items: center;
+
+gap: 6px;
+
+}
+
+
+
+.pomo-win-btns {
+
+display: flex;
+
+align-items: center;
+
+gap: 6px;
+
+}
+
+
+
+.pomo-win-btns button {
+
+background: rgba(255,255,255,0.28);
+
+border: none;
+
+color: inherit;
+
+width: 22px;
+
+height: 22px;
+
+border-radius: 6px;
+
+font-size: 11px;
+
+cursor: pointer;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+}
+
+
+
+.pomo-body {
+
+padding: 12px 14px 14px;
+
+}
+
+
+
+.pomo-modes {
+
+display: flex;
+
+gap: 4px;
+
+margin-bottom: 8px;
+
+}
+
+
+
+.pomo-mode-btn {
+
+flex: 1;
+
+border: 1.5px solid var(--green-border);
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+font-size: 11px;
+
+font-weight: 700;
+
+padding: 5px 2px;
+
+border-radius: 8px;
+
+cursor: pointer;
+
+}
+
+
+
+.pomo-mode-btn.active {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+border-color: var(--green-main);
+
+}
+
+
+
+body.dark-mode .pomo-mode-btn.active {
+
+color: #102a1d;
+
+}
+
+
+
+.pomo-clock {
+
+font-family: 'Playfair Display', serif;
+
+font-size: 32px;
+
+font-weight: 700;
+
+text-align: center;
+
+color: var(--green-main);
+
+margin: 4px 0 10px;
+
+}
+
+
+
+.pomo-controls {
+
+display: flex;
+
+gap: 6px;
+
+}
+
+
+
+.pomo-controls button {
+
+flex: 1;
+
+border: 2px solid var(--green-main);
+
+border-radius: 10px;
+
+padding: 7px;
+
+font-weight: 700;
+
+font-size: 12px;
+
+cursor: pointer;
+
+}
+
+
+
+#pomoStartBtn {
+
+background-color: var(--green-main);
+
+color: #ffffff;
+
+}
+
+
+
+body.dark-mode #pomoStartBtn {
+
+color: #102a1d;
+
+}
+
+
+
+#pomoResetBtn {
+
+background-color: var(--green-white);
+
+color: var(--green-main);
+
+}
+
+
+
+/* MODAL TAMBAH MATKUL */
+
+.modal-backdrop {
+
+position: fixed;
+
+inset: 0;
+
+background: rgba(16, 42, 29, 0.65);
+
+z-index: 10000;
+
+display: none;
+
+align-items: center;
+
+justify-content: center;
+
+padding: 16px;
+
+}
+
+
+
+.modal-backdrop.open {
+
+display: flex;
+
+}
+
+
+
+.modal-card {
+
+background-color: var(--green-white);
+
+border: 3px solid var(--green-main);
+
+border-radius: 24px;
+
+padding: 24px;
+
+width: 100%;
+
+max-width: 440px;
+
+box-shadow: 0 8px 0 var(--green-soft);
+
+}
+
+
+
+.modal-card h3 {
+
+font-family: 'Playfair Display', serif;
+
+color: var(--green-main);
+
+margin: 0 0 14px;
+
+font-size: 22px;
+
+}
+
+
+
+.form-group {
+
+margin-bottom: 12px;
+
+}
+
+
+
+.form-group label {
+
+display: block;
+
+font-size: 13px;
+
+font-weight: 700;
+
+margin-bottom: 5px;
+
+color: var(--green-text);
+
+}
+
+
+
+.form-group input, .form-group select {
+
+width: 100%;
+
+box-sizing: border-box;
+
+padding: 10px 12px;
+
+border-radius: 12px;
+
+border: 2px solid var(--green-border);
+
+background-color: var(--green-bg);
+
+color: var(--green-text);
+
+font-family: inherit;
+
+font-size: 14px;
+
+}
+
+
+
+.modal-footer {
+
+display: flex;
+
+justify-content: flex-end;
+
+gap: 10px;
+
+margin-top: 16px;
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <a href="index.html" class="logo">little universe <span>✿</span></a>
-        <nav class="nav-links" id="navLinks">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="memories.html">Memories</a>
-            <a href="diary.html">Diary</a>
-            <a href="favorites.html">Favorites</a>
-            <a href="creative.html">Creative</a>
-            <a href="campus.html">Campus Life</a>
-            <a href="bukti-belajar.html">Bukti Belajar</a>
-            <a href="planner.html">Planner</a>
-            <a href="study-hub.html" class="active">Study Hub</a>
-            <a href="guestbook.html">Guestbook</a>
-            <a href="surprise.html">Surprises</a>
-        </nav>
-        <div class="nav-actions">
-            <button id="themeToggle" aria-label="Toggle dark mode"><i class="fa-regular fa-moon"></i></button>
-            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
-        </div>
-    </header>
-
-    <main class="study-container">
-
-        <!-- HERO HEADER -->
-        <section class="study-hero">
-            <div>
-                <div class="badge-pill"><span>🌿</span> COZY GREEN STUDY SPACE</div>
-                <h1>My Study Hub 🍃</h1>
-                <p>Folder matkul per hari berisi lemari buku ukiran vintage Pertemuan 1–16.</p>
-            </div>
-
-            <div class="toolbar-actions">
-                <div class="font-sizer-box" title="Atur besar-kecil tulisan">
-                    <span>Teks:</span>
-                    <button class="font-btn" data-scale="0.92">A-</button>
-                    <button class="font-btn active" data-scale="1">Normal</button>
-                    <button class="font-btn" data-scale="1.15">A+</button>
-                </div>
-
-                <button type="button" class="btn-green-outline" id="uploadWallpaperBtn" title="Pilih gambar wallpaper cozy green sendiri">
-                    <i class="fa-regular fa-image"></i> Wallpaper
-                </button>
-
-                <button type="button" class="btn-green-outline" id="resetWallpaperBtn" style="display:none;" title="Hapus wallpaper dan kembali ke hijau polos">
-                    <i class="fa-solid fa-rotate-left"></i> Polos
-                </button>
-
-                <button type="button" class="btn-green-outline" id="lockNowBtn" title="Kunci kembali halaman ini">
-                    <i class="fa-solid fa-lock"></i> Kunci
-                </button>
-            </div>
-        </section>
-
-        <!-- VIEW 1: BERANDA STUDY HUB -->
-        <div id="foldersHomeView">
-
-            <div class="top-planner-grid">
-                <!-- KALENDER MINGGUAN -->
-                <div class="panel-card">
-                    <div class="panel-header">
-                        <h2><span>🗓️</span> Kalender &amp; Jadwal</h2>
-                        <span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--green-main);"></span>
-                    </div>
-
-                    <div class="week-days-strip" id="weekDaysStrip"></div>
-
-                    <div class="selected-day-summary" id="selectedDayText">
-                        Pilih hari di kalender untuk melihat jadwal matkulmu.
-                    </div>
-                </div>
-
-                <!-- REKOMENDASI BELAJAR -->
-                <div class="panel-card">
-                    <div class="panel-header">
-                        <h2 id="recTitle"><span>🌱</span> Rekomendasi Belajar Hari Ini</h2>
-                    </div>
-                    <div class="rec-list" id="recList"></div>
-                </div>
-            </div>
-
-            <!-- HEADER FOLDER MATKUL + FILTER PER HARI -->
-            <div class="folders-header">
-                <div class="folders-header-top">
-                    <h2>📁 Folder Mata Kuliah Per Hari</h2>
-                    <button type="button" class="btn-green-solid" id="openAddCourseModalBtn">
-                        <i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
-                    </button>
-                </div>
-
-                <div class="day-filter-bar" id="dayFilterBar"></div>
-            </div>
-
-            <!-- STATE KOSONG DI AWAL -->
-            <div class="empty-folder-state" id="emptyFolderState" style="display:none;">
-                <span class="big-emoji">🪴</span>
-                <h3>Belum Ada Folder Mata Kuliah</h3>
-                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu, otomatis berisi lemari 16 buku pertemuan!</p>
-                <button type="button" class="btn-green-solid" id="emptyAddCourseBtn">
-                    <i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
-                </button>
-            </div>
-
-            <!-- CONTAINER RAK FOLDER PER HARI -->
-            <div id="foldersByDayContainer"></div>
-        </div>
-
-        <!-- VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (PERTEMUAN 1 - 16) -->
-        <div id="bookshelfView">
-            <div class="detail-topbar">
-                <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-                    <button type="button" class="btn-green-outline" id="backToFoldersBtn">
-                        <i class="fa-solid fa-arrow-left"></i> Semua Folder
-                    </button>
-                    <div class="detail-title-group">
-                        <h2 id="detailCourseTitle">Nama Mata Kuliah</h2>
-                        <p id="detailCourseMeta">Jadwal • Dosen • Progres</p>
-                    </div>
-                </div>
-
-                <div style="display:flex; gap:8px;">
-                    <button type="button" class="btn-green-outline" id="editCourseScheduleBtn">
-                        <i class="fa-solid fa-calendar-day"></i> Ubah Hari
-                    </button>
-                    <button type="button" class="btn-green-outline" id="deleteCourseBtn" style="border-color:#c1121f; color:#c1121f;">
-                        <i class="fa-solid fa-trash"></i> Hapus
-                    </button>
-                </div>
-            </div>
-
-            <div class="vintage-cabinet-wrap">
-                <!-- MAHKOTA UKIRAN KLASIK IVORY & POT BUNGA (SVG) -->
-                <svg class="vintage-crown-header" viewBox="0 0 960 118" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Pot Bunga Kiri -->
-                    <ellipse cx="145" cy="52" rx="16" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
-                    <circle cx="138" cy="44" r="5" fill="#e5989b"/>
-                    <circle cx="148" cy="41" r="6" fill="#cdb4db"/>
-                    <circle cx="155" cy="47" r="4.5" fill="#f4d58d"/>
-                    <path d="M132 58 H158 L154 78 H136 Z" fill="#95b8a4" stroke="#5c4d3c" stroke-width="2"/>
-                    <rect x="130" y="55" width="30" height="5" rx="2" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
-
-                    <!-- Pot Bunga Kanan -->
-                    <ellipse cx="815" cy="46" rx="22" ry="15" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
-                    <circle cx="804" cy="37" r="6" fill="#e5989b"/>
-                    <circle cx="816" cy="33" r="7" fill="#f4d58d"/>
-                    <circle cx="828" cy="39" r="6" fill="#cdb4db"/>
-                    <circle cx="815" cy="43" r="5" fill="#ffb4a2"/>
-                    <path d="M798 54 Q815 58 832 54 L826 78 H804 Z" fill="#8fb3a2" stroke="#5c4d3c" stroke-width="2"/>
-                    <rect x="795" y="51" width="40" height="5" rx="2.5" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
-
-                    <!-- Mahkota Lengkungan Rococo Ivory -->
-                    <path d="M220 78 C295 78, 330 30, 415 30 C445 30, 462 42, 480 18 C498 42, 515 30, 545 30 C630 30, 665 78, 740 78 Z" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
-                    <!-- Ukiran Scrollwork Kiri & Kanan -->
-                    <path d="M315 72 C335 50, 375 45, 395 62 C405 70, 390 76, 382 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M645 72 C625 50, 585 45, 565 62 C555 70, 570 76, 578 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Ukiran Kerang / Bunga Tengah -->
-                    <path d="M454 68 C452 44, 468 32, 480 32 C492 32, 508 44, 506 68" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
-                    <path d="M480 32 V68 M467 38 L474 68 M493 38 L486 68" stroke="#8c7a5b" stroke-width="1.8"/>
-                    <circle cx="480" cy="70" r="7" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2"/>
-
-                    <!-- Lis Cornice Atas Lemari -->
-                    <rect x="24" y="78" width="912" height="16" rx="6" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
-                    <rect x="34" y="94" width="892" height="12" rx="4" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
-                </svg>
-
-                <!-- BADAN LEMARI BUKU -->
-                <div class="vintage-cabinet-body">
-                    <!-- RAK TINGKAT 1 (PERTEMUAN 1 - 8 + GUCI KERAMIK) -->
-                    <div class="vintage-shelf-tier">
-                        <div class="vintage-books-line" id="booksRowTop"></div>
-                        <div class="ivory-shelf-plank"></div>
-                    </div>
-
-                    <!-- RAK TINGKAT 2 (PERTEMUAN 9 - 16) -->
-                    <div class="vintage-shelf-tier">
-                        <div class="vintage-books-line" id="booksRowBottom"></div>
-                    </div>
-
-                    <!-- ALAS LEMARI UKIRAN -->
-                    <div class="vintage-cabinet-base"></div>
-                </div>
-
-                <div class="shelf-caption-hint">
-                    <span>✨ Klik salah satu punggung buku pertemuan untuk membuka halaman catatan &amp; latihannya</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW 3: HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS) -->
-        <div id="openBookView">
-            <div class="open-book-sheet">
-                <div class="book-nav-header">
-                    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                        <button type="button" class="btn-green-outline" id="backToShelfBtn">
-                            <i class="fa-solid fa-book"></i> Tutup &amp; Kembali ke Lemari Buku
-                        </button>
-                        <div class="book-chapter-title">
-                            <h2 id="openBookHeading">Pertemuan 1</h2>
-                            <span id="openBookCourseSub">Mata Kuliah</span>
-                        </div>
-                    </div>
-
-                    <label style="display:inline-flex; align-items:center; gap:8px; background:var(--green-soft); border:2px solid var(--green-main); padding:8px 14px; border-radius:14px; font-weight:700; cursor:pointer;">
-                        <input type="checkbox" id="openBookDoneCheckbox" style="width:18px; height:18px; accent-color:#2d6a4f;">
-                        <span id="openBookDoneText">Tandai Buku Selesai</span>
-                    </label>
-                </div>
-
-                <!-- TAB ISI BUKU -->
-                <div class="book-tabs-bar">
-                    <button type="button" class="book-tab-btn active" data-tab="notes">
-                        <i class="fa-solid fa-pen-nib"></i> Catatan &amp; Ringkasan
-                    </button>
-                    <button type="button" class="book-tab-btn" data-tab="materials">
-                        <i class="fa-solid fa-folder-open"></i> Bahan Ajar &amp; Link (<span id="matCountBadge">0</span>)
-                    </button>
-                    <button type="button" class="book-tab-btn" data-tab="lab">
-                        <i class="fa-solid fa-flask"></i> Ruang Praktik / Latihan
-                    </button>
-                </div>
-
-                <!-- TAB 1: CATATAN -->
-                <div class="book-tab-panel active" id="tabPanel-notes">
-                    <label class="book-field-label">Judul / Topik Utama Pertemuan</label>
-                    <input type="text" id="openBookTopicInput" class="book-topic-input" placeholder="Tulis judul materi pertemuan ini...">
-
-                    <label class="book-field-label">Isi Catatan, Konsep, &amp; Rangkuman</label>
-                    <textarea id="openBookNotesInput" class="book-notes-textarea" placeholder="Tulis catatan lengkapmu di sini (otomatis tersimpan saat kamu mengetik)..."></textarea>
-                </div>
-
-                <!-- TAB 2: BAHAN AJAR & LINK -->
-                <div class="book-tab-panel" id="tabPanel-materials">
-                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
-                        <button type="button" class="btn-green-solid" id="bookUploadFileBtn">
-                            <i class="fa-solid fa-file-arrow-up"></i> Upload File (PDF / PPT / Word / Gambar)
-                        </button>
-                        <button type="button" class="btn-green-outline" id="bookAddLinkBtn">
-                            <i class="fa-solid fa-link"></i> Tambah Link Referensi
-                        </button>
-                    </div>
-
-                    <div class="materials-list" id="openBookMaterialsList"></div>
-                </div>
-
-                <!-- TAB 3: RUANG PRAKTIK / LATIHAN -->
-                <div class="book-tab-panel" id="tabPanel-lab">
-                    <div class="lab-placeholder-box">
-                        <div style="font-size:38px;">🧪🌿</div>
-                        <h3>Ruang Praktik &amp; Latihan Interaktif</h3>
-                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Nanti kita bisa pasang alat latihan sesuai mata kuliahnya — seperti <strong>Flowchart Builder</strong> untuk Logika &amp; Algoritma, <strong>Generator Soal Latihan</strong> untuk Aljabar Linear, atau <strong>Sandbox Kode</strong> untuk Pemrograman Web &amp; Java.</p>
-                    </div>
-                </div>
-
-                <!-- NAVIGASI ANTAR BUKU -->
-                <div class="book-bottom-nav">
-                    <button type="button" class="btn-green-outline" id="prevBookBtn">
-                        <i class="fa-solid fa-chevron-left"></i> Buku Sebelumnya
-                    </button>
-                    <span id="bookAutoSaveStatus" style="font-size:12.5px; font-weight:700; color:var(--green-muted);">✓ Tersimpan otomatis</span>
-                    <button type="button" class="btn-green-outline" id="nextBookBtn">
-                        Buku Berikutnya <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FLOATING DRAGGABLE & DOCKABLE POMODORO ALARM -->
-    <div id="pomodoroWidget">
-        <div class="pomo-drag-bar" id="pomoDragHandle" title="Geser untuk memindahkan posisi alarm">
-            <div class="pomo-title">
-                <i class="fa-solid fa-grip-vertical"></i>
-                <span>🍵</span>
-                <span id="pomoMiniClock">25:00</span>
-            </div>
-            <div class="pomo-win-btns">
-                <button type="button" id="pomoDockBtn" title="Sembunyikan ke pinggir layar"><i class="fa-solid fa-angles-right"></i></button>
-                <button type="button" id="pomoMinBtn" title="Kecilkan / Besarkan"><i class="fa-solid fa-minus"></i></button>
-            </div>
-        </div>
-        <div class="pomo-body">
-            <div class="pomo-modes">
-                <button type="button" class="pomo-mode-btn active" data-mins="25">Fokus 25m</button>
-                <button type="button" class="pomo-mode-btn" data-mins="5">Break 5m</button>
-                <button type="button" class="pomo-mode-btn" data-mins="15">Long 15m</button>
-            </div>
-            <div class="pomo-clock" id="pomoClockDisplay">25:00</div>
-            <div class="pomo-controls">
-                <button type="button" id="pomoStartBtn"><i class="fa-solid fa-play"></i> Mulai</button>
-                <button type="button" id="pomoResetBtn"><i class="fa-solid fa-rotate-right"></i> Reset</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL TAMBAH FOLDER MATKUL -->
-    <div class="modal-backdrop" id="addCourseModal">
-        <div class="modal-card">
-            <h3>🌿 Tambah Folder Matkul</h3>
-            <div class="form-group">
-                <label>Nama Mata Kuliah</label>
-                <input type="text" id="newCourseName" placeholder="Contoh: Algoritma & Perancangan Program">
-            </div>
-            <div class="form-group">
-                <label>Label Tab Folder</label>
-                <input type="text" id="newCourseCode" placeholder="Contoh: SEMESTER 1">
-            </div>
-            <div class="form-group">
-                <label>Masuk ke Folder Hari</label>
-                <select id="newCourseDay">
-                    <option value="Senin">Senin</option>
-                    <option value="Selasa">Selasa</option>
-                    <option value="Rabu" selected>Rabu</option>
-                    <option value="Kamis">Kamis</option>
-                    <option value="Jumat">Jumat</option>
-                    <option value="Sabtu">Sabtu</option>
-                    <option value="Minggu">Minggu</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Nama Dosen (Opsional)</label>
-                <input type="text" id="newCourseLecturer" placeholder="Nama dosen pengampu...">
-            </div>
-            <div class="form-group">
-                <label>Ikon &amp; Warna Folder Hijau Solid</label>
-                <select id="newCourseTheme">
-                    <option value="🌿|#d8f3dc">🌿 Fresh Mint Sage</option>
-                    <option value="🍃|#b7e4c7">🍃 Soft Matcha Leaf</option>
-                    <option value="🪴|#e9f5db">🪴 Cozy Pistachio Cream</option>
-                    <option value="🍀|#cdeac0">🍀 Clover Spring Green</option>
-                    <option value="🌲|#d0e8d8">🌲 Misty Pine Green</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-green-outline" id="closeAddCourseModalBtn">Batal</button>
-                <button type="button" class="btn-green-solid" id="saveNewCourseBtn">Simpan Folder</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- HIDDEN FILE INPUTS -->
-    <input type="file" id="hiddenMaterialFileInput" style="display:none;" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,image/*">
-    <input type="file" id="hiddenWallpaperInput" style="display:none;" accept="image/*">
-
-    <!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
-    <script src="js/script.js"></script>
-    <!-- Modul Terpisah Lab Logika & Algoritma -->
-    <script src="js/lab-logal.js?v=3"></script>
-
-    <script>
-    (function () {
-        // ============================================================
-        // 1. SINKRON TOMBOL KUNCI DENGAN GLOBAL LOCK (PIN: 220408)
-        // ============================================================
-        document.getElementById("lockNowBtn").addEventListener("click", () => {
-            sessionStorage.removeItem("raishaAdminUnlocked");
-            location.reload();
-        });
-
-        // ============================================================
-        // 2. INDEXEDDB STORAGE (MATKUL, FILE BAHAN AJAR, & WALLPAPER)
-        // ============================================================
-        const DB_NAME = "CozyGreenStudyDB";
-        const DB_VERSION = 1;
-        let db = null;
-
-        function openStudyDB() {
-            return new Promise((resolve, reject) => {
-                const req = indexedDB.open(DB_NAME, DB_VERSION);
-                req.onupgradeneeded = (e) => {
-                    const database = e.target.result;
-                    if (!database.objectStoreNames.contains("courses")) {
-                        database.createObjectStore("courses", { keyPath: "id" });
-                    }
-                    if (!database.objectStoreNames.contains("files")) {
-                        database.createObjectStore("files", { keyPath: "fileId" });
-                    }
-                    if (!database.objectStoreNames.contains("settings")) {
-                        database.createObjectStore("settings", { keyPath: "key" });
-                    }
-                };
-                req.onsuccess = (e) => {
-                    db = e.target.result;
-                    resolve(db);
-                };
-                req.onerror = (e) => reject(e.target.error);
-            });
-        }
-
-        function saveSetting(key, value) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("settings", "readwrite");
-                tx.objectStore("settings").put({ key, value });
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        function getSetting(key) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("settings", "readonly");
-                const req = tx.objectStore("settings").get(key);
-                req.onsuccess = () => resolve(req.result ? req.result.value : null);
-            });
-        }
-
-        function deleteSetting(key) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("settings", "readwrite");
-                tx.objectStore("settings").delete(key);
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        function getAllCourses() {
-            return new Promise((resolve) => {
-                const tx = db.transaction("courses", "readonly");
-                const req = tx.objectStore("courses").getAll();
-                req.onsuccess = () => resolve(req.result || []);
-            });
-        }
-
-        function saveCourse(course) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("courses", "readwrite");
-                tx.objectStore("courses").put(course);
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        function deleteCourseById(id) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("courses", "readwrite");
-                tx.objectStore("courses").delete(id);
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        function saveFileBlob(fileId, fileObj) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("files", "readwrite");
-                tx.objectStore("files").put({
-                    fileId,
-                    name: fileObj.name,
-                    type: fileObj.type,
-                    blob: fileObj
-                });
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        function getFileBlob(fileId) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("files", "readonly");
-                const req = tx.objectStore("files").get(fileId);
-                req.onsuccess = () => resolve(req.result);
-            });
-        }
-
-        function deleteFileBlob(fileId) {
-            return new Promise((resolve) => {
-                const tx = db.transaction("files", "readwrite");
-                tx.objectStore("files").delete(fileId);
-                tx.oncomplete = () => resolve();
-            });
-        }
-
-        // ============================================================
-        // 3. CUSTOM COZY GREEN WALLPAPER UPLOAD & RESTORE
-        // ============================================================
-        const uploadWpBtn = document.getElementById("uploadWallpaperBtn");
-        const resetWpBtn = document.getElementById("resetWallpaperBtn");
-        const wpInput = document.getElementById("hiddenWallpaperInput");
-        let activeWpObjectUrl = null;
-
-        function applyWallpaperBlob(blob) {
-            if (activeWpObjectUrl) {
-                URL.revokeObjectURL(activeWpObjectUrl);
-                activeWpObjectUrl = null;
-            }
-            if (blob) {
-                activeWpObjectUrl = URL.createObjectURL(blob);
-                document.body.style.setProperty("background-image", `url("${activeWpObjectUrl}")`, "important");
-                resetWpBtn.style.display = "inline-flex";
-            } else {
-                document.body.style.removeProperty("background-image");
-                resetWpBtn.style.display = "none";
-            }
-        }
-
-        uploadWpBtn.addEventListener("click", () => wpInput.click());
-
-        wpInput.addEventListener("change", async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            await saveSetting("customWallpaper", file);
-            applyWallpaperBlob(file);
-            wpInput.value = "";
-        });
-
-        resetWpBtn.addEventListener("click", async () => {
-            await deleteSetting("customWallpaper");
-            applyWallpaperBlob(null);
-        });
-
-        // ============================================================
-        // 4. STRUKTUR 16 BUKU PERTEMUAN
-        // ============================================================
-        function createEmptyMeetings() {
-            return Array.from({ length: 16 }, (_, idx) => {
-                const num = idx + 1;
-                let defaultTopic = "";
-                if (num === 8) defaultTopic = "Ujian Tengah Semester (UTS)";
-                if (num === 16) defaultTopic = "Ujian Akhir Semester (UAS)";
-                return {
-                    number: num,
-                    topic: defaultTopic,
-                    notes: "",
-                    completed: false,
-                    materials: []
-                };
-            });
-        }
-
-        let courses = [];
-        let activeCourseId = null;
-        let activeBookNumber = 1;
-        let activeDayFilter = "ALL";
-
-        // ============================================================
-        // 5. PENGATUR BESAR-KECIL TULISAN
-        // ============================================================
-        const fontBtns = document.querySelectorAll(".font-btn");
-        const savedScale = localStorage.getItem("studyHubFontScale") || "1";
-        document.documentElement.style.setProperty("--read-scale", savedScale);
-        fontBtns.forEach(btn => {
-            btn.classList.toggle("active", btn.dataset.scale === savedScale);
-            btn.addEventListener("click", () => {
-                fontBtns.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                document.documentElement.style.setProperty("--read-scale", btn.dataset.scale);
-                localStorage.setItem("studyHubFontScale", btn.dataset.scale);
-            });
-        });
-
-        // ============================================================
-        // 6. KALENDER MINGGUAN & REKOMENDASI BELAJAR
-        // ============================================================
-        const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-        const ORDERED_DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-        const today = new Date();
-        const todayDayName = DAY_NAMES[today.getDay()];
-        let selectedDayName = todayDayName;
-
-        function renderCalendarAndRecommendations() {
-            const strip = document.getElementById("weekDaysStrip");
-            document.getElementById("todayDateLabel").textContent = today.toLocaleDateString("id-ID", {
-                weekday: "long", day: "numeric", month: "short", year: "numeric"
-            });
-
-            strip.innerHTML = "";
-            const currentDayIdx = today.getDay();
-            const diffToMonday = currentDayIdx === 0 ? -6 : 1 - currentDayIdx;
-            const monday = new Date(today);
-            monday.setDate(today.getDate() + diffToMonday);
-
-            for (let i = 0; i < 7; i++) {
-                const d = new Date(monday);
-                d.setDate(monday.getDate() + i);
-                const dName = DAY_NAMES[d.getDay()];
-                const hasClass = courses.some(c => c.day === dName);
-
-                const pill = document.createElement("div");
-                pill.className = "day-pill" + (dName === selectedDayName ? " selected" : "");
-                pill.innerHTML = `
-                    <span class="d-name">${dName.slice(0, 3)}</span>
-                    <span class="d-date">${d.getDate()}</span>${hasClass ? '<div class="d-dot"></div>' : '<div style="height:10px;"></div>'}
-                `;
-                pill.addEventListener("click", () => {
-                    selectedDayName = dName;
-                    renderCalendarAndRecommendations();
-                });
-                strip.appendChild(pill);
-            }
-
-            const matchingCourses = courses.filter(c => c.day === selectedDayName);
-            const isToday = selectedDayName === todayDayName;
-            document.getElementById("recTitle").innerHTML =
-                `<span>🌱</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
-
-            const summaryEl = document.getElementById("selectedDayText");
-            const recList = document.getElementById("recList");
-            recList.innerHTML = "";
-
-            if (courses.length === 0) {
-                summaryEl.textContent = "Tambahkan folder matkulmu dulu supaya rekomendasi jadwal muncul otomatis di sini!";
-                recList.innerHTML = `
-                    <div class="rec-item">
-                        <div class="rec-item-info">
-                            <strong>🌿 Belum ada jadwal matkul</strong>
-                            <span>Buat folder matkul &amp; pilih hari kuliahnya ya!</span>
-                        </div>
-                    </div>
-                `;
-            } else if (matchingCourses.length === 0) {
-                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah — waktunya baca santai di lemari buku!`;
-                recList.innerHTML = `
-                    <div class="rec-item">
-                        <div class="rec-item-info">
-                            <strong>🍵 Free Review Mandiri</strong>
-                            <span>Buka salah satu lemari buku matkulmu untuk membaca catatan.</span>
-                        </div>
-                    </div>
-                `;
-            } else {
-                summaryEl.innerHTML = `Ada <strong>${matchingCourses.length} mata kuliah</strong> terjadwal pada hari <strong>${selectedDayName}</strong>.`;
-                matchingCourses.forEach(course => {
-                    const doneCount = course.meetings.filter(m => m.completed).length;
-                    const nextMeeting = course.meetings.find(m => !m.completed) || course.meetings[15];
-                    const item = document.createElement("div");
-                    item.className = "rec-item";
-                    item.innerHTML = `
-                        <div class="rec-item-info">
-                            <strong>${course.icon}${escapeHtml(course.name)}</strong>
-                            <span>Selesai ${doneCount}/16 Buku • Lanjut Pertemuan ${nextMeeting.number}</span>
-                        </div>
-                        <button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka Lemari</button>
-                    `;
-                    item.querySelector("button").addEventListener("click", () => openBookshelf(course.id));
-                    recList.appendChild(item);
-                });
-            }
-        }
-
-        // ============================================================
-        // 7. RENDER FOLDER MATA KULIAH DIKELOMPOKKAN PER HARI
-        // ============================================================
-        function createCourseFolderCard(course) {
-            const doneCount = course.meetings.filter(m => m.completed).length;
-            const pct = Math.round((doneCount / 16) * 100);
-
-            const card = document.createElement("div");
-            card.className = "course-folder";
-            card.dataset.code = course.code || "MATKUL";
-            card.style.backgroundColor = course.color || "#d8f3dc";
-
-            card.innerHTML = `
-                <div>
-                    <div class="folder-top">
-                        <div class="folder-icon-badge">${course.icon}</div>
-                        <span class="folder-day-chip">📅 ${course.day}</span>
-                    </div>
-                    <h3>${escapeHtml(course.name)}</h3>
-                    <span class="lecturer-tag">${escapeHtml(course.lecturer || "Lemari 16 Buku Pertemuan")}</span>
-                </div>
-
-                <div class="folder-progress-wrap">
-                    <div class="progress-labels">
-                        <span>Progres Buku</span>
-                        <span>${doneCount}/16 (${pct}%)</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width:${pct}%;"></div>
-                    </div>
-                </div>
-            `;
-
-            card.addEventListener("click", () => openBookshelf(course.id));
-            return card;
-        }
-
-        function renderFoldersByDay() {
-            const filterBar = document.getElementById("dayFilterBar");
-            const container = document.getElementById("foldersByDayContainer");
-            const emptyState = document.getElementById("emptyFolderState");
-
-            filterBar.innerHTML = "";
-            container.innerHTML = "";
-
-            const allChip = document.createElement("button");
-            allChip.type = "button";
-            allChip.className = "day-filter-chip" + (activeDayFilter === "ALL" ? " active" : "");
-            allChip.innerHTML = `Semua Hari <span class="count-badge">${courses.length}</span>`;
-            allChip.addEventListener("click", () => {
-                activeDayFilter = "ALL";
-                renderFoldersByDay();
-            });
-            filterBar.appendChild(allChip);
-
-            ORDERED_DAYS.forEach(dayName => {
-                const count = courses.filter(c => c.day === dayName).length;
-                if (count === 0 && activeDayFilter !== dayName) return;
-
-                const chip = document.createElement("button");
-                chip.type = "button";
-                chip.className = "day-filter-chip" + (activeDayFilter === dayName ? " active" : "");
-                chip.innerHTML = `${dayName === todayDayName ? "🌿 " : ""}${dayName} <span class="count-badge">${count}</span>`;
-                chip.addEventListener("click", () => {
-                    activeDayFilter = dayName;
-                    renderFoldersByDay();
-                });
-                filterBar.appendChild(chip);
-            });
-
-            if (courses.length === 0) {
-                emptyState.style.display = "block";
-                return;
-            }
-            emptyState.style.display = "none";
-
-            const daysToRender = activeDayFilter === "ALL"
-                ? ORDERED_DAYS.filter(d => courses.some(c => c.day === d))
-                : [activeDayFilter];
-
-            daysToRender.forEach(dayName => {
-                const dayCourses = courses.filter(c => c.day === dayName);
-                const isToday = dayName === todayDayName;
-
-                const section = document.createElement("section");
-                section.className = "day-section-block" + (isToday ? " is-today" : "");
-
-                section.innerHTML = `
-                    <div class="day-section-head">
-                        <div class="day-section-title">
-                            <h3>📅 Folder Hari ${dayName}</h3>${isToday ? '<span class="today-tag">Hari Ini</span>' : ''}
-                            <span style="font-size:12.5px; font-weight:700; color:var(--green-muted);">(${dayCourses.length} Matkul)</span>
-                        </div>
-                        <button type="button" class="btn-add-day-course">
-                            <i class="fa-solid fa-plus"></i> Tambah di Hari ${dayName}
-                        </button>
-                    </div>
-                    <div class="folders-grid"></div>
-                `;
-
-                section.querySelector(".btn-add-day-course").addEventListener("click", () => {
-                    openCourseModal(dayName);
-                });
-
-                const grid = section.querySelector(".folders-grid");
-                dayCourses.forEach(course => {
-                    grid.appendChild(createCourseFolderCard(course));
-                });
-
-                container.appendChild(section);
-            });
-        }
-
-        // ============================================================
-        // 8. AESTHETIC VINTAGE BOOKSHELF (16 BUKU PUNGGUNG VERTIKAL)
-        // ============================================================
-        const VINTAGE_SPINE_PALETTE = [
-            "#e8c5d0", // Dusty Rose Pink
-            "#f3e5c3", // Warm Cream Ivory
-            "#c3dfd3", // Soft Sage Mint
-            "#cddce6", // Powder Blue
-            "#e6cbb8", // Soft Terracotta Peach
-            "#d5e3c8", // Pistachio Leaf
-            "#dfd3e3", // Lavender Mist
-            "#e8d9bd"  // Antique Parchment
-        ];
-
-        const SPINE_HEIGHTS = [184, 198, 174, 192, 180, 196, 176, 188];
-
-        function openBookshelf(courseId) {
-            activeCourseId = courseId;
-            const course = courses.find(c => c.id === courseId);
-            if (!course) return;
-
-            document.getElementById("foldersHomeView").style.display = "none";
-            document.getElementById("openBookView").style.display = "none";
-            document.getElementById("bookshelfView").style.display = "block";
-
-            updateShelfHeader(course);
-            renderBooksOnShelf(course);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        function updateShelfHeader(course) {
-            const doneCount = course.meetings.filter(m => m.completed).length;
-            const pct = Math.round((doneCount / 16) * 100);
-            document.getElementById("detailCourseTitle").textContent = `${course.icon} Lemari Buku:${course.name}`;
-            document.getElementById("detailCourseMeta").textContent =
-                `Folder Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 Buku (${pct}%)`;
-        }
-
-        function renderBooksOnShelf(course) {
-            const rowTop = document.getElementById("booksRowTop");
-            const rowBottom = document.getElementById("booksRowBottom");
-            rowTop.innerHTML = "";
-            rowBottom.innerHTML = "";
-
-            const vaseDecor = document.createElement("div");
-            vaseDecor.className = "shelf-decor-vase";
-            vaseDecor.title = "Guci Keramik Hias";
-            vaseDecor.innerHTML = `
-                <svg width="56" height="84" viewBox="0 0 56 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="28" cy="14" rx="7" ry="4" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
-                    <rect x="21" y="16" width="14" height="9" rx="3" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
-                    <path d="M18 25 C8 34, 8 62, 18 74 H38 C48 62, 48 34, 38 25 Z" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
-                    <path d="M22 27 C16 38, 16 58, 22 72 M34 27 C40 38, 40 58, 34 72" stroke="#52796f" stroke-width="1.3" stroke-opacity="0.55"/>
-                    <rect x="16" y="74" width="24" height="6" rx="3" fill="#749c85" stroke="#52796f" stroke-width="2"/>
-                </svg>
-            `;
-            rowTop.appendChild(vaseDecor);
-
-            course.meetings.forEach((m, idx) => {
-                const isExam = m.number === 8 || m.number === 16;
-                const spineColor = m.completed
-                    ? "#b7e4c7"
-                    : VINTAGE_SPINE_PALETTE[idx % VINTAGE_SPINE_PALETTE.length];
-
-                const spineHeight = SPINE_HEIGHTS[idx % SPINE_HEIGHTS.length];
-                const hasContent = (m.notes && m.notes.trim() !== "") || (m.materials && m.materials.length > 0);
-
-                const bookEl = document.createElement("div");
-                bookEl.className = "vintage-spine" + (m.completed ? " completed" : "");
-                bookEl.style.backgroundColor = spineColor;
-                bookEl.style.height = spineHeight + "px";
-                bookEl.title = `Pertemuan ${m.number}${m.topic ? ": " + m.topic : ""}`;
-
-                bookEl.innerHTML = `
-                    <div class="spine-gold-bands">
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <span class="spine-number-badge">${m.number}</span>
-                    <div class="spine-vertical-label">Pertemuan ${m.number}</div>${isExam ? `<span class="spine-exam-tag">${m.number === 8 ? "UTS" : "UAS"}</span>` : ""}
-                    <span class="spine-status-icon">${m.completed ? "✓" : hasContent ? "•" : "🌿"}</span>
-                    <div class="spine-gold-bands">
-                        <span></span>
-                        <span></span>
-                    </div>
-                `;
-
-                bookEl.addEventListener("click", () => openSingleBook(m.number));
-
-                if (m.number <= 8) {
-                    rowTop.appendChild(bookEl);
-                } else {
-                    rowBottom.appendChild(bookEl);
-                }
-            });
-
-            const miniPlantDecor = document.createElement("div");
-            miniPlantDecor.className = "shelf-decor-vase";
-            miniPlantDecor.title = "Tanaman Hias Rak";
-            miniPlantDecor.innerHTML = `
-                <svg width="52" height="76" viewBox="0 0 52 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="26" cy="34" rx="14" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
-                    <circle cx="19" cy="28" r="5" fill="#e5989b"/>
-                    <circle cx="31" cy="27" r="5" fill="#f4d58d"/>
-                    <path d="M15 44 H37 L33 68 H19 Z" fill="#e8d9bd" stroke="#8c7a5b" stroke-width="2"/>
-                    <rect x="13" y="41" width="26" height="5" rx="2.5" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="1.8"/>
-                </svg>
-            `;
-            rowBottom.appendChild(miniPlantDecor);
-        }
-
-        // ============================================================
-        // 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS + LAB KHUSUS MATKUL)
-        // ============================================================
-        function openSingleBook(meetingNum) {
-            activeBookNumber = meetingNum;
-            const course = courses.find(c => c.id === activeCourseId);
-            if (!course) return;
-            const meeting = course.meetings.find(m => m.number === meetingNum);
-            if (!meeting) return;
-
-            document.getElementById("bookshelfView").style.display = "none";
-            document.getElementById("openBookView").style.display = "block";
-
-            const examSuffix = meeting.number === 8 ? " (UTS)" : meeting.number === 16 ? " (UAS)" : "";
-            document.getElementById("openBookHeading").textContent = `📖 Buku Pertemuan ${meeting.number}${examSuffix}`; document.getElementById("openBookCourseSub").textContent = `${course.icon} ${course.name} • Hari ${course.day}`;
-
-            const doneCheck = document.getElementById("openBookDoneCheckbox");
-            const doneText = document.getElementById("openBookDoneText");
-            doneCheck.checked = meeting.completed;
-            doneText.textContent = meeting.completed ? "Buku Selesai ✓" : "Tandai Buku Selesai";
-
-            document.getElementById("openBookTopicInput").value = meeting.topic || "";
-            document.getElementById("openBookNotesInput").value = meeting.notes || "";
-
-            document.getElementById("prevBookBtn").disabled = meetingNum <= 1;
-            document.getElementById("nextBookBtn").disabled = meetingNum >= 16;
-
-            renderOpenBookMaterials(meeting);
-
-            // Sambungkan Modul Lab Terpisah KHUSUS untuk mata kuliah Logika & Algoritma
-            const labPanelEl = document.getElementById("tabPanel-lab");
-            const courseNameLower = (course.name || "").toLowerCase();
-            const isLogalCourse = courseNameLower.includes("logika") || courseNameLower.includes("algoritma");
-
-            if (isLogalCourse && typeof window.renderLogalLab === "function" && (meeting.number <= 7 || meeting.number === 9)) {
-                window.renderLogalLab(labPanelEl, meeting, () => saveCourse(course));
-            } else {
-                labPanelEl.innerHTML = `
-                    <div class="lab-placeholder-box">
-                        <div style="font-size:38px;">🧪🌿</div>
-                        <h3>Ruang Praktik &amp; Latihan Interaktif (${escapeHtml(course.name)})</h3>
-                        <p>Area khusus di dalam buku pertemuan ini sudah siap! Kamu bisa menambahkan modul latihan atau studi kasus khusus untuk mata kuliah <strong>${escapeHtml(course.name)}</strong> di sini.</p>
-                    </div>
-                `;
-            }
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-        function renderOpenBookMaterials(meeting) {
-            const listEl = document.getElementById("openBookMaterialsList");
-            document.getElementById("matCountBadge").textContent = meeting.materials.length;
-            listEl.innerHTML = "";
-
-            if (meeting.materials.length === 0) {
-                listEl.innerHTML = `
-                    <div style="padding:18px; border-radius:14px; background:var(--green-bg); border:1.5px dashed var(--green-border); text-align:center; color:var(--green-muted); font-size:13.5px; font-weight:600;">
-                        Belum ada file atau link bahan ajar di buku Pertemuan ${meeting.number}.
-                    </div>
-                `;
-                return;
-            }
-
-            meeting.materials.forEach((mat, matIdx) => {
-                const chip = document.createElement("div");
-                chip.className = "material-chip";
-
-                if (mat.kind === "file") {
-                    chip.innerHTML = `
-                        <button type="button" class="open-file-btn" title="Klik untuk membuka file">
-                            <i class="fa-solid fa-file-lines"></i> ${escapeHtml(mat.title)}
-                        </button>
-                        <button type="button" class="del-mat-btn" title="Hapus file"><i class="fa-solid fa-trash-can"></i></button>
-                    `;
-                    chip.querySelector(".open-file-btn").addEventListener("click", async () => {
-                        const record = await getFileBlob(mat.fileId);
-                        if (record && record.blob) {
-                            const url = URL.createObjectURL(record.blob);
-                            window.open(url, "_blank");
-                        } else {
-                            alert("File tidak ditemukan di browser.");
-                        }
-                    });
-                } else {
-                    chip.innerHTML = `
-                        <a href="${escapeHtml(mat.url)}" target="_blank" rel="noopener">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(mat.title)}
-                        </a>
-                        <button type="button" class="del-mat
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<a href="index.html" class="logo">little universe <span>✿</span></a>
+
+<nav class="nav-links" id="navLinks">
+
+<a href="index.html">Home</a>
+
+<a href="about.html">About</a>
+
+<a href="memories.html">Memories</a>
+
+<a href="diary.html">Diary</a>
+
+<a href="favorites.html">Favorites</a>
+
+<a href="creative.html">Creative</a>
+
+<a href="campus.html">Campus Life</a>
+
+<a href="bukti-belajar.html">Bukti Belajar</a>
+
+<a href="planner.html">Planner</a>
+
+<a href="study-hub.html" class="active">Study Hub</a>
+
+<a href="guestbook.html">Guestbook</a>
+
+<a href="surprise.html">Surprises</a>
+
+</nav>
+
+<div class="nav-actions">
+
+<button id="themeToggle" aria-label="Toggle dark mode"><i class="fa-regular fa-moon"></i></button>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+
+</div>
+
+</header>
+
+
+
+<main class="study-container">
+
+
+
+<!-- HERO HEADER -->
+
+<section class="study-hero">
+
+<div>
+
+<div class="badge-pill"><span>🌿</span> COZY GREEN STUDY SPACE</div>
+
+<h1>My Study Hub 🍃</h1>
+
+<p>Folder matkul per hari berisi lemari buku ukiran vintage Pertemuan 1–16.</p>
+
+</div>
+
+
+
+<div class="toolbar-actions">
+
+<div class="font-sizer-box" title="Atur besar-kecil tulisan">
+
+<span>Teks:</span>
+
+<button class="font-btn" data-scale="0.92">A-</button>
+
+<button class="font-btn active" data-scale="1">Normal</button>
+
+<button class="font-btn" data-scale="1.15">A+</button>
+
+</div>
+
+
+
+<button type="button" class="btn-green-outline" id="uploadWallpaperBtn" title="Pilih gambar wallpaper cozy green sendiri">
+
+<i class="fa-regular fa-image"></i> Wallpaper
+
+</button>
+
+
+
+<button type="button" class="btn-green-outline" id="resetWallpaperBtn" style="display:none;" title="Hapus wallpaper dan kembali ke hijau polos">
+
+<i class="fa-solid fa-rotate-left"></i> Polos
+
+</button>
+
+
+
+<button type="button" class="btn-green-outline" id="lockNowBtn" title="Kunci kembali halaman ini">
+
+<i class="fa-solid fa-lock"></i> Kunci
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- VIEW 1: BERANDA STUDY HUB -->
+
+<div id="foldersHomeView">
+
+
+
+<div class="top-planner-grid">
+
+<!-- KALENDER MINGGUAN -->
+
+<div class="panel-card">
+
+<div class="panel-header">
+
+<h2><span>🗓️</span> Kalender &amp; Jadwal</h2>
+
+<span id="todayDateLabel" style="font-size:12.5px; font-weight:700; color:var(--green-main);"></span>
+
+</div>
+
+
+
+<div class="week-days-strip" id="weekDaysStrip"></div>
+
+
+
+<div class="selected-day-summary" id="selectedDayText">
+
+Pilih hari di kalender untuk melihat jadwal matkulmu.
+
+</div>
+
+</div>
+
+
+
+<!-- REKOMENDASI BELAJAR -->
+
+<div class="panel-card">
+
+<div class="panel-header">
+
+<h2 id="recTitle"><span>🌱</span> Rekomendasi Belajar Hari Ini</h2>
+
+</div>
+
+<div class="rec-list" id="recList"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- HEADER FOLDER MATKUL + FILTER PER HARI -->
+
+<div class="folders-header">
+
+<div class="folders-header-top">
+
+<h2>📁 Folder Mata Kuliah Per Hari</h2>
+
+<button type="button" class="btn-green-solid" id="openAddCourseModalBtn">
+
+<i class="fa-solid fa-folder-plus"></i> Tambah Folder Matkul
+
+</button>
+
+</div>
+
+
+
+<div class="day-filter-bar" id="dayFilterBar"></div>
+
+</div>
+
+
+
+<!-- STATE KOSONG DI AWAL -->
+
+<div class="empty-folder-state" id="emptyFolderState" style="display:none;">
+
+<span class="big-emoji">🪴</span>
+
+<h3>Belum Ada Folder Mata Kuliah</h3>
+
+<p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu, otomatis berisi lemari 16 buku pertemuan!</p>
+
+<button type="button" class="btn-green-solid" id="emptyAddCourseBtn">
+
+<i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
+
+</button>
+
+</div>
+
+
+
+<!-- CONTAINER RAK FOLDER PER HARI -->
+
+<div id="foldersByDayContainer"></div>
+
+</div>
+
+
+
+<!-- VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (PERTEMUAN 1 - 16) -->
+
+<div id="bookshelfView">
+
+<div class="detail-topbar">
+
+<div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+
+<button type="button" class="btn-green-outline" id="backToFoldersBtn">
+
+<i class="fa-solid fa-arrow-left"></i> Semua Folder
+
+</button>
+
+<div class="detail-title-group">
+
+<h2 id="detailCourseTitle">Nama Mata Kuliah</h2>
+
+<p id="detailCourseMeta">Jadwal • Dosen • Progres</p>
+
+</div>
+
+</div>
+
+
+
+<div style="display:flex; gap:8px;">
+
+<button type="button" class="btn-green-outline" id="editCourseScheduleBtn">
+
+<i class="fa-solid fa-calendar-day"></i> Ubah Hari
+
+</button>
+
+<button type="button" class="btn-green-outline" id="deleteCourseBtn" style="border-color:#c1121f; color:#c1121f;">
+
+<i class="fa-solid fa-trash"></i> Hapus
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="vintage-cabinet-wrap">
+
+<!-- MAHKOTA UKIRAN KLASIK IVORY & POT BUNGA (SVG) -->
+
+<svg class="vintage-crown-header" viewBox="0 0 960 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<!-- Pot Bunga Kiri -->
+
+<ellipse cx="145" cy="52" rx="16" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+
+<circle cx="138" cy="44" r="5" fill="#e5989b"/>
+
+<circle cx="148" cy="41" r="6" fill="#cdb4db"/>
+
+<circle cx="155" cy="47" r="4.5" fill="#f4d58d"/>
+
+<path d="M132 58 H158 L154 78 H136 Z" fill="#95b8a4" stroke="#5c4d3c" stroke-width="2"/>
+
+<rect x="130" y="55" width="30" height="5" rx="2" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
+
+
+
+<!-- Pot Bunga Kanan -->
+
+<ellipse cx="815" cy="46" rx="22" ry="15" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+
+<circle cx="804" cy="37" r="6" fill="#e5989b"/>
+
+<circle cx="816" cy="33" r="7" fill="#f4d58d"/>
+
+<circle cx="828" cy="39" r="6" fill="#cdb4db"/>
+
+<circle cx="815" cy="43" r="5" fill="#ffb4a2"/>
+
+<path d="M798 54 Q815 58 832 54 L826 78 H804 Z" fill="#8fb3a2" stroke="#5c4d3c" stroke-width="2"/>
+
+<rect x="795" y="51" width="40" height="5" rx="2.5" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
+
+
+
+<!-- Mahkota Lengkungan Rococo Ivory -->
+
+<path d="M220 78 C295 78, 330 30, 415 30 C445 30, 462 42, 480 18 C498 42, 515 30, 545 30 C630 30, 665 78, 740 78 Z" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
+
+<!-- Ukiran Scrollwork Kiri & Kanan -->
+
+<path d="M315 72 C335 50, 375 45, 395 62 C405 70, 390 76, 382 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
+
+<path d="M645 72 C625 50, 585 45, 565 62 C555 70, 570 76, 578 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
+
+<!-- Ukiran Kerang / Bunga Tengah -->
+
+<path d="M454 68 C452 44, 468 32, 480 32 C492 32, 508 44, 506 68" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
+
+<path d="M480 32 V68 M467 38 L474 68 M493 38 L486 68" stroke="#8c7a5b" stroke-width="1.8"/>
+
+<circle cx="480" cy="70" r="7" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2"/>
+
+
+
+<!-- Lis Cornice Atas Lemari -->
+
+<rect x="24" y="78" width="912" height="16" rx="6" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
+
+<rect x="34" y="94" width="892" height="12" rx="4" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
+
+</svg>
+
+
+
+<!-- BADAN LEMARI BUKU -->
+
+<div class="vintage-cabinet-body">
+
+<!-- RAK TINGKAT 1 (PERTEMUAN 1 - 8 + GUCI KERAMIK) -->
+
+<div class="vintage-shelf-tier">
+
+<div class="vintage-books-line" id="booksRowTop"></div>
+
+<div class="ivory-shelf-plank"></div>
+
+</div>
+
+
+
+<!-- RAK TINGKAT 2 (PERTEMUAN 9 - 16) -->
+
+<div class="vintage-shelf-tier">
+
+<div class="vintage-books-line" id="booksRowBottom"></div>
+
+</div>
+
+
+
+<!-- ALAS LEMARI UKIRAN -->
+
+<div class="vintage-cabinet-base"></div>
+
+</div>
+
+
+
+<div class="shelf-caption-hint">
+
+<span>✨ Klik salah satu punggung buku pertemuan untuk membuka halaman catatan &amp; latihannya</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- VIEW 3: HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS) -->
+
+<div id="openBookView">
+
+<div class="open-book-sheet">
+
+<div class="book-nav-header">
+
+<div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+
+<button type="button" class="btn-green-outline" id="backToShelfBtn">
+
+<i class="fa-solid fa-book"></i> Tutup &amp; Kembali ke Lemari Buku
+
+</button>
+
+<div class="book-chapter-title">
+
+<h2 id="openBookHeading">Pertemuan 1</h2>
+
+<span id="openBookCourseSub">Mata Kuliah</span>
+
+</div>
+
+</div>
+
+
+
+<label style="display:inline-flex; align-items:center; gap:8px; background:var(--green-soft); border:2px solid var(--green-main); padding:8px 14px; border-radius:14px; font-weight:700; cursor:pointer;">
+
+<input type="checkbox" id="openBookDoneCheckbox" style="width:18px; height:18px; accent-color:#2d6a4f;">
+
+<span id="openBookDoneText">Tandai Buku Selesai</span>
+
+</label>
+
+</div>
+
+
+
+<!-- TAB ISI BUKU -->
+
+<div class="book-tabs-bar">
+
+<button type="button" class="book-tab-btn active" data-tab="notes">
+
+<i class="fa-solid fa-pen-nib"></i> Catatan &amp; Ringkasan
+
+</button>
+
+<button type="button" class="book-tab-btn" data-tab="materials">
+
+<i class="fa-solid fa-folder-open"></i> Bahan Ajar &amp; Link (<span id="matCountBadge">0</span>)
+
+</button>
+
+<button type="button" class="book-tab-btn" data-tab="lab">
+
+<i class="fa-solid fa-flask"></i> Ruang Praktik / Latihan
+
+</button>
+
+</div>
+
+
+
+<!-- TAB 1: CATATAN -->
+
+<div class="book-tab-panel active" id="tabPanel-notes">
+
+<label class="book-field-label">Judul / Topik Utama Pertemuan</label>
+
+<input type="text" id="openBookTopicInput" class="book-topic-input" placeholder="Tulis judul materi pertemuan ini...">
+
+
+
+<label class="book-field-label">Isi Catatan, Konsep, &amp; Rangkuman</label>
+
+<textarea id="openBookNotesInput" class="book-notes-textarea" placeholder="Tulis catatan lengkapmu di sini (otomatis tersimpan saat kamu mengetik)..."></textarea>
+
+</div>
+
+
+
+<!-- TAB 2: BAHAN AJAR & LINK -->
+
+<div class="book-tab-panel" id="tabPanel-materials">
+
+<div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+
+<button type="button" class="btn-green-solid" id="bookUploadFileBtn">
+
+<i class="fa-solid fa-file-arrow-up"></i> Upload File (PDF / PPT / Word / Gambar)
+
+</button>
+
+<button type="button" class="btn-green-outline" id="bookAddLinkBtn">
+
+<i class="fa-solid fa-link"></i> Tambah Link Referensi
+
+</button>
+
+</div>
+
+
+
+<div class="materials-list" id="openBookMaterialsList"></div>
+
+</div>
+
+
+
+<!-- TAB 3: RUANG PRAKTIK / LATIHAN -->
+
+<div class="book-tab-panel" id="tabPanel-lab">
+
+<div class="lab-placeholder-box">
+
+<div style="font-size:38px;">🧪🌿</div>
+
+<h3>Ruang Praktik &amp; Latihan Interaktif</h3>
+
+<p>Area khusus di dalam buku pertemuan ini sudah siap! Nanti kita bisa pasang alat latihan sesuai mata kuliahnya — seperti <strong>Flowchart Builder</strong> untuk Logika &amp; Algoritma, <strong>Generator Soal Latihan</strong> untuk Aljabar Linear, atau <strong>Sandbox Kode</strong> untuk Pemrograman Web &amp; Java.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- NAVIGASI ANTAR BUKU -->
+
+<div class="book-bottom-nav">
+
+<button type="button" class="btn-green-outline" id="prevBookBtn">
+
+<i class="fa-solid fa-chevron-left"></i> Buku Sebelumnya
+
+</button>
+
+<span id="bookAutoSaveStatus" style="font-size:12.5px; font-weight:700; color:var(--green-muted);">✓ Tersimpan otomatis</span>
+
+<button type="button" class="btn-green-outline" id="nextBookBtn">
+
+Buku Berikutnya <i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</main>
+
+
+
+<!-- FLOATING DRAGGABLE & DOCKABLE POMODORO ALARM -->
+
+<div id="pomodoroWidget">
+
+<div class="pomo-drag-bar" id="pomoDragHandle" title="Geser untuk memindahkan posisi alarm">
+
+<div class="pomo-title">
+
+<i class="fa-solid fa-grip-vertical"></i>
+
+<span>🍵</span>
+
+<span id="pomoMiniClock">25:00</span>
+
+</div>
+
+<div class="pomo-win-btns">
+
+<button type="button" id="pomoDockBtn" title="Sembunyikan ke pinggir layar"><i class="fa-solid fa-angles-right"></i></button>
+
+<button type="button" id="pomoMinBtn" title="Kecilkan / Besarkan"><i class="fa-solid fa-minus"></i></button>
+
+</div>
+
+</div>
+
+<div class="pomo-body">
+
+<div class="pomo-modes">
+
+<button type="button" class="pomo-mode-btn active" data-mins="25">Fokus 25m</button>
+
+<button type="button" class="pomo-mode-btn" data-mins="5">Break 5m</button>
+
+<button type="button" class="pomo-mode-btn" data-mins="15">Long 15m</button>
+
+</div>
+
+<div class="pomo-clock" id="pomoClockDisplay">25:00</div>
+
+<div class="pomo-controls">
+
+<button type="button" id="pomoStartBtn"><i class="fa-solid fa-play"></i> Mulai</button>
+
+<button type="button" id="pomoResetBtn"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- MODAL TAMBAH FOLDER MATKUL -->
+
+<div class="modal-backdrop" id="addCourseModal">
+
+<div class="modal-card">
+
+<h3>🌿 Tambah Folder Matkul</h3>
+
+<div class="form-group">
+
+<label>Nama Mata Kuliah</label>
+
+<input type="text" id="newCourseName" placeholder="Contoh: Algoritma & Perancangan Program">
+
+</div>
+
+<div class="form-group">
+
+<label>Label Tab Folder</label>
+
+<input type="text" id="newCourseCode" placeholder="Contoh: SEMESTER 1">
+
+</div>
+
+<div class="form-group">
+
+<label>Masuk ke Folder Hari</label>
+
+<select id="newCourseDay">
+
+<option value="Senin">Senin</option>
+
+<option value="Selasa">Selasa</option>
+
+<option value="Rabu" selected>Rabu</option>
+
+<option value="Kamis">Kamis</option>
+
+<option value="Jumat">Jumat</option>
+
+<option value="Sabtu">Sabtu</option>
+
+<option value="Minggu">Minggu</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Nama Dosen (Opsional)</label>
+
+<input type="text" id="newCourseLecturer" placeholder="Nama dosen pengampu...">
+
+</div>
+
+<div class="form-group">
+
+<label>Ikon &amp; Warna Folder Hijau Solid</label>
+
+<select id="newCourseTheme">
+
+<option value="🌿|#d8f3dc">🌿 Fresh Mint Sage</option>
+
+<option value="🍃|#b7e4c7">🍃 Soft Matcha Leaf</option>
+
+<option value="🪴|#e9f5db">🪴 Cozy Pistachio Cream</option>
+
+<option value="🍀|#cdeac0">🍀 Clover Spring Green</option>
+
+<option value="🌲|#d0e8d8">🌲 Misty Pine Green</option>
+
+</select>
+
+</div>
+
+<div class="modal-footer">
+
+<button type="button" class="btn-green-outline" id="closeAddCourseModalBtn">Batal</button>
+
+<button type="button" class="btn-green-solid" id="saveNewCourseBtn">Simpan Folder</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- HIDDEN FILE INPUTS -->
+
+<input type="file" id="hiddenMaterialFileInput" style="display:none;" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,image/*">
+
+<input type="file" id="hiddenWallpaperInput" style="display:none;" accept="image/*">
+
+
+
+<!-- Global Script (Otomatis Mengunci Study Hub dengan PIN 220408) -->
+
+<script src="js/script.js"></script>
+
+<!-- Modul Terpisah Lab Logika & Algoritma -->
+
+<script src="js/lab-logal.js?v=2"></script>
+
+
+
+<script>
+
+(function () {
+
+// ============================================================
+
+// 1. SINKRON TOMBOL KUNCI DENGAN GLOBAL LOCK (PIN: 220408)
+
+// ============================================================
+
+document.getElementById("lockNowBtn").addEventListener("click", () => {
+
+sessionStorage.removeItem("raishaAdminUnlocked");
+
+location.reload();
+
+});
+
+
+
+// ============================================================
+
+// 2. INDEXEDDB STORAGE (MATKUL, FILE BAHAN AJAR, & WALLPAPER)
+
+// ============================================================
+
+const DB_NAME = "CozyGreenStudyDB";
+
+const DB_VERSION = 1;
+
+let db = null;
+
+
+
+function openStudyDB() {
+
+return new Promise((resolve, reject) => {
+
+const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+req.onupgradeneeded = (e) => {
+
+const database = e.target.result;
+
+if (!database.objectStoreNames.contains("courses")) {
+
+database.createObjectStore("courses", { keyPath: "id" });
+
+}
+
+if (!database.objectStoreNames.contains("files")) {
+
+database.createObjectStore("files", { keyPath: "fileId" });
+
+}
+
+if (!database.objectStoreNames.contains("settings")) {
+
+database.createObjectStore("settings", { keyPath: "key" });
+
+}
+
+};
+
+req.onsuccess = (e) => {
+
+db = e.target.result;
+
+resolve(db);
+
+};
+
+req.onerror = (e) => reject(e.target.error);
+
+});
+
+}
+
+
+
+function saveSetting(key, value) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("settings", "readwrite");
+
+tx.objectStore("settings").put({ key, value });
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+function getSetting(key) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("settings", "readonly");
+
+const req = tx.objectStore("settings").get(key);
+
+req.onsuccess = () => resolve(req.result ? req.result.value : null);
+
+});
+
+}
+
+
+
+function deleteSetting(key) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("settings", "readwrite");
+
+tx.objectStore("settings").delete(key);
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+function getAllCourses() {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("courses", "readonly");
+
+const req = tx.objectStore("courses").getAll();
+
+req.onsuccess = () => resolve(req.result || []);
+
+});
+
+}
+
+
+
+function saveCourse(course) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("courses", "readwrite");
+
+tx.objectStore("courses").put(course);
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+function deleteCourseById(id) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("courses", "readwrite");
+
+tx.objectStore("courses").delete(id);
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+function saveFileBlob(fileId, fileObj) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("files", "readwrite");
+
+tx.objectStore("files").put({
+
+fileId,
+
+name: fileObj.name,
+
+type: fileObj.type,
+
+blob: fileObj
+
+});
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+function getFileBlob(fileId) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("files", "readonly");
+
+const req = tx.objectStore("files").get(fileId);
+
+req.onsuccess = () => resolve(req.result);
+
+});
+
+}
+
+
+
+function deleteFileBlob(fileId) {
+
+return new Promise((resolve) => {
+
+const tx = db.transaction("files", "readwrite");
+
+tx.objectStore("files").delete(fileId);
+
+tx.oncomplete = () => resolve();
+
+});
+
+}
+
+
+
+// ============================================================
+
+// 3. CUSTOM COZY GREEN WALLPAPER UPLOAD & RESTORE
+
+// ============================================================
+
+const uploadWpBtn = document.getElementById("uploadWallpaperBtn");
+
+const resetWpBtn = document.getElementById("resetWallpaperBtn");
+
+const wpInput = document.getElementById("hiddenWallpaperInput");
+
+let activeWpObjectUrl = null;
+
+
+
+function applyWallpaperBlob(blob) {
+
+if (activeWpObjectUrl) {
+
+URL.revokeObjectURL(activeWpObjectUrl);
+
+activeWpObjectUrl = null;
+
+}
+
+if (blob) {
+
+activeWpObjectUrl = URL.createObjectURL(blob);
+
+document.body.style.setProperty("background-image", `url("${activeWpObjectUrl}")`, "important");
+
+resetWpBtn.style.display = "inline-flex";
+
+} else {
+
+document.body.style.removeProperty("background-image");
+
+resetWpBtn.style.display = "none";
+
+}
+
+}
+
+
+
+uploadWpBtn.addEventListener("click", () => wpInput.click());
+
+
+
+wpInput.addEventListener("change", async (e) => {
+
+const file = e.target.files[0];
+
+if (!file) return;
+
+await saveSetting("customWallpaper", file);
+
+applyWallpaperBlob(file);
+
+wpInput.value = "";
+
+});
+
+
+
+resetWpBtn.addEventListener("click", async () => {
+
+await deleteSetting("customWallpaper");
+
+applyWallpaperBlob(null);
+
+});
+
+
+
+// ============================================================
+
+// 4. STRUKTUR 16 BUKU PERTEMUAN
+
+// ============================================================
+
+function createEmptyMeetings() {
+
+return Array.from({ length: 16 }, (_, idx) => {
+
+const num = idx + 1;
+
+let defaultTopic = "";
+
+if (num === 8) defaultTopic = "Ujian Tengah Semester (UTS)";
+
+if (num === 16) defaultTopic = "Ujian Akhir Semester (UAS)";
+
+return {
+
+number: num,
+
+topic: defaultTopic,
+
+notes: "",
+
+completed: false,
+
+materials: []
+
+};
+
+});
+
+}
+
+
+
+let courses = [];
+
+let activeCourseId = null;
+
+let activeBookNumber = 1;
+
+let activeDayFilter = "ALL";
+
+
+
+// ============================================================
+
+// 5. PENGATUR BESAR-KECIL TULISAN
+
+// ============================================================
+
+const fontBtns = document.querySelectorAll(".font-btn");
+
+const savedScale = localStorage.getItem("studyHubFontScale") || "1";
+
+document.documentElement.style.setProperty("--read-scale", savedScale);
+
+fontBtns.forEach(btn => {
+
+btn.classList.toggle("active", btn.dataset.scale === savedScale);
+
+btn.addEventListener("click", () => {
+
+fontBtns.forEach(b => b.classList.remove("active"));
+
+btn.classList.add("active");
+
+document.documentElement.style.setProperty("--read-scale", btn.dataset.scale);
+
+localStorage.setItem("studyHubFontScale", btn.dataset.scale);
+
+});
+
+});
+
+
+
+// ============================================================
+
+// 6. KALENDER MINGGUAN & REKOMENDASI BELAJAR
+
+// ============================================================
+
+const DAY_NAMES = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+
+const ORDERED_DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+
+const today = new Date();
+
+const todayDayName = DAY_NAMES[today.getDay()];
+
+let selectedDayName = todayDayName;
+
+
+
+function renderCalendarAndRecommendations() {
+
+const strip = document.getElementById("weekDaysStrip");
+
+document.getElementById("todayDateLabel").textContent = today.toLocaleDateString("id-ID", {
+
+weekday: "long", day: "numeric", month: "short", year: "numeric"
+
+});
+
+
+
+strip.innerHTML = "";
+
+const currentDayIdx = today.getDay();
+
+const diffToMonday = currentDayIdx === 0 ? -6 : 1 - currentDayIdx;
+
+const monday = new Date(today);
+
+monday.setDate(today.getDate() + diffToMonday);
+
+
+
+for (let i = 0; i < 7; i++) {
+
+const d = new Date(monday);
+
+d.setDate(monday.getDate() + i);
+
+const dName = DAY_NAMES[d.getDay()];
+
+const hasClass = courses.some(c => c.day === dName);
+
+
+
+const pill = document.createElement("div");
+
+pill.className = "day-pill" + (dName === selectedDayName ? " selected" : "");
+
+pill.innerHTML = `
+
+<span class="d-name">${dName.slice(0, 3)}</span>
+
+<span class="d-date">${d.getDate()}</span>
+
+${hasClass ? '<div class="d-dot"></div>' : '<div style="height:10px;"></div>'}
+
+`;
+
+pill.addEventListener("click", () => {
+
+selectedDayName = dName;
+
+renderCalendarAndRecommendations();
+
+});
+
+strip.appendChild(pill);
+
+}
+
+
+
+const matchingCourses = courses.filter(c => c.day === selectedDayName);
+
+const isToday = selectedDayName === todayDayName;
+
+document.getElementById("recTitle").innerHTML =
+
+`<span>🌱</span> Rekomendasi Belajar ${isToday ? "Hari Ini (" + selectedDayName + ")" : "Hari " + selectedDayName}`;
+
+
+
+const summaryEl = document.getElementById("selectedDayText");
+
+const recList = document.getElementById("recList");
+
+recList.innerHTML = "";
+
+
+
+if (courses.length === 0) {
+
+summaryEl.textContent = "Tambahkan folder matkulmu dulu supaya rekomendasi jadwal muncul otomatis di sini!";
+
+recList.innerHTML = `
+
+<div class="rec-item">
+
+<div class="rec-item-info">
+
+<strong>🌿 Belum ada jadwal matkul</strong>
+
+<span>Buat folder matkul &amp; pilih hari kuliahnya ya!</span>
+
+</div>
+
+</div>
+
+`;
+
+} else if (matchingCourses.length === 0) {
+
+summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah — waktunya baca santai di lemari buku!`;
+
+recList.innerHTML = `
+
+<div class="rec-item">
+
+<div class="rec-item-info">
+
+<strong>🍵 Free Review Mandiri</strong>
+
+<span>Buka salah satu lemari buku matkulmu untuk membaca catatan.</span>
+
+</div>
+
+</div>
+
+`;
+
+} else {
+
+summaryEl.innerHTML = `Ada <strong>${matchingCourses.length} mata kuliah</strong> terjadwal pada hari <strong>${selectedDayName}</strong>.`;
+
+matchingCourses.forEach(course => {
+
+const doneCount = course.meetings.filter(m => m.completed).length;
+
+const nextMeeting = course.meetings.find(m => !m.completed) || course.meetings[15];
+
+const item = document.createElement("div");
+
+item.className = "rec-item";
+
+item.innerHTML = `
+
+<div class="rec-item-info">
+
+<strong>${course.icon} ${escapeHtml(course.name)}</strong>
+
+<span>Selesai ${doneCount}/16 Buku • Lanjut Pertemuan ${nextMeeting.number}</span>
+
+</div>
+
+<button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka Lemari</button>
+
+`;
+
+item.querySelector("button").addEventListener("click", () => openBookshelf(course.id));
+
+recList.appendChild(item);
+
+});
+
+}
+
+}
+
+
+
+// ============================================================
+
+// 7. RENDER FOLDER MATA KULIAH DIKELOMPOKKAN PER HARI
+
+// ============================================================
+
+function createCourseFolderCard(course) {
+
+const doneCount = course.meetings.filter(m => m.completed).length;
+
+const pct = Math.round((doneCount / 16) * 100);
+
+
+
+const card = document.createElement("div");
+
+card.className = "course-folder";
+
+card.dataset.code = course.code || "MATKUL";
+
+card.style.backgroundColor = course.color || "#d8f3dc";
+
+
+
+card.innerHTML = `
+
+<div>
+
+<div class="folder-top">
+
+<div class="folder-icon-badge">${course.icon}</div>
+
+<span class="folder-day-chip">📅 ${course.day}</span>
+
+</div>
+
+<h3>${escapeHtml(course.name)}</h3>
+
+<span class="lecturer-tag">${escapeHtml(course.lecturer || "Lemari 16 Buku Pertemuan")}</span>
+
+</div>
+
+
+
+<div class="folder-progress-wrap">
+
+<div class="progress-labels">
+
+<span>Progres Buku</span>
+
+<span>${doneCount}/16 (${pct}%)</span>
+
+</div>
+
+<div class="progress-track">
+
+<div class="progress-fill" style="width:${pct}%;"></div>
+
+</div>
+
+</div>
+
+`;
+
+
+
+card.addEventListener("click", () => openBookshelf(course.id));
+
+return card;
+
+}
+
+
+
+function renderFoldersByDay() {
+
+const filterBar = document.getElementById("dayFilterBar");
+
+const container = document.getElementById("foldersByDayContainer");
+
+const emptyState = document.getElementById("emptyFolderState");
+
+
+
+filterBar.innerHTML = "";
+
+container.innerHTML = "";
+
+
+
+const allChip = document.createElement("button");
+
+allChip.type = "button";
+
+allChip.className = "day-filter-chip" + (activeDayFilter === "ALL" ? " active" : "");
+
+allChip.innerHTML = `Semua Hari <span class="count-badge">${courses.length}</span>`;
+
+allChip.addEventListener("click", () => {
+
+activeDayFilter = "ALL";
+
+renderFoldersByDay();
+
+});
+
+filterBar.appendChild(allChip);
+
+
+
+ORDERED_DAYS.forEach(dayName => {
+
+const count = courses.filter(c => c.day === dayName).length;
+
+if (count === 0 && activeDayFilter !== dayName) return;
+
+
+
+const chip = document.createElement("button");
+
+chip.type = "button";
+
+chip.className = "day-filter-chip" + (activeDayFilter === dayName ? " active" : "");
+
+chip.innerHTML = `${dayName === todayDayName ? "🌿 " : ""}${dayName} <span class="count-badge">${count}</span>`;
+
+chip.addEventListener("click", () => {
+
+activeDayFilter = dayName;
+
+renderFoldersByDay();
+
+});
+
+filterBar.appendChild(chip);
+
+});
+
+
+
+if (courses.length === 0) {
+
+emptyState.style.display = "block";
+
+return;
+
+}
+
+emptyState.style.display = "none";
+
+
+
+const daysToRender = activeDayFilter === "ALL"
+
+? ORDERED_DAYS.filter(d => courses.some(c => c.day === d))
+
+: [activeDayFilter];
+
+
+
+daysToRender.forEach(dayName => {
+
+const dayCourses = courses.filter(c => c.day === dayName);
+
+const isToday = dayName === todayDayName;
+
+
+
+const section = document.createElement("section");
+
+section.className = "day-section-block" + (isToday ? " is-today" : "");
+
+
+
+section.innerHTML = `
+
+<div class="day-section-head">
+
+<div class="day-section-title">
+
+<h3>📅 Folder Hari ${dayName}</h3>
+
+${isToday ? '<span class="today-tag">Hari Ini</span>' : ''}
+
+<span style="font-size:12.5px; font-weight:700; color:var(--green-muted);">(${dayCourses.length} Matkul)</span>
+
+</div>
+
+<button type="button" class="btn-add-day-course">
+
+<i class="fa-solid fa-plus"></i> Tambah di Hari ${dayName}
+
+</button>
+
+</div>
+
+<div class="folders-grid"></div>
+
+`;
+
+
+
+section.querySelector(".btn-add-day-course").addEventListener("click", () => {
+
+openCourseModal(dayName);
+
+});
+
+
+
+const grid = section.querySelector(".folders-grid");
+
+dayCourses.forEach(course => {
+
+grid.appendChild(createCourseFolderCard(course));
+
+});
+
+
+
+container.appendChild(section);
+
+});
+
+}
+
+
+
+// ============================================================
+
+// 8. AESTHETIC VINTAGE BOOKSHELF (16 BUKU PUNGGUNG VERTIKAL)
+
+// ============================================================
+
+const VINTAGE_SPINE_PALETTE = [
+
+"#e8c5d0", // Dusty Rose Pink
+
+"#f3e5c3", // Warm Cream Ivory
+
+"#c3dfd3", // Soft Sage Mint
+
+"#cddce6", // Powder Blue
+
+"#e6cbb8", // Soft Terracotta Peach
+
+"#d5e3c8", // Pistachio Leaf
+
+"#dfd3e3", // Lavender Mist
+
+"#e8d9bd" // Antique Parchment
+
+];
+
+
+
+const SPINE_HEIGHTS = [184, 198, 174, 192, 180, 196, 176, 188];
+
+
+
+function openBookshelf(courseId) {
+
+activeCourseId = courseId;
+
+const course = courses.find(c => c.id === courseId);
+
+if (!course) return;
+
+
+
+document.getElementById("foldersHomeView").style.display = "none";
+
+document.getElementById("openBookView").style.display = "none";
+
+document.getElementById("bookshelfView").style.display = "block";
+
+
+
+updateShelfHeader(course);
+
+renderBooksOnShelf(course);
+
+window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+
+
+function updateShelfHeader(course) {
+
+const doneCount = course.meetings.filter(m => m.completed).length;
+
+const pct = Math.round((doneCount / 16) * 100);
+
+document.getElementById("detailCourseTitle").textContent = `${course.icon} Lemari Buku: ${course.name}`;
+
+document.getElementById("detailCourseMeta").textContent =
+
+`Folder Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 Buku (${pct}%)`;
+
+}
+
+
+
+function renderBooksOnShelf(course) {
+
+const rowTop = document.getElementById("booksRowTop");
+
+const rowBottom = document.getElementById("booksRowBottom");
+
+rowTop.innerHTML = "";
+
+rowBottom.innerHTML = "";
+
+
+
+const vaseDecor = document.createElement("div");
+
+vaseDecor.className = "shelf-decor-vase";
+
+vaseDecor.title = "Guci Keramik Hias";
+
+vaseDecor.innerHTML = `
+
+<svg width="56" height="84" viewBox="0 0 56 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<ellipse cx="28" cy="14" rx="7" ry="4" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
+
+<rect x="21" y="16" width="14" height="9" rx="3" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+
+<path d="M18 25 C8 34, 8 62, 18 74 H38 C48 62, 48 34, 38 25 Z" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
+
+<path d="M22 27 C16 38, 16 58, 22 72 M34 27 C40 38, 40 58, 34 72" stroke="#52796f" stroke-width="1.3" stroke-opacity="0.55"/>
+
+<rect x="16" y="74" width="24" height="6" rx="3" fill="#749c85" stroke="#52796f" stroke-width="2"/>
+
+</svg>
+
+`;
+
+rowTop.appendChild(vaseDecor);
+
+
+
+course.meetings.forEach((m, idx) => {
+
+const isExam = m.number === 8 || m.number === 16;
+
+const spineColor = m.completed
+
+? "#b7e4c7"
+
+: VINTAGE_SPINE_PALETTE[idx % VINTAGE_SPINE_PALETTE.length];
+
+
+
+const spineHeight = SPINE_HEIGHTS[idx % SPINE_HEIGHTS.length];
+
+const hasContent = (m.notes && m.notes.trim() !== "") || (m.materials && m.materials.length > 0);
+
+
+
+const bookEl = document.createElement("div");
+
+bookEl.className = "vintage-spine" + (m.completed ? " completed" : "");
+
+bookEl.style.backgroundColor = spineColor;
+
+bookEl.style.height = spineHeight + "px";
+
+bookEl.title = `Pertemuan ${m.number}${m.topic ? ": " + m.topic : ""}`;
+
+
+
+bookEl.innerHTML = `
+
+<div class="spine-gold-bands">
+
+<span></span>
+
+<span></span>
+
+</div>
+
+<span class="spine-number-badge">${m.number}</span>
+
+<div class="spine-vertical-label">Pertemuan ${m.number}</div>
+
+${isExam ? `<span class="spine-exam-tag">${m.number === 8 ? "UTS" : "UAS"}</span>` : ""}
+
+<span class="spine-status-icon">${m.completed ? "✓" : hasContent ? "•" : "🌿"}</span>
+
+<div class="spine-gold-bands">
+
+<span></span>
+
+<span></span>
+
+</div>
+
+`;
+
+
+
+bookEl.addEventListener("click", () => openSingleBook(m.number));
+
+
+
+if (m.number <= 8) {
+
+rowTop.appendChild(bookEl);
+
+} else {
+
+rowBottom.appendChild(bookEl);
+
+}
+
+});
+
+
+
+const miniPlantDecor = document.createElement("div");
+
+miniPlantDecor.className = "shelf-decor-vase";
+
+miniPlantDecor.title = "Tanaman Hias Rak";
+
+miniPlantDecor.innerHTML = `
+
+<svg width="52" height="76" viewBox="0 0 52 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<ellipse cx="26" cy="34" rx="14" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+
+<circle cx="19" cy="28" r="5" fill="#e5989b"/>
+
+<circle cx="31" cy="27" r="5" fill="#f4d58d"/>
+
+<path d="M15 44 H37 L33 68 H19 Z" fill="#e8d9bd" stroke="#8c7a5b" stroke-width="2"/>
+
+<rect x="13" y="41" width="26" height="5" rx="2.5" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="1.8"/>
+
+</svg>
+
+`;
+
+rowBottom.appendChild(miniPlantDecor);
+
+}
+
+
+
+// ============================================================
+
+// 9. HALAMAN BUKU TERBUKA (1 PERTEMUAN FOKUS + LAB TERPISAH)
+
+// ============================================================
+
+function openSingleBook(meetingNum) {
+
+activeBookNumber = meetingNum;
+
+const course = courses.find(c => c.id === activeCourseId);
+
+if (!course) return;
+
+const meeting = course.meetings.find(m => m.number === meetingNum);
+
+if (!meeting) return;
+
+
+
+document.getElementById("bookshelfView").style.display = "none";
+
+document.getElementById("openBookView").style.display = "block";
+
+
+
+const examSuffix = meeting.number === 8 ? " (UTS)" : meeting.number === 16 ? " (UAS)" : "";
+
+document.getElementById("openBookHeading").textContent = `📖 Buku Pertemuan ${meeting.number}${examSuffix}`;
+
+document.getElementById("openBookCourseSub").textContent = `${course.icon} ${course.name} • Hari ${course.day}`;
+
+
+
+const doneCheck = document.getElementById("openBookDoneCheckbox");
+
+const doneText = document.getElementById("openBookDoneText");
+
+doneCheck.checked = meeting.completed;
+
+doneText.textContent = meeting.completed ? "Buku Selesai ✓" : "Tandai Buku Selesai";
+
+
+
+document.getElementById("openBookTopicInput").value = meeting.topic || "";
+
+document.getElementById("openBookNotesInput").value = meeting.notes || "";
+
+
+
+document.getElementById("prevBookBtn").disabled = meetingNum <= 1;
+
+document.getElementById("nextBookBtn").disabled = meetingNum >= 16;
+
+
+
+renderOpenBookMaterials(meeting);
+
+
+
+// Sambungkan Modul Lab Terpisah (js/lab-logal.js) untuk Pertemuan 1 - 7 dan Pertemuan 9
+
+const labPanelEl = document.getElementById("tabPanel-lab");
+
+if (typeof window.renderLogalLab === "function" && (meeting.number <= 7 || meeting.number === 9)) {
+
+window.renderLogalLab(labPanelEl, meeting, () => saveCourse(course));
+
+} else {
+
+labPanelEl.innerHTML = `
+
+<div class="lab-placeholder-box">
+
+<div style="font-size:38px;">🧪🌿</div>
+
+<h3>Ruang Praktik &amp; Latihan Interaktif</h3>
+
+<p>Area khusus di dalam buku pertemuan ini sudah siap! Untuk Pertemuan 1–7 dan Pertemuan 9 tersedia Studio Logika &amp; Algoritma (Deskriptif, Flowchart, Pseudocode, &amp; Java).</p>
+
+</div>
+
+`;
+
+}
+
+
+
+window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+
+
+function renderOpenBookMaterials(meeting) {
+
+const listEl = document.getElementById("openBookMaterialsList");
+
+document.getElementById("matCountBadge").textContent = meeting.materials.length;
+
+listEl.innerHTML = "";
+
+
+
+if (meeting.materials.length === 0) {
+
+listEl.innerHTML = `
+
+<div style="padding:18px; border-radius:14px; background:var(--green-bg); border:1.5px dashed var(--green-border); text-align:center; color:var(--green-muted); font-size:13.5px; font-weight:600;">
+
+Belum ada file atau link bahan ajar di buku Pertemuan ${meeting.number}.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+meeting.materials.forEach((mat, matIdx) => {
+
+const chip = document.createElement("div");
+
+chip.className = "material-chip";
+
+
+
+if (mat.kind === "file") {
+
+chip.innerHTML = `
+
+<button type="button" class="open-file-btn" title="Klik untuk membuka file">
+
+<i class="fa-solid fa-file-lines"></i> ${escapeHtml(mat.title)}
+
+</button>
+
+<button type="button" class="del-mat-btn" title="Hapus file"><i class="fa-solid fa-trash-can"></i></button>
+
+`;
+
+chip.querySelector(".open-file-btn").addEventListener("click", async () => {
+
+const record = await getFileBlob(mat.fileId);
+
+if (record && record.blob) {
+
+const url = URL.createObjectURL(record.blob);
+
+window.open(url, "_blank");
+
+} else {
+
+alert("File tidak ditemukan di browser.");
+
+}
+
+});
+
+} else {
+
+chip.innerHTML = `
+
+<a href="${escapeHtml(mat.url)}" target="_blank" rel="noopener">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(mat.title)}
+
+</a>
+
+<button type="button" class="del-mat-btn" title="Hapus link"><i class="fa-solid fa-trash-can"></i></button>
+
+`;
+
+}
+
+
+
+chip.querySelector(".del-mat-btn").addEventListener("click", async () => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+if (mat.kind === "file" && mat.fileId) {
+
+await deleteFileBlob(mat.fileId);
+
+}
+
+meeting.materials.splice(matIdx, 1);
+
+await saveCourse(course);
+
+renderOpenBookMaterials(meeting);
+
+});
+
+
+
+listEl.appendChild(chip);
+
+});
+
+}
+
+
+
+document.querySelectorAll(".book-tab-btn").forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+document.querySelectorAll(".book-tab-btn").forEach(b => b.classList.remove("active"));
+
+document.querySelectorAll(".book-tab-panel").forEach(p => p.classList.remove("active"));
+
+btn.classList.add("active");
+
+document.getElementById("tabPanel-" + btn.dataset.tab).classList.add("active");
+
+});
+
+});
+
+
+
+document.getElementById("openBookDoneCheckbox").addEventListener("change", async (e) => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+const meeting = course.meetings.find(m => m.number === activeBookNumber);
+
+meeting.completed = e.target.checked;
+
+document.getElementById("openBookDoneText").textContent = meeting.completed ? "Buku Selesai ✓" : "Tandai Buku Selesai";
+
+await saveCourse(course);
+
+});
+
+
+
+document.getElementById("openBookTopicInput").addEventListener("input", async (e) => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+const meeting = course.meetings.find(m => m.number === activeBookNumber);
+
+meeting.topic = e.target.value;
+
+await saveCourse(course);
+
+});
+
+
+
+document.getElementById("openBookNotesInput").addEventListener("input", async (e) => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+const meeting = course.meetings.find(m => m.number === activeBookNumber);
+
+meeting.notes = e.target.value;
+
+await saveCourse(course);
+
+});
+
+
+
+document.getElementById("bookUploadFileBtn").addEventListener("click", () => {
+
+document.getElementById("hiddenMaterialFileInput").click();
+
+});
+
+
+
+document.getElementById("hiddenMaterialFileInput").addEventListener("change", async (e) => {
+
+const file = e.target.files[0];
+
+if (!file || !activeCourseId) return;
+
+
+
+const course = courses.find(c => c.id === activeCourseId);
+
+const meeting = course.meetings.find(m => m.number === activeBookNumber);
+
+const fileId = "file-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+
+
+
+await saveFileBlob(fileId, file);
+
+meeting.materials.push({
+
+id: "mat-" + Date.now(),
+
+kind: "file",
+
+title: file.name,
+
+fileId: fileId
+
+});
+
+await saveCourse(course);
+
+e.target.value = "";
+
+renderOpenBookMaterials(meeting);
+
+});
+
+
+
+document.getElementById("bookAddLinkBtn").addEventListener("click", async () => {
+
+const title = prompt("Nama bahan ajar / link:");
+
+if (!title) return;
+
+const url = prompt("Tempel URL link:");
+
+if (!url) return;
+
+
+
+const course = courses.find(c => c.id === activeCourseId);
+
+const meeting = course.meetings.find(m => m.number === activeBookNumber);
+
+meeting.materials.push({
+
+id: "mat-" + Date.now(),
+
+kind: "link",
+
+title: title.trim(),
+
+url: url.startsWith("http") ? url.trim() : "https://" + url.trim()
+
+});
+
+await saveCourse(course);
+
+renderOpenBookMaterials(meeting);
+
+});
+
+
+
+document.getElementById("backToShelfBtn").addEventListener("click", () => {
+
+openBookshelf(activeCourseId);
+
+});
+
+
+
+document.getElementById("prevBookBtn").addEventListener("click", () => {
+
+if (activeBookNumber > 1) openSingleBook(activeBookNumber - 1);
+
+});
+
+
+
+document.getElementById("nextBookBtn").addEventListener("click", () => {
+
+if (activeBookNumber < 16) openSingleBook(activeBookNumber + 1);
+
+});
+
+
+
+document.getElementById("backToFoldersBtn").addEventListener("click", () => {
+
+activeCourseId = null;
+
+document.getElementById("bookshelfView").style.display = "none";
+
+document.getElementById("openBookView").style.display = "none";
+
+document.getElementById("foldersHomeView").style.display = "block";
+
+renderCalendarAndRecommendations();
+
+renderFoldersByDay();
+
+});
+
+
+
+document.getElementById("editCourseScheduleBtn").addEventListener("click", async () => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+if (!course) return;
+
+const newDay = prompt("Pindahkan ke folder hari (Senin / Selasa / Rabu / Kamis / Jumat / Sabtu / Minggu):", course.day);
+
+if (!newDay) return;
+
+const formatted = newDay.trim().charAt(0).toUpperCase() + newDay.trim().slice(1).toLowerCase();
+
+if (ORDERED_DAYS.includes(formatted)) {
+
+course.day = formatted;
+
+await saveCourse(course);
+
+updateShelfHeader(course);
+
+} else {
+
+alert("Nama hari tidak valid.");
+
+}
+
+});
+
+
+
+document.getElementById("deleteCourseBtn").addEventListener("click", async () => {
+
+const course = courses.find(c => c.id === activeCourseId);
+
+if (!course) return;
+
+if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta lemari bukunya?`)) {
+
+await deleteCourseById(course.id);
+
+courses = courses.filter(c => c.id !== course.id);
+
+document.getElementById("backToFoldersBtn").click();
+
+}
+
+});
+
+
+
+// ============================================================
+
+// 10. MODAL TAMBAH FOLDER MATKUL
+
+// ============================================================
+
+const modal = document.getElementById("addCourseModal");
+
+function openCourseModal(presetDay) {
+
+if (presetDay) {
+
+document.getElementById("newCourseDay").value = presetDay;
+
+}
+
+modal.classList.add("open");
+
+document.getElementById("newCourseName").focus();
+
+}
+
+document.getElementById("openAddCourseModalBtn").addEventListener("click", () => openCourseModal());
+
+document.getElementById("emptyAddCourseBtn").addEventListener("click", () => openCourseModal());
+
+document.getElementById("closeAddCourseModalBtn").addEventListener("click", () => {
+
+modal.classList.remove("open");
+
+});
+
+
+
+document.getElementById("saveNewCourseBtn").addEventListener("click", async () => {
+
+const name = document.getElementById("newCourseName").value.trim();
+
+if (!name) {
+
+alert("Nama mata kuliah wajib diisi ya!");
+
+return;
+
+}
+
+const code = document.getElementById("newCourseCode").value.trim() || "MATKUL";
+
+const day = document.getElementById("newCourseDay").value;
+
+const lecturer = document.getElementById("newCourseLecturer").value.trim();
+
+const [icon, color] = document.getElementById("newCourseTheme").value.split("|");
+
+
+
+const newCourse = {
+
+id: "c-" + Date.now(),
+
+code,
+
+name,
+
+day,
+
+lecturer,
+
+icon,
+
+color,
+
+meetings: createEmptyMeetings()
+
+};
+
+
+
+await saveCourse(newCourse);
+
+courses.push(newCourse);
+
+
+
+document.getElementById("newCourseName").value = "";
+
+document.getElementById("newCourseCode").value = "";
+
+document.getElementById("newCourseLecturer").value = "";
+
+modal.classList.remove("open");
+
+
+
+renderCalendarAndRecommendations();
+
+renderFoldersByDay();
+
+});
+
+
+
+// ============================================================
+
+// 11. DRAGGABLE & DOCKABLE POMODORO ALARM
+
+// ============================================================
+
+const pomoWidget = document.getElementById("pomodoroWidget");
+
+const pomoDragHandle = document.getElementById("pomoDragHandle");
+
+const pomoMinBtn = document.getElementById("pomoMinBtn");
+
+const pomoDockBtn = document.getElementById("pomoDockBtn");
+
+
+
+let isDragging = false;
+
+let dragOffsetX = 0;
+
+let dragOffsetY = 0;
+
+
+
+function startDrag(clientX, clientY) {
+
+if (pomoWidget.classList.contains("docked")) return;
+
+isDragging = true;
+
+const rect = pomoWidget.getBoundingClientRect();
+
+dragOffsetX = clientX - rect.left;
+
+dragOffsetY = clientY - rect.top;
+
+pomoWidget.style.right = "auto";
+
+pomoWidget.style.bottom = "auto";
+
+pomoWidget.style.left = rect.left + "px";
+
+pomoWidget.style.top = rect.top + "px";
+
+}
+
+
+
+function moveDrag(clientX, clientY) {
+
+if (!isDragging) return;
+
+const maxX = window.innerWidth - pomoWidget.offsetWidth - 8;
+
+const maxY = window.innerHeight - pomoWidget.offsetHeight - 8;
+
+const nextX = Math.max(8, Math.min(maxX, clientX - dragOffsetX));
+
+const nextY = Math.max(8, Math.min(maxY, clientY - dragOffsetY));
+
+pomoWidget.style.left = nextX + "px";
+
+pomoWidget.style.top = nextY + "px";
+
+}
+
+
+
+function endDrag() {
+
+isDragging = false;
+
+}
+
+
+
+pomoDragHandle.addEventListener("mousedown", (e) => {
+
+if (e.target.closest("button")) return;
+
+startDrag(e.clientX, e.clientY);
+
+});
+
+window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
+
+window.addEventListener("mouseup", endDrag);
+
+
+
+pomoDragHandle.addEventListener("touchstart", (e) => {
+
+if (e.target.closest("button")) return;
+
+if (e.touches[0]) startDrag(e.touches[0].clientX, e.touches[0].clientY);
+
+}, { passive: true });
+
+window.addEventListener("touchmove", (e) => {
+
+if (e.touches[0]) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+
+}, { passive: true });
+
+window.addEventListener("touchend", endDrag);
+
+
+
+pomoMinBtn.addEventListener("click", () => {
+
+pomoWidget.classList.remove("docked");
+
+pomoWidget.classList.toggle("minimized");
+
+pomoMinBtn.innerHTML = pomoWidget.classList.contains("minimized")
+
+? '<i class="fa-solid fa-plus"></i>'
+
+: '<i class="fa-solid fa-minus"></i>';
+
+});
+
+
+
+pomoDockBtn.addEventListener("click", () => {
+
+pomoWidget.classList.toggle("docked");
+
+pomoDockBtn.innerHTML = pomoWidget.classList.contains("docked")
+
+? '<i class="fa-solid fa-angles-left"></i>'
+
+: '<i class="fa-solid fa-angles-right"></i>';
+
+});
+
+
+
+let pomoSeconds = 25 * 60;
+
+let pomoInitialSeconds = 25 * 60;
+
+let pomoInterval = null;
+
+let pomoRunning = false;
+
+
+
+const pomoClock = document.getElementById("pomoClockDisplay");
+
+const pomoMiniClock = document.getElementById("pomoMiniClock");
+
+const pomoStartBtn = document.getElementById("pomoStartBtn");
+
+const pomoResetBtn = document.getElementById("pomoResetBtn");
+
+
+
+function updatePomoDisplay() {
+
+const m = String(Math.floor(pomoSeconds / 60)).padStart(2, "0");
+
+const s = String(pomoSeconds % 60).padStart(2, "0");
+
+const formatted = `${m}:${s}`;
+
+pomoClock.textContent = formatted;
+
+pomoMiniClock.textContent = formatted;
+
+}
+
+
+
+function playGentleBell() {
+
+try {
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+[523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+
+const osc = audioCtx.createOscillator();
+
+const gain = audioCtx.createGain();
+
+osc.type = "sine";
+
+osc.frequency.value = freq;
+
+gain.gain.setValueAtTime(0.14, audioCtx.currentTime + idx * 0.18);
+
+gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.18 + 0.9);
+
+osc.connect(gain);
+
+gain.connect(audioCtx.destination);
+
+osc.start(audioCtx.currentTime + idx * 0.18);
+
+osc.stop(audioCtx.currentTime + idx * 0.18 + 0.95);
+
+});
+
+} catch (err) {}
+
+}
+
+
+
+document.querySelectorAll(".pomo-mode-btn").forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+clearInterval(pomoInterval);
+
+pomoRunning = false;
+
+pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+
+document.querySelectorAll(".pomo-mode-btn").forEach(b => b.classList.remove("active"));
+
+btn.classList.add("active");
+
+pomoInitialSeconds = parseInt(btn.dataset.mins, 10) * 60;
+
+pomoSeconds = pomoInitialSeconds;
+
+updatePomoDisplay();
+
+});
+
+});
+
+
+
+pomoStartBtn.addEventListener("click", () => {
+
+if (pomoRunning) {
+
+clearInterval(pomoInterval);
+
+pomoRunning = false;
+
+pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Lanjut';
+
+} else {
+
+pomoRunning = true;
+
+pomoStartBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Jeda';
+
+pomoInterval = setInterval(() => {
+
+if (pomoSeconds > 0) {
+
+pomoSeconds--;
+
+updatePomoDisplay();
+
+} else {
+
+clearInterval(pomoInterval);
+
+pomoRunning = false;
+
+pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+
+playGentleBell();
+
+alert("🍵 Waktu selesai! Istirahat sebentar atau lanjutkan sesi belajarmu 🌿");
+
+}
+
+}, 1000);
+
+}
+
+});
+
+
+
+pomoResetBtn.addEventListener("click", () => {
+
+clearInterval(pomoInterval);
+
+pomoRunning = false;
+
+pomoSeconds = pomoInitialSeconds;
+
+pomoStartBtn.innerHTML = '<i class="fa-solid fa-play"></i> Mulai';
+
+updatePomoDisplay();
+
+});
+
+
+
+function escapeHtml(str) {
+
+return String(str || "")
+
+.replace(/&/g, "&amp;")
+
+.replace(/</g, "&lt;")
+
+.replace(/>/g, "&gt;")
+
+.replace(/"/g, "&quot;");
+
+}
+
+
+
+// ============================================================
+
+// 12. INISIALISASI DATABASE, WALLPAPER, & TAMPILAN PER HARI
+
+// ============================================================
+
+openStudyDB().then(async () => {
+
+const savedWp = await getSetting("customWallpaper");
+
+if (savedWp) {
+
+applyWallpaperBlob(savedWp);
+
+}
+
+courses = await getAllCourses();
+
+renderCalendarAndRecommendations();
+
+renderFoldersByDay();
+
+});
+
+})();
+
+</script>
+
+</body>
+
+</html> 
