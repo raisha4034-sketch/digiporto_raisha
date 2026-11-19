@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        /* TEMA COZY GREEN SOLID & TEGAS (TANPA GRADASI) */
+        /* TEMA COZY GREEN SOLID & TEGAS */
         :root {
             --green-bg: #eaf5ee;
             --green-white: #ffffff;
@@ -27,9 +27,10 @@
             --green-border: #74c69d;
             --green-text: #102a1d;
             --green-muted: #3a5a40;
-            --wood-shelf: #b07d56;
-            --wood-shelf-dark: #7f5539;
-            --wood-back: #f5ebe0;
+            --ivory-frame: #f7f2e7;
+            --ivory-trim: #dfd4be;
+            --ivory-border: #8c7a5b;
+            --ivory-back: #fcfaf4;
             --read-scale: 1;
         }
 
@@ -42,9 +43,10 @@
             --green-border: #40916c;
             --green-text: #eef9f2;
             --green-muted: #b7e4c7;
-            --wood-shelf: #6f4e37;
-            --wood-shelf-dark: #4a3323;
-            --wood-back: #231f1d;
+            --ivory-frame: #e8dec8;
+            --ivory-trim: #cbbba0;
+            --ivory-border: #5e503f;
+            --ivory-back: #26231d;
         }
 
         body {
@@ -612,7 +614,7 @@
         }
 
         /* ============================================================
-           VIEW 2: RAK BUKU INTERAKTIF (16 BUKU PERTEMUAN LUCU & RAPI)
+           VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (GAYA ROCOCO / COTTAGECORE)
            ============================================================ */
         #bookshelfView {
             display: none;
@@ -623,7 +625,7 @@
             border: 2.5px solid var(--green-main);
             border-radius: 20px;
             padding: 16px 20px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -646,21 +648,171 @@
             font-weight: 600;
         }
 
-        /* LEMARI RAK BUKU KAYU COZY */
-        .bookshelf-cabinet {
-            background-color: var(--wood-back);
-            border: 4px solid var(--wood-shelf-dark);
-            border-radius: 24px;
-            padding: 24px 20px 0;
-            box-shadow: 0 8px 0 var(--green-soft);
+        /* LEMARI BUKU UKIRAN KLASIK IVORY */
+        .vintage-cabinet-wrap {
+            max-width: 960px;
+            margin: 0 auto;
         }
 
-        .bookshelf-intro {
+        .vintage-crown-header {
+            width: 100%;
+            display: block;
+            margin-bottom: -4px;
+        }
+
+        .vintage-cabinet-body {
+            background-color: var(--ivory-back);
+            border-left: 16px solid var(--ivory-frame);
+            border-right: 16px solid var(--ivory-frame);
+            outline: 2.5px solid var(--ivory-border);
+            box-shadow: inset 10px 0 0 var(--ivory-trim), inset -10px 0 0 var(--ivory-trim), 0 10px 0 var(--green-soft);
+            padding: 20px 14px 0;
+            position: relative;
+        }
+
+        .vintage-shelf-tier {
+            padding-top: 10px;
+        }
+
+        .vintage-books-line {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 8px;
+            min-height: 205px;
+            flex-wrap: wrap;
+        }
+
+        /* ORNAMEN GUCI KERAMIK & POT BUNGA DI RAK */
+        .shelf-decor-vase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            margin: 0 6px;
+            user-select: none;
+        }
+
+        /* PUNGGUNG BUKU VINTAGE BERDIRI (BOOK SPINE) */
+        .vintage-spine {
+            position: relative;
+            width: 68px;
+            border-radius: 7px 7px 3px 3px;
+            border: 2px solid #5c4d3c;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 4px 10px;
             text-align: center;
-            margin-bottom: 18px;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            box-shadow: inset 4px 0 0 rgba(255, 255, 255, 0.45), inset -4px 0 0 rgba(60, 45, 30, 0.14);
         }
 
-        .bookshelf-intro span {
+        .vintage-spine:hover {
+            transform: translateY(-14px) scale(1.04);
+            z-index: 10;
+            box-shadow: 0 10px 16px rgba(27, 67, 50, 0.22);
+        }
+
+        /* Garis-garis Emas / Klasik Punggung Buku Atas & Bawah */
+        .spine-gold-bands {
+            width: 82%;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .spine-gold-bands span {
+            display: block;
+            height: 2px;
+            background-color: rgba(115, 92, 58, 0.55);
+            border-radius: 2px;
+        }
+
+        .spine-number-badge {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: #2f261d;
+            background-color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(92, 77, 60, 0.45);
+            padding: 2px 7px;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        .spine-vertical-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 12.5px;
+            letter-spacing: 0.4px;
+            color: #261e16;
+            max-height: 92px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 4px 0;
+        }
+
+        .spine-exam-tag {
+            font-size: 9.5px;
+            font-weight: 700;
+            background-color: #f4d58d;
+            color: #261e16;
+            border: 1px solid #7f5539;
+            padding: 1px 6px;
+            border-radius: 6px;
+        }
+
+        .spine-status-icon {
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.78);
+            color: #2d6a4f;
+            border: 1px solid rgba(92, 77, 60, 0.4);
+        }
+
+        .vintage-spine.completed .spine-status-icon {
+            background-color: #2d6a4f;
+            color: #ffffff;
+        }
+
+        /* PAPAN RAK KAYU GADING UKIR */
+        .ivory-shelf-plank {
+            height: 18px;
+            background-color: var(--ivory-frame);
+            border-top: 2px solid var(--ivory-border);
+            border-bottom: 3px solid var(--ivory-border);
+            margin: 0 -14px;
+            box-shadow: inset 0 4px 0 #ffffff, inset 0 -4px 0 var(--ivory-trim);
+        }
+
+        .vintage-cabinet-base {
+            height: 24px;
+            background-color: var(--ivory-frame);
+            border: 2.5px solid var(--ivory-border);
+            border-radius: 6px 6px 16px 16px;
+            margin: 0 -24px;
+            box-shadow: inset 0 5px 0 #ffffff, inset 0 -5px 0 var(--ivory-trim), 0 8px 0 var(--green-soft);
+        }
+
+        .shelf-caption-hint {
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .shelf-caption-hint span {
             display: inline-block;
             background-color: var(--green-white);
             border: 2px solid var(--green-main);
@@ -671,125 +823,17 @@
             border-radius: 20px;
         }
 
-        .shelf-row-wrap {
-            margin-bottom: 26px;
-        }
-
-        .books-row {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 10px;
-            padding: 0 10px;
-            align-items: end;
-        }
-
-        @media (max-width: 900px) {
-            .books-row {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 12px;
+        @media (max-width: 760px) {
+            .vintage-spine {
+                width: 54px;
             }
-        }
-
-        @media (max-width: 480px) {
-            .books-row {
-                grid-template-columns: repeat(2, 1fr);
+            .vintage-cabinet-body {
+                border-left-width: 10px;
+                border-right-width: 10px;
             }
-        }
-
-        /* PAPAN KAYU RAK BUKU */
-        .wooden-plank {
-            height: 18px;
-            background-color: var(--wood-shelf);
-            border: 2.5px solid var(--wood-shelf-dark);
-            border-radius: 8px;
-            box-shadow: 0 5px 0 var(--wood-shelf-dark);
-            margin-top: -2px;
-        }
-
-        /* DESAIN BUKU BERDIRI (BOOK CARD) */
-        .cute-book {
-            position: relative;
-            border-radius: 10px 14px 6px 6px;
-            border: 2.5px solid #1b4332;
-            padding: 14px 10px 12px;
-            min-height: 162px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: -4px 0 0 rgba(27, 67, 50, 0.22);
-        }
-
-        .cute-book:hover {
-            transform: translateY(-10px) rotate(-1.5deg);
-            z-index: 5;
-        }
-
-        /* Garis Punggung Buku di Kiri */
-        .cute-book::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 7px;
-            width: 2px;
-            background-color: rgba(27, 67, 50, 0.25);
-        }
-
-        .book-top-ribbon {
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            color: #102a1d;
-            border: 1.5px solid #1b4332;
-        }
-
-        .book-top-ribbon.exam {
-            background-color: #ffb703;
-            color: #102a1d;
-        }
-
-        .book-emoji {
-            font-size: 24px;
-            margin: 6px 0 4px;
-        }
-
-        .book-title {
-            font-weight: 700;
-            font-size: 13.5px;
-            color: #102a1d;
-            line-height: 1.25;
-        }
-
-        .book-subtopic {
-            font-size: 11px;
-            color: #2d4f3c;
-            font-weight: 600;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-top: 3px;
-        }
-
-        .book-status-pill {
-            margin-top: 6px;
-            font-size: 10.5px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.85);
-            color: #102a1d;
-        }
-
-        .cute-book.completed .book-status-pill {
-            background-color: #2d6a4f;
-            color: #ffffff;
+            .vintage-cabinet-base {
+                margin: 0 -14px;
+            }
         }
 
         /* ============================================================
@@ -831,7 +875,6 @@
             color: var(--green-muted);
         }
 
-        /* TAB DI DALAM BUKU */
         .book-tabs-bar {
             display: flex;
             flex-wrap: wrap;
@@ -1234,12 +1277,12 @@
 
     <main class="study-container">
 
-        <!-- HERO HEADER + WALLPAPER + UKURAN TULISAN + KUNCI -->
+        <!-- HERO HEADER -->
         <section class="study-hero">
             <div>
                 <div class="badge-pill"><span>🌿</span> COZY GREEN STUDY SPACE</div>
                 <h1>My Study Hub 🍃</h1>
-                <p>Folder matkul per hari berisi rak buku Pertemuan 1–16 yang rapi dan fokus.</p>
+                <p>Folder matkul per hari berisi lemari buku ukiran vintage Pertemuan 1–16.</p>
             </div>
 
             <div class="toolbar-actions">
@@ -1307,7 +1350,7 @@
             <div class="empty-folder-state" id="emptyFolderState" style="display:none;">
                 <span class="big-emoji">🪴</span>
                 <h3>Belum Ada Folder Mata Kuliah</h3>
-                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu, otomatis berisi rak 16 buku pertemuan!</p>
+                <p>Klik tombol di bawah untuk membuat folder mata kuliah pertamamu, otomatis berisi lemari 16 buku pertemuan!</p>
                 <button type="button" class="btn-green-solid" id="emptyAddCourseBtn">
                     <i class="fa-solid fa-plus"></i> Buat Folder Matkul Sekarang
                 </button>
@@ -1317,7 +1360,7 @@
             <div id="foldersByDayContainer"></div>
         </div>
 
-        <!-- VIEW 2: RAK BUKU PERTEMUAN 1 - 16 DI DALAM FOLDER -->
+        <!-- VIEW 2: AESTHETIC VINTAGE IVORY BOOKSHELF (PERTEMUAN 1 - 16) -->
         <div id="bookshelfView">
             <div class="detail-topbar">
                 <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
@@ -1340,21 +1383,60 @@
                 </div>
             </div>
 
-            <div class="bookshelf-cabinet">
-                <div class="bookshelf-intro">
-                    <span>📚 Pilih salah satu buku pertemuan untuk mulai membaca, mencatat, atau latihan!</span>
+            <div class="vintage-cabinet-wrap">
+                <!-- MAHKOTA UKIRAN KLASIK IVORY & POT BUNGA (SVG) -->
+                <svg class="vintage-crown-header" viewBox="0 0 960 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Pot Bunga Kiri -->
+                    <ellipse cx="145" cy="52" rx="16" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+                    <circle cx="138" cy="44" r="5" fill="#e5989b"/>
+                    <circle cx="148" cy="41" r="6" fill="#cdb4db"/>
+                    <circle cx="155" cy="47" r="4.5" fill="#f4d58d"/>
+                    <path d="M132 58 H158 L154 78 H136 Z" fill="#95b8a4" stroke="#5c4d3c" stroke-width="2"/>
+                    <rect x="130" y="55" width="30" height="5" rx="2" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
+
+                    <!-- Pot Bunga Kanan -->
+                    <ellipse cx="815" cy="46" rx="22" ry="15" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+                    <circle cx="804" cy="37" r="6" fill="#e5989b"/>
+                    <circle cx="816" cy="33" r="7" fill="#f4d58d"/>
+                    <circle cx="828" cy="39" r="6" fill="#cdb4db"/>
+                    <circle cx="815" cy="43" r="5" fill="#ffb4a2"/>
+                    <path d="M798 54 Q815 58 832 54 L826 78 H804 Z" fill="#8fb3a2" stroke="#5c4d3c" stroke-width="2"/>
+                    <rect x="795" y="51" width="40" height="5" rx="2.5" fill="#b7d3c2" stroke="#5c4d3c" stroke-width="1.8"/>
+
+                    <!-- Mahkota Lengkungan Rococo Ivory -->
+                    <path d="M220 78 C295 78, 330 30, 415 30 C445 30, 462 42, 480 18 C498 42, 515 30, 545 30 C630 30, 665 78, 740 78 Z" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
+                    <!-- Ukiran Scrollwork Kiri & Kanan -->
+                    <path d="M315 72 C335 50, 375 45, 395 62 C405 70, 390 76, 382 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M645 72 C625 50, 585 45, 565 62 C555 70, 570 76, 578 68" stroke="#8c7a5b" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Ukiran Kerang / Bunga Tengah -->
+                    <path d="M454 68 C452 44, 468 32, 480 32 C492 32, 508 44, 506 68" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
+                    <path d="M480 32 V68 M467 38 L474 68 M493 38 L486 68" stroke="#8c7a5b" stroke-width="1.8"/>
+                    <circle cx="480" cy="70" r="7" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2"/>
+
+                    <!-- Lis Cornice Atas Lemari -->
+                    <rect x="24" y="78" width="912" height="16" rx="6" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="2.5"/>
+                    <rect x="34" y="94" width="892" height="12" rx="4" fill="#dfd4be" stroke="#8c7a5b" stroke-width="2"/>
+                </svg>
+
+                <!-- BADAN LEMARI BUKU -->
+                <div class="vintage-cabinet-body">
+                    <!-- RAK TINGKAT 1 (PERTEMUAN 1 - 8 + GUCI KERAMIK) -->
+                    <div class="vintage-shelf-tier">
+                        <div class="vintage-books-line" id="booksRowTop"></div>
+                        <div class="ivory-shelf-plank"></div>
+                    </div>
+
+                    <!-- RAK TINGKAT 2 (PERTEMUAN 9 - 16) -->
+                    <div class="vintage-shelf-tier">
+                        <div class="vintage-books-line" id="booksRowBottom"></div>
+                    </div>
+
+                    <!-- ALAS LEMARI UKIRAN -->
+                    <div class="vintage-cabinet-base"></div>
                 </div>
 
-                <!-- RAK ATAS: BUKU PERTEMUAN 1 - 8 -->
-                <div class="shelf-row-wrap">
-                    <div class="books-row" id="booksRowTop"></div>
-                    <div class="wooden-plank"></div>
-                </div>
-
-                <!-- RAK BAWAH: BUKU PERTEMUAN 9 - 16 -->
-                <div class="shelf-row-wrap" style="margin-bottom: 18px;">
-                    <div class="books-row" id="booksRowBottom"></div>
-                    <div class="wooden-plank"></div>
+                <div class="shelf-caption-hint">
+                    <span>✨ Klik salah satu punggung buku pertemuan untuk membuka halaman catatan &amp; latihannya</span>
                 </div>
             </div>
         </div>
@@ -1365,7 +1447,7 @@
                 <div class="book-nav-header">
                     <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
                         <button type="button" class="btn-green-outline" id="backToShelfBtn">
-                            <i class="fa-solid fa-book"></i> Tutup &amp; Kembali ke Rak Buku
+                            <i class="fa-solid fa-book"></i> Tutup &amp; Kembali ke Lemari Buku
                         </button>
                         <div class="book-chapter-title">
                             <h2 id="openBookHeading">Pertemuan 1</h2>
@@ -1415,7 +1497,7 @@
                     <div class="materials-list" id="openBookMaterialsList"></div>
                 </div>
 
-                <!-- TAB 3: RUANG PRAKTIK / LATIHAN (SIAP DIISI FITUR KHUSUS MATKUL) -->
+                <!-- TAB 3: RUANG PRAKTIK / LATIHAN -->
                 <div class="book-tab-panel" id="tabPanel-lab">
                     <div class="lab-placeholder-box">
                         <div style="font-size:38px;">🧪🌿</div>
@@ -1773,12 +1855,12 @@
                     </div>
                 `;
             } else if (matchingCourses.length === 0) {
-                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah — waktunya baca santai di rak buku!`;
+                summaryEl.innerHTML = `Hari <strong>${selectedDayName}</strong> tidak ada jadwal kuliah — waktunya baca santai di lemari buku!`;
                 recList.innerHTML = `
                     <div class="rec-item">
                         <div class="rec-item-info">
                             <strong>🍵 Free Review Mandiri</strong>
-                            <span>Buka salah satu rak buku matkulmu untuk membaca catatan.</span>
+                            <span>Buka salah satu lemari buku matkulmu untuk membaca catatan.</span>
                         </div>
                     </div>
                 `;
@@ -1794,7 +1876,7 @@
                             <strong>${course.icon} ${escapeHtml(course.name)}</strong>
                             <span>Selesai ${doneCount}/16 Buku • Lanjut Pertemuan ${nextMeeting.number}</span>
                         </div>
-                        <button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka Rak</button>
+                        <button type="button" class="btn-green-solid" style="padding:7px 12px; font-size:12px;">Buka Lemari</button>
                     `;
                     item.querySelector("button").addEventListener("click", () => openBookshelf(course.id));
                     recList.appendChild(item);
@@ -1821,7 +1903,7 @@
                         <span class="folder-day-chip">📅 ${course.day}</span>
                     </div>
                     <h3>${escapeHtml(course.name)}</h3>
-                    <span class="lecturer-tag">${escapeHtml(course.lecturer || "Rak 16 Buku Pertemuan")}</span>
+                    <span class="lecturer-tag">${escapeHtml(course.lecturer || "Lemari 16 Buku Pertemuan")}</span>
                 </div>
 
                 <div class="folder-progress-wrap">
@@ -1917,12 +1999,22 @@
         }
 
         // ============================================================
-        // 8. RAK BUKU INTERAKTIF (16 BUKU LUCU PERTEMUAN 1 - 16)
+        // 8. AESTHETIC VINTAGE BOOKSHELF (16 BUKU PUNGGUNG VERTIKAL)
         // ============================================================
-        const BOOK_SOLID_COLORS = [
-            "#d8f3dc", "#b7e4c7", "#e9f5db", "#cdeac0",
-            "#d0e8d8", "#e2f5ea", "#c7edd4", "#d9f0e1"
+        // Palet pastel cottagecore vintage seperti referensi gambar
+        const VINTAGE_SPINE_PALETTE = [
+            "#e8c5d0", // Dusty Rose Pink
+            "#f3e5c3", // Warm Cream Ivory
+            "#c3dfd3", // Soft Sage Mint
+            "#cddce6", // Powder Blue
+            "#e6cbb8", // Soft Terracotta Peach
+            "#d5e3c8", // Pistachio Leaf
+            "#dfd3e3", // Lavender Mist
+            "#e8d9bd"  // Antique Parchment
         ];
+
+        // Tinggi bervariasi agar punggung buku terlihat organik & estetis
+        const SPINE_HEIGHTS = [184, 198, 174, 192, 180, 196, 176, 188];
 
         function openBookshelf(courseId) {
             activeCourseId = courseId;
@@ -1941,7 +2033,7 @@
         function updateShelfHeader(course) {
             const doneCount = course.meetings.filter(m => m.completed).length;
             const pct = Math.round((doneCount / 16) * 100);
-            document.getElementById("detailCourseTitle").textContent = `${course.icon} Rak Buku: ${course.name}`;
+            document.getElementById("detailCourseTitle").textContent = `${course.icon} Lemari Buku: ${course.name}`;
             document.getElementById("detailCourseMeta").textContent =
                 `Folder Hari ${course.day}${course.lecturer ? " • " + course.lecturer : ""} • Selesai ${doneCount}/16 Buku (${pct}%)`;
         }
@@ -1952,44 +2044,49 @@
             rowTop.innerHTML = "";
             rowBottom.innerHTML = "";
 
+            // Ornamen Guci Keramik Sage Green di pojok kiri rak atas (seperti referensi)
+            const vaseDecor = document.createElement("div");
+            vaseDecor.className = "shelf-decor-vase";
+            vaseDecor.title = "Guci Keramik Hias";
+            vaseDecor.innerHTML = `
+                <svg width="56" height="84" viewBox="0 0 56 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="28" cy="14" rx="7" ry="4" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
+                    <rect x="21" y="16" width="14" height="9" rx="3" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+                    <path d="M18 25 C8 34, 8 62, 18 74 H38 C48 62, 48 34, 38 25 Z" fill="#95b8a4" stroke="#52796f" stroke-width="2"/>
+                    <path d="M22 27 C16 38, 16 58, 22 72 M34 27 C40 38, 40 58, 34 72" stroke="#52796f" stroke-width="1.3" stroke-opacity="0.55"/>
+                    <rect x="16" y="74" width="24" height="6" rx="3" fill="#749c85" stroke="#52796f" stroke-width="2"/>
+                </svg>
+            `;
+            rowTop.appendChild(vaseDecor);
+
             course.meetings.forEach((m, idx) => {
                 const isExam = m.number === 8 || m.number === 16;
-                const bookColor = m.completed
-                    ? "#95d5b2"
-                    : isExam
-                    ? "#ffe8a3"
-                    : BOOK_SOLID_COLORS[idx % BOOK_SOLID_COLORS.length];
+                const spineColor = m.completed
+                    ? "#b7e4c7"
+                    : VINTAGE_SPINE_PALETTE[idx % VINTAGE_SPINE_PALETTE.length];
 
-                const bookEmoji = m.completed
-                    ? "📗"
-                    : m.number === 8
-                    ? "📙"
-                    : m.number === 16
-                    ? "📕"
-                    : "📘";
-
-                const ribbonLabel = m.number === 8
-                    ? "UTS"
-                    : m.number === 16
-                    ? "UAS"
-                    : `BAB ${m.number}`;
-
+                const spineHeight = SPINE_HEIGHTS[idx % SPINE_HEIGHTS.length];
                 const hasContent = (m.notes && m.notes.trim() !== "") || (m.materials && m.materials.length > 0);
 
                 const bookEl = document.createElement("div");
-                bookEl.className = "cute-book" + (m.completed ? " completed" : "");
-                bookEl.style.backgroundColor = bookColor;
+                bookEl.className = "vintage-spine" + (m.completed ? " completed" : "");
+                bookEl.style.backgroundColor = spineColor;
+                bookEl.style.height = spineHeight + "px";
+                bookEl.title = `Pertemuan ${m.number}${m.topic ? ": " + m.topic : ""}`;
 
                 bookEl.innerHTML = `
-                    <span class="book-top-ribbon ${isExam ? "exam" : ""}">${ribbonLabel}</span>
-                    <div>
-                        <div class="book-emoji">${bookEmoji}</div>
-                        <div class="book-title">Pertemuan ${m.number}</div>
-                        <div class="book-subtopic">${escapeHtml(m.topic || "Klik untuk buka")}</div>
+                    <div class="spine-gold-bands">
+                        <span></span>
+                        <span></span>
                     </div>
-                    <span class="book-status-pill">
-                        ${m.completed ? "Selesai ✓" : hasContent ? "Ada Isi •" : "Kosong"}
-                    </span>
+                    <span class="spine-number-badge">${m.number}</span>
+                    <div class="spine-vertical-label">Pertemuan ${m.number}</div>
+                    ${isExam ? `<span class="spine-exam-tag">${m.number === 8 ? "UTS" : "UAS"}</span>` : ""}
+                    <span class="spine-status-icon">${m.completed ? "✓" : hasContent ? "•" : "🌿"}</span>
+                    <div class="spine-gold-bands">
+                        <span></span>
+                        <span></span>
+                    </div>
                 `;
 
                 bookEl.addEventListener("click", () => openSingleBook(m.number));
@@ -2000,6 +2097,21 @@
                     rowBottom.appendChild(bookEl);
                 }
             });
+
+            // Ornamen Tumpukan Buku Kecil & Tanaman di pojok kanan rak bawah
+            const miniPlantDecor = document.createElement("div");
+            miniPlantDecor.className = "shelf-decor-vase";
+            miniPlantDecor.title = "Tanaman Hias Rak";
+            miniPlantDecor.innerHTML = `
+                <svg width="52" height="76" viewBox="0 0 52 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="26" cy="34" rx="14" ry="12" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+                    <circle cx="19" cy="28" r="5" fill="#e5989b"/>
+                    <circle cx="31" cy="27" r="5" fill="#f4d58d"/>
+                    <path d="M15 44 H37 L33 68 H19 Z" fill="#e8d9bd" stroke="#8c7a5b" stroke-width="2"/>
+                    <rect x="13" y="41" width="26" height="5" rx="2.5" fill="#f7f2e7" stroke="#8c7a5b" stroke-width="1.8"/>
+                </svg>
+            `;
+            rowBottom.appendChild(miniPlantDecor);
         }
 
         // ============================================================
@@ -2091,7 +2203,6 @@
             });
         }
 
-        // Tab Switcher di dalam Buku Terbuka
         document.querySelectorAll(".book-tab-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 document.querySelectorAll(".book-tab-btn").forEach(b => b.classList.remove("active"));
@@ -2101,7 +2212,6 @@
             });
         });
 
-        // Auto-save Topik, Catatan, & Status Selesai pada Buku Terbuka
         document.getElementById("openBookDoneCheckbox").addEventListener("change", async (e) => {
             const course = courses.find(c => c.id === activeCourseId);
             const meeting = course.meetings.find(m => m.number === activeBookNumber);
@@ -2124,7 +2234,6 @@
             await saveCourse(course);
         });
 
-        // Upload File & Tambah Link di dalam Buku Terbuka
         document.getElementById("bookUploadFileBtn").addEventListener("click", () => {
             document.getElementById("hiddenMaterialFileInput").click();
         });
@@ -2167,7 +2276,6 @@
             renderOpenBookMaterials(meeting);
         });
 
-        // Navigasi Kembali & Sebelumnya/Berikutnya
         document.getElementById("backToShelfBtn").addEventListener("click", () => {
             openBookshelf(activeCourseId);
         });
@@ -2207,7 +2315,7 @@
         document.getElementById("deleteCourseBtn").addEventListener("click", async () => {
             const course = courses.find(c => c.id === activeCourseId);
             if (!course) return;
-            if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta rak bukunya?`)) {
+            if (confirm(`Yakin ingin menghapus folder "${course.name}" beserta lemari bukunya?`)) {
                 await deleteCourseById(course.id);
                 courses = courses.filter(c => c.id !== course.id);
                 document.getElementById("backToFoldersBtn").click();
